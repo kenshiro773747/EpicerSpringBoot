@@ -29,7 +29,7 @@ public class ArticleService {
 	}
 
 	public List<ArticleBean> findByCategoryLike(int id) {
-		return aRepo.findAllByCategoryLike(id);
+		return aRepo.findAllByPlateformCategoryIdLike(id);
 	}
 
 	public List<ArticleBean> findAll() {
