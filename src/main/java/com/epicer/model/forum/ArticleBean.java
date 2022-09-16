@@ -18,12 +18,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@DynamicUpdate
+@DynamicInsert
 @Table(name = "forum_article")
 @Component
 public class ArticleBean implements Serializable {
@@ -47,7 +51,6 @@ public class ArticleBean implements Serializable {
 	@JsonIgnore
 	private List<ArticleReplyBean> articleReplyId = new ArrayList<ArticleReplyBean>();
 	
-
 	@Column(name = "article_category")
 	private int plateformCategoryId;
 

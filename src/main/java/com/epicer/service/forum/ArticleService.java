@@ -16,8 +16,8 @@ public class ArticleService {
 	@Autowired
 	private ArticleRepository aRepo;
 
-	public ArticleBean findById(int replyId) {
-		Optional<ArticleBean> op = aRepo.findById(replyId);
+	public ArticleBean findByArticleId(int articleId) {
+		Optional<ArticleBean> op = aRepo.findById(articleId);
 		if (op.isPresent()) {
 			return op.get();
 		}

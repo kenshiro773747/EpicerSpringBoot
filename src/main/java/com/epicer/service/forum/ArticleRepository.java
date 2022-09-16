@@ -11,4 +11,5 @@ public interface ArticleRepository extends JpaRepository<ArticleBean, Integer> {
 	public List<ArticleBean> findAllByTitleLike(String title);
 
 	public List<ArticleBean> findAllByPlateformCategoryIdLike(int id);
+	
 }

@@ -65,7 +65,7 @@ public class ArticleController {
 	@PostMapping("/QueryNameAjax")
 	@ResponseBody
 	public List<ArticleBean> QueryNameAjax(String title) {
-		return aService.findByTitleLike(title);
+		return aService.findByTitleLike("%"+title+"%");
 	}
 
 	@PostMapping("/QueryCategoryAjax")
@@ -85,41 +85,47 @@ public class ArticleController {
 		article.setPlateformCategoryId(category);
 		article.setTitle(articleTitle);
 		article.setDate(TimeTest.getTime());
+		article.setArticleContent(articleContent);
 		int userId = (int) session.getAttribute("userId");
 		Session s = factory.openSession();
 		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
-		article.setUser(userID);
 		s.close();
+		article.setUser(userID);
+		
 		aService.insert(article);
-		return "forum/forumIndexJsonTest";
+		return "redirect:/QueryAllPage";
 	}
 
 	@PostMapping("/forumUpdatePage")
 	public String forumUpdatePage(int articleId) {
-		ArticleBean updateDetail = aService.findById(articleId);
+		ArticleBean updateDetail = aService.findByArticleId(articleId);
 		session.setAttribute("updateDetail", updateDetail);
-		return "forumUpdate";
+		return "forum/forumUpdate";
 	}
 
+	//類型有問題
 	@PostMapping("/articleUpdate")
-	public ArticleBean articleUpdate(int articleId, String aTitle, String aContent) {
+	public String articleUpdate(int articleId, String aTitle, String aContent) {
 		ArticleBean article = new ArticleBean();
 		article.setArticleId(articleId);
 		article.setTitle(aTitle);
 		article.setArticleContent(aContent);
-
-		return aService.insert(article);
+		article.setDate(TimeTest.getTime());
+		
+		aService.insert(article);
+		return "redirect:/QueryAllPage";
 	}
 
 	@PostMapping("/articleDetail")
 	public String articleDetail(int articleId) {
-		ArticleBean selectDetail = aService.findById(articleId);
-		List<ArticleReplyBean> selectReplyAll = arService.findAllByUserId(articleId);
+		ArticleBean selectDetail = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(articleId);
 		session.setAttribute("selectDetail", selectDetail);
 		session.setAttribute("selectReplyAll", selectReplyAll);
-		return "forumDetail";
+		return "forum/forumDetail";
 	}
 
+	//都刪除第一個
 	@PostMapping("/articleDelete")
 	public String articleDelete(int number) {
 		aService.deleteById(number);
@@ -147,7 +153,7 @@ public class ArticleController {
 	@PostMapping("/replyDelete")
 	public String replyDelete(int replyId, int articleId) {
 		arService.deleteById(replyId);
-		ArticleBean selectDetail = aService.findById(articleId);
+		ArticleBean selectDetail = aService.findByArticleId(articleId);
 		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(articleId);
 		session.setAttribute("selectDetail", selectDetail);
 		session.setAttribute("selectReplyAll", selectReplyAll);
@@ -168,7 +174,7 @@ public class ArticleController {
 		articleReply.setArticleReplyId(replyId);
 		articleReply.setArticleReplyContent(replyContent);
 		arService.insert(articleReply);
-		ArticleBean selectDetail = aService.findById(articleId);
+		ArticleBean selectDetail = aService.findByArticleId(articleId);
 		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(articleId);
 		session.setAttribute("selectDetail", selectDetail);
 		session.setAttribute("selectReplyAll", selectReplyAll);
@@ -209,7 +215,7 @@ public class ArticleController {
 	@PostMapping("/UserUpdateArticlePage")
 	public String UserUpdateArticlePage(int articleId) {
 
-		ArticleBean updateDetail = aService.findById(articleId);
+		ArticleBean updateDetail = aService.findByArticleId(articleId);
 		session.setAttribute("updateDetail", updateDetail);
 		return "forumUserArticleUpdate";
 	}
