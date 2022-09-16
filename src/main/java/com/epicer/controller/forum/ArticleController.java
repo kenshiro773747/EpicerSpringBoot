@@ -53,7 +53,7 @@ public class ArticleController {
 
 	@GetMapping("/QueryAllPage")
 	public String QueryAllPage() {
-		return "forumIndexJsonTest";
+		return "forum/forumIndexJsonTest";
 	}
 
 	@GetMapping("/QueryAllAjax")
@@ -76,11 +76,11 @@ public class ArticleController {
 
 	@PostMapping("/forumAdd")
 	public String forumAddPage() {
-		return "forumAdd";
+		return "forum/forumAdd";
 	}
 
 	@PostMapping("/articleAdd")
-	public ArticleBean articleAdd(int category, String articleTitle, String articleContent) {
+	public String articleAdd(int category, String articleTitle, String articleContent) {
 		ArticleBean article = new ArticleBean();
 		article.setPlateformCategoryId(category);
 		article.setTitle(articleTitle);
@@ -90,7 +90,8 @@ public class ArticleController {
 		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
 		article.setUser(userID);
 		s.close();
-		return aService.insert(article);
+		aService.insert(article);
+		return "forum/forumIndexJsonTest";
 	}
 
 	@PostMapping("/forumUpdatePage")

@@ -25,8 +25,8 @@ public class ArticleReplyService{
 		return null;
 	}
 	
-	public List<ArticleReplyBean> findAllByUserId(int id){
-		return arRepo.findAllByUserId(id);
+	public List<ArticleReplyBean> findAllByUserId(int UserId){
+		return arRepo.findAllByUser(UserId);
 	}
 	
 	public List<ArticleReplyBean> findAllByArticleId(int id){

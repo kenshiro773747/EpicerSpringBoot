@@ -22,12 +22,12 @@ public class ArticleUserRecService{
 
 	public List<ArticleBean> selectArticle(int userid) {
 		// TODO Auto-generated method stub
-		return  aurRepo.findArticleByUserIdLike(userid);
+		return  aurRepo.findArticleByUserLike(userid);
 	}
 
 	public List<ArticleReplyBean> selectReply(int userid) {
 		// TODO Auto-generated method stub
-		return  aurRepo.findReplyByUserIdLike(userid);
+		return  aurRepo.findReplyByUserLike(userid);
 	}
 
 

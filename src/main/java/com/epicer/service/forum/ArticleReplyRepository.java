@@ -7,7 +7,7 @@ import com.epicer.model.forum.ArticleReplyBean;
 
 public interface ArticleReplyRepository extends JpaRepository<ArticleReplyBean, Integer> {
 
-	public List<ArticleReplyBean> findAllByUserId(int id);
+	public List<ArticleReplyBean> findAllByUser(int id);
 
 	public List<ArticleReplyBean> findAllByArticleId(int id);
 	
