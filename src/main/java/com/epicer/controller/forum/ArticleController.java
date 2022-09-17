@@ -117,18 +117,28 @@ public class ArticleController {
 	}
 
 	@PostMapping("/articleDetail")
-	public String articleDetail(int articleId) {
+	public String articleDetail(Integer articleId) {
+		
+		System.out.println(articleId.getClass().getSimpleName());
+		System.out.println(articleId);
 		ArticleBean selectDetail = aService.findByArticleId(articleId);
+		System.out.println("1"+selectDetail);
+		
 		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(articleId);
+		System.out.println("2"+selectReplyAll);
+		
+		
 		session.setAttribute("selectDetail", selectDetail);
 		session.setAttribute("selectReplyAll", selectReplyAll);
 		return "forum/forumDetail";
 	}
 
-	//都刪除第一個
+	//都刪除第一個,因為javascript del()抓是抓第一個form id=myForm的值
 	@PostMapping("/articleDelete")
 	public String articleDelete(int number) {
+		System.out.println(number);
 		aService.deleteById(number);
+		
 		return "redirect:/QueryAllPage";
 	}
 
@@ -162,7 +172,7 @@ public class ArticleController {
 
 	@PostMapping("/replyUpdatePage")
 	public String replyUpdatePage(int replyId) {
-		ArticleReplyBean replyUpdateDetail = arService.findById(replyId);
+		ArticleReplyBean replyUpdateDetail = arService.findByArticleReplyId(replyId);
 		session.setAttribute("replyUpdateDetail", replyUpdateDetail);
 		return "forumReplyUpdate";
 	}
@@ -245,7 +255,7 @@ public class ArticleController {
 
 	@PostMapping("/UserUpdateReplyPage")
 	public String UserUpdateReplyPage(int replyId) {
-		ArticleReplyBean replyUserUpdateDetail = arService.findById(replyId);
+		ArticleReplyBean replyUserUpdateDetail = arService.findByArticleReplyId(replyId);
 		session.setAttribute("replyUserUpdateDetail", replyUserUpdateDetail);
 		return "forumUserReplyUpdate";
 	}
