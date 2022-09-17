@@ -51,13 +51,13 @@ td, th {
 			
 				<td>文章類型</td>
 				<td><select name="category" >
-						<option value="0"  selected="<%=detail.getPlateformCategoryId()%>" disabled>請選擇文章類型</option> 
-						<option value="1"  selected="<%=detail.getPlateformCategoryId()%>" disabled>全穀雜糧類</option> 
-						<option value="2"  selected="<%=detail.getPlateformCategoryId()%>" disabled>豆魚蛋肉類</option> 
-						<option value="3"  selected="<%=detail.getPlateformCategoryId()%>" disabled>蔬菜類</option> 
-						<option value="4"  selected="<%=detail.getPlateformCategoryId()%>" disabled>水果類</option> 
-						<option value="5"  selected="<%=detail.getPlateformCategoryId()%>" disabled>乳品類</option> 
-						<option value="6"  selected="<%=detail.getPlateformCategoryId()%>" disabled>油脂與堅果種子類</option> 
+				<%if(detail.getPlateformCategoryId()==0)%><option value="0"  selected="<%=detail.getPlateformCategoryId()%>" disabled>請選擇文章類型</option> 
+				<%if(detail.getPlateformCategoryId()==1)%><option value="1"  selected="<%=detail.getPlateformCategoryId()%>" disabled>全穀雜糧類</option> 
+				<%if(detail.getPlateformCategoryId()==2)%><option value="2"  selected="<%=detail.getPlateformCategoryId()%>" disabled>豆魚蛋肉類</option> 
+				<%if(detail.getPlateformCategoryId()==3)%><option value="3"  selected="<%=detail.getPlateformCategoryId()%>" disabled>蔬菜類</option> 
+				<%if(detail.getPlateformCategoryId()==4)%><option value="4"  selected="<%=detail.getPlateformCategoryId()%>" disabled>水果類</option> 
+				<%if(detail.getPlateformCategoryId()==5)%><option value="5"  selected="<%=detail.getPlateformCategoryId()%>" disabled>乳品類</option> 
+				<%if(detail.getPlateformCategoryId()==6)%><option value="6"  selected="<%=detail.getPlateformCategoryId()%>" disabled>油脂與堅果種子類</option> 
 				</select></td>
 			</tr>
 			<tr>

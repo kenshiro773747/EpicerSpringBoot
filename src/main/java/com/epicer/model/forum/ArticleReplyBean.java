@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "article_reply")
+@Table(name = "forum_article_reply")
 @Component
 public class ArticleReplyBean implements Serializable {
 

@@ -103,7 +103,6 @@ public class ArticleController {
 		return "forum/forumUpdate";
 	}
 
-	//類型有問題
 	@PostMapping("/articleUpdate")
 	public String articleUpdate(int articleId, String aTitle, String aContent) {
 		ArticleBean article = new ArticleBean();
@@ -114,6 +113,7 @@ public class ArticleController {
 		
 		aService.insert(article);
 		return "redirect:/QueryAllPage";
+		
 	}
 
 	@PostMapping("/articleDetail")

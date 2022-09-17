@@ -26,8 +26,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@DynamicUpdate
-@DynamicInsert
 @Table(name = "forum_article")
 @Component
 public class ArticleBean implements Serializable {
@@ -51,7 +49,7 @@ public class ArticleBean implements Serializable {
 	@JsonIgnore
 	private List<ArticleReplyBean> articleReplyId = new ArrayList<ArticleReplyBean>();
 	
-	@Column(name = "article_category")
+	@Column(name = "article_category", updatable = false)
 	private int plateformCategoryId;
 
 	@Column(name = "article_title")
