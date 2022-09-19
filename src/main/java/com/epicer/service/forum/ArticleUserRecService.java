@@ -19,15 +19,14 @@ public class ArticleUserRecService{
 	private ArticleUserRecRepository aurRepo;
 
 
-
 	public List<ArticleBean> selectArticle(int userid) {
 		// TODO Auto-generated method stub
-		return  aurRepo.findArticleByUserLike(userid);
+		return  aurRepo.findArticleByUserUserId(userid);
 	}
 
 	public List<ArticleReplyBean> selectReply(int userid) {
 		// TODO Auto-generated method stub
-		return  aurRepo.findReplyByUserLike(userid);
+		return  aurRepo.findReplyByUserUserId(userid);
 	}
 
 

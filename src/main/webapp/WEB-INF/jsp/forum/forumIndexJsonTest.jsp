@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>首頁</title>
 <script  src='js/sweetalert2.min.js'></script>
+<script  src='js/jquery-3.6.0.js'></script>
 <link rel="stylesheet" href="css/sweetalert2.min.css">
 <script>
 

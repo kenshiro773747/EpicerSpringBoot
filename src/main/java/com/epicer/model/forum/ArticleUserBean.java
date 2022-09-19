@@ -30,10 +30,10 @@ public class ArticleUserBean implements Serializable {
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
+	private Integer userId;
 
 	@Column(name = "user_status")
-	private int userStatus;
+	private Integer userStatus;
 	
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL)
@@ -56,7 +56,7 @@ public class ArticleUserBean implements Serializable {
 
 
 
-	public ArticleUserBean(int userId, int userStatus, List<ArticleBean> articleBean,
+	public ArticleUserBean(Integer userId, Integer userStatus, List<ArticleBean> articleBean,
 			List<ArticleCollectRecBean> collectArticleRec, List<ArticleReplyBean> articleReplyBean) {
 		super();
 		this.userId = userId;
@@ -74,7 +74,7 @@ public class ArticleUserBean implements Serializable {
 
 
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -86,7 +86,7 @@ public class ArticleUserBean implements Serializable {
 
 
 
-	public void setUserStatus(int userStatus) {
+	public void setUserStatus(Integer userStatus) {
 		this.userStatus = userStatus;
 	}
 

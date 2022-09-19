@@ -15,7 +15,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +41,7 @@ public class ArticleController {
 	@Autowired
 	private ArticleReplyService arService;
 
+	
 	@Autowired
 	private ArticleUserRecService aurService;
 
@@ -106,8 +106,13 @@ public class ArticleController {
 	@PostMapping("/articleUpdate")
 	public String articleUpdate(int articleId, String aTitle, String aContent) {
 		ArticleBean article = new ArticleBean();
+		int userId = (int) session.getAttribute("userId");
 		article.setArticleId(articleId);
 		article.setTitle(aTitle);
+		Session s = factory.openSession();
+		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
+		s.close();
+		article.setUser(userID);
 		article.setArticleContent(aContent);
 		article.setDate(TimeTest.getTime());
 		
@@ -119,15 +124,10 @@ public class ArticleController {
 	@PostMapping("/articleDetail")
 	public String articleDetail(Integer articleId) {
 		
-		System.out.println(articleId.getClass().getSimpleName());
-		System.out.println(articleId);
 		ArticleBean selectDetail = aService.findByArticleId(articleId);
-		System.out.println("1"+selectDetail);
 		
-		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(articleId);
-		System.out.println("2"+selectReplyAll);
-		
-		
+		ArticleBean replyid = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(replyid);
 		session.setAttribute("selectDetail", selectDetail);
 		session.setAttribute("selectReplyAll", selectReplyAll);
 		return "forum/forumDetail";
@@ -145,7 +145,7 @@ public class ArticleController {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@PostMapping("/replyAdd")
-	public ArticleReplyBean replyAdd(int articleId, String replyContent) {
+	public String replyAdd(int articleId, String replyContent) {
 		int userId = (int) session.getAttribute("userId");
 		Session s = factory.openSession();
 		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
@@ -156,53 +156,63 @@ public class ArticleController {
 		articleReply.setUser(userID);
 		articleReply.setArticleReplyContent(replyContent);
 		articleReply.setArticleReplyDate(TimeTest.getTime());
-		return arService.insert(articleReply);
+		arService.insert(articleReply);
+		return "forward:/articleDetail";
+				
 
 	}
 
+	
+///////////////////////刪第一個
 	@PostMapping("/replyDelete")
 	public String replyDelete(int replyId, int articleId) {
 		arService.deleteById(replyId);
 		ArticleBean selectDetail = aService.findByArticleId(articleId);
-		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(articleId);
+		ArticleBean reply  = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(reply);
 		session.setAttribute("selectDetail", selectDetail);
 		session.setAttribute("selectReplyAll", selectReplyAll);
-		return "forumDetail";
+		return "forward:/articleDetail";
 	}
 
 	@PostMapping("/replyUpdatePage")
 	public String replyUpdatePage(int replyId) {
-		ArticleReplyBean replyUpdateDetail = arService.findByArticleReplyId(replyId);
+		ArticleReplyBean replyUpdateDetail = arService.findById(replyId);
 		session.setAttribute("replyUpdateDetail", replyUpdateDetail);
-		return "forumReplyUpdate";
+		return "forum/forumReplyUpdate";
 	}
 
 	@PostMapping("/replyUpdate")
-	public String replyUpdate(int articleId, int replyId, String replyContent, Model model) {
+	public String replyUpdate(int articleId, int replyId, String replyContent) {
 
-		ArticleReplyBean articleReply = new ArticleReplyBean();
-		articleReply.setArticleReplyId(replyId);
-		articleReply.setArticleReplyContent(replyContent);
-		arService.insert(articleReply);
+		arService.updateobject(replyContent, TimeTest.getTime(), replyId);
+		
 		ArticleBean selectDetail = aService.findByArticleId(articleId);
-		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(selectDetail);
 		session.setAttribute("selectDetail", selectDetail);
 		session.setAttribute("selectReplyAll", selectReplyAll);
-		return "forumDetail";
+		return "forum/forumDetail";
 	}
 
-	@GetMapping("/forumUser")
-	public String forumUser() {
-		return "forumUserPage";
-	}
+	
 
 //////////////////////////////////////////////////////////////////////////////////////////	
+	
+	@GetMapping("/forumUser")
+	public String forumUser() {
+		return "forum/forumUserPage";
+	}
+	
 	@GetMapping("/QueryUserArticle")
 	@ResponseBody
 	public List<ArticleBean> QueryUserArticle() {
 		int userId = (int) session.getAttribute("userId");
 		List<ArticleBean> artilces = new ArrayList<>();
-		Iterable<ArticleBean> selectUserId = aurService.selectArticle(userId);
+		Session s = factory.openSession();
+		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
+		s.close();
+		Iterable<ArticleBean> selectUserId = aService.findByUser(userID);
+		System.out.println(selectUserId);
 		for (ArticleBean article : selectUserId) {
 			artilces.add(article);
 		}
@@ -215,16 +225,19 @@ public class ArticleController {
 	public List<ArticleReplyBean> QueryUserReply() {
 		int userId = (int) session.getAttribute("userId");
 		List<ArticleReplyBean> artilceReplys = new ArrayList<>();
-		List<ArticleReplyBean> UserReply = aurService.selectReply(userId);
+		Session s = factory.openSession();
+		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
+		s.close();
+		List<ArticleReplyBean> UserReply = arService.findAllByUserId(userID);
 		for (ArticleReplyBean article : UserReply) {
 			artilceReplys.add(article);
 		}
 		return artilceReplys;
 	}
+	
 
 	@PostMapping("/UserUpdateArticlePage")
 	public String UserUpdateArticlePage(int articleId) {
-
 		ArticleBean updateDetail = aService.findByArticleId(articleId);
 		session.setAttribute("updateDetail", updateDetail);
 		return "forumUserArticleUpdate";
@@ -232,9 +245,14 @@ public class ArticleController {
 
 	@PostMapping("/UserUpdateArticle")
 	public String UserUpdateArticle(int articleId, String aTitle, String aContent) {
+		int userId = (int) session.getAttribute("userId");
 		ArticleBean article = new ArticleBean();
 		article.setArticleId(articleId);
 		article.setTitle(aTitle);
+		Session s = factory.openSession();
+		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
+		s.close();
+		article.setUser(userID);
 		article.setArticleContent(aContent);
 		article.setDate(TimeTest.getTime());
 		aService.insert(article);
@@ -255,18 +273,20 @@ public class ArticleController {
 
 	@PostMapping("/UserUpdateReplyPage")
 	public String UserUpdateReplyPage(int replyId) {
-		ArticleReplyBean replyUserUpdateDetail = arService.findByArticleReplyId(replyId);
+		ArticleReplyBean replyUserUpdateDetail = arService.findById(replyId);
 		session.setAttribute("replyUserUpdateDetail", replyUserUpdateDetail);
-		return "forumUserReplyUpdate";
+		return "forum/forumUserReplyUpdate";
 	}
 
 	@PostMapping("/UserUpdateReply")
 	public String UserUpdateReply(int replyId, String replyContent) {
-		ArticleReplyBean articleReply = new ArticleReplyBean();
-		articleReply.setArticleReplyId(replyId);
-		articleReply.setArticleReplyContent(replyContent);
-		articleReply.setArticleReplyDate(TimeTest.getTime());
-		arService.insert(articleReply);
+//		ArticleReplyBean articleReply = new ArticleReplyBean();
+//		articleReply.setArticleReplyId(replyId);
+//		articleReply.setArticleReplyContent(replyContent);
+//		articleReply.setArticleReplyDate(TimeTest.getTime());
+//		arService.insert(articleReply);
+		
+		arService.updateobject(replyContent, TimeTest.getTime(), replyId);
 		return "redirect:/forumUser";
 	}
 
