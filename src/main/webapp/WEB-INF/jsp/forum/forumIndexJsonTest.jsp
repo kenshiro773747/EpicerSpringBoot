@@ -9,10 +9,7 @@
 <script  src='js/jquery-3.6.0.js'></script>
 <link rel="stylesheet" href="css/sweetalert2.min.css">
 <script>
-
-window.onload=function(){
-	
-	document.getElementById("btnAll").onclick=function(){
+	function queryAll(){
 		//1.創建ajax對象
 		var xhr = new XMLHttpRequest();
 		//2.註冊回調函數
@@ -22,6 +19,7 @@ window.onload=function(){
 					var data = JSON.parse(this.responseText);
 					var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 					var resultText = '';
+					
 					for(var i=0;i<data.length;i++){
 						var time = new Date(data[i].date);
 						resultText +="<tr>"
@@ -29,7 +27,6 @@ window.onload=function(){
 						resultText +="<td>"+"<form action='articleDetail' method='post'>"+
 						"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
 						"<input type='submit' value="+(i+1)+">"+"</form>"+"</td>"
-						
 						
 						//類型
 						resultText +="<td>"+category[data[i].plateformCategoryId-1]+"</td>"
@@ -45,9 +42,9 @@ window.onload=function(){
 						"<input type='submit' value='Update'></form>"+
 						
 						//刪除
-						"<form id=myForm action='articleDelete' method='post'>"+
+						"<form  id = 'myform"+i+"' action='articleDelete' method='post'>"+
 						"<input type='hidden' name='number' value="+data[i].articleId+">"+
-						"<input type='button' value='Delete' onclick='del("+this.form+")'></form></td>"
+						"<input type='button' value='Delete' onclick='del("+i+")'></form></td>"
 						resultText +="</tr>"
 					   }
 					document.getElementById("mydiv").innerHTML = resultText;
@@ -63,7 +60,7 @@ window.onload=function(){
 		
 	}
 	
-	document.getElementById("btnTitle").onclick=function(){
+	function querytitle(){
 		//1.創建ajax對象
 		var xhr = new XMLHttpRequest();
 		//2.註冊回調函數
@@ -95,9 +92,9 @@ window.onload=function(){
 						"<input type='submit' value='Update'></form>"+
 						
 						//刪除
-						"<form id=myForm action='articleDelete' method='post'>"+
+						"<form  id = 'myform"+i+"' action='articleDelete' method='post'>"+
 						"<input type='hidden' name='number' value="+data[i].articleId+">"+
-						"<input type='button' value='Delete' onclick='del("+this.form+")'></form></td>"
+						"<input type='button' value='Delete' onclick='del("+i+")'></form></td>"
 						resultText +="</tr>"
 					   }
 					document.getElementById("mydiv").innerHTML = resultText;
@@ -115,8 +112,7 @@ window.onload=function(){
 		
 	}
 	
-	
-}
+
 	
 function category(category){
 	//1.創建ajax對象
@@ -149,9 +145,9 @@ function category(category){
 					"<input type='submit' value='Update'></form>"+
 					
 					//刪除
-					"<form id=myForm action='articleDelete' method='post'>"+
-					"<input type='hidden' name='number' value="+data[i].articleId+">"+
-					"<input type='button' value='Delete' onclick='del("+this.form+")'></form></td>"
+					"<form  id = 'myform"+i+"' action='articleDelete' method='post'>"+
+						"<input type='hidden' name='number' value="+data[i].articleId+">"+
+						"<input type='button' value='Delete' onclick='del("+i+")'></form></td>"
 					resultText +="</tr>"
 				   }
 				document.getElementById("mydiv").innerHTML = resultText;
@@ -169,7 +165,7 @@ function category(category){
 	
 }
 
-function del(form){
+function del(id){
 	Swal.fire({
 		  title: 'Are you sure?',
 		  text: "You won't be able to revert this!",
@@ -186,7 +182,7 @@ function del(form){
 		      'success'
 		      
 		    )
-		    document.getElementById("myForm").submit();
+		    $("#myform"+id).submit();
 		  }
 		})
 	
@@ -206,8 +202,8 @@ function del(form){
 <form action="forumAdd" method="post">
 		  <input type="submit" value="新增文章">
         </form>
-<button id = "btnAll">查詢全部</button><br/>
-<input type="text" name="searchTitle" id ="searchTitle"> <button id = "btnTitle">查詢文章</button><br/>
+<input type="button" value="查詢全部" onclick="queryAll()"><br/>
+<input type="text" name="searchTitle" id ="searchTitle" > <input type="button" value="查詢文章" onclick="querytitle()"><br/>
 <input type="button" value="全榖雜糧" name="1" onclick="category(this)">
 <input type="button" value="豆魚蛋肉" name="2" onclick="category(this)">
 <input type="button" value="蔬菜" name="3" onclick="category(this)">

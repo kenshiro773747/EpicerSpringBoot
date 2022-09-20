@@ -240,7 +240,7 @@ public class ArticleController {
 	public String UserUpdateArticlePage(int articleId) {
 		ArticleBean updateDetail = aService.findByArticleId(articleId);
 		session.setAttribute("updateDetail", updateDetail);
-		return "forumUserArticleUpdate";
+		return "forum/forumUserArticleUpdate";
 	}
 
 	@PostMapping("/UserUpdateArticle")

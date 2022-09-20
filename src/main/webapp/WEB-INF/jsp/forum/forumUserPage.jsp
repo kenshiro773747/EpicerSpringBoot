@@ -7,6 +7,7 @@
 <title>會員畫面</title>
 <script  src='js/sweetalert2.min.js'></script>
 <link rel="stylesheet" href="css/sweetalert2.min.css">
+<script  src='js/jquery-3.6.0.js'></script>
 <script>
 
 window.onload=function(){
@@ -45,9 +46,9 @@ window.onload=function(){
 						"<input type='submit' value='Update'></form>"+
 						
 						//刪除
-						"<form id=myForm action='UserDeleteArticle' method='post'>"+
+						"<form id = 'myform"+i+"' action='UserDeleteArticle' method='post'>"+
 						"<input type='hidden' name='number' value="+data[i].articleId+">"+
-						"<input type='button' value='Delete' onclick='del("+this.form+")'></form></td>"
+						"<input type='button' value='Delete' onclick='del("+i+")'></form></td>"
 						resultText +="</tr>"
 					   }
 					document.getElementById("mydiv").innerHTML = resultText;
@@ -96,9 +97,9 @@ window.onload=function(){
 						"<button type='submit'>Update</button></form>"+
 						
 						//刪除
-						"<form id=myForm action='UserDeleteReply' method='post'>"+
+						"<form id='myform"+i+"'  action='UserDeleteReply' method='post'>"+
 						"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
-						"<input type='button' value='Delete' onclick='del("+this.form+")'></form></td>"
+						"<input type='button' value='Delete' onclick='del("+i+")'></form></td>"
 						resultText +="</tr>"
 					   }
 					document.getElementById("mydiv").innerHTML = resultText;
@@ -116,7 +117,7 @@ window.onload=function(){
 	
 }
 
-function del(form){
+function del(id){
 	Swal.fire({
 		  title: 'Are you sure?',
 		  text: "You won't be able to revert this!",
@@ -134,7 +135,7 @@ function del(form){
 		      'success'
 		      
 		    )
-		    document.getElementById("myForm").submit();
+		    $("#myform"+id).submit();
 		  }
 		})
 

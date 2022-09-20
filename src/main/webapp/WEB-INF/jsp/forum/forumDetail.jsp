@@ -107,10 +107,10 @@
             
             
             
-				<form id ="myForm" action="replyDelete" method="post">
+				<form id ="myform<%=i%>" action="replyDelete" method="post">
 					   <input type="hidden" name="replyId" value="<%= articleReplyList.getArticleReplyId()%>">
 					   <input type="hidden" name="articleId" value="<%= articleReplyList.getArticleId().getArticleId() %>">
-					   <input type='button' value='Delete' onclick=del(this.form) >
+					   <input type='button' value='Delete' onclick="del(<%=i%>)">
 					   
 				</form>
 			</td>
@@ -128,7 +128,7 @@
 <script language='javascript' src='js/jquery-3.6.0.js'></script>
 <script language='javascript' src='js/Wang.js'></script>
 <script>
-function del(form){
+function del(id){
 	Swal.fire({
 		  title: 'Are you sure?',
 		  text: "You won't be able to revert this!",
@@ -136,8 +136,7 @@ function del(form){
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Yes, delete it!',
-		  
+		  confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
 		  if (result.isConfirmed) {
 		    Swal.fire(
@@ -146,10 +145,9 @@ function del(form){
 		      'success'
 		      
 		    )
-		    document.getElementById("myForm").submit();
+		    $("#myform"+id).submit();
 		  }
 		})
-
 	
 }
 
