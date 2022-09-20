@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8"> 
-<title>文章回覆</title>
-<!-- <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+<title>文章內容</title>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=63296382a700c90019f6dc52&product=image-share-buttons" async="async"></script>
 <script language='javascript' src='js/wangEditor.min.js'></script>
 <script  src='js/sweetalert2.min.js'></script>
 <link rel="stylesheet" href="css/sweetalert2.min.css">
@@ -52,9 +52,18 @@
             
       </table>     
 			
+<!-- 			<tr> -->
+<!-- 			<td><div class="line-it-button" data-lang="zh_Hant" data-type="share-b" data-env="REAL" data-url="http://localhost:8081/articleDetail" data-color="default" data-size="large" data-count="true" data-ver="3" style="display: none;"></div> -->
+<!-- <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script></td> -->
+<!-- <td><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script> <a href="http://twitter.com/share" class="twitter-share-button">Tweet</a></td> -->
+<!-- 			</tr> -->
+			
+			
+			
 		<br>	
 		<br>
 <div>
+
 <h1>留言版</h1>
 
 <form action="replyAdd" method="post"  style="width:800px;">

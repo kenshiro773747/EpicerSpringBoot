@@ -132,6 +132,8 @@ public class ArticleController {
 		session.setAttribute("selectReplyAll", selectReplyAll);
 		return "forum/forumDetail";
 	}
+	
+	
 
 	//都刪除第一個,因為javascript del()抓是抓第一個form id=myForm的值
 	@PostMapping("/articleDelete")
