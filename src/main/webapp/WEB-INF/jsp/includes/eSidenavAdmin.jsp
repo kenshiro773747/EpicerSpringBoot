@@ -144,13 +144,13 @@
 			</p>
 			<div class="collapse" id="collapseForum">
 			<a class="nav-link active"
-				href="./pages/dashboard.html" >
+				href="http://localhost:8081/QueryAllPage" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">所有文章</span>
 			</a>
 			<a class="nav-link active"
-				href="./pages/dashboard.html" >
+				href="http://localhost:8081/forumAdd" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">新增文章</span>
