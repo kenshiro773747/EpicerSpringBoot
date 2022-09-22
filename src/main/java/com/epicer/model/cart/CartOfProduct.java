@@ -32,7 +32,7 @@ public class CartOfProduct implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "userid")
 	private User cartUser;
-	
+	 
 	@ManyToOne
 	@JoinColumn(name = "productid")
 	private Product cartProduct;
