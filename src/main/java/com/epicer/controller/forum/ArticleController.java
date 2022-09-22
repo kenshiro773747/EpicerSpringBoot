@@ -210,6 +210,7 @@ public class ArticleController {
 		int userId = (int) session.getAttribute("userId");
 		List<ArticleBean> artilces = new ArrayList<>();
 		Session s = factory.openSession();
+		System.out.println(userId);
 		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
 		s.close();
 		Iterable<ArticleBean> selectUserId = aService.findByUser(userID);

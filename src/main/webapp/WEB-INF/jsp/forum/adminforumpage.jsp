@@ -258,7 +258,7 @@ function del(id){
 <!-- ////////////////// 個人主文開始 //////////////////-->
 
 
-<% session.setAttribute("userId", 1002); %>
+<% session.setAttribute("userId", 1000); %>
 
  		<form action="forumUser" method="get">
 		  <input type="submit" value="userPage">
