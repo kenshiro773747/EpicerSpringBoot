@@ -11,52 +11,60 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <html>
 <head>
 <title>新增文章</title>
-<!-- <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
 <script language='javascript' src='js/wangEditor.min.js'></script>
+<script>
+
+</script>
 <style>
         .tb1 {
             width: 700px;
             height: 550px;
-            border: 1px solid black;
             border-collapse: collapse;
             margin: auto;
         }
-
-        td,
-        th {
-
-            border: 1px solid #BEC9A6;
-        }
-        
-        .toolbar {
-            border: 1px solid #ccc;
-        }
-        .text {
-            border: 1px solid #ccc;
-            min-height: 400px;
-        }
-   
-        
 </style>
 
 
-    
+
 </head>
 
 <body>
-
-    <h1 style="text-align:center;">新增文章 </h1>
-    <hr>
-
-
+<%@include file="../includes/eLinkHead.jsp"%>
+<%@include file="../includes/eScriptForBody.jsp"%>
+<div style="background-image: url(images/foodCar.gif);background-size: contain;">
 
 
-    <form action="articleAdd" method="post">
-        <table class="tb1">
-            <tr>
-                <td>文章類型</td>
+
+
+
+
+
+<div style="margin:5% 0 0 0">
+	    <h1 style="text-align:center;">新增文章 </h1>
+
+
+ 
+   <div>
+     <form action="QueryAllPage" method="Get" >
+      <input type="submit"value="返回" class="btn bg-gradient-secondary">
+     </form>
+     </div>
+
+    <form action="articleAdd" method="post" >
+        <table class="tb1" style="opacity:1;" >
+                    <tr>
                 <td>
-                    <select name="category" >
+                <div class="col-md-6">
+    			<div class="form-group has-success">
+   				 <input type="text" placeholder="請輸入文章標題"  class="form-control" name="articleTitle" id="example-text-input" required="required"></td>
+				 </div>
+  				</div>
+   
+            </tr>
+            <tr>
+                <td>
+                  <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1" name="category" >
                         <option value="0" selected disabled >請選擇文章類型</option>
                         <option value="1">全穀雜糧類</option>
                         <option value="2">豆魚蛋肉類</option>
@@ -65,35 +73,36 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
                         <option value="5">乳品類</option>
                         <option value="6">油脂與堅果種子類</option>
                     </select>
+                     </div>
                 </td>
             </tr>
-            <tr>
-                <td>文章標題</td>
-                <td><input type="text" name="articleTitle" required="required"></td>
 
-            </tr>
             <tr>
             
-                <td>文章內容</td>
                 <td>
-                <div id="div1">
-				</div>
+                <div id="div1"></div>
                 <textarea id="text1" name="articleContent" style="width:100%; height:200px ;display:none" cols="80" rows="20" required="required" ></textarea>
                 </td>
 
             </tr>
             
             <tr>
-                <td><input type="submit" name="submit" value="保存"></td>
-                <td><input type="reset" value="清除表單"></td>
+                <td>
+                <input type="submit" name="submit" class="btn btn-primary btn-sm" value="保存">
+                <input type="reset"	 value="清除表單" id="testReset" class="btn btn-primary btn-sm">
+               
+               </td>
+             
             </tr>
 
 
 
         </table>
     </form>
-    
-<!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> -->
+ 
+    </div>	
+    </div>
+    </div>
 <script language='javascript' src='js/jquery-3.6.0.js'></script>
 <script language='javascript' src='js/Wang.js'></script>
 </body>

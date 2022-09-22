@@ -53,7 +53,7 @@ public class ArticleController {
 
 	@GetMapping("/QueryAllPage")
 	public String QueryAllPage() {
-		return "forum/forumIndexJsonTest";
+		return "forum/adminforumpage";
 	}
 
 	@GetMapping("/QueryAllAjax")
@@ -74,7 +74,7 @@ public class ArticleController {
 		return aService.findByCategoryLike(categoryId);
 	}
 
-	@PostMapping("/forumAdd")
+	@GetMapping("/forumAdd")
 	public String forumAddPage() {
 		return "forum/forumAdd";
 	}
@@ -130,12 +130,11 @@ public class ArticleController {
 		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(replyid);
 		session.setAttribute("selectDetail", selectDetail);
 		session.setAttribute("selectReplyAll", selectReplyAll);
-		return "forum/forumDetail";
+		return "forum/adminfourmDetail";
 	}
 	
 	
 
-	//都刪除第一個,因為javascript del()抓是抓第一個form id=myForm的值
 	@PostMapping("/articleDelete")
 	public String articleDelete(int number) {
 		System.out.println(number);
@@ -193,7 +192,7 @@ public class ArticleController {
 		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(selectDetail);
 		session.setAttribute("selectDetail", selectDetail);
 		session.setAttribute("selectReplyAll", selectReplyAll);
-		return "forum/forumDetail";
+		return "forum/adminfourmDetail";
 	}
 
 	
@@ -202,7 +201,7 @@ public class ArticleController {
 	
 	@GetMapping("/forumUser")
 	public String forumUser() {
-		return "forum/forumUserPage";
+		return "forum/userforumpage";
 	}
 	
 	@GetMapping("/QueryUserArticle")

@@ -44,7 +44,13 @@
 						//刪除
 						"<form  id = 'myform"+i+"' action='articleDelete' method='post'>"+
 						"<input type='hidden' name='number' value="+data[i].articleId+">"+
-						"<input type='button' value='Delete' onclick='del("+i+")'></form></td>"
+						"<input type='button' value='Delete' onclick='del("+i+")'></form>
+						
+						//收藏
+						"<form  id = 'action='articleDelete' method='post'>"+
+						"<input type='hidden' name='number' value="+data[i].articleId+">"+
+						"<input type='button' value='Delete' onclick='del("+i+")'></form>
+						</td>"
 						resultText +="</tr>"
 					   }
 					document.getElementById("mydiv").innerHTML = resultText;

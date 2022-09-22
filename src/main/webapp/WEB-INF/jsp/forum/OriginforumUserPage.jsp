@@ -81,7 +81,7 @@ window.onload=function(){
 						resultText +="<tr>"
 						//Detail
 						resultText +="<td>"+"<form action='articleDetail' method='post'>"+
-						"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+						"<input type='hidden' name='articleId' value='"+data[i].articleId.articleId+"'>"+
 						"<input type='submit' value="+(i+1)+">"+"</form>"+"</td>"
 						
 						
