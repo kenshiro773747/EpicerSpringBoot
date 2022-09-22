@@ -13,11 +13,13 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "article_reply")
+@Table(name = "forum_article_reply")
 @Component
+@JsonIgnoreProperties(value = {"article_id", "userId"})
 public class ArticleReplyBean implements Serializable {
 
 	/**

@@ -47,8 +47,7 @@ public class ArticleBean implements Serializable {
 	@JsonIgnore
 	private List<ArticleReplyBean> articleReplyId = new ArrayList<ArticleReplyBean>();
 	
-
-	@Column(name = "article_category")
+	@Column(name = "article_category", updatable = false)
 	private int plateformCategoryId;
 
 	@Column(name = "article_title")

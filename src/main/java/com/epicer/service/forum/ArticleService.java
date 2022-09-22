@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.epicer.model.forum.ArticleBean;
+import com.epicer.model.forum.ArticleUserBean;
 
 @Service
 @Transactional
@@ -16,12 +17,18 @@ public class ArticleService {
 	@Autowired
 	private ArticleRepository aRepo;
 
-	public ArticleBean findById(int replyId) {
-		Optional<ArticleBean> op = aRepo.findById(replyId);
+	public ArticleBean findByArticleId(int articleId) {
+		Optional<ArticleBean> op = aRepo.findById(articleId);
 		if (op.isPresent()) {
 			return op.get();
 		}
 		return null;
+	}
+	
+	
+	
+	public List<ArticleBean> findByUser(ArticleUserBean userId) {
+		return aRepo.findAllByUser(userId);
 	}
 
 	public List<ArticleBean> findByTitleLike(String title) {
@@ -40,7 +47,7 @@ public class ArticleService {
 		return aRepo.save(articleBean);
 	}
 
-	public void deleteById(int id) {
+	public void deleteById(Integer id) {
 		aRepo.deleteById(id);
 	}
 

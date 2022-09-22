@@ -5,7 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.epicer.model.forum.ArticleBean;
 import com.epicer.model.forum.ArticleReplyBean;
+import com.epicer.model.forum.ArticleUserBean;
 
 
 
@@ -25,12 +28,16 @@ public class ArticleReplyService{
 		return null;
 	}
 	
-	public List<ArticleReplyBean> findAllByUserId(int id){
-		return arRepo.findAllByUserId(id);
+	public List<ArticleReplyBean> findAllByUserId(ArticleUserBean UserId){
+		return arRepo.findAllByUser(UserId);
 	}
 	
-	public List<ArticleReplyBean> findAllByArticleId(int id){
+	public List<ArticleReplyBean> findAllByArticleId(ArticleBean id){
 		return arRepo.findAllByArticleId(id);
+	}
+	
+	public int updateobject(String replyContent,long date,int articleReplyId) {
+		return arRepo.update(replyContent, date, articleReplyId);
 	}
 
 

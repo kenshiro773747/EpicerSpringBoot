@@ -1,4 +1,4 @@
-package com.epicer.model.forum;
+package com.epicer.model.users;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,11 +16,15 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.epicer.model.forum.ArticleBean;
+import com.epicer.model.forum.ArticleCollectRecBean;
+import com.epicer.model.forum.ArticleReplyBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "forum_article_user")
 @Component
-public class ArticleUserBean implements Serializable {
+public class TestUsers implements Serializable {
 	
 	/**
 	 * 
@@ -48,27 +52,7 @@ public class ArticleUserBean implements Serializable {
 	@JsonIgnore
 	private List<ArticleReplyBean> articleReplyBean = new ArrayList<ArticleReplyBean>();
 	
-	
-
-	public ArticleUserBean() {
-		super();
-	}
-
-
-
-	public ArticleUserBean(Integer userId, Integer userStatus, List<ArticleBean> articleBean,
-			List<ArticleCollectRecBean> collectArticleRec, List<ArticleReplyBean> articleReplyBean) {
-		super();
-		this.userId = userId;
-		this.userStatus = userStatus;
-		this.articleBean = articleBean;
-		this.collectArticleRec = collectArticleRec;
-		this.articleReplyBean = articleReplyBean;
-	}
-
-
-
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
@@ -80,7 +64,7 @@ public class ArticleUserBean implements Serializable {
 
 
 
-	public int getUserStatus() {
+	public Integer getUserStatus() {
 		return userStatus;
 	}
 
@@ -125,9 +109,5 @@ public class ArticleUserBean implements Serializable {
 	public void setArticleReplyBean(List<ArticleReplyBean> articleReplyBean) {
 		this.articleReplyBean = articleReplyBean;
 	}
-
 	
-
-
-
 }
