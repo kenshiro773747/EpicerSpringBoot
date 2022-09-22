@@ -9,12 +9,9 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Epicer管理員系統</title>
 
-<!-- eLinkHead (開始) -->
-<%@include file="../includes/eLinkHead.jsp"%>
-<!-- eLinkHead (結束) -->
-<!-- <link rel="stylesheet" href="../assets/js/plugins/sweetalert2.min.css"> -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<!-- eLindHead (開始) -->
+<%@include file="../includes/eLinkHead.jsp" %>
+<!-- eLindHead (結束) -->
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -29,32 +26,25 @@
 		<!-- ////////////////// (Header)Start 上方 Navbar 上方  (要加裝在個人頁面)(從includes/eHead.jsp要拉一個檔案到自己資料夾改)////////////////// -->
 		<%@include file="../includes/eHead.jsp"%>
 		<!-- ////////////////// End 上方 Navbar //////////////////-->
-		<!-- ////////////////// 個人主文開始 //////////////////-->
+<!-- ////////////////// 個人主文開始 //////////////////-->
 
 
 
-		Hello ni hao ma<br /> Hello ni hao ma<br /> Hello ni hao ma<br />
-		Hello ni hao ma<br /> Hello ni hao ma<br /> Hello ni hao ma<br />
+		Hello ni hao ma<br /> 
+		Hello ni hao ma<br /> 
+		Hello ni hao ma<br />
+		Hello ni hao ma<br />
+		Hello ni hao ma<br />
+		Hello ni hao ma<br />
 
 		個人文字打在這<br />
 
 
 
-		<button class="btn bg-gradient-primary mb-0"
-			onclick="Swal.fire('Any fool can use a computer')">Try me!</button>
-			
-			
-	<table id="myTable">
-	
-	
-	</table>
 
 
 
-
-
-
-		<!-- ////////////////// 個人主文結束 //////////////////-->
+<!-- ////////////////// 個人主文結束 //////////////////-->
 		<!--////////////////// Footer(開始) //////////////////-->
 		<%@include file="../includes/eFooter.jsp"%>
 		<!-- ////////////////// Footer(結束) //////////////////-->
@@ -72,25 +62,6 @@
 	<!-- ////////////////// 框架Script url (開始)(不能少) ////////////////// -->
 	<%@include file="../includes/eScriptForBody.jsp"%>
 	<!-- ////////////////// 框架Script (結束) //////////////////-->
-
-	<!-- 	<script src="../../assets/js/plugins/sweetalert2.min.js"></script> -->
-	<!-- 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-
-	<!-- 	<script src="../assets/js/plugins/sweetalert2.min.js"></script> -->
-	<!-- 	<link rel="stylesheet" href="sweetalert2.min.css"> -->
-
-	<script type="text/javascript" charset="utf8"
-		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-	
-	
-	<script>
-		$('#myTable').dataTable({});
-	</script>
-	
-	
-
-
-
 
 </body>
 
