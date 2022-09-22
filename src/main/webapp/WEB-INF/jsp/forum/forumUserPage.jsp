@@ -11,7 +11,16 @@
 <script  src='js/sweetalert2.min.js'></script>
 <script  src='js/jquery-3.6.0.js'></script>
 <link rel="stylesheet" href="css/sweetalert2.min.css">
-
+<style type="text/css">
+span{
+position: relative;
+ overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 140px;
+  display: inline-block;
+}
+</style>
 <script>
 window.onload=function(){
 	document.getElementById("btnArticle").onclick=function(){
