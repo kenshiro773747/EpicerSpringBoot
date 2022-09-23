@@ -18,7 +18,11 @@ public interface ArticleReplyRepository extends JpaRepository<ArticleReplyBean, 
 	
 	
 	@Modifying
-	@Query( value = "update forum_article_reply set article_reply_content=?1 , article_reply_date=?2 where article_reply_id=?3",nativeQuery = true)
+	@Query( value = "update forum_article_reply set articlereplycontent=?1 , articlereplydate=?2 where articlereplyid=?3",nativeQuery = true)
 	public int update(String replyContent,long date,int articleReplyId);
+	
+	@Modifying
+	@Query( value = "select * from forum_article_reply where articlereplystatus=?1",nativeQuery = true)
+	public List<ArticleReplyBean> findAllByStatus(int status);
 	
 }

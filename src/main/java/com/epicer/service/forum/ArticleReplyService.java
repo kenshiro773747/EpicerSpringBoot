@@ -32,6 +32,10 @@ public class ArticleReplyService{
 		return arRepo.findAllByUser(UserId);
 	}
 	
+	public List<ArticleReplyBean> findAllByStatus(int status){
+		return arRepo.findAllByStatus(status);
+	}
+	
 	public List<ArticleReplyBean> findAllByArticleId(ArticleBean id){
 		return arRepo.findAllByArticleId(id);
 	}

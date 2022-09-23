@@ -71,6 +71,11 @@ position: relative;
 										"<input type='hidden' name='number' value="+data[i].articleId+">"+
 										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 									"</form>"+
+									"<form id = 'report"+i+"' action='forumReport' method='post'>"+
+									"<input type='hidden' name='number' value="+data[i].articleId+">"+
+									"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+								"</form>"+
+									
 						          "</td>"+
 						        "</tr>"
 						   
@@ -104,9 +109,11 @@ position: relative;
 						resultText +=
 					        "<tr>"+
 					          "<td>"+
-					          
-					            "<div class='d-flex px-2 py-1'>"+
-					               "<button type='button' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+					          "<div class='d-flex px-2 py-1'>"+
+					            "<form action='articleDetail' method='post'>"+
+					        	"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+								"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+								"</form>"+
 					            "</div>"+
 					          "</td>"+
 					          "<td>"+
@@ -130,6 +137,10 @@ position: relative;
 									"<input type='hidden' name='number' value="+data[i].articleId+">"+
 									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 								"</form>"+
+								"<form id = 'report"+i+"' action='forumReport' method='post'>"+
+								"<input type='hidden' name='number' value="+data[i].articleId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+							"</form>"+
 					          "</td>"+
 					        "</tr>"
 					   
@@ -168,9 +179,11 @@ function category(category){
 					resultText +=
 				        "<tr>"+
 				          "<td>"+
-				          
 				            "<div class='d-flex px-2 py-1'>"+
-				               "<button type='button' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+				            "<form action='articleDetail' method='post'>"+
+				        	"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+							"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+							"</form>"+
 				            "</div>"+
 				          "</td>"+
 				          "<td>"+
@@ -194,6 +207,10 @@ function category(category){
 								"<input type='hidden' name='number' value="+data[i].articleId+">"+
 								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 							"</form>"+
+							"<form id = 'report"+i+"' action='forumReport' method='post'>"+
+							"<input type='hidden' name='number' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+						"</form>"+
 				          "</td>"+
 				        "</tr>"
 				   
@@ -210,6 +227,134 @@ function category(category){
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
 	var searchCategoryId = category.name;
 	xhr.send("categoryId="+searchCategoryId)
+	
+}
+
+function reportPage(){
+	document.getElementById("searchTitle").value = ""
+	
+	//1.創建ajax對象
+	var xhr = new XMLHttpRequest();
+	//2.註冊回調函數
+	xhr.onreadystatechange = function(){
+		if(this.readyState ==4 ){
+			if(this.status==200){
+				var data = JSON.parse(this.responseText);
+				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
+				var resultText = '';
+				for(var i=0;i<data.length;i++){
+					var time = new Date(data[i].date);
+					resultText +=
+				        "<tr>"+
+				          "<td>"+
+				            "<div class='d-flex px-2 py-1'>"+
+				            "<form action='articleDetail' method='post'>"+
+				        	"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+							"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+							"</form>"+
+				            "</div>"+
+				          "</td>"+
+				          "<td>"+
+				            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].plateformCategoryId-1]+"</p>"+
+				          "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].title+"</span>"+
+				         "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+				          "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
+				          "</td>"+
+				          "<td class='align-middl'>"+
+				            "<form action='forumAdminUpdatePage' method='post'>"+
+								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+							"</form>"+
+							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
+								"<input type='hidden' name='number' value="+data[i].articleId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+							"</form>"+
+				          "</td>"+
+				        "</tr>"
+				   
+			   }
+				document.getElementById("mydiv").innerHTML = resultText;
+			}else{
+				alert(this.status);
+			}
+		}
+	}
+	//3.開啟通道
+	xhr.open("post","QueryArticleReport",true)
+	//4.發送請求
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
+	xhr.send("status="+1)
+	
+}
+
+
+function replyReportPage(){
+	document.getElementById("searchTitle").value = ""
+	
+	//1.創建ajax對象
+	var xhr = new XMLHttpRequest();
+	//2.註冊回調函數
+	xhr.onreadystatechange = function(){
+		if(this.readyState ==4 ){
+			if(this.status==200){
+				var data = JSON.parse(this.responseText);
+				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
+				var resultText = '';
+				for(var i=0;i<data.length;i++){
+					var time = new Date(data[i].articleReplyDate);
+					resultText +=
+				        "<tr>"+
+				          "<td>"+
+				            "<div class='d-flex px-2 py-1'>"+
+				            "<form action='articleDetail' method='post'>"+
+				        	"<input type='hidden' name='articleId' value='"+data[i].articleId.articleId+"'>"+
+							"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+							"</form>"+
+				            "</div>"+
+				          "</td>"+
+				          "<td>"+
+				            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].articleId.plateformCategoryId-1]+"</p>"+
+				          "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleId.title+"</span>"+
+				         "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+				          "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
+				          "</td>"+
+				          "<td class='align-middl'>"+
+				            "<form action='replyAdminUpdatePage' method='post'>"+
+								"<input type='hidden' name='articleReplyId' value='"+data[i].articleReplyId+"'>"+
+								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+							"</form>"+
+							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
+								"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
+								"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+							"</form>"+
+				          "</td>"+
+				        "</tr>"
+				   
+			   }
+				document.getElementById("mydiv").innerHTML = resultText;
+			}else{
+				alert(this.status);
+			}
+		}
+	}
+	//3.開啟通道
+	xhr.open("post","QueryReplyReport",true)
+	//4.發送請求
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
+	xhr.send("status="+1)
 	
 }
 
@@ -236,6 +381,29 @@ function del(id){
 	
 }
 
+
+function report(id){
+	Swal.fire({
+		  title: 'Are you sure?',
+		  text: "You won't be able to revert this!",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '確定檢舉!'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    Swal.fire(
+		      'Deleted!',
+		      'Your file has been deleted.',
+		      'success'
+		      
+		    )
+		    $("#report"+id).submit();
+		  }
+		})
+	
+}
 
 </script>
 <!-- eLindHead (開始) -->
@@ -277,12 +445,13 @@ function del(id){
 <div style="text-align: center;margin:0 0 10px 0"   >
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" onclick="queryAll()">查詢全部</button>
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="1" onclick="category(this)">全榖雜糧</button>
-<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="1" onclick="category(this)">全榖雜糧</button>
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="2" onclick="category(this)">豆魚蛋肉</button>
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="3" onclick="category(this)">蔬菜</button>
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="4" onclick="category(this)">水果</button>
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="5" onclick="category(this)">乳品</button>
 <button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="6" onclick="category(this)">油脂與堅果種子</button>
+<button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="7" onclick="reportPage()">檢舉文章</button>
+<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="8" onclick="replyReportPage()">檢舉留言</button>
 </div>
 <div style="padding:0 5%">
 <div class="card" >

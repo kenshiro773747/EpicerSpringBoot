@@ -73,6 +73,19 @@ public class ArticleController {
 	public List<ArticleBean> QueryCategoryAjax(int categoryId) {
 		return aService.findByCategoryLike(categoryId);
 	}
+	
+	
+	@PostMapping("/QueryReplyReport")
+	@ResponseBody
+	public List<ArticleReplyBean> QueryReplyReport(int status) {
+		return arService.findAllByStatus(status);
+	}
+	
+	@PostMapping("/QueryArticleReport")
+	@ResponseBody
+	public List<ArticleBean> QueryArticleReport(int status) {
+		return aService.findByStatus(status);
+	}
 
 	@GetMapping("/forumAdd")
 	public String forumAddPage() {
@@ -86,6 +99,7 @@ public class ArticleController {
 		article.setTitle(articleTitle);
 		article.setDate(TimeTest.getTime());
 		article.setArticleContent(articleContent);
+		article.setStatus(0);
 		int userId = (int) session.getAttribute("userId");
 		Session s = factory.openSession();
 		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
@@ -102,6 +116,27 @@ public class ArticleController {
 		session.setAttribute("updateDetail", updateDetail);
 		return "forum/forumUpdate";
 	}
+	@PostMapping("/forumAdminUpdatePage")
+	public String forumAdminUpdatePage(int articleId) {
+		ArticleBean updateDetail = aService.findByArticleId(articleId);
+		session.setAttribute("updateDetail", updateDetail);
+		return "forum/forumAdminUpdate";
+	}
+	
+	@PostMapping("/forumReport")
+	public String forumReport(int number) {
+		aService.insertReport(1,number);
+		return "redirect:/QueryAllPage";
+	}
+	
+	
+	@PostMapping("/articleReportUpdate")
+	public String articleUpdate(int status,int articleId) {
+		aService.updateReport(status, articleId);
+		return "redirect:/QueryAllPage";
+	}
+	
+	
 
 	@PostMapping("/articleUpdate")
 	public String articleUpdate(int articleId, String aTitle, String aContent) {
@@ -115,7 +150,7 @@ public class ArticleController {
 		article.setUser(userID);
 		article.setArticleContent(aContent);
 		article.setDate(TimeTest.getTime());
-		
+		article.setStatus(0);
 		aService.insert(article);
 		return "redirect:/QueryAllPage";
 		
@@ -142,6 +177,8 @@ public class ArticleController {
 		
 		return "redirect:/QueryAllPage";
 	}
+	
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -157,6 +194,7 @@ public class ArticleController {
 		articleReply.setUser(userID);
 		articleReply.setArticleReplyContent(replyContent);
 		articleReply.setArticleReplyDate(TimeTest.getTime());
+		articleReply.setStatus(0);
 		arService.insert(articleReply);
 		return "forward:/articleDetail";
 				
@@ -185,6 +223,25 @@ public class ArticleController {
 
 	@PostMapping("/replyUpdate")
 	public String replyUpdate(int articleId, int replyId, String replyContent) {
+
+		arService.updateobject(replyContent, TimeTest.getTime(), replyId);
+		
+		ArticleBean selectDetail = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(selectDetail);
+		session.setAttribute("selectDetail", selectDetail);
+		session.setAttribute("selectReplyAll", selectReplyAll);
+		return "forum/adminfourmDetail";
+	}
+	
+	@PostMapping("/replyAdminUpdatePage")
+	public String replyAdminUpdatePage(int articleReplyId) {
+		ArticleReplyBean replyUpdateDetail = arService.findById(articleReplyId);
+		session.setAttribute("replyUpdateDetail", replyUpdateDetail);
+		return "forum/forumReplyUpdate";
+	}
+
+	@PostMapping("/replyAdminUpdate")
+	public String replyAdminUpdate(int articleId, int replyId, String replyContent) {
 
 		arService.updateobject(replyContent, TimeTest.getTime(), replyId);
 		

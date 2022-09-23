@@ -15,8 +15,18 @@ public interface ArticleRepository extends JpaRepository<ArticleBean, Integer> {
 
 	public List<ArticleBean> findAllByPlateformCategoryIdLike(int id);
 	
+	public List<ArticleBean> findAllByStatus(int status);
+	
 	@Modifying
 	@Query( value = "select * from forum_article where userid=?1",nativeQuery = true)
 	public List<ArticleBean> findAllByUser(ArticleUserBean userId);
+	
+	@Modifying
+	@Query( value = "UPDATE forum_article SET articlestatus=?1  where articleid=?2",nativeQuery = true)
+	public void updateReport(int status,int articleId);
+	
+	@Modifying
+	@Query( value = "UPDATE forum_article SET articlestatus=?1  where articleid=?2",nativeQuery = true)
+	public void insertReport(int status,int articleId);
 	
 }
