@@ -28,22 +28,7 @@
 		<!-- ////////////////// End 上方 Navbar //////////////////-->
 <!-- ////////////////// 個人主文開始 //////////////////-->
 
-
-
-		Hello ni hao ma<br /> 
-		Hello ni hao ma<br /> 
-		Hello ni hao ma<br />
-		Hello ni hao ma<br />
-		Hello ni hao ma<br />
-		Hello ni hao ma<br />
-
-		個人文字打在這<br />
-
-
-
-
-
-
+   
 <!-- ////////////////// 個人主文結束 //////////////////-->
 		<!--////////////////// Footer(開始) //////////////////-->
 		<%@include file="../includes/eFooter.jsp"%>

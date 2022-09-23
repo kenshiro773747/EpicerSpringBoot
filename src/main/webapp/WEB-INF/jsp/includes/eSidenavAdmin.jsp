@@ -22,7 +22,7 @@
 			
 				<!-- 一個分類可彈出&連動多個連結-->
 			<!-- 會員管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseMember" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -55,7 +55,7 @@
 			</div> <!-- 會員管理底 -->
 
 			<!-- 食譜管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseRecipe" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -77,7 +77,7 @@
 			</div>
 			
 			<!-- 商場管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseProduct" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -99,7 +99,7 @@
 			</div>
 			
 			<!-- 課程管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseCourse" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -121,7 +121,7 @@
 			</div>
 			
 			<!-- 外燴管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseCuisine" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -143,7 +143,7 @@
 			</div>
 			
 			<!-- 論壇管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseForum" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -165,7 +165,7 @@
 			</div>
 			
 			<!-- 訂單管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseCart" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
