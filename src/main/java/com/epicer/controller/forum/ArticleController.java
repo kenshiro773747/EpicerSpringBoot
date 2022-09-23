@@ -237,21 +237,28 @@ public class ArticleController {
 	public String replyAdminUpdatePage(int articleReplyId) {
 		ArticleReplyBean replyUpdateDetail = arService.findById(articleReplyId);
 		session.setAttribute("replyUpdateDetail", replyUpdateDetail);
-		return "forum/forumReplyUpdate";
+		return "forum/forumAdminReplyUpdate";
 	}
 
 	@PostMapping("/replyAdminUpdate")
-	public String replyAdminUpdate(int articleId, int replyId, String replyContent) {
+	public String replyAdminUpdate(int status,int articleId) {
 
-		arService.updateobject(replyContent, TimeTest.getTime(), replyId);
+		arService.updateReport(status, articleId);
 		
-		ArticleBean selectDetail = aService.findByArticleId(articleId);
-		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(selectDetail);
-		session.setAttribute("selectDetail", selectDetail);
-		session.setAttribute("selectReplyAll", selectReplyAll);
-		return "forum/adminfourmDetail";
+		return "redirect:/QueryAllPage";
 	}
 
+	
+	@PostMapping("/replyReport")
+	public String ReplyReport(int replyId , int articleId) {
+		arService.insertReport(1,replyId);
+		ArticleBean selectDetail = aService.findByArticleId(articleId);
+		ArticleBean reply  = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(reply);
+		session.setAttribute("selectDetail", selectDetail);
+		session.setAttribute("selectReplyAll", selectReplyAll);
+		return "forward:/articleDetail";
+	}
 	
 
 //////////////////////////////////////////////////////////////////////////////////////////	

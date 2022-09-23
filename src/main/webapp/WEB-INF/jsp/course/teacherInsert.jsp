@@ -9,7 +9,7 @@
 <title>新增老師</title>
 </head>
 <body>
-
+ 
 	<%
 	TimeTest TT = new TimeTest();
 	Date date = new Date();

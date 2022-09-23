@@ -54,6 +54,12 @@ public class ArticleReplyService{
 		arRepo.deleteById(id);
 	}
 
+	public void updateReport(int status,int replyId) {
+		arRepo.updateReport(status, replyId);
+	}
 	
+	public void insertReport(int status,int replyId) {
+		arRepo.insertReport(status, replyId);
+	}
 
 }

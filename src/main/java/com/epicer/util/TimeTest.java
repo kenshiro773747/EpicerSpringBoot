@@ -49,12 +49,11 @@ public class TimeTest {
 	 * @param time
 	 * @returns
 	 */
-	public String transToDate(long time) {
+	public static String transToDate(long time) {
 		Date date = new Date(time);
 		Format format = new SimpleDateFormat("yyyy/MM/dd");
 		return format.format(date);
 	}
-
 	/**
 	 * 取得當前電腦時間(發文...)
 	 * 
@@ -79,7 +78,7 @@ public class TimeTest {
 
 	}
 
-	public Long getLongFromString(String date) {
+	public static Long getLongFromString(String date) {
 		// 字串轉毫秒
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -92,20 +91,20 @@ public class TimeTest {
 
 	}
 
-	public String TransLongToString(Long time) {
+	public static String TransLongToString(Long time) {
 		Date date = new Date();
 		date.setTime(time);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(date);
 	}
 
-	public String TransDateToString(Date date) {
+	public static String TransDateToString(Date date) {
 		SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
 		String stringDate = SDF.format(date);
 		return stringDate;
 	}
 
-	public String TransStringToDate(String time) {
+	public static String TransStringToDate(String time) {
 		Format format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(time);
 	}

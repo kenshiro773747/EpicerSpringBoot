@@ -54,7 +54,6 @@ width: 200px
             <tr><div style="text-align: center;"><%=detail.getArticleContent()%></div></tr>
             
             
-            
             </tbody>
       </table>     
 		<br>	
@@ -100,13 +99,13 @@ width: 200px
             <td><%=articleReplyList.getArticleReplyContent()%></td>
             <td><%=TimeTest.transToDate(articleReplyList.getArticleReplyDate())%></td>
             <td><%=articleReplyList.getUser().getUserId()%></td>
-            <td td colspan="2">
+            <td colspan="3">
             
               <form action="replyUpdatePage"  method="post">  
  				  <input type="hidden" name="replyId" value="<%= articleReplyList.getArticleReplyId()%>">
                   <button class="btn bg-gradient-primary"  type="submit">Update</button>
                 </form> 
-            </td>
+           
             <td>
 				<form id ="myform<%=i%>" action="replyDelete" method="post">
 					   <input type="hidden" name="replyId" value="<%= articleReplyList.getArticleReplyId()%>">
@@ -114,6 +113,14 @@ width: 200px
 					   <input type='button' class="btn bg-gradient-danger"  value='Delete' onclick="del(<%=i%>)">
 				</form>
 			</td>
+			<td>
+				<form id ="replyReport<%=i%>" action="replyReport" method="post">
+					   <input type="hidden" name="replyId" value="<%= articleReplyList.getArticleReplyId()%>">
+					   <input type="hidden" name="articleId" value="<%= articleReplyList.getArticleId().getArticleId() %>">
+					   <input type='button' class="btn bg-gradient-danger"  value='舉報' onclick="replyReport(<%=i%>)">
+				</form>
+			</td>
+			 </td>
        	    </tr> 
        	    <% } %>
             </tbody>
@@ -162,6 +169,29 @@ function del(id){
 		      
 		    )
 		    $("#myform"+id).submit();
+		  }
+		})
+	
+}
+
+function replyReport(id){
+	Swal.fire({
+		  title: 'Are you sure?',
+		  text: "You won't be able to revert this!",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '檢舉!'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    Swal.fire(
+		      'Deleted!',
+		      'Your file has been deleted.',
+		      'success'
+		      
+		    )
+		    $("#replyReport"+id).submit();
 		  }
 		})
 	
