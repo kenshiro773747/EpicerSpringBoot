@@ -33,12 +33,12 @@ public class ArticleBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "article_id")
+	@Column(name = "articleid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int articleId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "userid")
 	@JsonIgnoreProperties(value="userId")
 	private ArticleUserBean user;
 	
@@ -47,23 +47,22 @@ public class ArticleBean implements Serializable {
 	@JsonIgnore
 	private List<ArticleReplyBean> articleReplyId = new ArrayList<ArticleReplyBean>();
 	
-
-	@Column(name = "article_category")
+	@Column(name = "articlecategory", updatable = false)
 	private int plateformCategoryId;
 
-	@Column(name = "article_title")
+	@Column(name = "articletitle")
 	private String title;
 
-	@Column(name = "article_content")
+	@Column(name = "articlecontent")
 	private String articleContent;
 
-	@Column(name = "article_status")
+	@Column(name = "articlestatus")
 	private String status;
 
-	@Column(name = "article_date")
+	@Column(name = "articledate")
 	private Long date;
 
-	@Column(name = "article_like")
+	@Column(name = "articlelike")
 	private int articleLike;
 
 	public ArticleBean() {

@@ -10,8 +10,8 @@ import com.epicer.model.forum.ArticleReplyBean;
 
 public interface ArticleUserRecRepository extends JpaRepository<ArticleCollectRecBean, Integer> {
 	
-	public List<ArticleBean> findArticleByUserIdLike(int userid);
+	public List<ArticleBean> findArticleByUserUserId(int userid);
 
-	public List<ArticleReplyBean> findReplyByUserIdLike(int userid);
+	public List<ArticleReplyBean> findReplyByUserUserId(int userid);
 
 }

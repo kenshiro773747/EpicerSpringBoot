@@ -1,24 +1,33 @@
 package com.epicer.model.users;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.annotation.processing.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
+import com.epicer.model.cart.CartOfProduct;
+
+
 
 @Entity
 @Table(name = "users")
 public class User {
 	@Id
 	@Column(name = "userid")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name = "userstatus")
-	private int status =3; //不存在3
+	private int status;
 
 	@Column(name = "useraccount")
 	private String account;
@@ -45,7 +54,7 @@ public class User {
 	private String phone;
 
 	@Column(name = "usercity")
-	private int city; //23不存在
+	private int city;
 
 	@Column(name = "usertownship")
 	private String township;
@@ -59,7 +68,11 @@ public class User {
 	public User() {
 	}
 
-	//register
+	// 跟購物車表格串聯
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cartUser", cascade = CascadeType.ALL)
+	private Set<CartOfProduct> cartByUser = new LinkedHashSet<CartOfProduct>();
+
+	// register
 	public User(String account, String password, String name, int gender, String avatar, long birth, String phone,
 			int city, String township, String address) {
 		super();
@@ -75,22 +88,15 @@ public class User {
 		this.address = address;
 	}
 
-
-
-
-
 	// login
 	public User(String account, String password) {
 		super();
 		this.account = account;
 		this.password = password;
 	}
-	
-	
-	
-	
+
 //Register
-public User(String name,int gender, long birth,String account, String password, String phone, int city,
+	public User(String name, int gender, long birth, String account, String password, String phone, int city,
 			String township, String address) {
 		super();
 		this.account = account;
@@ -105,8 +111,7 @@ public User(String name,int gender, long birth,String account, String password, 
 	}
 
 //edit
-	public User(int id,String password, String nickname,String phone, int city, String township,
-			String address) {
+	public User(int id, String password, String nickname, String phone, int city, String township, String address) {
 		super();
 		this.password = password;
 		this.nickname = nickname;
@@ -247,42 +252,36 @@ public User(String name,int gender, long birth,String account, String password, 
 		this.logindate = logindate;
 	}
 
-	
-	
 	public String getGenderName(int gender) {
-	    String gendername =" ";
-		if(gender == 1) {
-			gendername="女性";
+		String gendername = " ";
+		if (gender == 1) {
+			gendername = "女性";
 			return gendername;
-		}else {
-			gendername="男性";
+		} else {
+			gendername = "男性";
 			return gendername;
 		}
 	}
 
-
-	
-	//move to tools
+	// move to tools
 	public int getGenderNum(String gendername) {
-		int gendernum =3; // 男0 女1 預設性別編碼3，不存在
-		if(gendername.equals("男性")) {
+		int gendernum = 3; // 男0 女1 預設性別編碼3，不存在
+		if (gendername.equals("男性")) {
 			gendernum = 0;
 			return gendernum;
-		}else {
+		} else {
 			gendernum = 1;
 			return gendernum;
 		}
 	}
 
-
-		public String getCityName(int city) {
-			String cityname=" ";
-	        String[]  allcities = {"基隆市","臺北市","新北市",
-	        		"桃園市","新竹市","新竹縣","苗栗縣","臺中市","彰化縣","南投縣",
-	        		"雲林縣","嘉義市","嘉義縣","臺南市","高雄市","屏東縣","臺東縣","花蓮縣","宜蘭縣","澎湖縣","金門縣","連江縣"};
-	        cityname += allcities[(city)];
-	        String ncityname = cityname.trim();
-	        return ncityname;
+	public String getCityName(int city) {
+		String cityname = " ";
+		String[] allcities = { "基隆市", "臺北市", "新北市", "桃園市", "新竹市", "新竹縣", "苗栗縣", "臺中市", "彰化縣", "南投縣", "雲林縣", "嘉義市",
+				"嘉義縣", "臺南市", "高雄市", "屏東縣", "臺東縣", "花蓮縣", "宜蘭縣", "澎湖縣", "金門縣", "連江縣" };
+		cityname += allcities[(city - 1)];
+		String ncityname = cityname.trim();
+		return ncityname;
 	}
 
 }

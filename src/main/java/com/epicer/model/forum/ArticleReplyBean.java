@@ -13,11 +13,13 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "article_reply")
+@Table(name = "forum_article_reply")
 @Component
+@JsonIgnoreProperties(value = {"articleid", "userId"})
 public class ArticleReplyBean implements Serializable {
 
 	/**
@@ -26,24 +28,24 @@ public class ArticleReplyBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "article_reply_id")
+	@Column(name = "articlereplyid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer articleReplyId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "article_id")
-	@JsonIgnoreProperties(value="article_id")
+	@JoinColumn(name = "articleid")
+	@JsonIgnoreProperties(value="articleid")
 	private ArticleBean articleId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "userid")
 	@JsonIgnoreProperties(value="userId")
 	private ArticleUserBean user;
 
-	@Column(name = "article_reply_content")
+	@Column(name = "articlereplycontent")
 	private String articleReplyContent;
 
-	@Column(name = "article_reply_date")
+	@Column(name = "articlereplydate")
 	private Long articleReplyDate;
 
 	public ArticleReplyBean() {

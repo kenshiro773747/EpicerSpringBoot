@@ -217,7 +217,7 @@ public String checkUserStatus(Model m) {
 	if(user != null) {
        if(user.getStatus()==1) {
     	   return "users/Userindex";
-       }else {
+       }else { //0管理者
     	   return "users/AdminIndex";
        }
 	}
