@@ -11,6 +11,18 @@
 <script  src='js/sweetalert2.min.js'></script>
 <script  src='js/jquery-3.6.0.js'></script>
 <link rel="stylesheet" href="css/sweetalert2.min.css">
+
+<style type="text/css">
+span{
+position: relative;
+ overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 140px;
+  display: inline-block;
+}
+</style>
+
 <script>
 	function queryAll(){
 		document.getElementById("searchTitle").value = ""
@@ -246,7 +258,7 @@ function del(id){
 <!-- ////////////////// 個人主文開始 //////////////////-->
 
 
-<% session.setAttribute("userId", 10); %>
+<% session.setAttribute("userId", 1002); %>
 
  		<form action="forumUser" method="get">
 		  <input type="submit" value="userPage">
@@ -262,7 +274,7 @@ function del(id){
 
 
 
-<div style="text-align: center;" >
+<div style="text-align: center;margin:0 0 10px 0"   >
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" onclick="queryAll()">查詢全部</button>
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="1" onclick="category(this)">全榖雜糧</button>
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="1" onclick="category(this)">全榖雜糧</button>

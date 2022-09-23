@@ -9,9 +9,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Epicer管理員系統</title>
-    <link rel="stylesheet" href="../css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="../css/nicepageForRecipe.css" media="screen">
     <script class="u-script" type="text/javascript" src="../js/jquery.js" "="" defer=""></script>
-    <script class="u-script" type="text/javascript" src="../js/nicepage.js" "="" defer=""></script>
+    <script class="u-script" type="text/javascript" src="../js/nicepageForRecipe.js" "="" defer=""></script>
 <!--     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i"> -->
 <!-- eLindHead (開始) -->
 <%@include file="../includes/eLinkHead.jsp" %>

@@ -201,7 +201,7 @@ public class ArticleController {
 	
 	@GetMapping("/forumUser")
 	public String forumUser() {
-		return "forum/userforumpage";
+		return "forum/forumUserPage";
 	}
 	
 	@GetMapping("/QueryUserArticle")

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+	
 <!-- Side Navber (開始)-->
 <aside
 	class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
@@ -20,7 +20,7 @@
 		id="sidenav-collapse-main">
 		<ul class="navbar-nav">
 			
-			<!-- 一個分類可彈出&連動多個連結 (for管理者後台)-->
+				<!-- 一個分類可彈出&連動多個連結-->
 			<!-- 會員管理 -->
 			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
@@ -29,23 +29,30 @@
 					 <i class="ni ni-circle-08 text-primary text-sm opacity-10" ></i>會員管理</a>
 			</p>
 			<div class="collapse" id="collapseMember">
-			 <form name='form2' action='empregister' method='post'>
-			<a class="nav-link active"
-				href='javascript:document.form3.submit();'>
+			
+	       <form name="usersdata" action="usersdata" method="post"> 
+			<a class="nav-link active" href="javascript:document.usersdata.submit();">
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">使用者管理</span>
 			</a>
 			</form>
-			<a class="nav-link active" href="./pages/dashboard.html" >
+			
+			<form name="adminmanagement" action="adminmanagement" method="post">
+			<a class="nav-link active" href="javascript:document.adminmanagement.submit();" >
 					<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center" ></div>
-					<span class="nav-link-text ms-1">工作管理</span>
+					<span class="nav-link-text ms-1">個人資料管理</span>
 			</a>
-			<a class="nav-link active" href="./pages/dashboard.html" >
+			</form>
+			
+			<form name="empregister" action="empregister" method="post">
+			<a class="nav-link active" href="javascript:document.empregister.submit();" >
 					<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center" ></div>
 					<span class="nav-link-text ms-1">新進人員註冊</span>
 			</a>
-			</div>
+			</form>
+				
+			</div> <!-- 會員管理底 -->
 
 			<!-- 食譜管理 -->
 			<p style="margin:0px ; margin-bottom:16px">
@@ -183,6 +190,15 @@
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">優惠券</span>
+			</a>
+			</div>
+			
+			<!-- 登出 -->
+				<a class="nav-link active"
+				href="adminlogout" >
+					<div
+						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+					</div> <span class="nav-link-text ms-1">登出</span>
 			</a>
 			</div>
 
