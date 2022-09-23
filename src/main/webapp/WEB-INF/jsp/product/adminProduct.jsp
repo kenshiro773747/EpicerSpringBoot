@@ -155,12 +155,12 @@ display:inline-block;
         <tr>
           <td>
             <div class="d-flex px-2 py-1">
+
               <div>
-              
               <input type="hidden" name="productId" value=<%=pb.getProductId()%>>
-              
-                <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg" class="avatar avatar-sm me-3">
+<%-- 照片位置                <img src="<%=pb.getProductImage() %>" class="avatar avatar-sm me-3"> --%>
               </div>
+
               <div class="d-flex flex-column justify-content-center">
                 <h6 class="mb-0 text-s"><%=pb.getProductName()%></h6>
                 <p class="text-xs text-secondary mb-0">

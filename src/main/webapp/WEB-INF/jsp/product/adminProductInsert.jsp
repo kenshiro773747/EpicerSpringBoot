@@ -42,7 +42,7 @@ fieldset {
 		<br>
 			<h5 ALIGN=CENTER>新增商品</h5>
 			
-			<form action="insertProductAction" method="post">
+			<form action="insertProductAction" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">商品名稱:</label> 
 					<input type="text" class="form-control" name="productName" placeholder=請輸入商品名稱 required>
@@ -60,6 +60,14 @@ fieldset {
                         <option value="7" name="調味品類">調味品類</option>
 					</select>
 				</div>
+				
+<!-- 				放照片的地方 -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="exampleFormControlInput1">商品照片:</label>  -->
+<!-- 					<input type="file" class="form-control" name="productImage" value="upload" > -->
+<!-- 				</div> -->
+				
+				
 				<div class="form-group">
 					<label for="exampleFormControlInput1">單位:</label> 
 					<input type="text" class="form-control" name="productUnit" placeholder=請輸入商品單位 required>

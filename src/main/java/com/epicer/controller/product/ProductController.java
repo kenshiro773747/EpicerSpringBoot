@@ -1,5 +1,7 @@
 package com.epicer.controller.product;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.epicer.model.product.Product;
 import com.epicer.service.product.ProductService;
@@ -55,14 +58,19 @@ public class ProductController {
 	}
 	
 	@PostMapping("/insertProductAction")
-	public String insertProductAction(Product bean) {
+	public String insertProductAction(Product bean )  {
+//		public String insertProductAction(Product bean,@RequestParam("ProductImage") MultipartFile mf ) throws IllegalStateException, IOException {
+//		String saveFileDir= "/WEB-INF/resources/images"; 
+//		File saveFilePath =new File(saveFileDir, ("product"+bean.getProductId()));
+//		byte[] b=mf.getBytes();
+//		mf.transferTo(saveFilePath);
+//		bean.setProductImage(b);
 		productService.insert(bean);
 		return "redirect:product";
 	}
 	
 	@PostMapping("/updateProduct")
 	public String updateProduct() {
-		System.out.println(123);
 		return "product/adminProductUpdate";
 	}
 	
@@ -78,6 +86,8 @@ public class ProductController {
 		productService.delete(bean.getProductId());
 		return "redirect:product";
 	}
+	
+	
 	
 	
 	
