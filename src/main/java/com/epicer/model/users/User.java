@@ -3,6 +3,7 @@ package com.epicer.model.users;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.annotation.processing.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,16 +14,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
 import com.epicer.model.cart.CartOfProduct;
+
+
 
 @Entity
 @Table(name = "users")
 public class User {
 	@Id
 	@Column(name = "userid")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name = "userstatus")

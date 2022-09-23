@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,8 +62,13 @@ li {
 					<li class="nav-item"><a class="nav-link"
 						href="http://localhost:8080/ForumSpringMvc/QueryAll">論壇</a></li>
 					<li class="nav-item"><a class="nav-link" href="http://localhost:8081/queryusercart">購物車</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="http://localhost:8080/Hibernate_Web/Login.jsp">會員登入</a></li>
+					
+					 <li class="nav-item">
+                     <form name='form1' action='checkuserstatus' method='post'>
+                        <a class="nav-link" href="javascript:document.form1.submit();">會員登入</a>
+                          </form>
+                    </li>
+						
 					<li class="nav-item"><a class="nav-link" href="#">我的訂單</a></li>
 				</ul>
 				<!-- Left links -->
