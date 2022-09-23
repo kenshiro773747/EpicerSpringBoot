@@ -45,6 +45,9 @@ public class ArticleReplyBean implements Serializable {
 	@Column(name = "articlereplycontent")
 	private String articleReplyContent;
 
+	@Column(name = "articlereplystatus")
+	private int status;
+	
 	@Column(name = "articlereplydate")
 	private Long articleReplyDate;
 
@@ -59,6 +62,27 @@ public class ArticleReplyBean implements Serializable {
 		this.user = user;
 		this.articleReplyContent = articleReplyContent;
 		this.articleReplyDate = articleReplyDate;
+	}
+	
+	
+
+	public ArticleReplyBean(Integer articleReplyId, ArticleBean articleId, ArticleUserBean user,
+			String articleReplyContent, int status, Long articleReplyDate) {
+		super();
+		this.articleReplyId = articleReplyId;
+		this.articleId = articleId;
+		this.user = user;
+		this.articleReplyContent = articleReplyContent;
+		this.status = status;
+		this.articleReplyDate = articleReplyDate;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public Integer getArticleReplyId() {

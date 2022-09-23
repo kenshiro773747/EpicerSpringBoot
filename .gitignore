@@ -32,8 +32,9 @@ build/
 ### VS Code ###
 .vscode/
 
-pom.xml
-src/main/java/com/epicer/model/users/User.java
-src/main/resources/application.properties
-src/main/webapp/WEB-INF/jsp/frontincludes/epicerNavbar.jsp
+
 src/main/webapp/WEB-INF/jsp/includes/eHead.jsp
+src/main/webapp/WEB-INF/jsp/includes/eSidenavAdmin.jsp
+src/main/webapp/WEB-INF/jsp/includes/eSidenavUser.jsp
+src/main/webapp/WEB-INF/jsp/includes/eHead.jsp
+

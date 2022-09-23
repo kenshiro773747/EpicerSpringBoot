@@ -57,7 +57,7 @@ public class ArticleBean implements Serializable {
 	private String articleContent;
 
 	@Column(name = "articlestatus")
-	private String status;
+	private int status;
 
 	@Column(name = "articledate")
 	private Long date;
@@ -88,7 +88,7 @@ public class ArticleBean implements Serializable {
 	
 
 	public ArticleBean(int articleId, ArticleUserBean user, int plateformCategoryId, String title,
-			String articleContent, String status, Long date, int articleLike) {
+			String articleContent, int status, Long date, int articleLike) {
 		super();
 		this.articleId = articleId;
 		this.user = user;
@@ -140,11 +140,11 @@ public class ArticleBean implements Serializable {
 		this.articleContent = articleContent;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

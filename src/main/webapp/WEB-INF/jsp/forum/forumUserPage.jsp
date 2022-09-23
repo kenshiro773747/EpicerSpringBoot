@@ -80,7 +80,7 @@ window.onload=function(){
 			}
 		}
 		//3.開啟通道
-		xhr.open("get","QueryAllAjax",true)
+		xhr.open("get","QueryUserArticle",true)
 		//4.發送請求
 		xhr.send()
 		

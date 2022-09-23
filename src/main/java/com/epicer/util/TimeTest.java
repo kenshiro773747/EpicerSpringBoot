@@ -1,36 +1,31 @@
 package com.epicer.util;
 
-import java.sql.Date;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.stereotype.Component;
-
 
 public class TimeTest {
 
 	public static void main(String[] args) throws ParseException {
 
-		
-		//當前電腦時間
-		long time=System.currentTimeMillis();
+		// 當前電腦時間
+		long time = System.currentTimeMillis();
 		System.out.println(time);
 
+		Date date = new Date(time);
+		Format format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		System.out.println(format.format(date));
 
-	    Date date = new Date(time);
-	    Format format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-	    System.out.println(format.format(date));
-
-		
-	   
 //		日期轉毫秒
 //		Calendar calendar = Calendar.getInstance();
 //		calendar.set(6666, 5, 5, 25, 37);
 //		System.out.println(calendar.getTimeInMillis());
-		
-		//毫秒轉日期
+
+		// 毫秒轉日期
 //		long time = -6847827760404l;
 //		long time2 = 7955084254509l;
 //		long time3 = 43017413827378l;
@@ -47,47 +42,72 @@ public class TimeTest {
 //		}
 //	    
 	}
-	
-	
-	
+
 	/**
 	 * 資料庫毫秒轉日期
+	 * 
 	 * @param time
 	 * @returns
 	 */
-	public static String transToDate(long time) {
-		 	Date date = new Date(time);
-		    Format format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-		    return format.format(date);
+	public String transToDate(long time) {
+		Date date = new Date(time);
+		Format format = new SimpleDateFormat("yyyy/MM/dd");
+		return format.format(date);
 	}
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * 取得當前電腦時間(發文...)
+	 * 
 	 * @param time
 	 * @return
 	 */
 	public static Long getTime(long time) {
-			time=System.currentTimeMillis();
-		 	return time;
-		 
+		time = System.currentTimeMillis();
+		return time;
+
 	}
-	
-	
+
 	/**
 	 * 取得當前電腦時間(發文...)
+	 * 
 	 * @param time
 	 * @return
 	 */
 	public static Long getTime() {
-			long time=System.currentTimeMillis();
-		 	return time;
-		 
+		long time = System.currentTimeMillis();
+		return time;
+
 	}
-	
+
+	public Long getLongFromString(String date) {
+		// 字串轉毫秒
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			return simpleDateFormat.parse(date).getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public String TransLongToString(Long time) {
+		Date date = new Date();
+		date.setTime(time);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(date);
+	}
+
+	public String TransDateToString(Date date) {
+		SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+		String stringDate = SDF.format(date);
+		return stringDate;
+	}
+
+	public String TransStringToDate(String time) {
+		Format format = new SimpleDateFormat("yyyy-MM-dd");
+		return format.format(time);
+	}
 
 }
