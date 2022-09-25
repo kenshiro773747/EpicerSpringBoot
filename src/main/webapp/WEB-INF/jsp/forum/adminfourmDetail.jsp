@@ -58,7 +58,22 @@ width: 200px
       </table>     
 		<br>	
 		<br>
+		
 <div style="padding-left:5%">
+
+
+
+<form action="insertCollect" method="post"  style="width:800px">
+	<input type="hidden" name="articleId" value="<%=request.getParameter("articleId")%>">
+    <input type = "submit" name="submit" class="btn bg-gradient-primary" value="收藏">
+    
+</form>
+
+<form action="delCollect" method="post"  style="width:800px">
+	<input type="hidden" name="articleId" value="<%=request.getParameter("articleId")%>">
+    <input type = "submit" name="submit" class="btn bg-gradient-primary" value="del收藏">
+    
+</form>
 
 <h1>留言版</h1>
 <form action="replyAdd" method="post"  style="width:800px">

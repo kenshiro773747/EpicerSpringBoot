@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.epicer.model.forum.ArticleBean;
+import com.epicer.model.forum.ArticleCollectRecBean;
 import com.epicer.model.forum.ArticleReplyBean;
 import com.epicer.model.forum.ArticleUserBean;
 import com.epicer.model.forum.WangEditorResponse;
@@ -299,6 +300,29 @@ public class ArticleController {
 			artilceReplys.add(article);
 		}
 		return artilceReplys;
+	}
+	
+	@PostMapping("/insertCollect")
+	public String addRec(int articleId) {
+		ArticleCollectRecBean rec = new ArticleCollectRecBean();
+		
+		int userId = (int) session.getAttribute("userId");
+		Session s = factory.openSession();
+		ArticleBean aID = s.get(ArticleBean.class, articleId);
+		s.close();
+		
+		rec.setArticleId(aID);
+		rec.setUser(userId);
+		
+		aurService.insert(rec);
+		return "forward:/articleDetail";
+	}
+	
+	@PostMapping("/delCollect")
+	public String delRec(int articleId) {
+		int userId = (int) session.getAttribute("userId");
+		aurService.delete(articleId,userId);
+		return "forward:/articleDetail";
 	}
 	
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.epicer.model.forum.ArticleBean;
+import com.epicer.model.forum.ArticleCollectRecBean;
 import com.epicer.model.forum.ArticleReplyBean;
 
 
@@ -18,16 +19,20 @@ public class ArticleUserRecService{
 	@Autowired
 	private ArticleUserRecRepository aurRepo;
 
+	public ArticleCollectRecBean insert(ArticleCollectRecBean rec) {
+		return  aurRepo.save(rec);
+	}
 
+	public void delete(int aid,int id) {
+		aurRepo.delete(aid,id);
+	}
+	
 	public List<ArticleBean> selectArticle(int userid) {
 		// TODO Auto-generated method stub
 		return  aurRepo.findArticleByUserUserId(userid);
 	}
 
-	public List<ArticleReplyBean> selectReply(int userid) {
-		// TODO Auto-generated method stub
-		return  aurRepo.findReplyByUserUserId(userid);
-	}
+	
 
 
 

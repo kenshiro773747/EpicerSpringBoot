@@ -224,8 +224,9 @@ function del(id){
 </form>
 <h1>${userId}號會員歡迎登入</h1>
 <div style="text-align: center;">
-<button id = "btnArticle" class="btn btn-secondary">搜文章記錄</button>
-<button id = "btnReply" class="btn btn-secondary">搜留言紀錄</button>
+<button id = "btnArticle" class="btn btn-secondary">文章記錄</button>
+<button id = "btnReply" class="btn btn-secondary">留言紀錄</button>
+<button id = "btnCollect" class="btn btn-secondary">收藏紀錄</button>
 </div>
 
 
