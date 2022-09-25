@@ -27,9 +27,9 @@ public class ArticleUserRecService{
 		aurRepo.delete(aid,id);
 	}
 	
-	public List<ArticleBean> selectArticle(int userid) {
+	public List<ArticleCollectRecBean> findRec(int userid) {
 		// TODO Auto-generated method stub
-		return  aurRepo.findArticleByUserUserId(userid);
+		return  aurRepo.findAllByUser(userid);
 	}
 
 	

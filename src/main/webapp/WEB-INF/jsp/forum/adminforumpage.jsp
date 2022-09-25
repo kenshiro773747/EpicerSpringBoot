@@ -426,7 +426,7 @@ function report(id){
 <!-- ////////////////// 個人主文開始 //////////////////-->
 
 
-<% session.setAttribute("userId", 1000); %>
+<% session.setAttribute("userId", 1001); %>
 
  		<form action="forumUser" method="get">
 		  <input type="submit" value="userPage">

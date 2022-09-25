@@ -155,6 +155,66 @@ window.onload=function(){
 	}
 	
 	
+	document.getElementById("btnCollect").onclick=function(){
+		
+		//1.創建ajax對象
+		var xhr = new XMLHttpRequest();
+		//2.註冊回調函數
+		xhr.onreadystatechange = function(){
+			if(this.readyState ==4 ){
+				if(this.status==200){
+					var data = JSON.parse(this.responseText);
+					var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
+					var resultText = '';
+					for(var i=0;i<data.length;i++){
+						var time = new Date(data[i].articleId.date);
+						resultText +=
+						        "<tr>"+
+						          "<td>"+
+						          
+						            "<div class='d-flex px-2 py-1'>"+
+						            "<form action='articleDetail' method='post'>"+
+									"<input type='hidden' name='articleId' value='"+data[i].articleId.articleId+"'>"+
+									"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+									"</form>"+
+						               
+						            "</div>"+
+						          "</td>"+
+						          "<td>"+
+						            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].articleId.plateformCategoryId-1]+"</p>"+
+						          "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleId.title+"</span>"+
+						         "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+						          "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleId.articleContent+"</span>"+
+						          "</td>"+
+						          "<td class='align-middl'>"+
+									 "<form id = 'myform"+i+"' action='UserdelRec' method='post'>"+
+										"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+									"</form>"+
+						          "</td>"+
+						        "</tr>"
+						   
+					   }
+					document.getElementById("mydiv").innerHTML = resultText;
+				}else{
+					alert(this.status);
+				}
+			}
+		}
+		//3.開啟通道
+		xhr.open("get","QueryRec",true)
+		//4.發送請求
+		xhr.send()
+		
+	}
+	
+	
 	
 	
 	
@@ -191,6 +251,9 @@ function del(id){
 		})
 	
 }
+
+
+
 
 
 </script>

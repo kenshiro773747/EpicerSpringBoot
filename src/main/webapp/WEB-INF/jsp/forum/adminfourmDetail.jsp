@@ -125,7 +125,7 @@ width: 200px
 				<form id ="myform<%=i%>" action="replyDelete" method="post">
 					   <input type="hidden" name="replyId" value="<%= articleReplyList.getArticleReplyId()%>">
 					   <input type="hidden" name="articleId" value="<%= articleReplyList.getArticleId().getArticleId() %>">
-					   <input type='button' class="btn bg-gradient-danger"  value='Delete' onclick="del(<%=i%>)">
+					   <input type='button' class="btn bg-gradient-danger"  value='Delete' onclick="del(<%=i%>)"></input>
 				</form>
 			</td>
 			<td>
@@ -134,6 +134,7 @@ width: 200px
 					   <input type="hidden" name="articleId" value="<%= articleReplyList.getArticleId().getArticleId() %>">
 					   <input type='button' class="btn bg-gradient-danger"  value='舉報' onclick="replyReport(<%=i%>)">
 				</form>
+				
 			</td>
 			 </td>
        	    </tr> 

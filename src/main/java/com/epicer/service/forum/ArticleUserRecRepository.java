@@ -19,4 +19,10 @@ public interface ArticleUserRecRepository extends JpaRepository<ArticleCollectRe
 	@Modifying
 	@Query( value = " DELETE FROM forum_article_collect_rec where articleid = ?1 and userid =?2",nativeQuery = true)
 	public void delete(int articleId,int userid);
+	
+	@Query( value = "SELECT collectarticlerec,userid,articleid From (\r\n"
+			+ "	Select collectarticlerec,userid,articleid,\r\n"
+			+ "	ROW_NUMBER() Over (Partition By articleid Order By collectarticlerec DESC) As Sort From forum_article_collect_rec where userid=?1) TMP_S\r\n"
+			+ "Where TMP_S.Sort=1",nativeQuery = true)
+	public List<ArticleCollectRecBean> findAllByUser(int userId);
 }

@@ -33,7 +33,6 @@ public class ArticleCollectRecBean implements Serializable{
 	private Integer collectArticleRec;
 
 
-//	@JsonIgnoreProperties(value="articleid")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "articleid")
 	private ArticleBean articleId;

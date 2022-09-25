@@ -172,10 +172,8 @@ public class ArticleController {
 	
 
 	@PostMapping("/articleDelete")
-	public String articleDelete(int number) {
-		System.out.println(number);
-		aService.deleteById(number);
-		
+	public String articleDelete(int articleId) {
+		aService.deleteById(articleId);
 		return "redirect:/QueryAllPage";
 	}
 	
@@ -242,10 +240,10 @@ public class ArticleController {
 	}
 
 	@PostMapping("/replyAdminUpdate")
-	public String replyAdminUpdate(int status,int articleId) {
-
-		arService.updateReport(status, articleId);
-		
+	public String replyAdminUpdate(int status,int replyId) {
+		System.out.println(status);
+		System.out.println(replyId);
+		arService.updateReport(status, replyId);
 		return "redirect:/QueryAllPage";
 	}
 
@@ -301,7 +299,11 @@ public class ArticleController {
 		}
 		return artilceReplys;
 	}
-	
+	/**
+	 * 收藏功能
+	 * @param articleId
+	 * @return
+	 */
 	@PostMapping("/insertCollect")
 	public String addRec(int articleId) {
 		ArticleCollectRecBean rec = new ArticleCollectRecBean();
@@ -324,6 +326,22 @@ public class ArticleController {
 		aurService.delete(articleId,userId);
 		return "forward:/articleDetail";
 	}
+	
+	@GetMapping("/QueryRec")
+	@ResponseBody
+	public List<ArticleCollectRecBean> QueryRec() {
+		int userId = (int) session.getAttribute("userId");
+		return aurService.findRec(userId);
+	}
+	
+	@PostMapping("/UserdelRec")
+	public String UserdelRec(int articleId) {
+		int userId = (int) session.getAttribute("userId");
+		aurService.delete(articleId,userId);
+		return "redirect:/forumUser";
+	}
+	
+	
 	
 
 	@PostMapping("/UserUpdateArticlePage")
