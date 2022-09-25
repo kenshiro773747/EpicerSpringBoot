@@ -32,6 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
+<<<<<<< HEAD
 pom.xml
 src/main/java/com/epicer/model/users/User.java
 src/main/resources/application.properties
@@ -43,3 +44,11 @@ src/main/webapp/WEB-INF/jsp/includes/eSidenavUser.jsp
 =======
 src/main/webapp/WEB-INF/jsp/includes/eHead.jsp
 >>>>>>> branch 'master' of https://github.com/ROCMC077/EpicerSpringBoot.git
+=======
+
+src/main/webapp/WEB-INF/jsp/includes/eHead.jsp
+src/main/webapp/WEB-INF/jsp/includes/eSidenavAdmin.jsp
+src/main/webapp/WEB-INF/jsp/includes/eSidenavUser.jsp
+src/main/webapp/WEB-INF/jsp/includes/eHead.jsp
+
+>>>>>>> 754662a07a00c14c4c977f42a6d078accba0a43a

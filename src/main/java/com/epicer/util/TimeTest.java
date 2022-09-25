@@ -54,6 +54,7 @@ public class TimeTest {
 		Format format = new SimpleDateFormat("yyyy/MM/dd");
 		return format.format(date);
 	}
+
 	/**
 	 * 取得當前電腦時間(發文...)
 	 * 
