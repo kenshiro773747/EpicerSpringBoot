@@ -81,5 +81,10 @@ public class CourseService {
 	}
 	
 	
+	//TestQUERYByCourseStyle
+		public List<Course> findAllCourseByStyle(String Style){		
+			return cRepo.findByCourseStyleLike(Style);
+		}
+	
 
 }

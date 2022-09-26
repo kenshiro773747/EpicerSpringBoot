@@ -25,8 +25,12 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/resources/css/");
 		registry.addResourceHandler("/reciperesult/css/**").addResourceLocations("/WEB-INF/resources/css/");
 		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/resources/images/");
+		//註冊圖片路徑
+		registry.addResourceHandler("/queryByCourseStyle/images/**").addResourceLocations("/WEB-INF/resources/images/");
+		//
 		registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/resources/js/");
 		registry.addResourceHandler("/assets/**").addResourceLocations("/WEB-INF/resources/assets/");
+		registry.addResourceHandler("/queryByCourseStyle/assets/**").addResourceLocations("/WEB-INF/resources/assets/");
 		registry.addResourceHandler("/reciperesult/assets/**").addResourceLocations("/WEB-INF/resources/assets/");
 		registry.addResourceHandler("/recipeForUpdate/assets/**").addResourceLocations("/WEB-INF/resources/assets/");
 		registry.addResourceHandler("/to/assets/**").addResourceLocations("/WEB-INF/resources/assets/");
