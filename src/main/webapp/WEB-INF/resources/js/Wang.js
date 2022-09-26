@@ -5,10 +5,21 @@
         // 第二步，监控变化，同步更新到 textarea
         $text1.val(html)
     }
-    
+    editor.config.zIndex = 0
     // 第一步，初始化 textarea 的值
     $text1.val(editor.txt.html())
     
+    $("#testReset").on("click",function(){
+		editor.txt.clear();
+})
+
+   $("#UpdateReset").on("click",function(){
+	document.getElementById('title').value="";
+		editor.txt.clear();
+		
+})
+    
+
     
 //      //開啟debug模式
 //         editor.config.debug = true;

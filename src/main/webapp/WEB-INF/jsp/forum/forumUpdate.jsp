@@ -10,47 +10,56 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 %>
 <html>
 <head>
-<title>修改文章</title>
-<!-- <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script> -->
+<title>新增文章</title>
 <script language='javascript' src='js/wangEditor.min.js'></script>
-<style>
-.tb1 {
-	width: 700px;
-	height: 550px;
-	border: 1px solid black;
-	border-collapse: collapse;
-	margin: auto;
-}
+<script>
 
-td, th {
-	border: 1px solid #BEC9A6;
-}
+</script>
+<style>
+        .tb1 {
+            width: 700px;
+            height: 550px;
+            border-collapse: collapse;
+            margin: auto;
+        }
 </style>
+
+
+
 </head>
 
 <body>
+<%@include file="../includes/eLinkHead.jsp"%>
+<%@include file="../includes/eScriptForBody.jsp"%>
+<div style="background-image: url(images/foodCar.gif);background-size: contain;">
 
-	<h1 style="text-align: center;">更新文章 </h1>
-	<hr>
+
+<div style="margin:5% 0 0 0">
+	    <h1 style="text-align:center;">更新文章 </h1>
   <%
       	   ArticleBean detail = (ArticleBean)request.getSession().getAttribute("updateDetail");  
  		%>
+ 		   <div>
+     <form action="QueryAllPage" method="Get" >
+      <input type="submit"value="返回" class="btn bg-gradient-secondary">
+     </form>
+     </div>
 	<form action="articleUpdate" method="post">
 		<input type="hidden" name="action" value="Update">
 		<table class="tb1">
 
 			<tr>
-				<td>文章id:</td>
+				
 				<td>
-				<input type="text" name="articleId"
+				<input type="text" name="articleId"  class="form-control"
 					value="<%=detail.getArticleId()%>" readonly>
 				</td>
 			</tr>
 
 			<tr>
 			
-				<td>文章類型</td>
-				<td><select name="category" >
+				<td class="form-group">
+				<select class="form-control" id="exampleFormControlSelect1" name="category" >
 				<%if(detail.getPlateformCategoryId()==0)%><option value="0"  selected="<%=detail.getPlateformCategoryId()%>" disabled>請選擇文章類型</option> 
 				<%if(detail.getPlateformCategoryId()==1)%><option value="1"  selected="<%=detail.getPlateformCategoryId()%>" disabled>全穀雜糧類</option> 
 				<%if(detail.getPlateformCategoryId()==2)%><option value="2"  selected="<%=detail.getPlateformCategoryId()%>" disabled>豆魚蛋肉類</option> 
@@ -58,16 +67,14 @@ td, th {
 				<%if(detail.getPlateformCategoryId()==4)%><option value="4"  selected="<%=detail.getPlateformCategoryId()%>" disabled>水果類</option> 
 				<%if(detail.getPlateformCategoryId()==5)%><option value="5"  selected="<%=detail.getPlateformCategoryId()%>" disabled>乳品類</option> 
 				<%if(detail.getPlateformCategoryId()==6)%><option value="6"  selected="<%=detail.getPlateformCategoryId()%>" disabled>油脂與堅果種子類</option> 
-				</select></td>
+				</select>
+				</td>
 			</tr>
 			<tr>
-				<td>文章標題</td>
-				<td><input type="text" name="aTitle"
-					value="<%=detail.getTitle()%>" required="required" ></td>
+				<td><input type="text" name="aTitle" class="form-control" id="title" value="<%=detail.getTitle()%>" required="required" ></td>
 
 			</tr>
 			<tr>
-				<td>文章內容</td>
 				<td>
 				<div id="div1">
 				 <p><%=detail.getArticleContent()%></p>
@@ -78,14 +85,16 @@ td, th {
 			</tr>
 			
 			<tr>
-				<td><input type="submit" name="submit" value="保存"></td>
-				<td><input type="reset" value="清除表單"></td>
+				<td>
+				<input type="submit" name="submit" value="保存" class="btn btn-primary btn-sm">
+				<input type="button" value="清除表單" id="UpdateReset" class="btn btn-primary btn-sm">
+				</td>
 			</tr>
-
 
 
 		</table>
 	</form>
+	</div>
 	
 	
 	

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-//import com.epicer.model.cart.CartOfProduct;
+import com.epicer.model.cart.CartOfProduct;
 
 @Entity
 @Table(name = "product")
@@ -60,8 +60,8 @@ public class Product implements Serializable{
 	private String productImage;
 	
 	//跟購物車商品清單串聯
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cartProduct", cascade = CascadeType.ALL)
-//	private Set<CartOfProduct> cartOfProduct =new LinkedHashSet<CartOfProduct>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cartProduct", cascade = CascadeType.ALL)
+	private Set<CartOfProduct> cartOfProduct =new LinkedHashSet<CartOfProduct>();
 	
 //	@OneToMany(mappedBy = "cartProduct", cascade = CascadeType.ALL)
 //	private List<Cart> cartsList;
@@ -73,41 +73,41 @@ public class Product implements Serializable{
 	
 	
 
-//	public Product(Integer productId, String productName, Integer productCategoryId, String productUnit,
-//			Integer productPrice, String productOrigin, Integer productStock, Integer productStatus,
-//			String productDiscription, Integer productLikeStatus, String productImage, Set<CartOfProduct> cartOfProduct) {
-//		super();
-//		this.productId = productId;
-//		this.productName = productName;
-//		this.productCategoryId = productCategoryId;
-//		this.productUnit = productUnit;
-//		this.productPrice = productPrice;
-//		this.productOrigin = productOrigin;
-//		this.productStock = productStock;
-//		this.productStatus = productStatus;
-//		this.productDiscription = productDiscription;
-//		this.productLikeStatus = productLikeStatus;
-//		this.productImage = productImage;
-//		this.cartOfProduct = cartOfProduct;
-//	}
-//
-//	public Product(Integer productId, String productName, String productUnit, Integer productPrice,
-//			String productImage, Set<CartOfProduct> cartOfProduct) {
-//		super();
-//		this.productId = productId;
-//		this.productName = productName;
-//		this.productUnit = productUnit;
-//		this.productPrice = productPrice;
-//		this.productImage = productImage;
-//		this.cartOfProduct = cartOfProduct;
-//	}
-//
-//	public Product(Integer productId, Integer productPrice, Set<CartOfProduct> cartOfProduct) {
-//		super();
-//		this.productId = productId;
-//		this.productPrice = productPrice;
-//		this.cartOfProduct = cartOfProduct;
-//	}
+	public Product(Integer productId, String productName, Integer productCategoryId, String productUnit,
+			Integer productPrice, String productOrigin, Integer productStock, Integer productStatus,
+			String productDescription, Integer productLikeStatus, String productImage, Set<CartOfProduct> cartOfProduct) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productCategoryId = productCategoryId;
+		this.productUnit = productUnit;
+		this.productPrice = productPrice;
+		this.productOrigin = productOrigin;
+		this.productStock = productStock;
+		this.productStatus = productStatus;
+		this.productDescription = productDescription;
+		this.productLikeStatus = productLikeStatus;
+		this.productImage = productImage;
+		this.cartOfProduct = cartOfProduct;
+	}
+
+	public Product(Integer productId, String productName, String productUnit, Integer productPrice,
+			String productImage, Set<CartOfProduct> cartOfProduct) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productUnit = productUnit;
+		this.productPrice = productPrice;
+		this.productImage = productImage;
+		this.cartOfProduct = cartOfProduct;
+	}
+
+	public Product(Integer productId, Integer productPrice, Set<CartOfProduct> cartOfProduct) {
+		super();
+		this.productId = productId;
+		this.productPrice = productPrice;
+		this.cartOfProduct = cartOfProduct;
+	}
 
 
 	@Override
@@ -305,13 +305,12 @@ public class Product implements Serializable{
 	}
 
 
-//	public Set<CartOfProduct> getCartOfProduct() {
-//		return cartOfProduct;
-//	}
-//
-//
-//	public void setCarts(Set<CartOfProduct> cartOfProduct) {
-//		this.cartOfProduct = cartOfProduct;
-//	}
+	public Set<CartOfProduct> getCartOfProduct() {
+		return cartOfProduct;
+	}
 
+
+	public void setCarts(Set<CartOfProduct> cartOfProduct) {
+		this.cartOfProduct = cartOfProduct;
+	}
 }

@@ -52,14 +52,6 @@
             
       </table>     
 			
-<!-- 			<tr> -->
-<!-- 			<td><div class="line-it-button" data-lang="zh_Hant" data-type="share-b" data-env="REAL" data-url="http://localhost:8081/articleDetail" data-color="default" data-size="large" data-count="true" data-ver="3" style="display: none;"></div> -->
-<!-- <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script></td> -->
-<!-- <td><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script> <a href="http://twitter.com/share" class="twitter-share-button">Tweet</a></td> -->
-<!-- 			</tr> -->
-			
-			
-			
 		<br>	
 		<br>
 <div>

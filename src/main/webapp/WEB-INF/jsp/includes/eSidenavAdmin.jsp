@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+	
 <!-- Side Navber (開始)-->
 <aside
 	class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
-	id="sidenav-main">
+	id="sidenav-main" >
 	<div class="sidenav-header">
 		<i
 			class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -20,7 +20,7 @@
 		id="sidenav-collapse-main">
 		<ul class="navbar-nav">
 			
-			<!-- 一個分類可彈出&連動多個連結 (for管理者後台)-->
+			<!-- 一個分類可彈出&連動多個連結-->
 			<!-- 會員管理 -->
 			<p>
 				<a class="nav-link active" data-bs-toggle="collapse"
@@ -29,26 +29,34 @@
 					 <i class="ni ni-circle-08 text-primary text-sm opacity-10" ></i>會員管理</a>
 			</p>
 			<div class="collapse" id="collapseMember">
-			 <form name='form2' action='empregister' method='post'>
-			<a class="nav-link active"
-				href='javascript:document.form3.submit();'>
+			
+	       <form name="usersdata" action="usersdata" method="post"> 
+			<a class="nav-link active" href="javascript:document.usersdata.submit();">
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">使用者管理</span>
 			</a>
 			</form>
-			<a class="nav-link active" href="./pages/dashboard.html" >
+			
+			<form name="adminmanagement" action="adminmanagement" method="post">
+			<a class="nav-link active" href="javascript:document.adminmanagement.submit();" >
 					<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center" ></div>
-					<span class="nav-link-text ms-1">工作管理</span>
+					<span class="nav-link-text ms-1">個人資料管理</span>
 			</a>
-			<a class="nav-link active" href="./pages/dashboard.html" >
+			</form>
+			
+			<form name="empregister" action="empregister" method="post">
+			<a class="nav-link active" href="javascript:document.empregister.submit();" >
 					<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center" ></div>
 					<span class="nav-link-text ms-1">新進人員註冊</span>
 			</a>
-			</div>
+			</form>
+				
+			</div> 
+			<!-- 會員管理底 -->
 
 			<!-- 食譜管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseRecipe" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -56,13 +64,13 @@
 			</p>
 			<div class="collapse" id="collapseRecipe">
 			<a class="nav-link active"
-				href="./pages/dashboard.html" >
+				href="http://localhost:8091/recipe" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">所有食譜</span>
 			</a>
 			<a class="nav-link active"
-				href="./pages/dashboard.html" >
+				href="http://localhost:8091/to/add" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">新增食譜</span>
@@ -70,7 +78,7 @@
 			</div>
 			
 			<!-- 商場管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseProduct" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -92,7 +100,7 @@
 			</div>
 			
 			<!-- 課程管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseCourse" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -100,13 +108,13 @@
 			</p>
 			<div class="collapse" id="collapseCourse">
 			<a class="nav-link active"
-				href="./pages/dashboard.html" >
+				href="http://localhost:8091/666" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">所有課程</span>
 			</a>
 			<a class="nav-link active"
-				href="./pages/dashboard.html" >
+				href="http://localhost:8091/" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">新增課程</span>
@@ -114,7 +122,7 @@
 			</div>
 			
 			<!-- 外燴管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseCuisine" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -136,7 +144,7 @@
 			</div>
 			
 			<!-- 論壇管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseForum" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -144,13 +152,13 @@
 			</p>
 			<div class="collapse" id="collapseForum">
 			<a class="nav-link active"
-				href="./pages/dashboard.html" >
+				href="http://localhost:8091/QueryAllPage" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">所有文章</span>
 			</a>
 			<a class="nav-link active"
-				href="./pages/dashboard.html" >
+				href="http://localhost:8091/forumAdd" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">新增文章</span>
@@ -158,7 +166,7 @@
 			</div>
 			
 			<!-- 訂單管理 -->
-			<p>
+			<p style="margin:0px ; margin-bottom:16px">
 				<a class="nav-link active" data-bs-toggle="collapse"
 					href="#collapseCart" role="button" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -185,8 +193,18 @@
 					</div> <span class="nav-link-text ms-1">優惠券</span>
 			</a>
 			</div>
+			
+			<!-- 登出 -->
+				<a class="nav-link active"
+				href="adminlogout" >
+					<div
+						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+					</div> <span class="nav-link-text ms-1">登出</span>
+			</a>
+			</div>
 
 			<!-- 個人資料維護 -->
+			<!--
 			<li class="nav-item mt-3">
 				<h6
 					class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account
@@ -215,7 +233,7 @@
 			</a></li>
 		</ul>
 	</div>
-
+-->
 	<!-- Sidebar 右下方文件連動 -->
 	<!--     <div class="sidenav-footer mx-3 "> -->
 	<!--       <div class="card card-plain shadow-none" id="sidenavCard"> -->

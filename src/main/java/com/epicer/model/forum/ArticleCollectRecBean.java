@@ -28,24 +28,23 @@ public class ArticleCollectRecBean implements Serializable{
 
 
 	@Id
-	@Column(name = "collect_article_rec")
+	@Column(name = "collectarticlerec")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer collectArticleRec;
 
 
-	@Column(name = "article_id")
-	private Integer articleId;
-
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonIgnoreProperties(value="userId")
-	@JoinColumn(name = "user_id")
-	private ArticleUserBean user;
+	@JoinColumn(name = "articleid")
+	private ArticleBean articleId;
+
+	@Column(name = "userid")
+	private int user;
 
 	public ArticleCollectRecBean() {
 		super();
 	}
 
-	public ArticleCollectRecBean(Integer collectArticleRec, Integer articleId, ArticleUserBean user) {
+	public ArticleCollectRecBean(Integer collectArticleRec, ArticleBean articleId, int user) {
 		super();
 		this.collectArticleRec = collectArticleRec;
 		this.articleId = articleId;
@@ -60,19 +59,19 @@ public class ArticleCollectRecBean implements Serializable{
 		this.collectArticleRec = collectArticleRec;
 	}
 
-	public Integer getArticleId() {
+	public ArticleBean getArticleId() {
 		return articleId;
 	}
 
-	public void setArticleId(Integer articleId) {
+	public void setArticleId(ArticleBean articleId) {
 		this.articleId = articleId;
 	}
 
-	public ArticleUserBean getUser() {
+	public int getUser() {
 		return user;
 	}
 
-	public void setUser(ArticleUserBean user) {
+	public void setUser(int user) {
 		this.user = user;
 	}
 

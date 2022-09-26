@@ -33,12 +33,12 @@ public class ArticleBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "article_id")
+	@Column(name = "articleid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int articleId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "userid")
 	@JsonIgnoreProperties(value="userId")
 	private ArticleUserBean user;
 	
@@ -47,23 +47,28 @@ public class ArticleBean implements Serializable {
 	@JsonIgnore
 	private List<ArticleReplyBean> articleReplyId = new ArrayList<ArticleReplyBean>();
 	
-	@Column(name = "article_category", updatable = false)
+	@Column(name = "articlecategory", updatable = false)
 	private int plateformCategoryId;
 
-	@Column(name = "article_title")
+	@Column(name = "articletitle")
 	private String title;
 
-	@Column(name = "article_content")
+	@Column(name = "articlecontent")
 	private String articleContent;
 
-	@Column(name = "article_status")
-	private String status;
+	@Column(name = "articlestatus")
+	private int status;
 
-	@Column(name = "article_date")
+	@Column(name = "articledate")
 	private Long date;
 
-	@Column(name = "article_like")
+	@Column(name = "articlelike")
 	private int articleLike;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "articleId",cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<ArticleCollectRecBean> collectArticleRec = new ArrayList<ArticleCollectRecBean>();
+	
 
 	public ArticleBean() {
 		super();
@@ -87,8 +92,32 @@ public class ArticleBean implements Serializable {
 	
 	
 
+	public ArticleBean(int articleId, ArticleUserBean user, List<ArticleReplyBean> articleReplyId,
+			int plateformCategoryId, String title, String articleContent, int status, Long date, int articleLike,
+			List<ArticleCollectRecBean> collectArticleRec) {
+		super();
+		this.articleId = articleId;
+		this.user = user;
+		this.articleReplyId = articleReplyId;
+		this.plateformCategoryId = plateformCategoryId;
+		this.title = title;
+		this.articleContent = articleContent;
+		this.status = status;
+		this.date = date;
+		this.articleLike = articleLike;
+		this.collectArticleRec = collectArticleRec;
+	}
+
+	public List<ArticleCollectRecBean> getCollectArticleRec() {
+		return collectArticleRec;
+	}
+
+	public void setCollectArticleRec(List<ArticleCollectRecBean> collectArticleRec) {
+		this.collectArticleRec = collectArticleRec;
+	}
+
 	public ArticleBean(int articleId, ArticleUserBean user, int plateformCategoryId, String title,
-			String articleContent, String status, Long date, int articleLike) {
+			String articleContent, int status, Long date, int articleLike) {
 		super();
 		this.articleId = articleId;
 		this.user = user;
@@ -140,11 +169,11 @@ public class ArticleBean implements Serializable {
 		this.articleContent = articleContent;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

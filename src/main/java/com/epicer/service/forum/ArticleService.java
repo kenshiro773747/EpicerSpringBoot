@@ -25,6 +25,10 @@ public class ArticleService {
 		return null;
 	}
 	
+	public List<ArticleBean> findByStatus(int articlestatus) {
+		return aRepo.findAllByStatus(articlestatus);
+	}
+	
 	
 	
 	public List<ArticleBean> findByUser(ArticleUserBean userId) {
@@ -50,5 +54,12 @@ public class ArticleService {
 	public void deleteById(Integer id) {
 		aRepo.deleteById(id);
 	}
+	
+	public void updateReport(int status,int articleid) {
+		aRepo.updateReport(status, articleid);
+	}
 
+	public void insertReport(int status,int articleid) {
+		aRepo.insertReport(status, articleid);
+	}
 }

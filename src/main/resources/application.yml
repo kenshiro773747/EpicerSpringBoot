@@ -1,0 +1,13 @@
+profiles:
+ username: Marry 
+ address: Taipei
+ phone: 0900000000
+ 
+ spring:
+  freemarker:
+    template-loader-path: classpath:/templates/
+    enabled: true
+    cache: false
+    charset: UTF-8
+    content-type: text/html
+    check-template-location: true
