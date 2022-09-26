@@ -180,7 +180,7 @@
 			</a>
 
 			<a class="nav-link active"
-				href="http://localhost:8081/adminorder.controller" >
+				href="http://localhost:8091/adminorderquery" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">所有訂單</span>
