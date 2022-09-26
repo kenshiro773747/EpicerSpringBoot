@@ -71,7 +71,10 @@ public class RecipeController {
 			@RequestParam("ingredient") String[] ingredients,@RequestParam("amount") String[]amounts
 			,@RequestParam("step")String[] steps,@RequestParam("userId") Integer userId,Model model) throws IllegalStateException, IOException {
 		String filenameString = mf.getOriginalFilename();
-		String saveFileDir="D:/projectws/ProjectForSpring/src/main/webapp/WEB-INF/resources/images";
+		String localString = this.getClass().getClassLoader().getResource("").getPath();
+		String path =  localString.substring(1).replaceAll("target", "src").replaceAll("classes", "main");
+		String saveFileDir=path +"webapp/WEB-INF/resources/images";
+
 		String fileLocalPathString = "images/"+filenameString;
 		File filePath = new File(saveFileDir, filenameString);
 		mf.transferTo(filePath);
@@ -118,7 +121,10 @@ public class RecipeController {
 			,@RequestParam("step") String[] steps,@RequestParam("userId") Integer userId, Model model) throws IllegalStateException, IOException {
 		String filenameString = mf.getOriginalFilename();
 		System.out.println(filenameString);
-		String saveFileDir = "D:/projectws/ProjectForSpring/src/main/webapp/WEB-INF/resources/images";
+		String localString = this.getClass().getClassLoader().getResource("").getPath();
+		String path =  localString.substring(1).replaceAll("target", "src").replaceAll("classes", "main");
+		String saveFileDir=path +"webapp/WEB-INF/resources/images";
+
 		String fileLocalPathString = "images/" + filenameString;
 		System.out.println(fileLocalPathString);
 		File filePath = new File(saveFileDir, filenameString);

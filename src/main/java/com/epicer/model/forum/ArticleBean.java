@@ -64,6 +64,11 @@ public class ArticleBean implements Serializable {
 
 	@Column(name = "articlelike")
 	private int articleLike;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "articleId",cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<ArticleCollectRecBean> collectArticleRec = new ArrayList<ArticleCollectRecBean>();
+	
 
 	public ArticleBean() {
 		super();
@@ -86,6 +91,30 @@ public class ArticleBean implements Serializable {
 	}
 	
 	
+
+	public ArticleBean(int articleId, ArticleUserBean user, List<ArticleReplyBean> articleReplyId,
+			int plateformCategoryId, String title, String articleContent, int status, Long date, int articleLike,
+			List<ArticleCollectRecBean> collectArticleRec) {
+		super();
+		this.articleId = articleId;
+		this.user = user;
+		this.articleReplyId = articleReplyId;
+		this.plateformCategoryId = plateformCategoryId;
+		this.title = title;
+		this.articleContent = articleContent;
+		this.status = status;
+		this.date = date;
+		this.articleLike = articleLike;
+		this.collectArticleRec = collectArticleRec;
+	}
+
+	public List<ArticleCollectRecBean> getCollectArticleRec() {
+		return collectArticleRec;
+	}
+
+	public void setCollectArticleRec(List<ArticleCollectRecBean> collectArticleRec) {
+		this.collectArticleRec = collectArticleRec;
+	}
 
 	public ArticleBean(int articleId, ArticleUserBean user, int plateformCategoryId, String title,
 			String articleContent, int status, Long date, int articleLike) {

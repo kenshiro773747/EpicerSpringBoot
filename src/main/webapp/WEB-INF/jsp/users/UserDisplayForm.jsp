@@ -46,7 +46,7 @@ input {
 <div class="card">
   <img src="images/default.jpg" alt="John" style="width:100%">
   <h4>Checkout This!</h4>
- <form action="insert" method="post">
+ <form action="vertifymail" method="post">
 <table>
 <tr style="text-align: center;">
 <td>Name</td>

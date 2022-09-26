@@ -15,7 +15,7 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 	TimeTest TT = new TimeTest();
 	Date date = new Date();
 	String stringDate = TT.TransDateToString(date);
-	%>
+	%> 
 	<h1>新增課程</h1>
 	<form:form action="addCourse" method="post" modelAttribute="Course"
 		enctype="multipart/form-data">

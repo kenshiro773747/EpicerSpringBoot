@@ -20,6 +20,7 @@ position: relative;
   text-overflow: ellipsis;
   max-width: 140px;
   display: inline-block;
+  height:20px;
 }
 </style>
 
@@ -33,6 +34,7 @@ position: relative;
 		xhr.onreadystatechange = function(){
 			if(this.readyState ==4 ){
 				if(this.status==200){
+					
 					var data = JSON.parse(this.responseText);
 					var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 					var resultText = '';
@@ -69,6 +71,7 @@ position: relative;
 									"</form>"+
 									 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
 										"<input type='hidden' name='number' value="+data[i].articleId+">"+
+										"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
 										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 									"</form>"+
 									"<form id = 'report"+i+"' action='forumReport' method='post'>"+
@@ -135,6 +138,7 @@ position: relative;
 								"</form>"+
 								 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
 									"<input type='hidden' name='number' value="+data[i].articleId+">"+
+									"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
 									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 								"</form>"+
 								"<form id = 'report"+i+"' action='forumReport' method='post'>"+
@@ -205,6 +209,7 @@ function category(category){
 							"</form>"+
 							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
 								"<input type='hidden' name='number' value="+data[i].articleId+">"+
+								"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
 								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 							"</form>"+
 							"<form id = 'report"+i+"' action='forumReport' method='post'>"+
@@ -273,6 +278,7 @@ function reportPage(){
 							"</form>"+
 							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
 								"<input type='hidden' name='number' value="+data[i].articleId+">"+
+								"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
 								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 							"</form>"+
 				          "</td>"+
@@ -426,7 +432,7 @@ function report(id){
 <!-- ////////////////// 個人主文開始 //////////////////-->
 
 
-<% session.setAttribute("userId", 1000); %>
+<% session.setAttribute("userId", 1002); %>
 
  		<form action="forumUser" method="get">
 		  <input type="submit" value="userPage">

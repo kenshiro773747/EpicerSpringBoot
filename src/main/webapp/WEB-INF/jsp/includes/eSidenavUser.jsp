@@ -17,7 +17,7 @@
 	</div>
 	<hr class="horizontal dark mt-0">
 	<div class="collapse navbar-collapse  w-auto "
-		id="sidenav-collapse-main">
+		id="sidenav-collapse-main" >
 		<ul class="navbar-nav">
 			
 			<!-- 一個分類對應一個連結-->
@@ -63,7 +63,7 @@
 
 			<!-- 論壇管理 -->
 			<li class="nav-item"><a class="nav-link "
-				href="./pages/rtl.html">
+				href="http://localhost:8091/forumUser">
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="ni ni-planet text-danger text-sm opacity-10"></i>
@@ -96,73 +96,12 @@
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="ni ni-cart text-success text-sm opacity-10"></i>
 					</div> <span class="nav-link-text ms-1">登出</span>
+					
+ 		
 			<!-- 一個分類對應一個連結 (for一般會員的會員中心)-->
-			<!-- 會員管理 -->
-			<li class="nav-item"><a class="nav-link active"
-				href="./pages/dashboard.html" >
-					<div
-						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="ni ni-circle-08 text-primary text-sm opacity-10"></i>
-					</div> <span class="nav-link-text ms-1">我的會員</span>
-			</a>
-			</li>
-
-			<!-- 食譜管理 -->
-			<li class="nav-item"><a class="nav-link "
-				href="./pages/tables.html">
-					<div
-						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="ni ni-paper-diploma text-warning text-sm opacity-10"></i>
-					</div> <span class="nav-link-text ms-1">我的食譜</span>
-			</a></li>
-
-
-			<!-- 課程管理 -->
-			<li class="nav-item"><a class="nav-link "
-				href="./pages/virtual-reality.html">
-					<div
-						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="ni ni-app text-info text-sm opacity-10"></i>
-					</div> <span class="nav-link-text ms-1">我的課程</span>
-			</a></li>
-
-			<!-- 外燴管理 -->
-			<li class="nav-item"><a class="nav-link "
-				href="./pages/rtl.html">
-					<div
-						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="ni ni-delivery-fast text-danger text-sm opacity-10"></i>
-					</div> <span class="nav-link-text ms-1">我的訂餐</span>
-			</a></li>
-
-			<!-- 論壇管理 -->
-			<li class="nav-item"><a class="nav-link "
-				href="http://localhost:8091/userforum.controller">
-					<div
-						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="ni ni-planet text-danger text-sm opacity-10"></i>
-					</div> <span class="nav-link-text ms-1">我的文章</span>
-			</a></li>
-			
-			<!-- 購物車管理 -->
-			<li class="nav-item"><a class="nav-link "
-				href="http://localhost:8081/usercart.controller">
-					<div
-						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="ni ni-shop text-success text-sm opacity-10"></i>
-					</div> <span class="nav-link-text ms-1">購物車</span>
-			</a></li>
-
-			<!-- 訂單管理 -->
-			<li class="nav-item"><a class="nav-link "
-				href="http://localhost:8081/userorder.controller">
-					<div
-						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="ni ni-cart text-success text-sm opacity-10"></i>
-					</div> <span class="nav-link-text ms-1">我的訂單</span>
-			</a></li>
-
+		
 			<!-- 個人資料維護 -->
+			<!--
 			<li class="nav-item mt-3">
 				<h6
 					class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account
@@ -191,6 +130,7 @@
 			</a></li>
 		</ul>
 	</div>
+	-->
 
 	<!-- Sidebar 右下方文件連動 -->
 	<!--     <div class="sidenav-footer mx-3 "> -->

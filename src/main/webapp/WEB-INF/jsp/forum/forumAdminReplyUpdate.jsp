@@ -45,7 +45,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
      </form>
      </div>
 
-    <form action="adminReplyUpdate" method="post">
+    <form action="replyAdminUpdate" method="post">
         <table class="tb1">
         <td class="form-group">
 				<select class="form-control" id="exampleFormControlSelect1" name="status" >
@@ -65,7 +65,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
                 <div id="div1">
                  <p><%=detail.getArticleReplyContent()%></p>
 				</div>
-                <textarea id="text1" name="replyContent" style="width:100%; height:200px ;display:none" cols="80" rows="20" required="required" ></textarea>
+                <textarea id="text1" name="replyContent" style="width:100%; height:200px ;display:none" cols="80" rows="20"  ></textarea>
                 </td>
 
             </tr>

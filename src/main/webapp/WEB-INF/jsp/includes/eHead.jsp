@@ -45,6 +45,8 @@
 						</a> <!-- 小鈴鐺通知Menu -->
 							<ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
 								aria-labelledby="dropdownMenuButton">
+								
+						
 								<!-- 通知1- 新訊息通知範例 -->
 								<li class="mb-2"><a class="dropdown-item border-radius-md"
 									href="javascript:;">
@@ -132,7 +134,7 @@
 			</div>
 		</nav>
 		<!-- End 上方 Header-Navbar -->
-=======
+<!-- 
 						<li class="nav-item d-flex align-items-center"><a
 							href="javascript:;"
 							class="nav-link text-white font-weight-bold px-0"> <i
@@ -160,6 +162,8 @@
 						</a> <!-- 小鈴鐺通知Menu -->
 							<ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
 								aria-labelledby="dropdownMenuButton">
+								
+								 -->
 								<!-- 通知1- 新訊息通知範例 -->
 								<li class="mb-2"><a class="dropdown-item border-radius-md"
 									href="javascript:;">

@@ -7,8 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +27,7 @@ import com.epicer.model.users.User;
 import com.epicer.service.users.LoginService;
 import com.epicer.service.users.ManagementService;
 import com.epicer.service.users.RegisterService;
+import com.epicer.util.MailTemplateUtil;
 import com.epicer.util.Tools;
 
 
@@ -38,9 +42,15 @@ public class UserController {
 	@Autowired
 	private ManagementService management;
 	
-	private static final String localpath = "C:\\Action\\worksapce\\EpicerSpringBoot\\src\\main\\webapp\\WEB-INF\\resources\\images";
-
+	
+	@Autowired
+	private MailTemplateUtil mailtemplateutil;
+	
+	private static final String localpath = "D:\\Code\\EpicerSpringBoot\\src\\main\\webapp\\WEB-INF\\resources\\images\\";
+	
 	private Tools tools=new Tools();
+	
+
 	
 	
 //測試用
@@ -167,10 +177,10 @@ public class UserController {
 			Message result = show.get("result");
 			Message passwordd = show.get("password");
 			if(result.getCode() == 0 && msg.getCode() == 0) { //驗證通過
-				m.addAttribute("user",user);
 				String sgender = tools.getGenderName(user.getGender());
 				String scity = tools.getCityName(user.getCity());
 				String sbirth = tools.getStringDate(user.getBirth());
+				m.addAttribute("user",user);
 				m.addAttribute("sgender",sgender);
 				m.addAttribute("scity",scity);
 				m.addAttribute("sbirth",sbirth);
@@ -179,15 +189,32 @@ public class UserController {
 			    m.addAttribute("show",show);
 			    m.addAttribute("account",msg);
 			    m.addAttribute("user",user);
+			    System.out.println(user.getTownship()+1);
 				return "users/UserRegisterReset";
 			}
 		}
 	
 	
+	//useremailvertify 
+	//Display > Vertiry
+	@PostMapping(path="/vertifymail")
+	public String SendUseremail(Model m) {
+		User user = (User)m.getAttribute("user");
+//		user.setStatus(1);
+		Date a = new Date();
+		long time =a.getTime();
+		user.setLogindate(time);
+		user.setNickname("尼還沒有設定唷");
+		user.setAvatar("images/default.jpg");
+		m.addAttribute("user",user);
+		mailtemplateutil.sendMessageWithFreemarkerTemplate("notification.ftl",user);  //驗證信		
+		return "users/Vertify"; 
+	}
 	
-//insertdata
-@RequestMapping (path="/insert" , method =RequestMethod.POST) // DisplayForm.jsp
-public String InertCilent(Model m) {
+	
+//insertdata (session)
+@RequestMapping (path="/insert" , method =RequestMethod.GET) // DisplayForm.jsp要換path
+public String InertCilent(Model m) { 
 	User user = (User)m.getAttribute("user");
 	user.setStatus(1);
 	Date a = new Date();
@@ -204,12 +231,14 @@ public String InertCilent(Model m) {
 		m.addAttribute("sgender",sgender);
 		m.addAttribute("scity",scity);
 		m.addAttribute("sbirth",sbirth);
-		m.addAttribute("welcome",welcome);
+		m.addAttribute("welcome",welcome);	
 		return "users/Userindex";
 	}else {
 		return "users/error";
 	}
 }
+
+
 
 @PostMapping(path="/checkuserstatus")
 public String checkUserStatus(Model m) {
@@ -217,8 +246,10 @@ public String checkUserStatus(Model m) {
 	if(user != null) {
        if(user.getStatus()==1) {
     	   return "users/Userindex";
-       }else { //0管理者
+       }else if(user.getStatus()==0){ //0管理者
     	   return "users/AdminIndex";
+       }else {
+    	   return "users/Userlogin";
        }
 	}
 	return "users/Userlogin";

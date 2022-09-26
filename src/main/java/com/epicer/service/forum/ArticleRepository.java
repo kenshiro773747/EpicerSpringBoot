@@ -17,7 +17,6 @@ public interface ArticleRepository extends JpaRepository<ArticleBean, Integer> {
 	
 	public List<ArticleBean> findAllByStatus(int status);
 	
-	@Modifying
 	@Query( value = "select * from forum_article where userid=?1",nativeQuery = true)
 	public List<ArticleBean> findAllByUser(ArticleUserBean userId);
 	

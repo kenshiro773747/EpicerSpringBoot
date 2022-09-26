@@ -15,7 +15,7 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<%
+	<% 
 	TimeTest TT = new TimeTest();
 	Date date = new Date();
 

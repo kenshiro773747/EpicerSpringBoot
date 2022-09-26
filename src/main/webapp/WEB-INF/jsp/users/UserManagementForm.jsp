@@ -21,7 +21,7 @@
 	    <link rel="stylesheet" href="css/style.css">
 	    <style>
 	    
-	    span{
+	    .msg{
 	    color:red;
 	    }
 	    
@@ -72,7 +72,7 @@
             <input type="hidden" name="id" value="${user.getId()}">
             <p class="mb-0"><strong class="pr-1">Name:</strong>${user.getName()}</p>
             <p class="mb-0"><strong class="pr-1">Nickname:</strong><input type="text" name="nickname" value='${user.getNickname()}' required></p>
-            <span>${show.nickname.getMessage()}</span>
+            <span class="msg">${show.nickname.getMessage()}</span>
           </div>
         </div>
       </div>
@@ -102,15 +102,15 @@
                 <th width="30%">Password</th>
                 <td width="2%">:</td>
                 <td><input type="text" id="password" name="password" value="${user.getPassword()}" required >
-<span>${show.password.getMessage()}</span>
-<span id="sp1"></span></td>
+<span class="msg">${show.password.getMessage()}</span>
+<span class="msg" id="sp1"></span></td>
               </tr>
               <tr>
                 <th width="30%">Phone</th>
                 <td width="2%">:</td>
                 <td><input type="text" id="phone" name="phone" value="${user.getPhone()}" required>
-<span>${show.phone.getMessage()}</span>
-<span id="sp2"></span>
+<span class="msg">${show.phone.getMessage()}</span>
+<span  class="msg" id="sp2"></span>
               </tr>
                <tr>
                 <th width="30%">City & Township</th>
@@ -123,8 +123,8 @@
                 <th width="30%">Address</th>
                 <td width="2%">:</td>
                 <td><input type="text" id="road" name="road" value="${user.getAddress()}" required>
-<span>${show.address.getMessage()}</span>
-<span id="sp5"></span></td>
+<span class="msg">${show.address.getMessage()}</span>
+<span class="msg" id="sp5"></span></td>
               </tr>
               <tr>
               <td colspan="3" style="
@@ -177,6 +177,16 @@
 <script src="js/test.js"></script>
  <script>
     const twzipcode = new TWzipcode(".twzipcode");
+    </script>
+    <script>
+    $(function(){
+    //居住路段必填 判斷 非空 觸發 onblur onsubmit
+    $(".twzipcode").on('change',function(){
+     let county = twzipcode.get('county');
+		  let district = twzipcode.get('district');
+		  $('#road').attr("value",county+district);
+   });
+    });
     </script>
 </body>
 

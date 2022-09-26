@@ -24,9 +24,157 @@
 td{
 width: 200px
 }
-
 </style>
 
+<script type="text/javascript">
+
+function queryReply(){
+	
+	if($('textarea').val()!=""){
+	var xhr = new XMLHttpRequest();
+	//2.註冊回調函數
+	xhr.onreadystatechange = function(){
+		if(this.readyState ==4 ){
+			if(this.status==200){
+				var data = JSON.parse(this.responseText);
+				var resultText = '';
+				for(var i=0;i<data.length;i++){
+					var time = new Date(data[i].articleReplyDate);
+					console.log(data);
+					
+					resultText +=
+					        "<tr>"+
+					          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
+					          "</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+					          "</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
+					          "</td>"+
+					        
+					          "<td>"+
+					          
+					            "<div class='d-flex px-2 py-1'>"+
+					            "<form action='replyUpdatePage' method='post'>"+
+								"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+								"<button type='submit' class='btn bg-gradient-primary'>Update</button>"+
+								"</form>"+
+					               
+					            
+					        
+								 "<form id = 'myform"+i+"' action='replyDelete' method='post'>"+
+									"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
+									"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+								"</form>"+
+								"<form id = 'replyReport"+i+"' action='replyReport' method='post'>"+
+								"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
+								"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+							"</form>"+
+								
+					          "</td>"+
+					          "</div>"+
+					        "</tr>"
+					   
+				   }
+				document.getElementById("mydiv").innerHTML = resultText;
+			}else{
+				alert(this.status);
+			}
+		}
+	}
+	//3.開啟通道
+	xhr.open("post","replyDetail",true)
+	//4.發送請求
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
+	var articleId = document.getElementById('ArticleId').value;
+	var replyContent = $('textarea').val();
+	xhr.send("articleId="+articleId+"&"+"replyContent="+replyContent)
+	}
+	else{
+		var xhr = new XMLHttpRequest();
+		//2.註冊回調函數
+		xhr.onreadystatechange = function(){
+			if(this.readyState ==4 ){
+				if(this.status==200){
+					var data = JSON.parse(this.responseText);
+					var resultText = '';
+					for(var i=0;i<data.length;i++){
+						var time = new Date(data[i].articleReplyDate);
+						console.log(data);
+						
+						resultText +=
+						        "<tr>"+
+						          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
+						          "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+						          "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
+						          "</td>"+
+						        
+						          "<td>"+
+						          
+						            "<div class='d-flex px-2 py-1'>"+
+						            "<form action='replyUpdatePage' method='post'>"+
+									"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+									"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+									"</form>"+
+						               
+						            
+						        
+									 "<form id = 'myform"+i+"' action='replyDelete' method='post'>"+
+										"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
+										"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+									"</form>"+
+									"<form id = 'replyReport"+i+"' action='replyReport' method='post'>"+
+									"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
+									"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+									"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+								"</form>"+
+									
+						          "</td>"+
+						          "</div>"+
+						        "</tr>"
+						   
+					   }
+					document.getElementById("mydiv").innerHTML = resultText;
+				}else{
+					alert(this.status);
+				}
+			}
+		}
+		//3.開啟通道
+		xhr.open("post","replyEmptyDetail",true)
+		//4.發送請求
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
+		var articleId = document.getElementById('ArticleId').value;
+		var replyContent = $('textarea').val();
+		xhr.send("articleId="+articleId)
+		
+		
+	}
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+</script>
 
 </head>
 
@@ -54,18 +202,30 @@ width: 200px
             <tr><div style="text-align: center;"><%=detail.getArticleContent()%></div></tr>
             
             
-            
             </tbody>
       </table>     
 		<br>	
 		<br>
+		
 <div style="padding-left:5%">
 
+	<form action="insertCollect" method="post"  style="width:800px">
+	<input type="hidden" name="articleId" value="<%=request.getParameter("articleId")%>">
+    <input type = "submit" name="submit" class="btn bg-gradient-primary" value="收藏">
+	</form>
+	
+	<form action="delCollect" method="post"  style="width:800px">
+	<input type="hidden" name="articleId" value="<%=request.getParameter("articleId")%>">
+    <input type = "submit" name="submit" class="btn bg-gradient-primary" value="del收藏">
+	</form>
+
+
+</div>
 <h1>留言版</h1>
-<form action="replyAdd" method="post"  style="width:800px">
+<!-- <form action="replyAdd" method="post"  style="width:800px"> -->
         <table>
        	   <tr>
-				<input type="hidden" name="articleId" value="<%=request.getParameter("articleId")%>" readonly>
+				<input type="hidden" name="articleId" id ="ArticleId" value="<%=request.getParameter("articleId")%>" readonly>
 			</tr>
             <tr>
                 <div id="div1">
@@ -73,11 +233,12 @@ width: 200px
                 <textarea id="text1" name="replyContent" style="width:100%; height:200px ;display:none" cols="80" rows="20" required="required" ></textarea>
             </tr>
             <tr>
-                <td><input type = "submit" name="submit" class="btn bg-gradient-primary" value="發佈"></td>
+                <td><input type = "button"  id="testReset" name="submit" class="btn bg-gradient-primary" onclick="queryReply()" value="發佈"></td>
             </tr>
         </table>
-</form>
-</div>
+<!-- </form> -->
+
+
 <div  style="padding-left:5%">
 <table>
 				  <thead>
@@ -89,34 +250,7 @@ width: 200px
                 <th > 操作</th>
               </tr>
             </thead>
-			<%
-			 List<ArticleReplyBean> articleReply = (List<ArticleReplyBean>)request.getSession().getAttribute("selectReplyAll");
-	 		 int i = 1;
-			for (ArticleReplyBean articleReplyList : articleReply) {
-			%>
-			<tbody>
-            <tr >
-            <td><%=i++%></td>
-            <td><%=articleReplyList.getArticleReplyContent()%></td>
-            <td><%=TimeTest.transToDate(articleReplyList.getArticleReplyDate())%></td>
-            <td><%=articleReplyList.getUser().getUserId()%></td>
-            <td td colspan="2">
-            
-              <form action="replyUpdatePage"  method="post">  
- 				  <input type="hidden" name="replyId" value="<%= articleReplyList.getArticleReplyId()%>">
-                  <button class="btn bg-gradient-primary"  type="submit">Update</button>
-                </form> 
-            </td>
-            <td>
-				<form id ="myform<%=i%>" action="replyDelete" method="post">
-					   <input type="hidden" name="replyId" value="<%= articleReplyList.getArticleReplyId()%>">
-					   <input type="hidden" name="articleId" value="<%= articleReplyList.getArticleId().getArticleId() %>">
-					   <input type='button' class="btn bg-gradient-danger"  value='Delete' onclick="del(<%=i%>)">
-				</form>
-			</td>
-       	    </tr> 
-       	    <% } %>
-            </tbody>
+ <tbody id ="mydiv"/>
 </table>	
 </div>
 
@@ -166,6 +300,33 @@ function del(id){
 		})
 	
 }
+
+function replyReport(id){
+	Swal.fire({
+		  title: 'Are you sure?',
+		  text: "You won't be able to revert this!",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '檢舉!'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    Swal.fire(
+		      'Deleted!',
+		      'Your file has been deleted.',
+		      'success'
+		      
+		    )
+		    $("#replyReport"+id).submit();
+		  }
+		})
+	
+}
+
+$("#testReset").on("click",function(){
+	editor.txt.clear();
+})
 </script>
 </body>
 
