@@ -39,7 +39,6 @@ public class ArticleReplyBean implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userid")
-	@JsonIgnoreProperties(value="userId")
 	private ArticleUserBean user;
 
 	@Column(name = "articlereplycontent")

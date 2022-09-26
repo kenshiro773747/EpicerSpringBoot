@@ -281,11 +281,16 @@ function del(id){
 		<%@include file="../includes/eHead.jsp"%>
 		<!-- ////////////////// End 上方 Navbar //////////////////-->
 <!-- ////////////////// 個人主文開始 //////////////////-->
-
+<div style="padding-left:15%">
+<div style="padding-left:10%">
 <form action="QueryAllPage" method="Get">
 	<input type="submit" value="回首頁">
 </form>
+
+</div>
+<div style="text-align: center;">
 <h1>${userId}號會員歡迎登入</h1>
+</div>
 <div style="text-align: center;">
 <button id = "btnArticle" class="btn btn-secondary">文章記錄</button>
 <button id = "btnReply" class="btn btn-secondary">留言紀錄</button>
@@ -314,7 +319,7 @@ function del(id){
 </div>
 
 </div>
-
+</div>
 
 
 

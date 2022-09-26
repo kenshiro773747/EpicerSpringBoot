@@ -169,6 +169,43 @@ public class ArticleController {
 		return "forum/adminfourmDetail";
 	}
 	
+	@PostMapping("/replyDetail")
+	@ResponseBody
+	public List<ArticleReplyBean> replyDetail(int articleId,String replyContent) {
+		
+		int userId = (int) session.getAttribute("userId");
+		Session s = factory.openSession();
+		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
+		ArticleBean articleID = s.get(ArticleBean.class, articleId);
+		s.close();
+		ArticleReplyBean articleReply = new ArticleReplyBean();
+		articleReply.setArticleId(articleID);
+		articleReply.setUser(userID);
+		articleReply.setArticleReplyContent(replyContent);
+		articleReply.setArticleReplyDate(TimeTest.getTime());
+		articleReply.setStatus(0);
+		
+		arService.insert(articleReply);
+		
+		
+		ArticleBean replyid = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(replyid);
+		for (ArticleReplyBean articleReplyBean : selectReplyAll) {
+			System.err.println(articleReplyBean.getUser().getUserId());
+		}
+		return selectReplyAll ;
+	}
+	
+	@PostMapping("/replyEmptyDetail")
+	@ResponseBody
+	public List<ArticleReplyBean> replyEmptyDetail(int articleId) {
+		ArticleBean replyid = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(replyid);
+		return selectReplyAll ;
+	}
+	
+	
+	
 	
 
 	@PostMapping("/articleDelete")
@@ -182,7 +219,7 @@ public class ArticleController {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@PostMapping("/replyAdd")
-	public String replyAdd(int articleId, String replyContent) {
+	public ArticleReplyBean replyAdd(int articleId, String replyContent) {
 		int userId = (int) session.getAttribute("userId");
 		Session s = factory.openSession();
 		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
@@ -194,10 +231,8 @@ public class ArticleController {
 		articleReply.setArticleReplyContent(replyContent);
 		articleReply.setArticleReplyDate(TimeTest.getTime());
 		articleReply.setStatus(0);
-		arService.insert(articleReply);
-		return "forward:/articleDetail";
-				
-
+		return arService.insert(articleReply);
+//		return "redirect:/replyDetail";
 	}
 
 	
