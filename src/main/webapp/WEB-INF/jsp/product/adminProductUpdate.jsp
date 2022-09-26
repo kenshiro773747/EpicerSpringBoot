@@ -43,13 +43,13 @@ fieldset {
 		<br>
 			<h5 ALIGN=CENTER>修改商品</h5>
 			
-			<form action="updateProductAction" method="post">
+			<form id="updateProduct<%=request.getParameter("ProductId")%>" action="updateProductAction" method="post" enctype="multipart/form-data">
 			
 			<input type="hidden" name="ProductId" value=<%=request.getParameter("ProductId")%>>
 			
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">商品名稱:</label> 
-					<input type="text" class="form-control" name="productName" value=<%=request.getParameter("ProductName")%>>
+					<input type="text" class="form-control" name="productName" value=<%=request.getParameter("ProductName")%> >
 				</div>
 				<div class="form-group">
 					<label for="exampleFormControlSelect1">商品類別:</label> 
@@ -86,6 +86,24 @@ fieldset {
                         <option value="7" name="調味品類">調味品類</option>
 					</select>
 				</div>
+				
+				<div class="form-group">
+					<label for="exampleFormControlInput1">商品照片:</label> 
+					<input type="file" class="form-control" name="productImage" value="upload" >
+					<img class="img" src="../<%=request.getParameter("productImage") %>" width="300px" >
+					
+			<script>
+               $('.form-control').on('change', function(e){       
+                const file = this.files[0]; 
+                const objectURL = URL.createObjectURL(file); 
+      
+               $('.img').attr('src', objectURL); 
+               });
+            </script> 
+				</div>
+				
+				
+				
 				<div class="form-group">
 					<label for="exampleFormControlInput1">單位:</label> 
 					<input type="text" class="form-control" name="productUnit" value=<%= request.getParameter("ProductUnit") %>>
@@ -133,13 +151,35 @@ fieldset {
             <input type="hidden" name="action" value="update" >
 <!--             <input type="submit" value="更新" name="update" > -->
             
-            <button class="btn bg-gradient-primary mb-0" onclick="Swal.fire('Any fool can use a computer')">更新</button>
+            <button type="button" class="btn bg-gradient-primary mb-0" onclick="update(<%=request.getParameter("ProductId")%>)">更新</button>
 
         </div>
 			</form>
 		</fieldset>
 
+<script type="text/javascript">
 
+function update(i) {
+	Swal.fire({
+		  icon: 'success',
+		  title: '更新完成',
+		  showConfirmButton: true,
+		  timer: 3000
+		  
+		})
+		
+		.then((result) => {
+	  if (result.isConfirmed) {
+	    Swal.fire(
+	      
+	    )
+	    $("#updateProduct"+i).submit();
+	  }
+	})
+	
+}
+
+</script>
 
 		<!-- ////////////////// 個人主文結束 //////////////////-->
 		<!--////////////////// Footer(開始) //////////////////-->

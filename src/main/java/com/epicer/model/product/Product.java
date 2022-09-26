@@ -57,7 +57,7 @@ public class Product implements Serializable{
 	private Integer productLikeStatus;
 	
 	@Column(name = "productimage")
-	private byte[] productImage;
+	private String productImage;
 	
 	//跟購物車商品清單串聯
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cartProduct", cascade = CascadeType.ALL)
@@ -110,6 +110,19 @@ public class Product implements Serializable{
 //	}
 
 
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", productCategoryId="
+				+ productCategoryId + ", productUnit=" + productUnit + ", productPrice=" + productPrice
+				+ ", productOrigin=" + productOrigin + ", productStock=" + productStock + ", productStatus="
+				+ productStatus + ", productDescription=" + productDescription + ", productLikeStatus="
+				+ productLikeStatus + ", productImage=" + productImage + "]";
+	}
+
+
+
+
+
 	public Product(Integer productId, String productName, Integer productCategoryId, String productUnit,
 			Integer productPrice, String productOrigin, Integer productStock, Integer productStatus,
 			String productDescription) {
@@ -124,6 +137,47 @@ public class Product implements Serializable{
 		this.productStatus = productStatus;
 		this.productDescription = productDescription;
 	}
+	
+	
+
+//可以放照片的
+	public Product(Integer productId, String productName, Integer productCategoryId, String productUnit,
+			Integer productPrice, String productOrigin, Integer productStock, Integer productStatus,
+			String productDescription, String productImage) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productCategoryId = productCategoryId;
+		this.productUnit = productUnit;
+		this.productPrice = productPrice;
+		this.productOrigin = productOrigin;
+		this.productStock = productStock;
+		this.productStatus = productStatus;
+		this.productDescription = productDescription;
+		this.productImage = productImage;
+	}
+
+
+
+
+//可以放照片的
+	public Product(String productName, Integer productCategoryId, String productUnit, Integer productPrice,
+			String productOrigin, Integer productStock, Integer productStatus, String productDescription,
+			String productImage) {
+		super();
+		this.productName = productName;
+		this.productCategoryId = productCategoryId;
+		this.productUnit = productUnit;
+		this.productPrice = productPrice;
+		this.productOrigin = productOrigin;
+		this.productStock = productStock;
+		this.productStatus = productStatus;
+		this.productDescription = productDescription;
+		this.productImage = productImage;
+	}
+
+
+
 
 
 	public Product(String productName, Integer productCategoryId, String productUnit,
@@ -241,12 +295,12 @@ public class Product implements Serializable{
 	}
 
 
-	public byte[] getProductImage() {
+	public String getProductImage() {
 		return productImage;
 	}
 
 
-	public void setProductImage(byte[] productImage) {
+	public void setProductImage(String productImage) {
 		this.productImage = productImage;
 	}
 

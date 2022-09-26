@@ -38,6 +38,9 @@ max-width:200px;
 display:inline-block;
 }
 
+.avatar {
+  width:100px
+}
 </style>
 </head>
 
@@ -69,6 +72,11 @@ display:inline-block;
 	
 	<div class="nav-wrapper position-relative end-0">
    <ul class="nav nav-pills nav-fill p-1" role="tablist">
+    <li class="nav-item">
+         <a class="nav-link mb-0 px-0 py-1 active"  href="${pageContext.request.contextPath}/product" role="tab" aria-controls="profile" aria-selected="true">
+         搜全部
+         </a>
+      </li>
       <li class="nav-item">
          <a class="nav-link mb-0 px-0 py-1 active"  href="${pageContext.request.contextPath}/productCategory?productCategoryId=1" role="tab" aria-controls="profile" aria-selected="true">
          五穀根莖類
@@ -157,12 +165,12 @@ display:inline-block;
         <tr>
           <td>
             <div class="d-flex px-2 py-1">
+              <input type="hidden" name="productId" value=<%=pb.getProductId()%>>
               <div>
               
-              <input type="hidden" name="productId" value=<%=pb.getProductId()%>>
-              
-                <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg" class="avatar avatar-sm me-3">
+                <img src="../<%=pb.getProductImage() %>" width="80px">
               </div>
+               &nbsp;&ensp;
               <div class="d-flex flex-column justify-content-center">
                 <h6 class="mb-0 text-s"><%=pb.getProductName()%></h6>
                 <p class="text-xs text-secondary mb-0">

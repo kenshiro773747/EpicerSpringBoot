@@ -44,10 +44,8 @@ public class ProductController {
 	
 	@GetMapping(path="/productCategory")
 	public String findCategoryAll(@RequestParam("productCategoryId") Integer productCategoryId ,Model m) {
-		System.out.println(productCategoryId);
 		List<Product> beans=productService.findCategoryAll(productCategoryId);
 		m.addAttribute("findCategoryAll",beans);
-		System.out.println(beans.get(1));
 		return "product/adminProductCategory";
 	}
 	
@@ -58,28 +56,84 @@ public class ProductController {
 	}
 	
 	@PostMapping("/insertProductAction")
-	public String insertProductAction(Product bean )  {
-//		public String insertProductAction(Product bean,@RequestParam("ProductImage") MultipartFile mf ) throws IllegalStateException, IOException {
-//		String saveFileDir= "/WEB-INF/resources/images"; 
-//		File saveFilePath =new File(saveFileDir, ("product"+bean.getProductId()));
+//	public String insertProductAction(Product bean )  {
+		public String insertProductAction(@RequestParam("productName") String productName,
+				@RequestParam("productCategoryId") Integer productCategoryId, @RequestParam("productImage") MultipartFile mf,
+				@RequestParam("productUnit") String productUnit, @RequestParam("productPrice") Integer productPrice,
+				@RequestParam("productOrigin") String productOrigin,@RequestParam("productStock") Integer productStock,
+				@RequestParam("productStatus") Integer productStatus,@RequestParam("productDescription") String productDescription
+				) throws IllegalStateException, IOException {
+//		存入該專案的位置寫法
+		String classLocalPath =this.getClass().getClassLoader().getResource("").getPath();
+		String classLocalPathModify= classLocalPath.substring(1).replaceAll("target", "src").replaceAll("classes", "main");
+		String saveFileDir= classLocalPathModify+"webapp/WEB-INF/resources/images"; 
+//		用產品名稱來設定檔案名
+		String fileName="product"+productName;
+		String fileLocalPath = "images/"+fileName;
+//	    存檔
+		File saveFilePath =new File(saveFileDir,fileName);
+		mf.transferTo(saveFilePath);
+//		存入資料庫的寫法
 //		byte[] b=mf.getBytes();
-//		mf.transferTo(saveFilePath);
 //		bean.setProductImage(b);
+		Product bean = new Product(productName, productCategoryId, productUnit, productPrice, productOrigin, productStock, productStatus, productDescription, fileLocalPath);
+		bean.setProductImage(fileLocalPath)	;
+		
 		productService.insert(bean);
 		return "redirect:product";
 	}
 	
 	@PostMapping("/updateProduct")
-	public String updateProduct() {
+    public String updateProduct() {
+//	public String updateProduct(@RequestParam("ProductId") Integer productId,Model m ) {
+//		Product product = productService.getById(productId);
+//		m.addAttribute("product", product);
 		return "product/adminProductUpdate";
 	}
 	
+//	還沒加照片
+//	public String updateProductAction(Product bean) {
+//		productService.update(bean);
+//		return "redirect:product";
+//	}
+	
 	@PostMapping("/updateProductAction")
-	public String updateProductAction(Product bean) {
-		System.out.println(bean.getProductName());
-		productService.update(bean);
-		return "redirect:product";
-	}
+	public String updateProductAction(Model m, @RequestParam("ProductId") Integer productId, @RequestParam("productName") String productName,
+			@RequestParam("productCategoryId") Integer productCategoryId, @RequestParam("productImage") MultipartFile mf,
+			@RequestParam("productUnit") String productUnit, @RequestParam("productPrice") Integer productPrice,
+			@RequestParam("productOrigin") String productOrigin,@RequestParam("productStock") Integer productStock,
+			@RequestParam("productStatus") Integer productStatus,@RequestParam("productDescription") String productDescription
+			) throws IllegalStateException, IOException {
+		
+//		if (mf!=null) {
+		
+		
+//			存入該專案的位置寫法
+			String classLocalPath =this.getClass().getClassLoader().getResource("").getPath();
+			String classLocalPathModify= classLocalPath.substring(1).replaceAll("target", "src").replaceAll("classes", "main");
+			String saveFileDir= classLocalPathModify+"webapp/WEB-INF/resources/images"; 
+//			用產品名稱來設定檔案名
+			String fileName="product"+productName;
+			String fileLocalPath = "images/"+fileName;
+			Product bean = new Product(productId, productName, productCategoryId, productUnit, productPrice, productOrigin, productStock, productStatus, productDescription, fileLocalPath);
+//		    存檔
+			File saveFilePath =new File(saveFileDir,fileName);
+			mf.transferTo(saveFilePath);
+//			存入資料庫的寫法
+//			byte[] b=mf.getBytes();
+//			bean.setProductImage(b);
+			productService.update(bean);
+			
+			
+//		} else {
+//			Product bean = new Product(productId, productName, productCategoryId, productUnit, productPrice, productOrigin, productStock, productStatus, productDescription);
+//			productService.update(bean);
+//		}
+
+	
+	return "redirect:product";
+}
+	
 	
 	@PostMapping("/deleteProductAction")
 	public String deleteProductAction(Product bean) {
