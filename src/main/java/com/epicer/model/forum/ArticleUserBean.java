@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-@Table(name = "forum_article_user")
+@Table(name = "users")
 @Component
 public class ArticleUserBean implements Serializable {
 	
@@ -28,11 +28,11 @@ public class ArticleUserBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "user_id")
+	@Column(name = "userid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
 
-	@Column(name = "user_status")
+	@Column(name = "userstatus")
 	private Integer userStatus;
 	
 	

@@ -19,7 +19,7 @@ public class CartOfProductService {
 	@Autowired
 	private CartOfProductRepository cartOfProductRep;
 	
-	private static Integer userid=1001;
+	//private static Integer userid=1002;
 
 	// 查詢購物車by userid & productid and get cartproductid
 	
@@ -42,7 +42,7 @@ public class CartOfProductService {
 		return cartOfProductRep.findById(userId);
 	}
 	
-	//查詢ById test
+	//查詢ById test(語)
 	public List<CartOfProduct> findById2(Integer userId) {
 		return cartOfProductRep.findByCartUser(userId);
 	}

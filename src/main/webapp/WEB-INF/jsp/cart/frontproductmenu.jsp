@@ -71,8 +71,8 @@ th td {
 		</thead>
 
 		<%
-		request.setAttribute("userId", 1001);
-		List<Product> product = (List<Product>) session.getAttribute("queryall");
+		request.setAttribute("userId", 1002);
+		List<Product> product = (List<Product>) request.getAttribute("queryall");
 		for (Product pb : product) {
 		%>
 		<tbody>
