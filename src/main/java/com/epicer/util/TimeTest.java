@@ -51,7 +51,7 @@ public class TimeTest {
 	 */
 	public String transToDate(long time) {
 		Date date = new Date(time);
-		Format format = new SimpleDateFormat("yyyy/MM/dd");
+		Format format = new SimpleDateFormat("yyyy/MM/dd ");
 		return format.format(date);
 	}
 
@@ -79,6 +79,8 @@ public class TimeTest {
 
 	}
 
+	
+/////////////////////////////////////////////////////////////	
 	public Long getLongFromString(String date) {
 		// 字串轉毫秒
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -98,6 +100,8 @@ public class TimeTest {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(date);
 	}
+	
+	/////////////////////////////////////////////////////////
 
 	public String TransDateToString(Date date) {
 		SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
@@ -109,5 +113,13 @@ public class TimeTest {
 		Format format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(time);
 	}
+	
+	 public  String filterNumber(String number)
+	 {
+	 number = number.replaceAll("[^(0-9)]", "");
+	 return number;
+	 }
+	
+	
 
 }

@@ -28,17 +28,17 @@ public class ArticleCollectRecBean implements Serializable{
 
 
 	@Id
-	@Column(name = "collect_article_rec")
+	@Column(name = "collectarticlerec")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer collectArticleRec;
 
 
-	@Column(name = "article_id")
+	@Column(name = "articleid")
 	private Integer articleId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties(value="userId")
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "userid")
 	private ArticleUserBean user;
 
 	public ArticleCollectRecBean() {
