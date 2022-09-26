@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
-
 <!-- Side Navber (開始)-->
 <aside
 	class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
@@ -19,18 +17,20 @@
 	</div>
 	<hr class="horizontal dark mt-0">
 	<div class="collapse navbar-collapse  w-auto "
-		id="sidenav-collapse-main">
+		id="sidenav-collapse-main" >
 		<ul class="navbar-nav">
 			
-			<!-- 一個分類對應一個連結 (for一般會員的會員中心)-->
+			<!-- 一個分類對應一個連結-->
 			<!-- 會員管理 -->
-			<li class="nav-item"><a class="nav-link active"
-				href="./pages/dashboard.html" >
-					<div
-						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="ni ni-circle-08 text-primary text-sm opacity-10"></i>
-					</div> <span class="nav-link-text ms-1">我的會員</span>
+			<form name="usermanagement" method="post" action="usermanagement">
+			<li class="nav-item">
+			<a class="nav-link active" href="javascript:document.usermanagement.submit();">
+					<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+					<i class="ni ni-circle-08 text-primary text-sm opacity-10"></i>
+					</div> 
+					<span class="nav-link-text ms-1">我的會員</span>
 			</a>
+			</form>
 			</li>
 
 			<!-- 食譜管理 -->
@@ -63,7 +63,7 @@
 
 			<!-- 論壇管理 -->
 			<li class="nav-item"><a class="nav-link "
-				href="http://localhost:8091/userforum.controller">
+				href="http://localhost:8091/forumUser">
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="ni ni-planet text-danger text-sm opacity-10"></i>
@@ -72,7 +72,11 @@
 			
 			<!-- 購物車管理 -->
 			<li class="nav-item"><a class="nav-link "
+<<<<<<< HEAD
 				href="http://localhost:8091/usercart.controller">
+=======
+				href="./pages/billing.html">
+>>>>>>> branch 'master' of https://github.com/Angie16eeit/EpicerSpringBoot.git
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="ni ni-shop text-success text-sm opacity-10"></i>
@@ -81,14 +85,31 @@
 
 			<!-- 訂單管理 -->
 			<li class="nav-item"><a class="nav-link "
+<<<<<<< HEAD
 				href="http://localhost:8091/userorder.controller">
+=======
+				href="./pages/billing.html">
+>>>>>>> branch 'master' of https://github.com/Angie16eeit/EpicerSpringBoot.git
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="ni ni-cart text-success text-sm opacity-10"></i>
 					</div> <span class="nav-link-text ms-1">我的訂單</span>
 			</a></li>
-
+			
+			
+			<!-- 訂單管理 -->
+			<li class="nav-item"><a class="nav-link "
+				href="userlogout">
+					<div
+						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+						<i class="ni ni-cart text-success text-sm opacity-10"></i>
+					</div> <span class="nav-link-text ms-1">登出</span>
+					
+ 		
+			<!-- 一個分類對應一個連結 (for一般會員的會員中心)-->
+		
 			<!-- 個人資料維護 -->
+			<!--
 			<li class="nav-item mt-3">
 				<h6
 					class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account
@@ -117,6 +138,7 @@
 			</a></li>
 		</ul>
 	</div>
+	-->
 
 	<!-- Sidebar 右下方文件連動 -->
 	<!--     <div class="sidenav-footer mx-3 "> -->

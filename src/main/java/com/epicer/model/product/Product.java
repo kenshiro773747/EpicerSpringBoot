@@ -112,6 +112,91 @@ public class Product implements Serializable {
 		this.cartOfProduct = cartOfProduct;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", productCategoryId="
+				+ productCategoryId + ", productUnit=" + productUnit + ", productPrice=" + productPrice
+				+ ", productOrigin=" + productOrigin + ", productStock=" + productStock + ", productStatus="
+				+ productStatus + ", productDescription=" + productDescription + ", productLikeStatus="
+				+ productLikeStatus + ", productImage=" + productImage + "]";
+	}
+
+
+
+
+
+	public Product(Integer productId, String productName, Integer productCategoryId, String productUnit,
+			Integer productPrice, String productOrigin, Integer productStock, Integer productStatus,
+			String productDescription) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productCategoryId = productCategoryId;
+		this.productUnit = productUnit;
+		this.productPrice = productPrice;
+		this.productOrigin = productOrigin;
+		this.productStock = productStock;
+		this.productStatus = productStatus;
+		this.productDescription = productDescription;
+	}
+	
+	
+
+//可以放照片的
+	public Product(Integer productId, String productName, Integer productCategoryId, String productUnit,
+			Integer productPrice, String productOrigin, Integer productStock, Integer productStatus,
+			String productDescription, String productImage) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productCategoryId = productCategoryId;
+		this.productUnit = productUnit;
+		this.productPrice = productPrice;
+		this.productOrigin = productOrigin;
+		this.productStock = productStock;
+		this.productStatus = productStatus;
+		this.productDescription = productDescription;
+		this.productImage = productImage;
+	}
+
+
+
+
+//可以放照片的
+	public Product(String productName, Integer productCategoryId, String productUnit, Integer productPrice,
+			String productOrigin, Integer productStock, Integer productStatus, String productDescription,
+			String productImage) {
+		super();
+		this.productName = productName;
+		this.productCategoryId = productCategoryId;
+		this.productUnit = productUnit;
+		this.productPrice = productPrice;
+		this.productOrigin = productOrigin;
+		this.productStock = productStock;
+		this.productStatus = productStatus;
+		this.productDescription = productDescription;
+		this.productImage = productImage;
+	}
+
+
+
+
+
+	public Product(String productName, Integer productCategoryId, String productUnit,
+			Integer productPrice, String productOrigin, Integer productStock, Integer productStatus,
+			String productDescription) {
+		super();
+		this.productName = productName;
+		this.productCategoryId = productCategoryId;
+		this.productUnit = productUnit;
+		this.productPrice = productPrice;
+		this.productOrigin = productOrigin;
+		this.productStock = productStock;
+		this.productStatus = productStatus;
+		this.productDescription = productDescription;
+	}
+
+
 	public Integer getProductId() {
 		return productId;
 	}
@@ -176,12 +261,12 @@ public class Product implements Serializable {
 		this.productStatus = productStatus;
 	}
 
-	public String getProductDiscription() {
+	public String getProductDescription() {
 		return productDescription;
 	}
 
-	public void setProductDiscription(String productDiscription) {
-		this.productDescription = productDiscription;
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
 
 	public Integer getProductLikeStatus() {
@@ -207,5 +292,4 @@ public class Product implements Serializable {
 	public void setCarts(Set<CartOfProduct> cartOfProduct) {
 		this.cartOfProduct = cartOfProduct;
 	}
-
 }

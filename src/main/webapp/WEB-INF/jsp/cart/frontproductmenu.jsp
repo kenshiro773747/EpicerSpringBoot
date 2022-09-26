@@ -81,7 +81,7 @@ th td {
 					<input type="hidden" name="id"
 						value=<%=request.getParameter("id")%>>
 				<td><%=pb.getProductName()%></td>
-				<td><%=pb.getProductDiscription()%></td>
+				<td><%=pb.getProductDescription()%></td>
 				<td>
 					<%
 						if (pb.getProductCategoryId() == 1) {
@@ -110,7 +110,7 @@ th td {
 				<td>1</td>
 				<td>
 					<form ALIGN=center action="addproducttocart" method="post">
-						<input type="hidden" name="userid" value=1001> <input
+						<input type="hidden" name="userid" value=1002> <input
 							type="hidden" name="productid" value="<%=pb.getProductId()%>"> <input
 							type="hidden" name="name" value="<%=pb.getProductName()%>">
 						<input type="hidden" name="unit" value="<%=pb.getProductUnit()%>">

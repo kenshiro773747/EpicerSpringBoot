@@ -32,6 +32,10 @@ public class ArticleReplyService{
 		return arRepo.findAllByUser(UserId);
 	}
 	
+	public List<ArticleReplyBean> findAllByStatus(int status){
+		return arRepo.findAllByStatus(status);
+	}
+	
 	public List<ArticleReplyBean> findAllByArticleId(ArticleBean id){
 		return arRepo.findAllByArticleId(id);
 	}
@@ -50,6 +54,12 @@ public class ArticleReplyService{
 		arRepo.deleteById(id);
 	}
 
+	public void updateReport(int status,int replyId) {
+		arRepo.updateReport(status, replyId);
+	}
 	
+	public void insertReport(int status,int replyId) {
+		arRepo.insertReport(status, replyId);
+	}
 
 }

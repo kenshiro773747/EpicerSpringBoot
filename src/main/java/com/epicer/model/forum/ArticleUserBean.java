@@ -40,9 +40,7 @@ public class ArticleUserBean implements Serializable {
 	@JsonIgnore
 	private List<ArticleBean> articleBean = new ArrayList<ArticleBean>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<ArticleCollectRecBean> collectArticleRec = new ArrayList<ArticleCollectRecBean>();
+
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -57,12 +55,11 @@ public class ArticleUserBean implements Serializable {
 
 
 	public ArticleUserBean(Integer userId, Integer userStatus, List<ArticleBean> articleBean,
-			List<ArticleCollectRecBean> collectArticleRec, List<ArticleReplyBean> articleReplyBean) {
+			 List<ArticleReplyBean> articleReplyBean) {
 		super();
 		this.userId = userId;
 		this.userStatus = userStatus;
 		this.articleBean = articleBean;
-		this.collectArticleRec = collectArticleRec;
 		this.articleReplyBean = articleReplyBean;
 	}
 
@@ -101,19 +98,6 @@ public class ArticleUserBean implements Serializable {
 	public void setArticleBean(List<ArticleBean> articleBean) {
 		this.articleBean = articleBean;
 	}
-
-
-
-	public List<ArticleCollectRecBean> getCollectArticleRec() {
-		return collectArticleRec;
-	}
-
-
-
-	public void setCollectArticleRec(List<ArticleCollectRecBean> collectArticleRec) {
-		this.collectArticleRec = collectArticleRec;
-	}
-
 
 
 	public List<ArticleReplyBean> getArticleReplyBean() {

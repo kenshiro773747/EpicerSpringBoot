@@ -45,7 +45,7 @@ public class OrderProductController {
 	private static Integer userid=1002;
 	
 	//前端畫面"確認訂單明細" (不能直接連動)
-	//進入網址: http://localhost:8081/ordercheck
+	//進入網址: http://localhost:8091/ordercheck
 	@GetMapping(path = "/ordercheck")
 	public String processActionCartQueryAll(Model m){
 		System.out.println("gotoqueryorder");
@@ -63,7 +63,7 @@ public class OrderProductController {
 	
 	
 	//新增商品訂單 
-	//進入商品頁網址: http://localhost:8081/orderinsert
+	//進入商品頁網址: http://localhost:8091/orderinsert
 	@PostMapping(path = "/orderinsert")
 	public String processOrderInsert(@RequestParam("productId")Integer [] productId,Model m) {
 		System.out.println("gotoorderinsert");
@@ -78,7 +78,7 @@ public class OrderProductController {
 	}
 	
 	//後台管理員開啟總訂單畫面
-	//進入訂單管理網址: http://localhost:8081/adminorderquery
+	//進入訂單管理網址: http://localhost:8091/adminorderquery
 	@GetMapping(path = "/adminorderquery")
 	public String processOrderQueryAll(Model m) {
 		System.out.println("goto admin order query!!");

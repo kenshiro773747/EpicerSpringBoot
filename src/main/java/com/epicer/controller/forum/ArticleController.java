@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.epicer.model.forum.ArticleBean;
+import com.epicer.model.forum.ArticleCollectRecBean;
 import com.epicer.model.forum.ArticleReplyBean;
 import com.epicer.model.forum.ArticleUserBean;
 import com.epicer.model.forum.WangEditorResponse;
@@ -73,6 +74,19 @@ public class ArticleController {
 	public List<ArticleBean> QueryCategoryAjax(int categoryId) {
 		return aService.findByCategoryLike(categoryId);
 	}
+	
+	
+	@PostMapping("/QueryReplyReport")
+	@ResponseBody
+	public List<ArticleReplyBean> QueryReplyReport(int status) {
+		return arService.findAllByStatus(status);
+	}
+	
+	@PostMapping("/QueryArticleReport")
+	@ResponseBody
+	public List<ArticleBean> QueryArticleReport(int status) {
+		return aService.findByStatus(status);
+	}
 
 	@GetMapping("/forumAdd")
 	public String forumAddPage() {
@@ -86,6 +100,7 @@ public class ArticleController {
 		article.setTitle(articleTitle);
 		article.setDate(TimeTest.getTime());
 		article.setArticleContent(articleContent);
+		article.setStatus(0);
 		int userId = (int) session.getAttribute("userId");
 		Session s = factory.openSession();
 		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
@@ -102,6 +117,27 @@ public class ArticleController {
 		session.setAttribute("updateDetail", updateDetail);
 		return "forum/forumUpdate";
 	}
+	@PostMapping("/forumAdminUpdatePage")
+	public String forumAdminUpdatePage(int articleId) {
+		ArticleBean updateDetail = aService.findByArticleId(articleId);
+		session.setAttribute("updateDetail", updateDetail);
+		return "forum/forumAdminUpdate";
+	}
+	
+	@PostMapping("/forumReport")
+	public String forumReport(int number) {
+		aService.insertReport(1,number);
+		return "redirect:/QueryAllPage";
+	}
+	
+	
+	@PostMapping("/articleReportUpdate")
+	public String articleUpdate(int status,int articleId) {
+		aService.updateReport(status, articleId);
+		return "redirect:/QueryAllPage";
+	}
+	
+	
 
 	@PostMapping("/articleUpdate")
 	public String articleUpdate(int articleId, String aTitle, String aContent) {
@@ -115,7 +151,7 @@ public class ArticleController {
 		article.setUser(userID);
 		article.setArticleContent(aContent);
 		article.setDate(TimeTest.getTime());
-		
+		article.setStatus(0);
 		aService.insert(article);
 		return "redirect:/QueryAllPage";
 		
@@ -133,20 +169,10 @@ public class ArticleController {
 		return "forum/adminfourmDetail";
 	}
 	
-	
-
-	@PostMapping("/articleDelete")
-	public String articleDelete(int number) {
-		System.out.println(number);
-		aService.deleteById(number);
+	@PostMapping("/replyDetail")
+	@ResponseBody
+	public List<ArticleReplyBean> replyDetail(int articleId,String replyContent) {
 		
-		return "redirect:/QueryAllPage";
-	}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@PostMapping("/replyAdd")
-	public String replyAdd(int articleId, String replyContent) {
 		int userId = (int) session.getAttribute("userId");
 		Session s = factory.openSession();
 		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
@@ -157,10 +183,56 @@ public class ArticleController {
 		articleReply.setUser(userID);
 		articleReply.setArticleReplyContent(replyContent);
 		articleReply.setArticleReplyDate(TimeTest.getTime());
+		articleReply.setStatus(0);
+		
 		arService.insert(articleReply);
-		return "forward:/articleDetail";
-				
+		
+		
+		ArticleBean replyid = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(replyid);
+		for (ArticleReplyBean articleReplyBean : selectReplyAll) {
+			System.err.println(articleReplyBean.getUser().getUserId());
+		}
+		return selectReplyAll ;
+	}
+	
+	@PostMapping("/replyEmptyDetail")
+	@ResponseBody
+	public List<ArticleReplyBean> replyEmptyDetail(int articleId) {
+		ArticleBean replyid = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(replyid);
+		return selectReplyAll ;
+	}
+	
+	
+	
+	
 
+	@PostMapping("/articleDelete")
+	public String articleDelete(int articleId) {
+		aService.deleteById(articleId);
+		return "redirect:/QueryAllPage";
+	}
+	
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@PostMapping("/replyAdd")
+	public ArticleReplyBean replyAdd(int articleId, String replyContent) {
+		int userId = (int) session.getAttribute("userId");
+		Session s = factory.openSession();
+		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
+		ArticleBean articleID = s.get(ArticleBean.class, articleId);
+		s.close();
+		ArticleReplyBean articleReply = new ArticleReplyBean();
+		articleReply.setArticleId(articleID);
+		articleReply.setUser(userID);
+		articleReply.setArticleReplyContent(replyContent);
+		articleReply.setArticleReplyDate(TimeTest.getTime());
+		articleReply.setStatus(0);
+		return arService.insert(articleReply);
+//		return "redirect:/replyDetail";
 	}
 
 	
@@ -194,7 +266,33 @@ public class ArticleController {
 		session.setAttribute("selectReplyAll", selectReplyAll);
 		return "forum/adminfourmDetail";
 	}
+	
+	@PostMapping("/replyAdminUpdatePage")
+	public String replyAdminUpdatePage(int articleReplyId) {
+		ArticleReplyBean replyUpdateDetail = arService.findById(articleReplyId);
+		session.setAttribute("replyUpdateDetail", replyUpdateDetail);
+		return "forum/forumAdminReplyUpdate";
+	}
 
+	@PostMapping("/replyAdminUpdate")
+	public String replyAdminUpdate(int status,int replyId) {
+		System.out.println(status);
+		System.out.println(replyId);
+		arService.updateReport(status, replyId);
+		return "redirect:/QueryAllPage";
+	}
+
+	
+	@PostMapping("/replyReport")
+	public String ReplyReport(int replyId , int articleId) {
+		arService.insertReport(1,replyId);
+		ArticleBean selectDetail = aService.findByArticleId(articleId);
+		ArticleBean reply  = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(reply);
+		session.setAttribute("selectDetail", selectDetail);
+		session.setAttribute("selectReplyAll", selectReplyAll);
+		return "forward:/articleDetail";
+	}
 	
 
 //////////////////////////////////////////////////////////////////////////////////////////	
@@ -210,6 +308,7 @@ public class ArticleController {
 		int userId = (int) session.getAttribute("userId");
 		List<ArticleBean> artilces = new ArrayList<>();
 		Session s = factory.openSession();
+		System.out.println(userId);
 		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
 		s.close();
 		Iterable<ArticleBean> selectUserId = aService.findByUser(userID);
@@ -235,6 +334,49 @@ public class ArticleController {
 		}
 		return artilceReplys;
 	}
+	/**
+	 * 收藏功能
+	 * @param articleId
+	 * @return
+	 */
+	@PostMapping("/insertCollect")
+	public String addRec(int articleId) {
+		ArticleCollectRecBean rec = new ArticleCollectRecBean();
+		
+		int userId = (int) session.getAttribute("userId");
+		Session s = factory.openSession();
+		ArticleBean aID = s.get(ArticleBean.class, articleId);
+		s.close();
+		
+		rec.setArticleId(aID);
+		rec.setUser(userId);
+		
+		aurService.insert(rec);
+		return "forward:/articleDetail";
+	}
+	
+	@PostMapping("/delCollect")
+	public String delRec(int articleId) {
+		int userId = (int) session.getAttribute("userId");
+		aurService.delete(articleId,userId);
+		return "forward:/articleDetail";
+	}
+	
+	@GetMapping("/QueryRec")
+	@ResponseBody
+	public List<ArticleCollectRecBean> QueryRec() {
+		int userId = (int) session.getAttribute("userId");
+		return aurService.findRec(userId);
+	}
+	
+	@PostMapping("/UserdelRec")
+	public String UserdelRec(int articleId) {
+		int userId = (int) session.getAttribute("userId");
+		aurService.delete(articleId,userId);
+		return "redirect:/forumUser";
+	}
+	
+	
 	
 
 	@PostMapping("/UserUpdateArticlePage")
