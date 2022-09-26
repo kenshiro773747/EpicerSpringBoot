@@ -189,6 +189,7 @@ public class UserController {
 			    m.addAttribute("show",show);
 			    m.addAttribute("account",msg);
 			    m.addAttribute("user",user);
+			    m.addAttribute("birth", tools.getStringDate(user.getBirth()));
 			    System.out.println(user.getTownship()+1);
 				return "users/UserRegisterReset";
 			}
