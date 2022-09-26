@@ -65,7 +65,7 @@
                               </div>
                             </div>
                             <h3>
-                              <a class="header-action-link" href="addpage.controller" rel="nofollow"><i class="icon-plus-regular"></i>&nbsp;寫食譜 
+                              <a class="header-action-link" href="http://localhost:8091/to/add" rel="nofollow"><i class="icon-plus-regular"></i>&nbsp;寫食譜 
                               </a>
                             </h3>
                           </div>

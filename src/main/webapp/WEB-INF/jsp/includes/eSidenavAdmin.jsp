@@ -51,7 +51,6 @@
 					<span class="nav-link-text ms-1">新進人員註冊</span>
 			</a>
 			</form>
-				
 			</div> 
 			<!-- 會員管理底 -->
 
@@ -114,7 +113,7 @@
 					</div> <span class="nav-link-text ms-1">所有課程</span>
 			</a>
 			<a class="nav-link active"
-				href="http://localhost:8091/" >
+				href="http://localhost:8091/beforeCourseInsert" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">新增課程</span>

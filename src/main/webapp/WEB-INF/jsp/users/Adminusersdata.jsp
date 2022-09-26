@@ -164,7 +164,7 @@ User user = (User)it.next();%>
                <td><%= user.getName() %></td>
                 <td><%= user.getNickname() %></td>
                <td><%= user.getGenderName(user.getGender())%></td>
-               <td><%= user.getBirth() %></td>
+               <td><%= tools.getStringDate(user.getBirth()) %></td>
                 <td><%= user.getAccount() %></td>
                <td><%= user.getPassword() %></td>
                 <td><%= user.getPhone() %></td>
@@ -186,7 +186,6 @@ User user = (User)it.next();%>
          <input type="submit" name="submit" value="返回" style="margin-left:900px;margin-top:15px"  >
          </form>
 </div>
-      
 <!-- ////////////////// 個人主文結束 //////////////////-->
   <!--////////////////// Footer(開始) //////////////////-->
   <%@include file="../includes/eFooter.jsp"%>
