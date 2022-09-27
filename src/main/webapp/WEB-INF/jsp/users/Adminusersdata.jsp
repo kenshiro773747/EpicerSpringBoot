@@ -104,6 +104,7 @@ if(list == null){ %>
         <select name="status" required>
                     <option  value="0">管理者</option>
                     <option  value="1">會員</option>
+                     <option  value="4">黑名單</option>
                     </select>
                     </div>
        <input type="submit" name="submit" value="搜尋" style="margin-left:250px;margin-top:15px">
@@ -130,6 +131,7 @@ if(msg == null){
         <select name="status" required >
                     <option  value="0">管理者</option>
                     <option  value="1">會員</option>
+                      <option  value="4">黑名單</option>
                     </select>&emsp;&emsp;<input type="submit" name="submit" value="搜尋" >
                     </div>
 </form>  
