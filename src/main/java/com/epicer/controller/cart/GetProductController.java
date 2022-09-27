@@ -23,7 +23,7 @@ public class GetProductController {
 	
 	
 	
-	//進入商品頁網址: http://localhost:8081/productmenu
+	//進入商品頁網址: http://localhost:8091/productmenu
 //	@GetMapping("/productmenu")
 //	public String processProductMainAction() {
 //		System.out.println("gotomenu");

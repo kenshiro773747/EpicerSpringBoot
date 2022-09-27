@@ -64,17 +64,19 @@ public class OrderProductController {
 	
 	//新增商品訂單 
 	//進入商品頁網址: http://localhost:8091/orderinsert
-	@PostMapping(path = "/orderinsert")
-	public String processOrderInsert(@RequestParam("productId")Integer [] productId,Model m) {
+	@GetMapping(path = "/orderinsert")
+	public String processOrderInsert(Model m) {
 		System.out.println("gotoorderinsert");
 		
+		//@RequestParam("productId")Integer [] productId,
 		
 		
 		
 		
 		
 		
-		return "cart/frontproductmenu";
+		
+		return "redirect:/queryallproductmenu";
 	}
 	
 	//後台管理員開啟總訂單畫面

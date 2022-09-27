@@ -131,7 +131,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
 					<div class="u-cart-button-container">
 						<a
-							href="http://localhost:8081/queryusercart"
+							href="http://localhost:8091/queryusercart"
 							data-page-id="711118021"
 							class="u-active-none u-btn u-button-style u-cart-continue-shopping u-hover-none u-none u-text-body-color u-btn-1"><span
 							class="u-icon"><svg class="u-svg-content"
@@ -256,10 +256,11 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 										</table>
 
 									</div>
-									
-									<a href="http://localhost:8081/orderinsert"
+									<i onclick="orderedSuccess">
+									<a href="http://localhost:8091/orderinsert"
 										data-page-id="93644921"
-										class="u-btn u-btn-round u-button-style u-cart-checkout-btn u-radius-50 u-btn-4 checkout">繼續結帳</a>
+										class="u-btn u-btn-round u-button-style u-cart-checkout-btn u-radius-50 u-btn-4 checkout" >確認結帳</a></i>
+									
 								</div>
 							</div>
 						</div>
@@ -278,7 +279,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						<!-- 						</div> -->
 					</div>
 	</section>
-
+	<!--   SweetAlert(https://sweetalert2.github.io/#examples)   -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
 		(function(document) {
 			'use strict';
@@ -332,6 +334,20 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	<script src="https://kit.fontawesome.com/c01f9b1966.js"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
+	//按鈕功能
+	//確認結帳
+// 	$(function() {
+		$("a.checkout").click(function(){
+		Swal.fire({
+			  position: 'top-end',
+			  icon: '訂單已成立!',
+			  title: '謝謝購買',
+			  showConfirmButton: false,
+			  timer: 2000
+			})
+		})
+// 	})
+
 		
 	</script>
 </body>
