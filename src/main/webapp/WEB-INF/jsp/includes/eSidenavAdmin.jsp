@@ -9,7 +9,7 @@
 		<i
 			class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
 			aria-hidden="true" id="iconSidenav"></i> <a class="navbar-brand m-0"
-			href=" (裝首頁jsp)https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html "
+			href="http://localhost:8091/queryallproductmenu"
 			target="_blank"> <img src="./assets/img/logo-bgwhite.jpg"
 			class="navbar-brand-img h-100" alt="main_logo"> <span
 			class="ms-1 font-weight-bold">管理員介面</span>
@@ -18,7 +18,8 @@
 	<hr class="horizontal dark mt-0">
 	<div class="collapse navbar-collapse  w-auto "
 		id="sidenav-collapse-main">
-		<ul class="navbar-nav">
+		<ul class="navbar-nav" style=" margin-top: 0px;
+    margin-bottom: 16px;">
 			
 			<!-- 一個分類可彈出&連動多個連結-->
 			<!-- 會員管理 -->
@@ -121,26 +122,26 @@
 			</div>
 			
 			<!-- 外燴管理 -->
-			<p style="margin:0px ; margin-bottom:16px">
-				<a class="nav-link active" data-bs-toggle="collapse"
-					href="#collapseCuisine" role="button" aria-expanded="false"
-					aria-controls="collapseExample">
-					 <i class="ni ni-delivery-fast text-danger text-sm opacity-10"></i>外燴管理</a>
-			</p>
-			<div class="collapse" id="collapseCuisine">
-			<a class="nav-link active"
-				href="./pages/dashboard.html" >
-					<div
-						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-					</div> <span class="nav-link-text ms-1">所有菜單</span>
-			</a>
-			<a class="nav-link active"
-				href="./pages/dashboard.html" >
-					<div
-						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-					</div> <span class="nav-link-text ms-1">新增菜單</span>
-			</a>
-			</div>
+<!-- 			<p style="margin:0px ; margin-bottom:16px"> -->
+<!-- 				<a class="nav-link active" data-bs-toggle="collapse" -->
+<!-- 					href="#collapseCuisine" role="button" aria-expanded="false" -->
+<!-- 					aria-controls="collapseExample"> -->
+<!-- 					 <i class="ni ni-delivery-fast text-danger text-sm opacity-10"></i>外燴管理</a> -->
+<!-- 			</p> -->
+<!-- 			<div class="collapse" id="collapseCuisine"> -->
+<!-- 			<a class="nav-link active" -->
+<!-- 				href="./pages/dashboard.html" > -->
+<!-- 					<div -->
+<!-- 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"> -->
+<!-- 					</div> <span class="nav-link-text ms-1">所有菜單</span> -->
+<!-- 			</a> -->
+<!-- 			<a class="nav-link active" -->
+<!-- 				href="./pages/dashboard.html" > -->
+<!-- 					<div -->
+<!-- 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"> -->
+<!-- 					</div> <span class="nav-link-text ms-1">新增菜單</span> -->
+<!-- 			</a> -->
+<!-- 			</div> -->
 			
 			<!-- 論壇管理 -->
 			<p style="margin:0px ; margin-bottom:16px">
@@ -150,14 +151,12 @@
 					 <i class="ni ni-planet text-danger text-sm opacity-10"></i>論壇管理</a>
 			</p>
 			<div class="collapse" id="collapseForum">
-			<a class="nav-link active"
-				href="http://localhost:8091/QueryAllPage" >
+			<a class="nav-link active" href="http://localhost:8091/QueryAllPage" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">所有文章</span>
 			</a>
-			<a class="nav-link active"
-				href="http://localhost:8091/forumAdd" >
+			<a class="nav-link active" href="http://localhost:8091/forumAdd" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">新增文章</span>
@@ -173,14 +172,13 @@
 			</p>
 			<div class="collapse" id="collapseCart">
 			<a class="nav-link active"
-				href="http://localhost:8081/admincart.controller" >
+				href="http://localhost:8091/admincart.controller" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">所有購物車明細</span>
 			</a>
 
-			<a class="nav-link active"
-				href="http://localhost:8091/adminorderquery" >
+			<a class="nav-link active"	href="http://localhost:8091/adminorderquery" >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">所有訂單</span>
