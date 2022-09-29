@@ -1,0 +1,9 @@
+diff a/src/main/resources/application.properties b/src/main/resources/application.properties	(rejected hunks)
+@@ -28,6 +28,7 @@
+ # TLS , port 587
+ spring.mail.port=587
+ spring.mail.username=eeit4902@gmail.com
++spring.mail.password=ntasocpzrnbpwnxz
+ # Other properties
+ spring.mail.properties.mail.smtp.auth=true
+ spring.mail.properties.mail.smtp.starttls.enable=true

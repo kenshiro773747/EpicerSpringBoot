@@ -1,6 +1,5 @@
 package com.epicer.config;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 import org.springframework.context.annotation.Bean;
@@ -19,7 +18,7 @@ public class MailConfig{
 	     mailSender.setPort(587);
 	      
 	     mailSender.setUsername("eeit4902@gmail.com");
-	     mailSender.setPassword("ntasocpzrnbpwnxz");
+	     mailSender.setPassword("mvtrotnelsztbkku");
 	      
 	     Properties props = mailSender.getJavaMailProperties();
 	     props.put("mail.transport.protocol", "smtp");

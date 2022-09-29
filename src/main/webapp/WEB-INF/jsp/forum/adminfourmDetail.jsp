@@ -11,6 +11,9 @@
 <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=63296382a700c90019f6dc52&product=image-share-buttons" async="async"></script>
 <script language='javascript' src='js/wangEditor.min.js'></script>
 <script  src='js/sweetalert2.min.js'></script>
+<script type="text/javascript" src='js/jquery.min.js'></script>
+<script type="text/javascript" src='js/anime.min.js'></script>
+<link rel="stylesheet" href="css/heart.css">
 <link rel="stylesheet" href="css/sweetalert2.min.css">
 <!-- eLindHead (開始) -->
 <%@include file="../includes/eLinkHead.jsp" %>
@@ -28,6 +31,12 @@ width: 200px
 
 <script type="text/javascript">
 
+$(document).ready(function(){
+	queryReply()
+});
+
+
+
 function queryReply(){
 	
 	if($('textarea').val()!=""){
@@ -41,9 +50,48 @@ function queryReply(){
 				for(var i=0;i<data.length;i++){
 					var time = new Date(data[i].articleReplyDate);
 					console.log(data);
-					
+					if(data[i].status==1){
 					resultText +=
-					        "<tr>"+
+						"<tr style='background-color:#FFD494'>"+
+					          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
+					          "</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+					          "</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
+					          "</td>"+
+					        
+					          "<td>"+
+					          
+					            "<div class='d-flex px-2 py-1'>"+
+					            "<form action='replyUpdatePage' method='post'>"+
+								"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+								"</form>"+
+					               
+					            
+					        
+								 "<form id = 'myform"+i+"' action='replyDelete' method='post'>"+
+									"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
+									"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+								"</form>"+
+								"<form id = 'replyReport"+i+"' action='replyReport' method='post'>"+
+								"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
+								"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+							"</form>"+
+								
+					          "</td>"+
+					          "</div>"+
+					        "</tr>"
+					   
+				   }else if(data[i].status==0){
+					   resultText +=
+						   "<tr>"+
 					          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
 					          "<td class='align-middle text-center'>"+
 					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
@@ -81,6 +129,7 @@ function queryReply(){
 					        "</tr>"
 					   
 				   }
+				}
 				document.getElementById("mydiv").innerHTML = resultText;
 			}else{
 				alert(this.status);
@@ -106,46 +155,86 @@ function queryReply(){
 					for(var i=0;i<data.length;i++){
 						var time = new Date(data[i].articleReplyDate);
 						console.log(data);
-						
-						resultText +=
-						        "<tr>"+
-						          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
-						          "<td class='align-middle text-center'>"+
-						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
-						          "</td>"+
-						          "<td class='align-middle text-center'>"+
-						            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
-						          "</td>"+
-						          "<td class='align-middle text-center'>"+
-						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
-						          "</td>"+
-						        
-						          "<td>"+
-						          
-						            "<div class='d-flex px-2 py-1'>"+
-						            "<form action='replyUpdatePage' method='post'>"+
-									"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
-									"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
-									"</form>"+
-						               
-						            
-						        
-									 "<form id = 'myform"+i+"' action='replyDelete' method='post'>"+
+						if(data[i].status==1){
+							resultText +=
+							        "<tr  style='background-color:#FFD494'>"+
+							          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
+							          "</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+							          "</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
+							          "</td>"+
+							        
+							          "<td>"+
+							          
+							            "<div class='d-flex px-2 py-1'>"+
+							            "<form action='replyUpdatePage' method='post'>"+
+										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+										"</form>"+
+							               
+							            
+							        
+										 "<form id = 'myform"+i+"' action='replyDelete' method='post'>"+
+											"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
+											"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+											"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+										"</form>"+
+										"<form id = 'replyReport"+i+"' action='replyReport' method='post'>"+
 										"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
 										"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
-										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+										"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
 									"</form>"+
-									"<form id = 'replyReport"+i+"' action='replyReport' method='post'>"+
-									"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
-									"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
-									"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
-								"</form>"+
-									
-						          "</td>"+
-						          "</div>"+
-						        "</tr>"
-						   
-					   }
+										
+							          "</td>"+
+							          "</div>"+
+							        "</tr>"
+							   
+						   }else if(data[i].status==0){
+							   resultText +=
+								   "<tr>"+
+							          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
+							          "</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+							          "</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
+							          "</td>"+
+							        
+							          "<td>"+
+							          
+							            "<div class='d-flex px-2 py-1'>"+
+							            "<form action='replyUpdatePage' method='post'>"+
+										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+										"</form>"+
+							               
+							            
+							        
+										 "<form id = 'myform"+i+"' action='replyDelete' method='post'>"+
+											"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
+											"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+											"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+										"</form>"+
+										"<form id = 'replyReport"+i+"' action='replyReport' method='post'>"+
+										"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
+										"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+										"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+									"</form>"+
+										
+							          "</td>"+
+							          "</div>"+
+							        "</tr>"
+							   
+						   }
+						}
 					document.getElementById("mydiv").innerHTML = resultText;
 				}else{
 					alert(this.status);
@@ -219,9 +308,36 @@ function queryReply(){
 	<input type="hidden" name="articleId" value="<%=request.getParameter("articleId")%>">
     <input type = "submit" name="submit" class="btn bg-gradient-primary" value="del收藏">
 	</form>
+	
+	
+	<!-- 愛心功能 -->
+	<div class="controls__item like">
+	<svg width="397" height="470" version="1">
+		<path class="main" d="M211 226c9-9 21-14 34-14 29 0 50 26 50 54 0 34-53 77-78 95-5 3-7 3-12 0-25-18-78-61-78-95 0-28 21-54 50-54 13 0 25 5 34 14z"/>
+		<path class="second" d="M211 226c9-9 21-14 34-14 29 0 50 26 50 54 0 34-53 77-78 95-5 3-7 3-12 0-25-18-78-61-78-95 0-28 21-54 50-54 13 0 25 5 34 14z"/>
+		
+		<path class="line line1" d="M171 294c-43-12-106-47-111-62-18-52 0-125 0-125"/>
+		<path class="line line2" d="M197 244c-11-31-25-75-32-119-12-79-5-125-5-125"/>
+		<path class="line line3" d="M258 251c23-18 49-43 61-67 25-50 19-74 13-153"/>
+		<path class="line line4" d="M246 304c22 15 54 34 79 37 46 7 58-53 62-88s-8-96-8-96"/>
+		<path class="line line5" d="M217 330c6 36 23 85 62 111 69 46 117-56 117-56"/>
+		<path class="line line6" d="M204 330c-9 46-25 112-46 134-34 35-66-111-66-111"/>
+		<path class="line line7" d="M191 309c-24 25-69 63-108 74C15 402 0 234 0 234"/>
+	</svg>
+	
+	<img class="heart heart1" src="images/l.png" width="40" alt="">
+	<img class="heart heart2" src="images/l.png" width="40" alt="">
+	<img class="heart heart3" src="images/l.png" width="40" alt="">
+	<img class="heart heart4" src="images/l.png" width="40" alt="">
+	<img class="heart heart5" src="images/l.png" width="40" alt="">
+	<img class="heart heart6" src="images/l.png" width="40" alt="">
+	<img class="heart heart7" src="images/l.png" width="40" alt="">
+</div>
 </tr>
 </table>
 </div>
+
+   
 <h1>留言版</h1>
 <!-- <form action="replyAdd" method="post"  style="width:800px"> -->
         <table>
@@ -258,6 +374,7 @@ function queryReply(){
 
 
 
+
 <!-- ////////////////// 個人主文結束 //////////////////-->
 		<!--////////////////// Footer(開始) //////////////////-->
 		<%@include file="../includes/eFooter.jsp"%>
@@ -278,6 +395,7 @@ function queryReply(){
 	<!-- ////////////////// 框架Script (結束) //////////////////-->
 <script language='javascript' src='js/jquery-3.6.0.js'></script>
 <script language='javascript' src='js/Wang.js'></script>
+<script type="text/javascript" src="js/index.js"></script>
 <script>
 function del(id){
 	Swal.fire({
@@ -294,9 +412,9 @@ function del(id){
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
-		      
-		    )
-		    $("#myform"+id).submit();
+		     
+		    ).then((result) => {
+		    	 $("#myform"+id).submit();})
 		  }
 		})
 	
@@ -318,16 +436,21 @@ function replyReport(id){
 		      'Your file has been deleted.',
 		      'success'
 		      
-		    )
-		    $("#replyReport"+id).submit();
+		    ).then((result) => {
+		    	$("#replyReport"+id).submit();})
 		  }
 		})
 	
 }
-
+		
 $("#testReset").on("click",function(){
 	editor.txt.clear();
 })
+
+
+
+
+
 </script>
 </body>
 

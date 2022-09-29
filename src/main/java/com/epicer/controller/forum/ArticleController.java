@@ -30,11 +30,15 @@ import com.epicer.model.forum.WangEditorResponse;
 import com.epicer.service.forum.ArticleReplyService;
 import com.epicer.service.forum.ArticleService;
 import com.epicer.service.forum.ArticleUserRecService;
+import com.epicer.util.Mail;
 import com.epicer.util.TimeTest;
 import com.epicer.util.fileUtils;
 
 @Controller
 public class ArticleController {
+	
+	@Autowired
+	private Mail mail;
 
 	@Autowired
 	private ArticleService aService;
@@ -127,6 +131,7 @@ public class ArticleController {
 	@PostMapping("/forumReport")
 	public String forumReport(int number) {
 		aService.insertReport(1,number);
+		mail.sendToGmail();
 		return "redirect:/QueryAllPage";
 	}
 	
@@ -140,7 +145,7 @@ public class ArticleController {
 	
 
 	@PostMapping("/articleUpdate")
-	public String articleUpdate(int articleId, String aTitle, String aContent) {
+	public String articleUpdate(int articleId, String aTitle, String aContent,int status) {
 		ArticleBean article = new ArticleBean();
 		int userId = (int) session.getAttribute("userId");
 		article.setArticleId(articleId);
@@ -151,7 +156,7 @@ public class ArticleController {
 		article.setUser(userID);
 		article.setArticleContent(aContent);
 		article.setDate(TimeTest.getTime());
-		article.setStatus(0);
+		article.setStatus(status);
 		aService.insert(article);
 		return "redirect:/QueryAllPage";
 		
@@ -437,10 +442,15 @@ public class ArticleController {
 	@ResponseBody // application/json
 	public Object test1(@RequestParam("img") MultipartFile file, Map<String, Object> map, HttpServletRequest request)
 			throws IOException {
-		System.out.println("file.getOriginalFilename() " + file.getOriginalFilename());
 		// 使用uuid解决文件重名
-		String outpath = "C:\\Users\\User\\Desktop\\EpicerSpringBoot\\src\\main\\webapp\\WEB-INF\\resources\\images\\"
-				+ UUID.randomUUID().toString().replaceAll("-", "");
+		
+		String classLocalPath =this.getClass().getClassLoader().getResource("").getPath();
+		String classLocalPathModify= classLocalPath.substring(1).replaceAll("target", "src").replaceAll("classes", "main");
+		String saveFileDir= classLocalPathModify+"webapp/WEB-INF/resources/images";
+
+		
+		String outpath = saveFileDir+ UUID.randomUUID().toString().replaceAll("-", "");
+				
 		byte[] bytes = file.getBytes();
 		// 读取文件路径
 		String path = request.getServletContext().getRealPath("/images/");
