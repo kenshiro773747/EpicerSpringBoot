@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,9 +37,31 @@ public class AdminController {
 	@Autowired
 	private ManagementService management;
 	
-	private static final String localpath = "C:\\Action\\worksapce\\EpicerSpringBoot\\src\\main\\webapp\\WEB-INF\\resources\\images";;
+	private static final String localpath = "C:\\Users\\User\\Desktop\\EpicerSpringBoot\\src\\main\\webapp\\WEB-INF\\resources\\images\\";
 
 	private Tools tools=new Tools();
+	
+	
+	//確認密碼
+	@PostMapping(path="/checkpassword")
+	public Message checkPassword(@RequestBody User user) {
+		Message pwdmsg = new Message();
+		String account = user.getAccount();
+		Message msg = login.checkAccount(account);
+		User result = (User)msg.getObject();
+		if(result.getPassword().equals(user.getPassword())) {
+			pwdmsg.setCode(0);
+			pwdmsg.setMessage("密碼正確");
+			pwdmsg.setObject(result); //管理員domain
+		}else {
+			pwdmsg.setCode(1);
+			pwdmsg.setMessage("密碼錯誤");
+		}
+		return pwdmsg;
+	}
+	
+	
+	
 	
 	
 	//返回
@@ -60,8 +83,10 @@ public class AdminController {
 		if(user != null) {
 	       if(user.getStatus()==1) {
 	    	   return "users/userindex";
-	       }else {
+	       }else if(user.getStatus()==0){
 	    	   return "users/AdminIndex";
+	       }else {
+	    	   return "users/AdminLogin";
 	       }
 		}
 		return "users/AdminLogin";
@@ -286,13 +311,36 @@ public class AdminController {
 		}
 		
 		
-		//刪除該筆使用者資料
+		//刪除該筆使用者資料(真的刪除)
+//		@PostMapping(path="/delete")
+//		public String doDelete(@RequestParam("password") String password,@RequestParam("userid") int id,Model m,SessionStatus status) {
+//			User user = (User)m.getAttribute("user");
+//			if(user.getStatus()==0) {
+//				if(user.getStatus()==0 && password.equals(user.getPassword())) {
+//					Message msg = management.deleteById(id);
+//					m.addAttribute("msg",msg);
+//					return "users/Adminusersdata";			
+//				}else {
+//					Message msg =new Message();
+//					msg.setMessage("密碼錯誤，請重新嘗試");
+//					m.addAttribute("msg",msg);
+//					return "users/Adminusersdata";	
+//				}				
+//			}else {
+//				status.setComplete();
+//				return "users/illegal";
+//			}
+//			
+//		}
+		
+		
+		//刪除該筆使用者資料(假的刪除)
 		@PostMapping(path="/delete")
 		public String doDelete(@RequestParam("password") String password,@RequestParam("userid") int id,Model m,SessionStatus status) {
 			User user = (User)m.getAttribute("user");
 			if(user.getStatus()==0) {
 				if(user.getStatus()==0 && password.equals(user.getPassword())) {
-					Message msg = management.deleteById(id);
+					Message msg = management.changeStatusById(id);
 					m.addAttribute("msg",msg);
 					return "users/Adminusersdata";			
 				}else {

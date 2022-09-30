@@ -8,7 +8,6 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Epicer Admin System</title>
-
 <!-- eLindHead (開始) -->
 <%@include file="../includes/eLinkHead.jsp" %>
 <!-- eLindHead (結束) -->
@@ -30,6 +29,7 @@
 <!-- ////////////////// 個人主文開始 //////////////////-->
    <div class="container">
 <div class="title">Employee Register Form</div>
+  <button id="action">Input</button>
 <form action="empcheck" method="post">
 <div class="userdetail">
     <div class="inputbox">
@@ -40,7 +40,7 @@
     <div class="inputbox">
         <span class="detail">Address</span>
         <input type="text" id="road" name="road" placeholder="address" required>
-        <span id="sp8" class="msg"></span>
+        <span id="sp9" class="msg"></span>
     </div>
     <div class="inputbox">
         <span class="detail">Account</span>
@@ -128,37 +128,46 @@
     <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="js/Register.js"></script>
 <script type="text/javascript" src="js/test.js"></script>
-    <script>
-    const twzipcode = new TWzipcode(".twzipcode");
-    </script>
-    <script>
+   <script>
     $(function(){
-
-        $('#su').on('click',function(){  
-        while(true){
-        let A = checkName();
-        let B = checkGender();
-        let C = checkAge();
-        let D =checkAccount();
-        let E =checkPassword();
-        let F =checkPhone();
-        let G =selectcity();
-        let H =checkTownship();
-        let I=checkRoad();
     	
-        if(A && B && C && D && E && F && G && H && I){  
-            $('form').submit()
-     break ;
-    }
-    }
-     })
-        
-        
+    	 const twzipcode = new TWzipcode(".twzipcode");
+    	
+    	 
+    	 //一鍵輸入
+    	  $('#action').on('click',function(){
+    		  $('#name').attr("value","游語穠"); 
+    		  $("#birth").attr("value","1997-01-02"); 
+    		  $('#account').attr("value","860102yeah@gmail.com");
+    		  $('#password').attr("value","我我我452145511");
+    		  $('#phone').attr("value","4546545465465466464654");
+    		  twzipcode.set({
+    			    'county': '臺中市',
+    			    'district': '太平區'
+    			});
+    		  
+    		  let county = twzipcode.get('county');
+    		  let district = twzipcode.get('district');
+    		  $('#road').attr("value",county+district);
+        	
+    	  });
+//-----------------------------------------------------------------------------------------------------------------//      	
+        //for 一鍵輸入
+         $('#action').on("blur",function(){        	 
+            checkName();
+            checkGender();
+            checkAge();
+            checkAccount();
+            checkPassword();
+            checkPhone();
+            checkRoad();
+         });
+//-----------------------------------------------------------------------------------------------------------------//         
         //檢查姓名
-        $('#name').on('blur',function(){
+             $('#name').on('blur',function(){
             checkName()
         });
-        //檢查姓名
+        
         function checkName(){
             let name =$('#name').val()
             if(typeof name ==="string"){
@@ -191,19 +200,11 @@
             return false
         }
         } 
-        
-           
-         
-                   
-        //------
-        
-        
+//-----------------------------------------------------------------------------------------------------------------//        
         //性別必填 觸發: onblur/onsubmit
         $("#birth").on('focus',function(){
             checkGender()
-        })
-        
-        
+        });
         
         function checkGender(){
            var gender =$("input[name='gender']:checked").val(); //radio 取值，注意寫法
@@ -218,7 +219,7 @@
         }
         }
         
-        
+//-----------------------------------------------------------------------------------------------------------------//          
         //確認年齡 須為18歲以上 觸發:onblur/onsubmit
         $('#birth').on('blur',function(){
             checkAge()
@@ -258,9 +259,7 @@
         }   
         
         }
-        
-        
-        
+//-----------------------------------------------------------------------------------------------------------------//          
           //檢查帳號 非空/不能有中文/序列4以上含有'@' 觸發：onblur onsubmit
           $('#account').on('blur', function(){
            checkAccount()
@@ -299,16 +298,12 @@
                     return false
         } 
         }
-        
-        
+//-----------------------------------------------------------------------------------------------------------------//          
         //檢查密碼 判斷 非空/不能有中文/須為8-16個字 觸發:onblur onsubmit
         $('#password').on('blur',
         function(){
-            checkPassword()
-        }
-        )
-        
-        
+            checkPassword();
+        });
         
         function checkPassword(){
             let password = $('#password').val()
@@ -342,13 +337,11 @@
                     return false   
         }
         }
-        
-        
+//-----------------------------------------------------------------------------------------------------------------//          
         //檢查電話  判斷 非空/不能有中文+英文/開頭為09/
         $('#phone').on('blur', function(){
         checkPhone()
-        })
-        
+        });
         
         function checkPhone(){
                 var phone = $('#phone').val();
@@ -388,32 +381,29 @@
                     return false  
                 }
             }
-        
-        
+//-----------------------------------------------------------------------------------------------------------------//          
         //居住城市必填 判斷 必選 觸發 onblur onsubmit
-        let city = document.querySelector("#city");  //select
-        city.addEventListener("blur", selectcity);
-        
+  /*
+        $(".twzipcode").on('blur',function(){
+	  selectcity();
+  });
          function selectcity() {
-          const result = city.options[city.selectedIndex].value;
-          if(result == 0){
-         var msg= "居住城市必填";
-              $('#sp7').text(msg);
-              return false;
+         let county = twzipcode.get('county');
+          if(typeof county === "string"){
+              if(county == null || county ==""){
+            	  var msg= "居住城市必填";
+                  $('#sp7').text(msg);
         }else{
           var msg= "OK";
               $('#sp7').text(msg);
-              return true;
         }
-        
         }
-        
-        
+          */
+//-----------------------------------------------------------------------------------------------------------------//  
         //居住區域必填 非空  觸發 onblur onsubmit
         $('#township').on('blur',function(){
             checkTownship()
-        })
-        
+        });
         
         function checkTownship(){
             let township = $('#township').val()
@@ -432,14 +422,19 @@
                 $('#sp8').text(msg)
                     return false
             }
-           
           }
-        
-        
+//-----------------------------------------------------------------------------------------------------------------//          
         //居住路段必填 判斷 非空 觸發 onblur onsubmit
+         $(".twzipcode").on('change',function(){
+          let county = twzipcode.get('county');
+   		  let district = twzipcode.get('district');
+   		  $('#road').attr("value",county+district);
+        });
+        
+        
         $('#road').on('blur',function(){
         checkRoad()
-        })
+        });
         
         
         function checkRoad(){

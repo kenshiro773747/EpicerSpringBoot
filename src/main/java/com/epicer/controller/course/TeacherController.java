@@ -30,7 +30,7 @@ public class TeacherController {
 	public String processMainAction(Model m) {
 		List<Teacher> list = TS.findAllTeacher();
 		m.addAttribute("listAll", list);
-		return "course/teacherPage";	
+		return "course/teacherPageWithFrame";	
 	}
 	
 	///INSERT///
@@ -38,7 +38,7 @@ public class TeacherController {
 	public String beforeTeacherInsert (Model m) {
 		Teacher teacher = new Teacher();
 		m.addAttribute("Teacher",teacher);
-		return "course/teacherInsert";
+		return "course/teacherInsertWithFrame";
 	}
 	
 	@PostMapping(path = "/insertTeacher")
@@ -65,7 +65,7 @@ public class TeacherController {
 	public String beforeTeacherUpdate(@RequestParam("teacherId")int teacherId,Model m) {
 		Teacher teacher = TS.getTeacherById(teacherId);
 		m.addAttribute("Teacher",teacher);	
-		return "course/teacherEditor";	
+		return "course/teacherEditorWithFrame";	
 	}
 	
 	@PostMapping(path = "/updateTeacher")

@@ -13,6 +13,13 @@ public class Tools {
 		// TODO Auto-generated constructor stub
 	}
 	
+	//產生亂數
+	public int randomNum() {
+		int random = 0;
+		random = (int)(Math.random()*100)+1;
+        return random;		
+	}
+	
 	//非空判斷
 		public boolean isEmpty(String str) {
 			if(str !=null) {
@@ -209,7 +216,7 @@ public class Tools {
 				for(int i =0 ;i<allcities.length;i++) {
 					if(cityName.equals(allcities[i])) {
 						result = i;
-						return result+1;
+						return result;
 					}
 				}
 				return 0;

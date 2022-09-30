@@ -1,12 +1,12 @@
 <%@ page import="java.util.*,com.epicer.model.users.*,com.epicer.util.*"  language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+ pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh">
 
 <head>
 <meta charset="utf-8" />
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Epicer Admin System</title>
 
 <!-- eLindHead (開始) -->
@@ -84,16 +84,16 @@
 
 <body class="g-sidenav-show   bg-gray-100">
 
-	<!-- ////////////////// 介面最外層框架 //////////////////-->
-	<div class="min-height-300 bg-primary position-absolute w-100"></div>
-	<!-- ////////////////// Side Navber (開始) //////////////////-->
-	<%@include file="../includes/eSidenavAdmin.jsp"%>
-	<!-- ////////////////// Side Navber (結束) //////////////////-->
-	<!-- //////////////////主畫面框架(開始) ////////////////// -->
-	<main class="main-content position-relative border-radius-lg ">
-		<!-- ////////////////// (Header)Start 上方 Navbar 上方  (要加裝在個人頁面)(從includes/eHead.jsp要拉一個檔案到自己資料夾改)////////////////// -->
-		<%@include file="../includes/eHead.jsp"%>
-		<!-- ////////////////// End 上方 Navbar //////////////////-->
+ <!-- ////////////////// 介面最外層框架 //////////////////-->
+ <div class="min-height-300 bg-primary position-absolute w-100"></div>
+ <!-- ////////////////// Side Navber (開始) //////////////////-->
+ <%@include file="../includes/eSidenavAdmin.jsp"%>
+ <!-- ////////////////// Side Navber (結束) //////////////////-->
+ <!-- //////////////////主畫面框架(開始) ////////////////// -->
+ <main class="main-content position-relative border-radius-lg ">
+  <!-- ////////////////// (Header)Start 上方 Navbar 上方  (要加裝在個人頁面)(從includes/eHead.jsp要拉一個檔案到自己資料夾改)////////////////// -->
+  <%@include file="../includes/eHead.jsp"%>
+  <!-- ////////////////// End 上方 Navbar //////////////////-->
 <!-- ////////////////// 個人主文開始 //////////////////-->
 <%
 List<User> list = (List<User>)session.getAttribute("list");
@@ -104,6 +104,7 @@ if(list == null){ %>
         <select name="status" required>
                     <option  value="0">管理者</option>
                     <option  value="1">會員</option>
+                     <option  value="4">黑名單</option>
                     </select>
                     </div>
        <input type="submit" name="submit" value="搜尋" style="margin-left:250px;margin-top:15px">
@@ -119,9 +120,9 @@ Tools tools= new Tools();
 Message msg = (Message)request.getAttribute("msg"); //delete
 String info ="";
 if(msg == null){
-	info="";
+ info="";
 }else{
-	info=msg.getMessage();
+ info=msg.getMessage();
 } %>
 <form action="user" method="post">
  <h4 id="p" value="<%= info %>" style="margin-left:250px;color:red"><%= info %></h4>
@@ -130,6 +131,7 @@ if(msg == null){
         <select name="status" required >
                     <option  value="0">管理者</option>
                     <option  value="1">會員</option>
+                      <option  value="4">黑名單</option>
                     </select>&emsp;&emsp;<input type="submit" name="submit" value="搜尋" >
                     </div>
 </form>  
@@ -164,7 +166,7 @@ User user = (User)it.next();%>
                <td><%= user.getName() %></td>
                 <td><%= user.getNickname() %></td>
                <td><%= user.getGenderName(user.getGender())%></td>
-               <td><%= user.getBirth() %></td>
+               <td><%= tools.getStringDate(user.getBirth()) %></td>
                 <td><%= user.getAccount() %></td>
                <td><%= user.getPassword() %></td>
                 <td><%= user.getPhone() %></td>
@@ -172,7 +174,7 @@ User user = (User)it.next();%>
                 <td><%= user.getTownship() %></td>
                <td><%= user.getAddress() %></td>
 <%                      String logindate =null;
-                    	logindate = tools.getStringDate(user.getLogindate());%>
+                     logindate = tools.getStringDate(user.getLogindate());%>
                 <td><%= logindate %></td>
   <td><input type="radio" name="userid" value="<%= user.getId() %>"  required></td>
               </tr>
@@ -186,45 +188,49 @@ User user = (User)it.next();%>
          <input type="submit" name="submit" value="返回" style="margin-left:900px;margin-top:15px"  >
          </form>
 </div>
-      
 <!-- ////////////////// 個人主文結束 //////////////////-->
-		<!--////////////////// Footer(開始) //////////////////-->
-		<%@include file="../includes/eFooter.jsp"%>
-		<!-- ////////////////// Footer(結束) //////////////////-->
+  <!--////////////////// Footer(開始) //////////////////-->
+  <%@include file="../includes/eFooter.jsp"%>
+  <!-- ////////////////// Footer(結束) //////////////////-->
 
-		</div>
-		<!-- ////////////////// 中間主畫面(結束) ////////////////// -->
-	</main>
-	<!-- ////////////////// 主畫面框架(結束) //////////////////-->
+  </div>
+  <!-- ////////////////// 中間主畫面(結束) ////////////////// -->
+ </main>
+ <!-- ////////////////// 主畫面框架(結束) //////////////////-->
 
-	<!-- ////////////////// (右上設定鈕)Sidenav Type 調整樣式 ////////////////// -->
-	<!-- ////////////////// Sidebar Backgrounds 開始 //////////////////-->
-	<%@include file="../includes/eSidenavTypeSetting.jsp"%>
-	<!-- ////////////////// Sidebar Backgrounds 結束 ////////////////// -->
+ <!-- ////////////////// (右上設定鈕)Sidenav Type 調整樣式 ////////////////// -->
+ <!-- ////////////////// Sidebar Backgrounds 開始 //////////////////-->
+ <%@include file="../includes/eSidenavTypeSetting.jsp"%>
+ <!-- ////////////////// Sidebar Backgrounds 結束 ////////////////// -->
 
-	<!-- ////////////////// 框架Script url (開始)(不能少) ////////////////// -->
-	<%@include file="../includes/eScriptForBody.jsp"%>
-	<!-- ////////////////// 框架Script (結束) //////////////////-->
+ <!-- ////////////////// 框架Script url (開始)(不能少) ////////////////// -->
+ <%@include file="../includes/eScriptForBody.jsp"%>
+ <!-- ////////////////// 框架Script (結束) //////////////////-->
       <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+      <script src="js/sweetalert2.all.min.js"></script>
     <script>
     $(document).ready( function () {
         $('#table_id').DataTable(); 
         $("#delete").click(function(){
-        	var password = $("#password").val();
-        	if($.trim(password) == ""){
-        		alert("請先輸入員工密碼");
-        		return;
-        	}
-        	if(confirm("是否確定刪除")){
-        		$('#deleteform').submit();
-        		return true;
-        	}else{
-        		return false;
-        	}
+         var password = $("#password").val();
+         if($.trim(password) == ""){
+          Swal.fire({
+             icon: 'error',
+             title: 'Oops...',
+             text: '請先輸入密碼',
+           })
+          return;
+         }
+         if(confirm("是否確定刪除")){
+          $('#deleteform').submit();
+          return true;
+         }else{
+          return false;
+         }
         })    //click   
     } ); //底
     </script>
 </body>
 </html>
-<% } %> 
+<% } %>

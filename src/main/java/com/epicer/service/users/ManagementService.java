@@ -44,22 +44,43 @@ private Tools tools =new Tools();
 //		}
 //	}
 	
-//使用者管理
-	public Message deleteById(int id) {
-		Message msg = new Message();
-		try{
-			ur.deleteById(id);
-			msg.setCode(0);
-			msg.setMessage("刪除完成");
-			msg.setObject(id);			
-		}catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("error");
-			msg.setCode(1);
-			msg.setMessage("刪除失敗請重新嘗試");
+	//使用者管理(真的刪除)
+		public Message deleteById(int id) {
+			Message msg = new Message();
+			try{
+				ur.deleteById(id);
+				msg.setCode(0);
+				msg.setMessage("刪除完成");
+				msg.setObject(id);			
+			}catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("error");
+				msg.setCode(1);
+				msg.setMessage("刪除失敗請重新嘗試");
+			}
+			return msg;
 		}
-		return msg;
-	}
+		
+		
+		//使用者管理(假的刪除)
+			public Message changeStatusById(int id) {
+				Message msg = new Message();
+				Optional<User> optional = ur.findById(id);
+				User user = optional.get();
+				user.setStatus(4); //4 刪除會員權但保留資料
+				try{
+					ur.save(user);
+					msg.setCode(0);
+					msg.setMessage("刪除完成");
+					msg.setObject(id);			
+				}catch(Exception e) {
+					e.printStackTrace();
+					System.out.println("error");
+					msg.setCode(1);
+					msg.setMessage("刪除失敗請重新嘗試");
+				}
+				return msg;
+			}
 	
 	
 	//會員管理

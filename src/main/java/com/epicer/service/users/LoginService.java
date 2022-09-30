@@ -33,7 +33,7 @@ private UserRespostity ur;
 	public Message checkAccount(String account) {
 		Message msg = new Message();
 		User user = ur.checkAccount(account);
-		if(user==null) {
+		if(user==null || user.getStatus()==4) {
 			msg.setCode(1);
 			msg.setMessage("帳號不存在");
 		}else {

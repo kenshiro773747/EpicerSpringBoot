@@ -147,30 +147,36 @@ let city = document.querySelector("#city");  //select
       }
     
     
-    //居住路段必填 判斷 非空 觸發 onblur onsubmit
-    $('#road').on('blur',function(){
-    checkRoad()
-    })
-    
-    
-    function checkRoad(){
-        let road = $('#road').val()
-        if(typeof road ==="string"){
-            if(road == null  || road == "" ){
-                var msg ="路段必填";
-                $('#sp5').text(msg)
-                return false
+     //居住路段必填 判斷 非空 觸發 onblur onsubmit
+         $(".twzipcode").on('change',function(){
+          let county = twzipcode.get('county');
+   		  let district = twzipcode.get('district');
+   		  $('#road').attr("value",county+district);
+        });
+        
+        
+        $('#road').on('blur',function(){
+        checkRoad()
+        });
+        
+        
+        function checkRoad(){
+            let road = $('#road').val()
+            if(typeof road ==="string"){
+                if(road == null  || road == "" ){
+                    var msg ="路段必填";
+                    $('#sp9').text(msg)
+                    return false
+                }else{
+                    var msg ="ok";
+                    $('#sp9').text(msg)
+                    return true
+                }
             }else{
-                var msg ="ok";
-                $('#sp5').text(msg)
-                return true
+                var msg ="請輸入有效字元";
+                $('#sp9').text(msg)
+                return false
             }
-        }else{
-            var msg ="請輸入有效字元";
-            $('#sp5').text(msg)
-            return false
-        }
-      
-      }
-
-})
+          
+          }
+          })
