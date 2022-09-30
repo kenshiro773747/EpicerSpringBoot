@@ -94,10 +94,10 @@
     	 //一鍵輸入
     	  $('#action').on('click',function(){
     		  $('#name').attr("value","暗影騎士"); 
-    		  $("#birth").attr("value","2022-01-02"); 
-    		  $('#account').attr("value","860102yeah@gmail.com");
+    		  $("#birth").attr("value","1997-01-02"); 
+    		  $('#account').attr("value","jasont11413@gmail.com");
     		  $('#password').attr("value","eeit49024902");
-    		  $('#phone').attr("value","我沒有手機");
+    		  $('#phone').attr("value","0903060859");
     		  twzipcode.set({
     			    'county': '臺中市',
     			    'district': '太平區'

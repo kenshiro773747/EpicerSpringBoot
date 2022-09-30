@@ -29,7 +29,7 @@ public class MailTemplateUtil {
         MimeMessage message = javaMailSender.createMimeMessage();
 
         try {
-            MimeMessageHelper mailsender = new MimeMessageHelper(message, true);
+            MimeMessageHelper mailsender = new MimeMessageHelper(message, true,"UTF-8");
 
             mailsender.setTo(user.getAccount());
             mailsender.setSubject("Hello!"+" "+user.getName()+" "+"Welcome to join Epicer!!!!");

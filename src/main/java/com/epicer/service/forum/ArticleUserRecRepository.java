@@ -16,6 +16,9 @@ public interface ArticleUserRecRepository extends JpaRepository<ArticleCollectRe
 	@Query( value = "select * from forum_article_collect_rec where userid=?1",nativeQuery = true)
 	public List<ArticleBean> findArticleByUserUserId(int userid);
 	
+	@Query( value = "select count(*)  from forum_article_collect_rec where articleid=?1 and userid=?2",nativeQuery = true)
+	public String collectStatus(int articleId,int userid);
+	
 	@Modifying
 	@Query( value = " DELETE FROM forum_article_collect_rec where articleid = ?1 and userid =?2",nativeQuery = true)
 	public void delete(int articleId,int userid);

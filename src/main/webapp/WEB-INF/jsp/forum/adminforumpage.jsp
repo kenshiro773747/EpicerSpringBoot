@@ -27,7 +27,7 @@ position: relative;
 
 <script>
 $(document).ready(function(){
-	queryAll()
+	queryAll();
 });
 
 	function queryAll(){
@@ -75,15 +75,11 @@ $(document).ready(function(){
 										"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 									"</form>"+
-									 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-										"<input type='hidden' name='number' value="+data[i].articleId+">"+
-										"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
+									
+										"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+										"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
 										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-									"</form>"+
-									"<form id = 'report"+i+"' action='forumReport' method='post'>"+
-									"<input type='hidden' name='number' value="+data[i].articleId+">"+
-									"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
-								"</form>"+
+									    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
 						          "</td>"+
 						        "</tr>"
 						   
@@ -117,15 +113,10 @@ $(document).ready(function(){
 									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 									"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 								"</form>"+
-								 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-									"<input type='hidden' name='number' value="+data[i].articleId+">"+
-									"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
-									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-								"</form>"+
-								"<form id = 'report"+i+"' action='forumReport' method='post'>"+
-								"<input type='hidden' name='number' value="+data[i].articleId+">"+
-								"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
-							"</form>"+
+								"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+								"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+							    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
 								
 					          "</td>"+
 					        "</tr>"
@@ -186,15 +177,10 @@ $(document).ready(function(){
 									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 									"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 								"</form>"+
-								 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-									"<input type='hidden' name='number' value="+data[i].articleId+">"+
-									"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
-									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-								"</form>"+
-								"<form id = 'report"+i+"' action='forumReport' method='post'>"+
-								"<input type='hidden' name='number' value="+data[i].articleId+">"+
-								"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
-							"</form>"+
+								"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+								"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+							    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
 					          "</td>"+
 					        "</tr>"
 					   
@@ -227,15 +213,10 @@ $(document).ready(function(){
 										"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 									"</form>"+
-									 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-										"<input type='hidden' name='number' value="+data[i].articleId+">"+
-										"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
-										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-									"</form>"+
-									"<form id = 'report"+i+"' action='forumReport' method='post'>"+
-									"<input type='hidden' name='number' value="+data[i].articleId+">"+
-									"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
-								"</form>"+
+									"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+									"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+								    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
 						          "</td>"+
 						        "</tr>"
 						}
@@ -300,15 +281,10 @@ function category(category){
 								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 							"</form>"+
-							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-								"<input type='hidden' name='number' value="+data[i].articleId+">"+
-								"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
-								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-							"</form>"+
-							"<form id = 'report"+i+"' action='forumReport' method='post'>"+
-							"<input type='hidden' name='number' value="+data[i].articleId+">"+
-							"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
-						"</form>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+						    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
 				          "</td>"+
 				        "</tr>"
 				   
@@ -340,15 +316,10 @@ function category(category){
 								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 							"</form>"+
-							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-								"<input type='hidden' name='number' value="+data[i].articleId+">"+
-								"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
-								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-							"</form>"+
-							"<form id = 'report"+i+"' action='forumReport' method='post'>"+
-							"<input type='hidden' name='number' value="+data[i].articleId+">"+
-							"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
-						"</form>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+						    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
 				          "</td>"+
 				        "</tr>"
 				}
@@ -409,11 +380,9 @@ function reportPage(){
 								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 							"</form>"+
-							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-								"<input type='hidden' name='number' value="+data[i].articleId+">"+
-								"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
-								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-							"</form>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleId"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 				          "</td>"+
 				        "</tr>"
 				   
@@ -474,11 +443,9 @@ function replyReportPage(){
 								"<input type='hidden' name='articleReplyId' value='"+data[i].articleReplyId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 							"</form>"+
-							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-								"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
-								"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
-								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-							"</form>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleId"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 				          "</td>"+
 				        "</tr>"
 				   
@@ -512,9 +479,14 @@ function del(id){
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
-		     
 		    ).then((result) => {
-		    	 $("#myform"+id).submit();})
+		    	var xhr = new XMLHttpRequest();
+		    	xhr.open("post","articleDelete",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var articleId = document.getElementById("articleID"+id).value;
+		    	xhr.send("articleId="+articleId);
+		    	queryAll();
+		    })
 		  }
 		})
 	
@@ -538,7 +510,13 @@ function report(id){
 		      'success'
 		      
 		    ).then((result) => {
-		    	 $("#report"+id).submit();})
+		    	var xhr = new XMLHttpRequest();
+		    	xhr.open("post","forumReport",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var number = document.getElementById("number"+id).value;
+		    	xhr.send("number="+number);
+		    	queryAll();
+		    })
 		  }
 		})
 	

@@ -237,7 +237,6 @@ public class ArticleController {
 		articleReply.setArticleReplyDate(TimeTest.getTime());
 		articleReply.setStatus(0);
 		return arService.insert(articleReply);
-//		return "redirect:/replyDetail";
 	}
 
 	
@@ -365,6 +364,17 @@ public class ArticleController {
 		int userId = (int) session.getAttribute("userId");
 		aurService.delete(articleId,userId);
 		return "forward:/articleDetail";
+	}
+	
+	
+	@PostMapping("/CollectStatus")
+	@ResponseBody
+	public boolean CollectStatus(int articleId) {
+		int userId = (int) session.getAttribute("userId");
+		if(Integer.parseInt(aurService.statusRec(articleId,userId)) >0) {
+			return true;
+		}
+		return false;
 	}
 	
 	@GetMapping("/QueryRec")
