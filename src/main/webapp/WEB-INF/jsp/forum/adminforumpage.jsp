@@ -475,16 +475,16 @@ function del(id){
 		  confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
 		  if (result.isConfirmed) {
+			  var xhr = new XMLHttpRequest();
+		    	xhr.open("post","articleDelete",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var articleId = document.getElementById("articleID"+id).value;
+		    	xhr.send("articleId="+articleId);
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
 		    ).then((result) => {
-		    	var xhr = new XMLHttpRequest();
-		    	xhr.open("post","articleDelete",true);
-		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-		    	var articleId = document.getElementById("articleID"+id).value;
-		    	xhr.send("articleId="+articleId);
 		    	queryAll();
 		    })
 		  }
@@ -503,6 +503,11 @@ function report(id){
 		  cancelButtonColor: '#d33',
 		  confirmButtonText: '確定檢舉!'
 		}).then((result) => {
+	    	var xhr = new XMLHttpRequest();
+	    	xhr.open("post","forumReport",true);
+	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+	    	var number = document.getElementById("number"+id).value;
+	    	xhr.send("number="+number);
 		  if (result.isConfirmed) {
 		    Swal.fire(
 		      'Deleted!',
@@ -510,11 +515,7 @@ function report(id){
 		      'success'
 		      
 		    ).then((result) => {
-		    	var xhr = new XMLHttpRequest();
-		    	xhr.open("post","forumReport",true);
-		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-		    	var number = document.getElementById("number"+id).value;
-		    	xhr.send("number="+number);
+
 		    	queryAll();
 		    })
 		  }
