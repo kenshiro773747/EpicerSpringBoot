@@ -172,8 +172,8 @@ public class ArticleController {
 	
 
 	@PostMapping("/articleDelete")
-	public String articleDelete(int articleId) {
-		aService.deleteById(articleId);
+	public String articleDelete(int number) {
+		aService.deleteById(number);
 		return "redirect:/QueryAllPage";
 	}
 	
