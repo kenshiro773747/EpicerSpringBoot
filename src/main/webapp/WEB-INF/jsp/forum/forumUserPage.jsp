@@ -19,11 +19,17 @@ position: relative;
   text-overflow: ellipsis;
   max-width: 140px;
   display: inline-block;
+  height:20px;
 }
 </style>
 <script>
-window.onload=function(){
-	document.getElementById("btnArticle").onclick=function(){
+$(document).ready(function(){
+	btnArticle()
+});
+
+
+	
+	function btnArticle(){
 			
 		//1.創建ajax對象
 		var xhr = new XMLHttpRequest();
@@ -91,7 +97,7 @@ window.onload=function(){
 	
 	
 	
-	document.getElementById("btnReply").onclick=function(){
+	function btnReply(){
 		
 		//1.創建ajax對象
 		var xhr = new XMLHttpRequest();
@@ -155,7 +161,7 @@ window.onload=function(){
 	}
 	
 	
-	document.getElementById("btnCollect").onclick=function(){
+	function btnCollect(){
 		
 		//1.創建ajax對象
 		var xhr = new XMLHttpRequest();
@@ -224,7 +230,7 @@ window.onload=function(){
 	
 	
 
-}
+
 
 	
 
@@ -244,15 +250,15 @@ function del(id){
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
-		      
-		    )
-		    $("#myform"+id).submit();
+		     
+		    ).then((result) => {
+		    	 $("#myform"+id).submit();})
 		  }
-		})
-	
+		  })
+
+
+
 }
-
-
 
 
 
@@ -292,9 +298,9 @@ function del(id){
 <h1>${userId}號會員歡迎登入</h1>
 </div>
 <div style="text-align: center;">
-<button id = "btnArticle" class="btn btn-secondary">文章記錄</button>
-<button id = "btnReply" class="btn btn-secondary">留言紀錄</button>
-<button id = "btnCollect" class="btn btn-secondary">收藏紀錄</button>
+<button class="btn btn-secondary" onclick="btnArticle()">文章記錄</button>
+<button class="btn btn-secondary" onclick="btnReply()">留言紀錄</button>
+<button class="btn btn-secondary" onclick="btnCollect()">收藏紀錄</button>
 </div>
 
 

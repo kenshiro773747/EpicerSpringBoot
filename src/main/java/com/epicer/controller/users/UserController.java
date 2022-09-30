@@ -39,8 +39,10 @@ import com.epicer.util.Tools;
 public class UserController {
 	@Autowired
 	private RegisterService register;
+	
 	@Autowired
 	private LoginService login;
+	
 	@Autowired
 	private ManagementService management;
 	

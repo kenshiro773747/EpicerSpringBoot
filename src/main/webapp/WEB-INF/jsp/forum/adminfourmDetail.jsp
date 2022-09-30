@@ -28,6 +28,12 @@ width: 200px
 
 <script type="text/javascript">
 
+$(document).ready(function(){
+	queryReply()
+	queryCollect()
+});
+
+
 function queryReply(){
 	
 	if($('textarea').val()!=""){
@@ -41,9 +47,9 @@ function queryReply(){
 				for(var i=0;i<data.length;i++){
 					var time = new Date(data[i].articleReplyDate);
 					console.log(data);
-					
+					if(data[i].status==1){
 					resultText +=
-					        "<tr>"+
+						"<tr style='background-color:#FFD494'>"+
 					          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
 					          "<td class='align-middle text-center'>"+
 					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
@@ -65,22 +71,49 @@ function queryReply(){
 					               
 					            
 					        
-								 "<form id = 'myform"+i+"' action='replyDelete' method='post'>"+
-									"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
-									"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+								"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
 									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+									"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+								
+					          "</td>"+
+					          "</div>"+
+					        "</tr>"
+					   
+				   }else if(data[i].status==0){
+					   resultText +=
+						   "<tr>"+
+					          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
+					          "</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+					          "</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
+					          "</td>"+
+					        
+					          "<td>"+
+					          
+					            "<div class='d-flex px-2 py-1'>"+
+					            "<form action='replyUpdatePage' method='post'>"+
+								"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 								"</form>"+
-								"<form id = 'replyReport"+i+"' action='replyReport' method='post'>"+
-								"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
-								"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+					               
+					            
+					        
+
+								"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 								"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
-							"</form>"+
 								
 					          "</td>"+
 					          "</div>"+
 					        "</tr>"
 					   
 				   }
+				}
 				document.getElementById("mydiv").innerHTML = resultText;
 			}else{
 				alert(this.status);
@@ -106,46 +139,74 @@ function queryReply(){
 					for(var i=0;i<data.length;i++){
 						var time = new Date(data[i].articleReplyDate);
 						console.log(data);
-						
-						resultText +=
-						        "<tr>"+
-						          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
-						          "<td class='align-middle text-center'>"+
-						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
-						          "</td>"+
-						          "<td class='align-middle text-center'>"+
-						            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
-						          "</td>"+
-						          "<td class='align-middle text-center'>"+
-						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
-						          "</td>"+
-						        
-						          "<td>"+
-						          
-						            "<div class='d-flex px-2 py-1'>"+
-						            "<form action='replyUpdatePage' method='post'>"+
-									"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
-									"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
-									"</form>"+
-						               
-						            
-						        
-									 "<form id = 'myform"+i+"' action='replyDelete' method='post'>"+
-										"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
-										"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
+						if(data[i].status==1){
+							resultText +=
+							        "<tr  style='background-color:#FFD494'>"+
+							          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
+							          "</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+							          "</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
+							          "</td>"+
+							        
+							          "<td>"+
+							          
+							            "<div class='d-flex px-2 py-1'>"+
+							            "<form action='replyUpdatePage' method='post'>"+
+										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+										"</form>"+
+							               
+							            
+							        
+
+										"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
 										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-									"</form>"+
-									"<form id = 'replyReport"+i+"' action='replyReport' method='post'>"+
-									"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
-									"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
-									"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
-								"</form>"+
-									
-						          "</td>"+
-						          "</div>"+
-						        "</tr>"
-						   
-					   }
+										"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+										
+							          "</td>"+
+							          "</div>"+
+							        "</tr>"
+							   
+						   }else if(data[i].status==0){
+							   resultText +=
+								   "<tr>"+
+							          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
+							          "</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+							          "</td>"+
+							          "<td class='align-middle text-center'>"+
+							            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
+							          "</td>"+
+							        
+							          "<td>"+
+							          
+							            "<div class='d-flex px-2 py-1'>"+
+							            "<form action='replyUpdatePage' method='post'>"+
+										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+										"</form>"+
+							               
+							            
+							        
+
+										"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
+										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+										"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+										
+							          "</td>"+
+							          "</div>"+
+							        "</tr>"
+							   
+						   }
+						}
 					document.getElementById("mydiv").innerHTML = resultText;
 				}else{
 					alert(this.status);
@@ -168,6 +229,71 @@ function queryReply(){
 }
 
 
+
+
+
+function queryCollect(){
+			
+		//1.創建ajax對象
+		var xhr = new XMLHttpRequest();
+		//2.註冊回調函數
+		xhr.onreadystatechange = function(){
+			if(this.readyState ==4 ){
+				if(this.status==200){
+					var data = JSON.parse(this.responseText);
+					var resultText = '';
+						if(data==true){
+						resultText +=
+							"<tr>"+
+							"<td id='favorite'>"+
+						"<button type='button' class='btn btn-danger' onclick ='deleteCollect()'>取消收藏</button>"+
+						"</td>"+
+						"</tr>"
+					   }else if(data==false){
+						   resultText +=
+							   "<tr>"+
+							   "<td id='favorite'>"+
+								"<button type='button' class='btn bg-gradient-primary' onclick ='addCollect()' >收藏</button>"+
+								"<td>"+
+								"</tr>"
+					}
+					document.getElementById("collect").innerHTML = resultText;
+				}else{
+					alert(this.status);
+				}
+			}
+		}
+		//3.開啟通道
+		xhr.open("post","CollectStatus",true)
+		//4.
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
+		var articleId = document.getElementById("ArticleId").value;
+		xhr.send("articleId="+articleId)
+		
+	}
+	
+	
+function addCollect(){
+	var xhr = new XMLHttpRequest();
+	xhr.open("post","insertCollect",true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+	var articleId = document.getElementById("ArticleId").value;
+	xhr.send("articleId="+articleId);
+	$("#favorite").empty();
+	$("#favorite").append("<button type='button' class='btn btn-danger' onclick ='deleteCollect()'>取消收藏</button>");
+}
+
+
+function deleteCollect(){
+	var xhr = new XMLHttpRequest();
+	xhr.open("post","delCollect",true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+	var articleId = document.getElementById("ArticleId").value;
+	xhr.send("articleId="+articleId);
+	$("#favorite").empty();
+	$("#favorite").append("<button type='button' class='btn bg-gradient-primary' onclick ='addCollect()' >收藏</button>");
+
+}
 
 
 
@@ -209,19 +335,11 @@ function queryReply(){
 		
 <div style="padding-left:5%;display:inline">
 <table>
-<tr>
-	<form action="insertCollect" method="post"  style="width:800px">
-	<input type="hidden" name="articleId" value="<%=request.getParameter("articleId")%>">
-    <input type = "submit" name="submit" class="btn bg-gradient-primary" value="收藏">
-	</form>
-	
-	<form action="delCollect" method="post"  style="width:800px">
-	<input type="hidden" name="articleId" value="<%=request.getParameter("articleId")%>">
-    <input type = "submit" name="submit" class="btn bg-gradient-primary" value="del收藏">
-	</form>
-</tr>
+ <tbody id ="collect"/>
 </table>
 </div>
+
+   
 <h1>留言版</h1>
 <!-- <form action="replyAdd" method="post"  style="width:800px"> -->
         <table>
@@ -254,6 +372,7 @@ function queryReply(){
  <tbody id ="mydiv"/>
 </table>	
 </div>
+
 
 
 
@@ -294,13 +413,22 @@ function del(id){
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
-		      
-		    )
-		    $("#myform"+id).submit();
+		     
+		    ).then((result) => {
+		    	var xhr = new XMLHttpRequest();
+		    	xhr.open("post","replyDelete",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var articleId = document.getElementById("ArticleId").value;
+		    	var replyId = document.getElementById("replyId"+id).value;
+		    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
+		    	queryReply();
+		    	})
 		  }
 		})
 	
 }
+
+
 
 function replyReport(id){
 	Swal.fire({
@@ -318,16 +446,28 @@ function replyReport(id){
 		      'Your file has been deleted.',
 		      'success'
 		      
-		    )
-		    $("#replyReport"+id).submit();
+		    ).then((result) => {
+		    	var xhr = new XMLHttpRequest();
+		    	xhr.open("post","replyReport",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var articleId = document.getElementById("ArticleId").value;
+		    	var replyId = document.getElementById("replyId"+id).value;
+		    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
+		    	queryReply();
+		    	})
 		  }
 		})
 	
 }
-
+		
 $("#testReset").on("click",function(){
 	editor.txt.clear();
 })
+
+
+
+
+
 </script>
 </body>
 

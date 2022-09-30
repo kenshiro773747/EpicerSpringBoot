@@ -10,6 +10,7 @@
 <title>Epicer管理員系統</title>
 <script  src='js/sweetalert2.min.js'></script>
 <script  src='js/jquery-3.6.0.js'></script>
+<script  src='js/report.js'></script>
 <link rel="stylesheet" href="css/sweetalert2.min.css">
 
 <style type="text/css">
@@ -25,6 +26,10 @@ position: relative;
 </style>
 
 <script>
+$(document).ready(function(){
+	queryAll();
+});
+
 	function queryAll(){
 		document.getElementById("searchTitle").value = ""
 			
@@ -40,8 +45,9 @@ position: relative;
 					var resultText = '';
 					for(var i=0;i<data.length;i++){
 						var time = new Date(data[i].date);
+						if(data[i].status==1){
 						resultText +=
-						        "<tr>"+
+						        "<tr style='background-color:#FFD494'>"+
 						          "<td>"+
 						          
 						            "<div class='d-flex px-2 py-1'>"+
@@ -69,20 +75,54 @@ position: relative;
 										"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 									"</form>"+
-									 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-										"<input type='hidden' name='number' value="+data[i].articleId+">"+
-										"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
-										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-									"</form>"+
-									"<form id = 'report"+i+"' action='forumReport' method='post'>"+
-									"<input type='hidden' name='number' value="+data[i].articleId+">"+
-									"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
-								"</form>"+
 									
+										"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+										"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+									    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
 						          "</td>"+
 						        "</tr>"
 						   
-					   }
+					   }else if(data[i].status==0){
+						   resultText +=
+						   "<tr>"+
+					          "<td>"+
+					          
+					            "<div class='d-flex px-2 py-1'>"+
+					            "<form action='articleDetail' method='post'>"+
+								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+								"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+								"</form>"+
+					               
+					            "</div>"+
+					          "</td>"+
+					          "<td>"+
+					            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].plateformCategoryId-1]+"</p>"+
+					          "</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].title+"</span>"+
+					         "</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+					          "</td>"+
+					          "<td class='align-middle text-center'>"+
+					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
+					          "</td>"+
+					          "<td class='align-middl'>"+
+					            "<form action='forumUpdatePage' method='post'>"+
+									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+									"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+								"</form>"+
+								"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+								"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+							    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+								
+					          "</td>"+
+					        "</tr>"
+					   
+					}
+					}
 					document.getElementById("mydiv").innerHTML = resultText;
 				}else{
 					alert(this.status);
@@ -109,8 +149,9 @@ position: relative;
 					var resultText = '';
 					for(var i=0;i<data.length;i++){
 						var time = new Date(data[i].date);
-						resultText +=
-					        "<tr>"+
+						if(data[i].status==1){
+							resultText +=
+								"<tr style='background-color:#FFD494'>"+
 					          "<td>"+
 					          "<div class='d-flex px-2 py-1'>"+
 					            "<form action='articleDetail' method='post'>"+
@@ -136,19 +177,51 @@ position: relative;
 									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 									"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 								"</form>"+
-								 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-									"<input type='hidden' name='number' value="+data[i].articleId+">"+
-									"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
-									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-								"</form>"+
-								"<form id = 'report"+i+"' action='forumReport' method='post'>"+
-								"<input type='hidden' name='number' value="+data[i].articleId+">"+
-								"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
-							"</form>"+
+								"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+								"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+							    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
 					          "</td>"+
 					        "</tr>"
 					   
 				   }
+						else if(data[i].status==0){
+							resultText +=
+						        "<tr>"+
+						          "<td>"+
+						          "<div class='d-flex px-2 py-1'>"+
+						            "<form action='articleDetail' method='post'>"+
+						        	"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+									"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+									"</form>"+
+						            "</div>"+
+						          "</td>"+
+						          "<td>"+
+						            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].plateformCategoryId-1]+"</p>"+
+						          "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].title+"</span>"+
+						         "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+						          "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
+						          "</td>"+
+						          "<td class='align-middl'>"+
+						            "<form action='forumUpdatePage' method='post'>"+
+										"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+									"</form>"+
+									"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+									"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+								    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+						          "</td>"+
+						        "</tr>"
+						}
+					}
+					
 					document.getElementById("mydiv").innerHTML = resultText;
 				}else{
 					alert(this.status);
@@ -180,8 +253,9 @@ function category(category){
 				var resultText = '';
 				for(var i=0;i<data.length;i++){
 					var time = new Date(data[i].date);
-					resultText +=
-				        "<tr>"+
+					if(data[i].status==1){
+						resultText +=
+						        "<tr style='background-color:#FFD494'>"+
 				          "<td>"+
 				            "<div class='d-flex px-2 py-1'>"+
 				            "<form action='articleDetail' method='post'>"+
@@ -207,19 +281,49 @@ function category(category){
 								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 							"</form>"+
-							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-								"<input type='hidden' name='number' value="+data[i].articleId+">"+
-								"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
-								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-							"</form>"+
-							"<form id = 'report"+i+"' action='forumReport' method='post'>"+
-							"<input type='hidden' name='number' value="+data[i].articleId+">"+
-							"<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
-						"</form>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+						    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
 				          "</td>"+
 				        "</tr>"
 				   
-			   }
+			   }else if(data[i].status==0){
+					resultText +=
+				        "<tr>"+
+				          "<td>"+
+				          "<div class='d-flex px-2 py-1'>"+
+				            "<form action='articleDetail' method='post'>"+
+				        	"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+							"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+							"</form>"+
+				            "</div>"+
+				          "</td>"+
+				          "<td>"+
+				            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].plateformCategoryId-1]+"</p>"+
+				          "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].title+"</span>"+
+				         "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+				          "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
+				          "</td>"+
+				          "<td class='align-middl'>"+
+				            "<form action='forumUpdatePage' method='post'>"+
+								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+							"</form>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+						    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+				          "</td>"+
+				        "</tr>"
+				}
+			}
 				document.getElementById("mydiv").innerHTML = resultText;
 			}else{
 				alert(this.status);
@@ -276,11 +380,9 @@ function reportPage(){
 								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 							"</form>"+
-							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-								"<input type='hidden' name='number' value="+data[i].articleId+">"+
-								"<input type='hidden' name='articleId' value="+data[i].articleId+">"+
-								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-							"</form>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleId"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 				          "</td>"+
 				        "</tr>"
 				   
@@ -341,11 +443,9 @@ function replyReportPage(){
 								"<input type='hidden' name='articleReplyId' value='"+data[i].articleReplyId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 							"</form>"+
-							 "<form id = 'myform"+i+"' action='articleDelete' method='post'>"+
-								"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
-								"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
-								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-							"</form>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleId"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 				          "</td>"+
 				        "</tr>"
 				   
@@ -375,13 +475,18 @@ function del(id){
 		  confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
 		  if (result.isConfirmed) {
+			  var xhr = new XMLHttpRequest();
+		    	xhr.open("post","articleDelete",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var articleId = document.getElementById("articleID"+id).value;
+		    	xhr.send("articleId="+articleId);
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
-		      
-		    )
-		    $("#myform"+id).submit();
+		    ).then((result) => {
+		    	queryAll();
+		    })
 		  }
 		})
 	
@@ -398,18 +503,27 @@ function report(id){
 		  cancelButtonColor: '#d33',
 		  confirmButtonText: '確定檢舉!'
 		}).then((result) => {
+	    	var xhr = new XMLHttpRequest();
+	    	xhr.open("post","forumReport",true);
+	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+	    	var number = document.getElementById("number"+id).value;
+	    	xhr.send("number="+number);
 		  if (result.isConfirmed) {
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
 		      
-		    )
-		    $("#report"+id).submit();
+		    ).then((result) => {
+
+		    	queryAll();
+		    })
 		  }
 		})
 	
 }
+
+
 
 </script>
 <!-- eLindHead (開始) -->
@@ -458,7 +572,8 @@ function report(id){
 <button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="6" onclick="category(this)">油脂與堅果種子</button>
 <button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="7" onclick="reportPage()">檢舉文章</button>
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="8" onclick="replyReportPage()">檢舉留言</button>
-</div>
+
+</div>   
 <div style="padding:0 5%">
 <div class="card" >
   <div class="table-responsive">
@@ -471,7 +586,6 @@ function report(id){
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">時間</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">內文</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">操作</th>
-          <th class="text-secondary opacity-7"></th>
         </tr>
       </thead>
     <tbody id ="mydiv"/>
