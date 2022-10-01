@@ -11,8 +11,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +30,7 @@ import com.epicer.model.forum.WangEditorResponse;
 import com.epicer.service.forum.ArticleReplyService;
 import com.epicer.service.forum.ArticleService;
 import com.epicer.service.forum.ArticleUserRecService;
+import com.epicer.service.forum.UserService;
 import com.epicer.util.Mail;
 import com.epicer.util.TimeTest;
 import com.epicer.util.fileUtils;
@@ -49,12 +50,13 @@ public class ArticleController {
 	
 	@Autowired
 	private ArticleUserRecService aurService;
+	
+	@Autowired
+	private UserService uService;
 
 	@Autowired
 	private HttpSession session;
 
-	@Autowired
-	private SessionFactory factory;
 
 	@GetMapping("/QueryAllPage")
 	public String QueryAllPage() {
@@ -105,10 +107,10 @@ public class ArticleController {
 		article.setDate(TimeTest.getTime());
 		article.setArticleContent(articleContent);
 		article.setStatus(0);
+		article.setArticleLike(0);
+		article.setArticleViews(0);
 		int userId = (int) session.getAttribute("userId");
-		Session s = factory.openSession();
-		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
-		s.close();
+		ArticleUserBean userID = uService.findByUserId(userId);
 		article.setUser(userID);
 		
 		aService.insert(article);
@@ -150,9 +152,7 @@ public class ArticleController {
 		int userId = (int) session.getAttribute("userId");
 		article.setArticleId(articleId);
 		article.setTitle(aTitle);
-		Session s = factory.openSession();
-		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
-		s.close();
+		ArticleUserBean userID = uService.findByUserId(userId);
 		article.setUser(userID);
 		article.setArticleContent(aContent);
 		article.setDate(TimeTest.getTime());
@@ -164,13 +164,13 @@ public class ArticleController {
 
 	@PostMapping("/articleDetail")
 	public String articleDetail(Integer articleId) {
-		
 		ArticleBean selectDetail = aService.findByArticleId(articleId);
-		
-		ArticleBean replyid = aService.findByArticleId(articleId);
-		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(replyid);
 		session.setAttribute("selectDetail", selectDetail);
-		session.setAttribute("selectReplyAll", selectReplyAll);
+		
+		int views =selectDetail.getArticleViews();
+		views++;
+		aService.updateViews(views, articleId);
+		
 		return "forum/adminfourmDetail";
 	}
 	
@@ -179,10 +179,8 @@ public class ArticleController {
 	public List<ArticleReplyBean> replyDetail(int articleId,String replyContent) {
 		
 		int userId = (int) session.getAttribute("userId");
-		Session s = factory.openSession();
-		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
-		ArticleBean articleID = s.get(ArticleBean.class, articleId);
-		s.close();
+		ArticleUserBean userID = uService.findByUserId(userId);
+		ArticleBean articleID = aService.findByArticleId(articleId);
 		ArticleReplyBean articleReply = new ArticleReplyBean();
 		articleReply.setArticleId(articleID);
 		articleReply.setUser(userID);
@@ -214,9 +212,8 @@ public class ArticleController {
 	
 
 	@PostMapping("/articleDelete")
-	public String articleDelete(int number) {
+	public void articleDelete(int number) {
 		aService.deleteById(number);
-		return "redirect:/QueryAllPage";
 	}
 	
 
@@ -226,10 +223,8 @@ public class ArticleController {
 	@PostMapping("/replyAdd")
 	public ArticleReplyBean replyAdd(int articleId, String replyContent) {
 		int userId = (int) session.getAttribute("userId");
-		Session s = factory.openSession();
-		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
-		ArticleBean articleID = s.get(ArticleBean.class, articleId);
-		s.close();
+		ArticleUserBean userID = uService.findByUserId(userId);
+		ArticleBean articleID = aService.findByArticleId(articleId);
 		ArticleReplyBean articleReply = new ArticleReplyBean();
 		articleReply.setArticleId(articleID);
 		articleReply.setUser(userID);
@@ -311,10 +306,7 @@ public class ArticleController {
 	public List<ArticleBean> QueryUserArticle() {
 		int userId = (int) session.getAttribute("userId");
 		List<ArticleBean> artilces = new ArrayList<>();
-		Session s = factory.openSession();
-		System.out.println(userId);
-		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
-		s.close();
+		ArticleUserBean userID = uService.findByUserId(userId);
 		Iterable<ArticleBean> selectUserId = aService.findByUser(userID);
 		System.out.println(selectUserId);
 		for (ArticleBean article : selectUserId) {
@@ -329,9 +321,7 @@ public class ArticleController {
 	public List<ArticleReplyBean> QueryUserReply() {
 		int userId = (int) session.getAttribute("userId");
 		List<ArticleReplyBean> artilceReplys = new ArrayList<>();
-		Session s = factory.openSession();
-		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
-		s.close();
+		ArticleUserBean userID = uService.findByUserId(userId);
 		List<ArticleReplyBean> UserReply = arService.findAllByUserId(userID);
 		for (ArticleReplyBean article : UserReply) {
 			artilceReplys.add(article);
@@ -344,26 +334,26 @@ public class ArticleController {
 	 * @return
 	 */
 	@PostMapping("/insertCollect")
-	public String addRec(int articleId) {
+	public void addRec(int articleId) {
 		ArticleCollectRecBean rec = new ArticleCollectRecBean();
 		
 		int userId = (int) session.getAttribute("userId");
-		Session s = factory.openSession();
-		ArticleBean aID = s.get(ArticleBean.class, articleId);
-		s.close();
+		ArticleBean articleID = aService.findByArticleId(articleId);
 		
-		rec.setArticleId(aID);
+		rec.setArticleId(articleID);
 		rec.setUser(userId);
 		
 		aurService.insert(rec);
-		return "forward:/articleDetail";
+		int likes = aService.Like(articleId);
+		aService.updateLike(likes, articleId);
 	}
 	
 	@PostMapping("/delCollect")
-	public String delRec(int articleId) {
+	public void delRec(int articleId) {
 		int userId = (int) session.getAttribute("userId");
 		aurService.delete(articleId,userId);
-		return "forward:/articleDetail";
+		int likes = aService.Like(articleId);
+		aService.updateLike(likes, articleId);
 	}
 	
 	
@@ -407,9 +397,7 @@ public class ArticleController {
 		ArticleBean article = new ArticleBean();
 		article.setArticleId(articleId);
 		article.setTitle(aTitle);
-		Session s = factory.openSession();
-		ArticleUserBean userID = s.get(ArticleUserBean.class, userId);
-		s.close();
+		ArticleUserBean userID = uService.findByUserId(userId);
 		article.setUser(userID);
 		article.setArticleContent(aContent);
 		article.setDate(TimeTest.getTime());
@@ -456,38 +444,36 @@ public class ArticleController {
 		
 		String classLocalPath =this.getClass().getClassLoader().getResource("").getPath();
 		String classLocalPathModify= classLocalPath.substring(1).replaceAll("target", "src").replaceAll("classes", "main");
-		String saveFileDir= classLocalPathModify+"webapp/WEB-INF/resources/images";
+		String saveFileDir= classLocalPathModify+"/webapp/WEB-INF/resources/images/";
 
 		
 		String outpath = saveFileDir+ UUID.randomUUID().toString().replaceAll("-", "");
 				
 		byte[] bytes = file.getBytes();
 		// 读取文件路径
-		String path = request.getServletContext().getRealPath("/images/");
+		String path = request.getServletContext().getRealPath("/webapp/WEB-INF/resources/images/");
 		// 如果不存在则新建
 		File imgFile = new File(path);
 		if (!imgFile.exists()) {
 			imgFile.mkdirs();
 		}
 		String fileName = file.getOriginalFilename();// 文件名称
-		System.out.println(path + fileName);
 		// 对文件进行写入
 		try (FileOutputStream fos = new FileOutputStream(new File(path + fileName))) {
-			int len = 0;
 			fos.write(bytes);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		// 這方法照片要重新刷新才能顯示 // String value = "images/"
 		// +outpath.substring(outpath.lastIndexOf("\\")+1)+ fileName;
-		String value = "images/" + fileName;
+		String value = outpath.substring(outpath.lastIndexOf("\\")+1)+ fileName;
 		// 保存到服务器目录，记录名称地址
 		fileUtils.upload(file, outpath, file.getOriginalFilename());
 		map.put("imgName", fileName);
 		map.put("imgUrl", outpath + fileName);
 		System.out.println(map);
 		// 返回信息上传
-		return new WangEditorResponse("1", Arrays.asList(value));
+		return new WangEditorResponse("1", Arrays.asList(StringUtils.substringAfterLast(value, "resources/")));
 
 	}
 }

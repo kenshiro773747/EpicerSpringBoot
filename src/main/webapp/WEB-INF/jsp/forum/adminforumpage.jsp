@@ -479,7 +479,8 @@ function del(id){
 		    	xhr.open("post","articleDelete",true);
 		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
 		    	var articleId = document.getElementById("articleID"+id).value;
-		    	xhr.send("articleId="+articleId);
+		    	var number = document.getElementById("number"+id).value;
+		    	xhr.send("number="+number);
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',

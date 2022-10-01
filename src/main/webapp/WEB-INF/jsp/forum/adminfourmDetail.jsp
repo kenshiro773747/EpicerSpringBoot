@@ -408,19 +408,18 @@ function del(id){
 		  cancelButtonColor: '#d33',
 		  confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
+			var xhr = new XMLHttpRequest();
+	    	xhr.open("post","replyDelete",true);
+	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+	    	var articleId = document.getElementById("ArticleId").value;
+	    	var replyId = document.getElementById("replyId"+id).value;
+	    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
 		  if (result.isConfirmed) {
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
-		     
 		    ).then((result) => {
-		    	var xhr = new XMLHttpRequest();
-		    	xhr.open("post","replyDelete",true);
-		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-		    	var articleId = document.getElementById("ArticleId").value;
-		    	var replyId = document.getElementById("replyId"+id).value;
-		    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
 		    	queryReply();
 		    	})
 		  }
@@ -440,6 +439,12 @@ function replyReport(id){
 		  cancelButtonColor: '#d33',
 		  confirmButtonText: '檢舉!'
 		}).then((result) => {
+			var xhr = new XMLHttpRequest();
+	    	xhr.open("post","replyReport",true);
+	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+	    	var articleId = document.getElementById("ArticleId").value;
+	    	var replyId = document.getElementById("replyId"+id).value;
+	    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
 		  if (result.isConfirmed) {
 		    Swal.fire(
 		      'Deleted!',
@@ -447,12 +452,7 @@ function replyReport(id){
 		      'success'
 		      
 		    ).then((result) => {
-		    	var xhr = new XMLHttpRequest();
-		    	xhr.open("post","replyReport",true);
-		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-		    	var articleId = document.getElementById("ArticleId").value;
-		    	var replyId = document.getElementById("replyId"+id).value;
-		    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
+		    	
 		    	queryReply();
 		    	})
 		  }
