@@ -235,7 +235,6 @@ public class ArticleController {
 	}
 
 	
-///////////////////////刪第一個
 	@PostMapping("/replyDelete")
 	public String replyDelete(int replyId, int articleId) {
 		arService.deleteById(replyId);

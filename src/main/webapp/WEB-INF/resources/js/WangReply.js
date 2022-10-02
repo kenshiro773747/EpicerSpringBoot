@@ -15,6 +15,7 @@
      editor.config.excludeMenus = [
         'video',
         'table',
+        'image',
     ]
     
     
@@ -29,22 +30,6 @@
 })
     
 
-    
-
- //    设置上传本地图片到服务器
-    editor.config.uploadImgServer =  'images';//与后端访问接口保持一致
-    editor.config.uploadFileName = 'img'//文件名作为后端接收的参数名
-    editor.config.uploadImgHooks = {
-        //配置自动插入到编辑器
-        customInsert: function (insertImgFn, result) {
-            // result 即服务端返回的接口
-            // insertImgFn 可把图片插入到编辑器，传入图片 src ，执行函数即可
-            insertImgFn(result.data[0])
-        }
-    }
-    //设置图片大小
-    editor.config.uploadImgMaxSize = 50 * 1024 * 1024 // 50M
-    editor.config.uploadImgMaxLength = 10 // 一次最多上传 10 个图片
 
     editor.create();//创建在所有配置之后
     
