@@ -14,6 +14,23 @@
 <link rel="stylesheet" href="css/sweetalert2.min.css">
 
 <style type="text/css">
+.modal-body p{
+white-space:pre-wrap;
+width:450px;
+}
+.modal-dialog{
+
+overflow-y: initial !important
+
+}
+
+.modal-body{
+overflow-x: hidden;
+height: 450px;
+overflow-y: auto;
+
+}
+
 span{
 position: relative;
  overflow: hidden;
@@ -43,46 +60,42 @@ $(document).ready(function(){
 					var data = JSON.parse(this.responseText);
 					var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 					var resultText = '';
+					var o =0;
 					for(var i=0;i<data.length;i++){
+						o++;
 						var time = new Date(data[i].date);
 						if(data[i].status==1){
 						resultText +=
-						        "<tr style='background-color:#FFD494'>"+
-						          "<td>"+
-						            "<div class='d-flex px-2 py-1'>"+
-						            
-						            <!-- Button trigger modal -->
-							          "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>"+
-							          (i+1)+
-							          "</button>"+
-
-							          <!-- Modal -->
-							         " <div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>"+
-							            "<div  class='modal-dialog'>"+
-							             " <div class='modal-content'>"+
-							              " <div class='modal-header'>"+
-							               "<h5 class='modal-title' id='staticBackdropLabel'>"+data[i].title+"</h5>"+
-							                 "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"+
-							                "</div>"+
-							                "<div class='modal-body'>"+
-							                data[i].articleContent+
-							              "</div>"+
-							               " <div class='modal-footer'>"+
-							                "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>關閉</button>"+
-							                "<form action='articleDetail' method='post'>"+
-											"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-											"<button type='submit' class='btn btn-primary'>進入文章</button>"+
-											"</form>"+
-							               " </div>"+
-							            "  </div>"+
-							            "</div>"+
-							          "</div>"+
-						            
-						            
-						            
-						               
-						            "</div>"+
-						          "</td>"+
+							 "<tr style='background-color:#FFD494'>"+
+						        "<div>"+
+						        "<td>"+
+						        "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop"+o+"'>"+(i+1)+
+						     " </button>"+
+						      <!-- Modal -->
+						      "<div class='modal fade' id='staticBackdrop"+o+"' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>"+
+						        "<div class='modal-dialog'>"+
+						          "<div class='modal-content'>"+
+						          "  <div class='modal-header'>"+
+						             " <h5 class='modal-title' id='staticBackdropLabel'>"+data[i].title+"</h5>"+
+						             
+						            "  <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"+
+						          "  </div>"+
+						           " <div class='modal-body'>"+
+						           data[i].articleContent+
+						           " </div>"+
+						           " <div class='modal-footer'>"+
+						            " <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>關閉</button>"+
+						            "<form action='articleDetail' method='post'>"+
+									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+									"<button type='submit' class='btn bg-gradient-primary'>查看文章</button>"+
+									"</form>"+
+						           "</button>"+
+						           " </div>"+
+						         " </div>"+
+						       " </div>"+
+						    "  </div>"+
+						 "</div>"+
+						          
 						          "<td>"+
 						            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].plateformCategoryId-1]+"</p>"+
 						          "</td>"+
@@ -110,17 +123,34 @@ $(document).ready(function(){
 						   
 					   }else if(data[i].status==0){
 						   resultText +=
-						   "<tr>"+
-					          "<td>"+
-					          
-					            "<div class='d-flex px-2 py-1'>"+
-					            "<form action='articleDetail' method='post'>"+
-								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-								"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
-								"</form>"+
-					               
-					            "</div>"+
-					          "</td>"+
+							   "<tr>"+
+						        "<div>"+
+						        "<td>"+
+						        "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop"+o+"'>"+(i+1)+
+							     " </button>"+
+							      <!-- Modal -->
+							      "<div class='modal fade' id='staticBackdrop"+o+"' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>"+
+						        "<div class='modal-dialog'>"+
+						          "<div class='modal-content'>"+
+						          "  <div class='modal-header'>"+
+						             " <h5 class='modal-title' id='staticBackdropLabel'>"+data[i].title+"</h5>"+
+						            "  <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"+
+						          "  </div>"+
+						           " <div class='modal-body'>"+
+						           data[i].articleContent+
+						           " </div>"+
+						           " <div class='modal-footer'>"+
+						            " <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>關閉</button>"+
+						            "<form action='articleDetail' method='post'>"+
+									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+									"<button type='submit' class='btn bg-gradient-primary'>查看文章</button>"+
+									"</form>"+
+						           "</button>"+
+						           " </div>"+
+						         " </div>"+
+						       " </div>"+
+						    "  </div>"+
+						 "</div>"+
 					          "<td>"+
 					            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].plateformCategoryId-1]+"</p>"+
 					          "</td>"+
@@ -172,19 +202,40 @@ $(document).ready(function(){
 					var data = JSON.parse(this.responseText);
 					var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 					var resultText = '';
+					var o=0;
 					for(var i=0;i<data.length;i++){
+						o++;
 						var time = new Date(data[i].date);
 						if(data[i].status==1){
 							resultText +=
-								"<tr style='background-color:#FFD494'>"+
-					          "<td>"+
-					          "<div class='d-flex px-2 py-1'>"+
-					            "<form action='articleDetail' method='post'>"+
-					        	"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-								"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
-								"</form>"+
-					            "</div>"+
-					          "</td>"+
+								  "<tr style='background-color:#FFD494'>"+
+						          "<td>"+
+						            "<div>"+
+							        "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop"+o+"'>"+(i+1)+
+								     " </button>"+
+								      <!-- Modal -->
+								      "<div class='modal fade' id='staticBackdrop"+o+"' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>"+
+							            "<div  class='modal-dialog'>"+
+							             " <div class='modal-content'>"+
+							              " <div class='modal-header'>"+
+							               "<h5 class='modal-title' id='staticBackdropLabel'>"+data[i].title+"</h5>"+
+							                 "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"+
+							                "</div>"+
+							                "<div class='modal-body'>"+
+							                data[i].articleContent+
+							              "</div>"+
+							               " <div class='modal-footer'>"+
+							                "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>關閉</button>"+
+							                "<form action='articleDetail' method='post'>"+
+											"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+											"<button type='submit' class='btn btn-primary'>進入文章</button>"+
+											"</form>"+
+							               " </div>"+
+							            "  </div>"+
+							            "</div>"+
+							          "</div>"+
+						            "</div>"+
+						          "</td>"+
 					          "<td>"+
 					            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].plateformCategoryId-1]+"</p>"+
 					          "</td>"+
@@ -212,13 +263,32 @@ $(document).ready(function(){
 				   }
 						else if(data[i].status==0){
 							resultText +=
-						        "<tr>"+
+								  "<tr>"+
 						          "<td>"+
-						          "<div class='d-flex px-2 py-1'>"+
-						            "<form action='articleDetail' method='post'>"+
-						        	"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-									"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
-									"</form>"+
+						            "<div>"+
+							        "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop"+o+"'>"+(i+1)+
+								     " </button>"+
+								      <!-- Modal -->
+								      "<div class='modal fade' id='staticBackdrop"+o+"' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>"+
+							            "<div  class='modal-dialog'>"+
+							             " <div class='modal-content'>"+
+							              " <div class='modal-header'>"+
+							               "<h5 class='modal-title' id='staticBackdropLabel'>"+data[i].title+"</h5>"+
+							                 "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"+
+							                "</div>"+
+							                "<div class='modal-body'>"+
+							                data[i].articleContent+
+							              "</div>"+
+							               " <div class='modal-footer'>"+
+							                "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>關閉</button>"+
+							                "<form action='articleDetail' method='post'>"+
+											"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+											"<button type='submit' class='btn btn-primary'>進入文章</button>"+
+											"</form>"+
+							               " </div>"+
+							            "  </div>"+
+							            "</div>"+
+							          "</div>"+
 						            "</div>"+
 						          "</td>"+
 						          "<td>"+
@@ -276,19 +346,40 @@ function category(category){
 				var data = JSON.parse(this.responseText);
 				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 				var resultText = '';
+				var o =0;
 				for(var i=0;i<data.length;i++){
+					o++
 					var time = new Date(data[i].date);
 					if(data[i].status==1){
 						resultText +=
-						        "<tr style='background-color:#FFD494'>"+
-				          "<td>"+
-				            "<div class='d-flex px-2 py-1'>"+
-				            "<form action='articleDetail' method='post'>"+
-				        	"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-							"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
-							"</form>"+
-				            "</div>"+
-				          "</td>"+
+							  "<tr style='background-color:#FFD494'>"+
+					          "<td>"+
+					            "<div>"+
+						        "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop"+o+"'>"+(i+1)+
+							     " </button>"+
+							      <!-- Modal -->
+							      "<div class='modal fade' id='staticBackdrop"+o+"' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>"+
+						            "<div  class='modal-dialog'>"+
+						             " <div class='modal-content'>"+
+						              " <div class='modal-header'>"+
+						               "<h5 class='modal-title' id='staticBackdropLabel'>"+data[i].title+"</h5>"+
+						                 "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"+
+						                "</div>"+
+						                "<div class='modal-body'>"+
+						                data[i].articleContent+
+						              "</div>"+
+						               " <div class='modal-footer'>"+
+						                "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>關閉</button>"+
+						                "<form action='articleDetail' method='post'>"+
+										"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+										"<button type='submit' class='btn btn-primary'>進入文章</button>"+
+										"</form>"+
+						               " </div>"+
+						            "  </div>"+
+						            "</div>"+
+						          "</div>"+
+					            "</div>"+
+					          "</td>"+
 				          "<td>"+
 				            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].plateformCategoryId-1]+"</p>"+
 				          "</td>"+
@@ -315,13 +406,32 @@ function category(category){
 				   
 			   }else if(data[i].status==0){
 					resultText +=
-				        "<tr>"+
+						  "<tr>"+
 				          "<td>"+
-				          "<div class='d-flex px-2 py-1'>"+
-				            "<form action='articleDetail' method='post'>"+
-				        	"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-							"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
-							"</form>"+
+				            "<div>"+
+					        "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop"+o+"'>"+(i+1)+
+						     " </button>"+
+						      <!-- Modal -->
+						      "<div class='modal fade' id='staticBackdrop"+o+"' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>"+
+					            "<div  class='modal-dialog'>"+
+					             " <div class='modal-content'>"+
+					              " <div class='modal-header'>"+
+					               "<h5 class='modal-title' id='staticBackdropLabel'>"+data[i].title+"</h5>"+
+					                 "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"+
+					                "</div>"+
+					                "<div class='modal-body'>"+
+					                data[i].articleContent+
+					              "</div>"+
+					               " <div class='modal-footer'>"+
+					                "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>關閉</button>"+
+					                "<form action='articleDetail' method='post'>"+
+									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+									"<button type='submit' class='btn btn-primary'>進入文章</button>"+
+									"</form>"+
+					               " </div>"+
+					            "  </div>"+
+					            "</div>"+
+					          "</div>"+
 				            "</div>"+
 				          "</td>"+
 				          "<td>"+
@@ -376,16 +486,37 @@ function reportPage(){
 				var data = JSON.parse(this.responseText);
 				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 				var resultText = '';
+				var o = 0;
 				for(var i=0;i<data.length;i++){
+					o++
 					var time = new Date(data[i].date);
 					resultText +=
-				        "<tr>"+
+						  "<tr style='background-color:#FFD494'>"+
 				          "<td>"+
-				            "<div class='d-flex px-2 py-1'>"+
-				            "<form action='articleDetail' method='post'>"+
-				        	"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-							"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
-							"</form>"+
+				            "<div>"+
+					        "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop"+o+"'>"+(i+1)+
+						     " </button>"+
+						      <!-- Modal -->
+						      "<div class='modal fade' id='staticBackdrop"+o+"' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>"+
+					            "<div  class='modal-dialog'>"+
+					             " <div class='modal-content'>"+
+					              " <div class='modal-header'>"+
+					               "<h5 class='modal-title' id='staticBackdropLabel'>"+data[i].title+"</h5>"+
+					                 "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"+
+					                "</div>"+
+					                "<div class='modal-body'>"+
+					                data[i].articleContent+
+					              "</div>"+
+					               " <div class='modal-footer'>"+
+					                "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>關閉</button>"+
+					                "<form action='articleDetail' method='post'>"+
+									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+									"<button type='submit' class='btn btn-primary'>進入文章</button>"+
+									"</form>"+
+					               " </div>"+
+					            "  </div>"+
+					            "</div>"+
+					          "</div>"+
 				            "</div>"+
 				          "</td>"+
 				          "<td>"+
@@ -439,16 +570,37 @@ function replyReportPage(){
 				var data = JSON.parse(this.responseText);
 				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 				var resultText = '';
+				var o =0;
 				for(var i=0;i<data.length;i++){
+					o++;
 					var time = new Date(data[i].articleReplyDate);
 					resultText +=
-				        "<tr>"+
+						  "<tr style='background-color:#FFD494'>"+
 				          "<td>"+
-				            "<div class='d-flex px-2 py-1'>"+
-				            "<form action='articleDetail' method='post'>"+
-				        	"<input type='hidden' name='articleId' value='"+data[i].articleId.articleId+"'>"+
-							"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
-							"</form>"+
+				            "<div>"+
+					        "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop"+o+"'>"+(i+1)+
+						     " </button>"+
+						      <!-- Modal -->
+						      "<div class='modal fade' id='staticBackdrop"+o+"' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>"+
+					            "<div  class='modal-dialog'>"+
+					             " <div class='modal-content'>"+
+					              " <div class='modal-header'>"+
+					               "<h5 class='modal-title' id='staticBackdropLabel'>"+data[i].articleId.title+"</h5>"+
+					                 "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"+
+					                "</div>"+
+					                "<div class='modal-body'>"+
+					                data[i].articleReplyContent+
+					              "</div>"+
+					               " <div class='modal-footer'>"+
+					                "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>關閉</button>"+
+					                "<form action='articleDetail' method='post'>"+
+									"<input type='hidden' name='articleId' value='"+data[i].articleId.articleId+"'>"+
+									"<button type='submit' class='btn btn-primary'>進入文章</button>"+
+									"</form>"+
+					               " </div>"+
+					            "  </div>"+
+					            "</div>"+
+					          "</div>"+
 				            "</div>"+
 				          "</td>"+
 				          "<td>"+
