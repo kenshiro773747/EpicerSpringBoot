@@ -54,6 +54,37 @@ position: relative;
   height: 350px;
 }
 
+.searchTitle{
+  z-index: 10;     
+  position: fixed;      
+  top:5%;
+  width:65%;
+  left: 13%;
+  opacity: 0.94;
+  transition: opacity .5s ease-out;  
+
+}
+
+.searchInput{
+width:280px;
+height:28px;
+border:2px solid;
+float:left;
+margin-top:20px;
+border-bottom-left-radius:15px;
+border-top-left-radius:15px;
+outline:none;
+
+}
+
+.searchButton{
+margin-left:20%;
+border:2px solid;
+background-color: #f4f5f7;height:46px
+}
+
+
+
 </style>
 
 <script>
@@ -571,10 +602,10 @@ function queryAll(){
 					resultText +=
 						"<div class='post'>"+
 					"<h1 class='post-title' style='font-size: 28px'><a href='blog-single.html'>"+data[i].title+"</a></h1>"+
-					"<div class='post-content multiline-ellipsis pic' style='height:350px'>"+
+					"<div class='post-content multiline-ellipsis pic' style='height:350px;margin:auto'>"+
 					data[i].articleContent+
 					"</div>"+
-					"<div class='post-meta'>"+
+					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
@@ -647,12 +678,18 @@ function queryAll(){
 <!-- </div> -->
 
 
-<div class="input-group mb-3" style="padding:0 5%">
-  <input type="text"  name="searchTitle" id ="searchTitle" class="form-control" placeholder="Article title" aria-label="Recipient's username" aria-describedby="button-addon2">
-  <button class="btn btn-outline-primary mb-0" style="background-color: #f4f5f7" type="button" id="button-addon2" onclick="querytitle()">查詢文章</button>
-</div>
-<div id ="mydiv"></div>
+<!-- <div class="input-group mb-3 searchTitle"> -->
+<!-- <table> -->
+<!-- <tr> -->
+<!-- <td style="width:100%"><input type="text"  name="searchTitle" id ="searchTitle" class="form-control searchInput" style="margin-bottom:20px" placeholder="Article title" aria-label="Recipient's username" aria-describedby="button-addon2"></td> -->
+<!-- <td style="margin: auto"><button class="btn btn-outline-primary mb-0 searchButton"  type="button" id="button-addon2" onclick="querytitle()">查詢文章</button></td> -->
+<!-- </tr> -->
+<!-- </table> -->
+<!-- </div> -->
 
+<div style="margin-top:22%;">
+<div id ="mydiv"></div>
+</div>
 
 <!-- ////// 分頁跳轉  /////// -->
 <div class="text-center">

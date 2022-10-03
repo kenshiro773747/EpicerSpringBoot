@@ -24,6 +24,10 @@
 td{
 width: 200px
 }
+
+img{
+display：block
+}
 </style>
 
 <script type="text/javascript">

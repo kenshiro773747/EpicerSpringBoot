@@ -11,14 +11,21 @@
 <!-- 主文內容 開始 -->
 
 <!-- /////// 超級重要!!!!Navbar 1+2 要連放一起!! (1)聯絡電話 + 購物車 + 商品搜尋 (2)首頁連動，大家串聯在這，最最後要討論串連的地方///// -->
+<div style="position: fixed; z-index: 20;width:100%; background-color: white;">
 <%@include file="../frontpartials/frontheadernavigation.jsp" %>
+<div class="input-group mb-3 searchTitle">
+<table>
+<tr>
+<td style="width:100%"><input type="text"  name="searchTitle" id ="searchTitle" class="form-control searchInput" style="margin-bottom:20px" placeholder="Article title" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
+<td style="margin: auto"><button class="btn btn-outline-primary mb-0 searchButton"  type="button" id="button-addon2" onclick="querytitle()">查詢文章</button></td>
+</tr>
+</table>
+</div>
+<div style="margin-top:5px">
 <%@include file="../frontpartials/frontheadernavigationtwo.jsp" %>
-
+</div>
+</div>
 <!-- /////// 可抽換連結分頁回首頁(客製化/個人化)(類似分頁標籤) /////// -->
-<jsp:include page="../frontpartials/pageheader.jsp" flush="true">
-<jsp:param name="title" value="論壇" />
-<jsp:param name="pagination" value="論壇" />
-</jsp:include>
 
 <div class="page-wrapper">
 	<div class="container">
@@ -31,7 +38,7 @@
       		<div class="col-md-4">
 					<!-- ///////////  文章頁的側邊 -推播專區 ///////////// -->
 				<!-- @@include('blocks/post-sidebar.htm') -->
-				<%@include file="../frontpartials/postsidebar.jsp" %>
+				<%@include file="formFrontBlogSidebar.jsp" %>
       		</div>
 		</div>
 	</div>
