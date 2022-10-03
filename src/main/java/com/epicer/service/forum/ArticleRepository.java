@@ -23,6 +23,13 @@ public interface ArticleRepository extends JpaRepository<ArticleBean, Integer> {
 	@Query( value = "select count(*)  from forum_article_collect_rec where articleid=?1",nativeQuery = true)
 	public int countLike(int articleId);
 	
+	@Query( value = "select count(*)  from forum_article_reply where articleid=?1",nativeQuery = true)
+	public int countReply(int articleId);
+	
+	@Modifying
+	@Query( value = "UPDATE forum_article SET articlereplys=?1  where articleid=?2",nativeQuery = true)
+	public void updateCountReply(int articlereplys,int articleId);
+	
 	@Modifying
 	@Query( value = "UPDATE forum_article SET articlelike=?1  where articleid=?2",nativeQuery = true)
 	public void updateLike(int articleLike,int articleId);

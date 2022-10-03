@@ -46,6 +46,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
      </div>
 	<form action="articleReportUpdate" method="post">	
 		<input type="hidden" name="action" value="Update">
+		
 		<table class="tb1">
 
 			<tr>

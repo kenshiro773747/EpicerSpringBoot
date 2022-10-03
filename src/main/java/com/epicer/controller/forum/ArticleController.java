@@ -109,10 +109,10 @@ public class ArticleController {
 		article.setStatus(0);
 		article.setArticleLike(0);
 		article.setArticleViews(0);
+		article.setArticleReplys(0);
 		int userId = (int) session.getAttribute("userId");
 		ArticleUserBean userID = uService.findByUserId(userId);
 		article.setUser(userID);
-		
 		aService.insert(article);
 		return "redirect:/QueryAllPage";
 	}
@@ -134,6 +134,7 @@ public class ArticleController {
 	public String forumReport(int number) {
 		aService.insertReport(1,number);
 		mail.sendToGmail();
+//		mail.forumSendToGmail(mail);
 		return "redirect:/QueryAllPage";
 	}
 	
@@ -147,7 +148,7 @@ public class ArticleController {
 	
 
 	@PostMapping("/articleUpdate")
-	public String articleUpdate(int articleId, String aTitle, String aContent,int status) {
+	public String articleUpdate(int articleId, String aTitle, String aContent,int status,int replys,int views,int likes) {
 		ArticleBean article = new ArticleBean();
 		int userId = (int) session.getAttribute("userId");
 		article.setArticleId(articleId);
@@ -157,6 +158,9 @@ public class ArticleController {
 		article.setArticleContent(aContent);
 		article.setDate(TimeTest.getTime());
 		article.setStatus(status);
+		article.setArticleLike(likes);
+		article.setArticleReplys(replys);
+		article.setArticleViews(views);
 		aService.insert(article);
 		return "redirect:/QueryAllPage";
 		
@@ -190,12 +194,11 @@ public class ArticleController {
 		
 		arService.insert(articleReply);
 		
+		int replys= aService.CountReply(articleId);
+		aService.updateCountReply(replys, articleId);
 		
 		ArticleBean replyid = aService.findByArticleId(articleId);
 		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(replyid);
-		for (ArticleReplyBean articleReplyBean : selectReplyAll) {
-			System.err.println(articleReplyBean.getUser().getUserId());
-		}
 		return selectReplyAll ;
 	}
 	
@@ -208,8 +211,6 @@ public class ArticleController {
 	}
 	
 	
-	
-	
 
 	@PostMapping("/articleDelete")
 	public void articleDelete(int number) {
@@ -220,30 +221,12 @@ public class ArticleController {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@PostMapping("/replyAdd")
-	public ArticleReplyBean replyAdd(int articleId, String replyContent) {
-		int userId = (int) session.getAttribute("userId");
-		ArticleUserBean userID = uService.findByUserId(userId);
-		ArticleBean articleID = aService.findByArticleId(articleId);
-		ArticleReplyBean articleReply = new ArticleReplyBean();
-		articleReply.setArticleId(articleID);
-		articleReply.setUser(userID);
-		articleReply.setArticleReplyContent(replyContent);
-		articleReply.setArticleReplyDate(TimeTest.getTime());
-		articleReply.setStatus(0);
-		return arService.insert(articleReply);
-	}
-
 	
 	@PostMapping("/replyDelete")
-	public String replyDelete(int replyId, int articleId) {
+	public void replyDelete(int replyId, int articleId) {
 		arService.deleteById(replyId);
-		ArticleBean selectDetail = aService.findByArticleId(articleId);
-		ArticleBean reply  = aService.findByArticleId(articleId);
-		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(reply);
-		session.setAttribute("selectDetail", selectDetail);
-		session.setAttribute("selectReplyAll", selectReplyAll);
-		return "forward:/articleDetail";
+		int replys= aService.CountReply(articleId);
+		aService.updateCountReply(replys, articleId);
 	}
 
 	@PostMapping("/replyUpdatePage")
@@ -343,7 +326,7 @@ public class ArticleController {
 		rec.setUser(userId);
 		
 		aurService.insert(rec);
-		int likes = aService.Like(articleId);
+		int likes = aService.CountLike(articleId);
 		aService.updateLike(likes, articleId);
 	}
 	
@@ -351,7 +334,7 @@ public class ArticleController {
 	public void delRec(int articleId) {
 		int userId = (int) session.getAttribute("userId");
 		aurService.delete(articleId,userId);
-		int likes = aService.Like(articleId);
+		int likes = aService.CountLike(articleId);
 		aService.updateLike(likes, articleId);
 	}
 	
@@ -475,4 +458,42 @@ public class ArticleController {
 		return new WangEditorResponse("1", Arrays.asList(StringUtils.substringAfterLast(value, "resources/")));
 
 	}
+	
+	
+	
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	// EPICER測試前台登入頁面
+	// 連線網址路徑: http://localhost:8091/firstfrontindex
+	@GetMapping("/formFirstFrontIndex")
+	public String processFristFrontIndexAction() {
+		return "forum/formFrontIndex";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

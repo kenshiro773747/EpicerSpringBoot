@@ -20,4 +20,14 @@ public class Mail {
   
   mailSender.send(message);
  }
+ 
+ public void forumSendToGmail(String mail) {
+	  SimpleMailMessage message = new SimpleMailMessage();  
+	  
+	  message.setTo(mail);
+	  message.setSubject("您的文章被檢舉");
+	  message.setText("org.springframework.mail.SimpleMailMessage 透過 Gmail 發信。");
+	  
+	  mailSender.send(message);
+	 }
 }

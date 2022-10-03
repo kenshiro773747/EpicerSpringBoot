@@ -341,7 +341,6 @@ function deleteCollect(){
 
    
 <h1>留言版</h1>
-<!-- <form action="replyAdd" method="post"  style="width:800px"> -->
         <table>
        	   <tr>
 				<input type="hidden" name="articleId" id ="ArticleId" value="<%=request.getParameter("articleId")%>" readonly>
@@ -355,7 +354,6 @@ function deleteCollect(){
                 <td><input type = "button"  id="testReset" name="submit" class="btn bg-gradient-primary" onclick="queryReply()" value="發佈"></td>
             </tr>
         </table>
-<!-- </form> -->
 
 
 <div  style="padding-left:5%">

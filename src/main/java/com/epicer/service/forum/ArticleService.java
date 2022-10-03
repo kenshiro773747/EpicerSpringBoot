@@ -63,7 +63,7 @@ public class ArticleService {
 		aRepo.insertReport(status, articleid);
 	}
 	
-	public int Like(int articleId) {
+	public int CountLike(int articleId) {
 		return aRepo.countLike(articleId);
 	}
 	
@@ -75,4 +75,10 @@ public class ArticleService {
 		aRepo.updateViews(articleViews, articleId);
 	}
 	
+	public int CountReply(int articleId) {
+		return aRepo.countReply(articleId);
+	}
+	public void updateCountReply(int articlereplys,int articleId) {
+		aRepo.updateCountReply(articlereplys, articleId);
+	}
 }
