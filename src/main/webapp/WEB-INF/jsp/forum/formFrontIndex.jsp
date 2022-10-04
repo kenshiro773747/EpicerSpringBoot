@@ -16,7 +16,7 @@
 <div class="input-group mb-3 searchTitle">
 <table>
 <tr>
-<td style="width:100%"><input type="text"  name="searchTitle" id ="searchTitle" class="form-control searchInput" style="margin-bottom:20px" placeholder="Article title" aria-label="Recipient's username" aria-describedby="button-addon2"></td>
+<td style="width:100%"><input type="text"  name="searchTitle" id ="searchTitle" class="form-control searchInput" style="margin-bottom:20px" placeholder="Article title"></td>
 <td style="margin: auto"><button class="btn btn-outline-primary mb-0 searchButton"  type="button" id="button-addon2" onclick="querytitle()">查詢文章</button></td>
 </tr>
 </table>

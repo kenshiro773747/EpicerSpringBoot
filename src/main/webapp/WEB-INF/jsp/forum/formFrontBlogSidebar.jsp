@@ -37,15 +37,6 @@
 		</div>
 		<div class="media">
 			<a class="pull-left" href="#!">
-				<img class="media-object" src="./source/images/blog/post-thumb-2.jpg" alt="Image">
-			</a>
-			<div class="media-body">
-				<h4 class="media-heading"><a href="#!">Welcome to Themefisher Family</a></h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, officia.</p>
-			</div>
-		</div>
-		<div class="media">
-			<a class="pull-left" href="#!">
 				<img class="media-object" src="./source/images/blog/post-thumb-3.jpg" alt="Image">
 			</a>
 			<div class="media-body">
@@ -66,38 +57,31 @@
 	<!-- End Latest Posts -->
 
 
- <!-- /////////// 文章分類-風格1 ///////////// -->
-	<!-- Widget Category -->
-	<div class="widget widget-category">
-		<h4 class="widget-title">Categories</h4>
-		<ul class="widget-category-list">
-	        <li><a href="#!">Animals</a>
-	        </li>
-	        <li><a href="#!">Landscape</a>
-	        </li>
-	        <li><a href="#!">Portrait</a>
-	        </li>
-	        <li><a href="#!">Wild Life</a>
-	        </li>
-	        <li><a href="#!">Video</a>
-	        </li>
-	    </ul>
-	</div> <!-- End category  -->
-
  <!-- /////////// 文章分類-風格2 (關鍵字方式/可用於食譜) ///////////// -->
 	<!-- Widget tag -->
 	<div class="widget widget-tag">
 		<h4 class="widget-title">Tag Cloud</h4>
 		<ul class="widget-tag-list">
-	        <li><a href="#!">Animals</a>
+	         <li>
+	        <a href="javascript: void(0)" onclick="queryAll()" >全部</a>
 	        </li>
-	        <li><a href="#!">Landscape</a>
+	        <li>
+	        <a href="javascript: void(0)" name="1" onclick="category(this)">全榖雜糧</a>
 	        </li>
-	        <li><a href="#!">Portrait</a>
+	        <li>
+	        <a href="javascript: void(0)" name="2" onclick="category(this)">豆魚蛋肉</a>
 	        </li>
-	        <li><a href="#!">Wild Life</a>
+	        <li>
+	        <a href="javascript: void(0)" name="3" onclick="category(this)">蔬菜</a>
 	        </li>
-	        <li><a href="#!">Video</a>
+	        <li>
+	        <a href="javascript: void(0)" name="4" onclick="category(this)">水果</a>
+	        </li>
+	        <li>
+	        <a href="javascript: void(0)" name="5" onclick="category(this)">乳品</a>
+	        </li>
+	        <li>
+	        <a href="javascript: void(0)" name="6" onclick="category(this)">油脂與堅果種子</a>
 	        </li>
 	    </ul>
 	</div> <!-- End tag  -->
