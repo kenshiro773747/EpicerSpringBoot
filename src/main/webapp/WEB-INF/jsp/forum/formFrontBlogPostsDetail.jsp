@@ -113,6 +113,148 @@ function queryCollect(){
 }
 
 
+
+
+
+
+
+
+
+
+
+function queryReply(){
+	if($('textarea').val()!=""){
+	var xhr = new XMLHttpRequest();
+	//2.註冊回調函數
+	xhr.onreadystatechange = function(){
+		if(this.readyState ==4 ){
+			if(this.status==200){
+				var data = JSON.parse(this.responseText);
+				var resultText = '';
+				for(var i=0;i<data.length;i++){
+					var time = new Date(data[i].articleReplyDate);
+					console.log(data);
+				
+					resultText +=
+						"<div class='post-comments'>"+
+						"<h3 class='post-sub-heading'>10 Comments</h3>"+
+						"<ul class='media-list comments-list m-bot-50 clearlist'>"+
+						"<li class='media'>"+
+						"<a class='pull-left' href='#!'>"+
+						" <img class='media-object comment-avatar' src='./source/images/blog/avater-1.jpg' alt='' width='50' height='50'>"+
+						"</a>"+
+						"<div class='media-body'>"+
+						"<div class='comment-info'>"+
+						" <div class='comment-author'>"+
+						"<a href='#!'>"+data[i].user.userId+"</a>"+
+						"</div>"+
+						"<time>"+time.toLocaleString()+"</time>"+
+						"</div>"+
+						"<p>"+data[i].articleReplyContent+" </p>"+
+						" </div>"+
+						" </li>"+
+						"</ul>"+
+						"</div>"+
+
+						
+						"<tr style='background-color:#FFD494'>"+
+					            "<div class='d-flex px-2 py-1'>"+
+					            "<form action='replyUpdatePage' method='post'>"+
+								"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+								"</form>"+
+					               
+					        
+								"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
+									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+									"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+								
+					          "</td>"+
+					          "</div>"+
+					        "</tr>"
+				}
+				document.getElementById("mydiv").innerHTML = resultText;
+			}else{
+				alert(this.status);
+			}
+		}
+	}
+	//3.開啟通道
+	xhr.open("post","replyDetail",true)
+	//4.發送請求
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
+	var articleId = document.getElementById('ArticleId').value;
+	var replyContent = $('textarea').val();
+	xhr.send("articleId="+articleId+"&"+"replyContent="+replyContent)
+	}
+	else{
+		var xhr = new XMLHttpRequest();
+		//2.註冊回調函數
+		xhr.onreadystatechange = function(){
+			if(this.readyState ==4 ){
+				if(this.status==200){
+					var data = JSON.parse(this.responseText);
+					var resultText = '';
+					for(var i=0;i<data.length;i++){
+						var time = new Date(data[i].articleReplyDate);
+						
+							resultText +=
+									"<div class='post-comments'>"+
+									"<h3 class='post-sub-heading'>10 Comments</h3>"+
+									"<ul class='media-list comments-list m-bot-50 clearlist'>"+
+									"<li class='media'>"+
+									"<a class='pull-left' href='#!'>"+
+									" <img class='media-object comment-avatar' src='./source/images/blog/avater-1.jpg' alt='' width='50' height='50'>"+
+									"</a>"+
+									"<div class='media-body'>"+
+									"<div class='comment-info'>"+
+									" <div class='comment-author'>"+
+									"<a href='#!'>"+data[i].user.userId+"</a>"+
+									"</div>"+
+									"<time>"+time.toLocaleString()+"</time>"+
+									"</div>"+
+									"<p>"+data[i].articleReplyContent+" </p>"+
+									" </div>"+
+									" </li>"+
+									"</ul>"+
+									"</div>"+
+								
+							        "<tr  style='background-color:#FFD494'>"+
+							          "<td>"+
+							            "<div class='d-flex px-2 py-1'>"+
+							            "<form action='replyUpdatePage' method='post'>"+
+										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+										"</form>"+
+
+										"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
+										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+										"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+										
+							          "</td>"+
+							          "</div>"+
+							        "</tr>"
+						}
+						
+					document.getElementById("mydiv").innerHTML = resultText;
+				}else{
+					alert(this.status);
+				}
+			}
+		}
+		xhr.open("post","replyEmptyDetail",true)
+		//4.發送請求
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
+		var articleId = document.getElementById('ArticleId').value;
+		var replyContent = $('textarea').val();
+		xhr.send("articleId="+articleId)
+		
+	}
+
+
+}
+
+
 function del(id){
 	Swal.fire({
 		  title: 'Are you sure?',
@@ -174,183 +316,6 @@ function report(id){
 }
 
 
-
-
-
-
-
-
-function queryReply(Id){
-	if($('textarea#text1').text()!=""){
-	var xhr = new XMLHttpRequest();
-	//2.註冊回調函數
-	xhr.onreadystatechange = function(){
-		if(this.readyState ==4 ){
-			if(this.status==200){
-				var data = JSON.parse(this.responseText);
-				var resultText = '';
-				for(var i=0;i<data.length;i++){
-					var time = new Date(data[i].articleReplyDate);
-					console.log(data);
-				
-					resultText +=
-						
-						
-						
-						
-						
-						
-						
-						"<div class="post-comments">"+
-			    	"<h3 class="post-sub-heading">10 Comments</h3>"+
-			    	"<ul class="media-list comments-list m-bot-50 clearlist">"+
-					   <!-- Comment Item start-->
-					    "<li class="media">"+
-
-					        "<a class="pull-left" href="#!">"+
-					           " <img class="media-object comment-avatar" src="./source/images/blog/avater-1.jpg" alt="" width="50" height="50">"+
-					        "</a>"+
-
-					        "<div class="media-body">"+
-					            "<div class="comment-info">"+
-					                "<h4 class="comment-author">"+
-					                    "<a href="#!">Jonathon Andrew</a>"+
-					                	
-					                "</h4>"+
-					                "<time>July 02, 2015, at 11:34</time>"+
-					                "<a class="comment-button" href="#!"><i class="tf-ion-chatbubbles"></i>Reply</a>"+
-					            "</div>"+
-
-					            "<p>"+
-					                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at magna ut ante eleifend eleifend."+
-					            "</p>"+
-					            "</div>"+
-					        "</div>"+
-					    "</li>"+
-					"</ul>"+
-			    "</div>"+
-			"</div>"+
-		"</div>"+
-	"</div>"+
-"</div>"+
-						
-						
-						
-						
-						
-						
-						
-						
-						"<tr style='background-color:#FFD494'>"+
-					          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
-					          "<td class='align-middle text-center'>"+
-					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
-					          "</td>"+
-					          "<td class='align-middle text-center'>"+
-					            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
-					          "</td>"+
-					          "<td class='align-middle text-center'>"+
-					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
-					          "</td>"+
-					        
-					          "<td>"+
-					          
-					            "<div class='d-flex px-2 py-1'>"+
-					            "<form action='replyUpdatePage' method='post'>"+
-								"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
-								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
-								"</form>"+
-					               
-					            
-					        
-								"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
-									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-									"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
-								
-					          "</td>"+
-					          "</div>"+
-					        "</tr>"
-					   
-				   
-				}
-				document.getElementById("mydiv").innerHTML = resultText;
-			}else{
-				alert(this.status);
-			}
-		}
-	}
-	//3.開啟通道
-	xhr.open("post","replyDetail",true)
-	//4.發送請求
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-	var articleId =Id;
-	console.log(articleId);
-	var replyContent = $('textarea').val();
-	xhr.send("articleId="+articleId+"&"+"replyContent="+replyContent);
-	}
-	
-	else if($('textarea#text1').text()==""){
-		var xhr = new XMLHttpRequest();
-		//2.註冊回調函數
-		xhr.onreadystatechange = function(){
-			if(this.readyState ==4 ){
-				if(this.status==200){
-					var data = JSON.parse(this.responseText);
-					var resultText = '';
-					for(var i=0;i<data.length;i++){
-						var time = new Date(data[i].articleReplyDate);
-						
-							resultText +=
-							        "<tr  style='background-color:#FFD494'>"+
-							          "<td class='align-middle text-center'>"+(i+1)+"</td>"+
-							          "<td class='align-middle text-center'>"+
-							            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
-							          "</td>"+
-							          "<td class='align-middle text-center'>"+
-							            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
-							          "</td>"+
-							          "<td class='align-middle text-center'>"+
-							            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].user.userId+"</span>"+
-							          "</td>"+
-							          "<td>"+
-							          
-							            "<div class='d-flex px-2 py-1'>"+
-							            "<form action='replyUpdatePage' method='post'>"+
-										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
-										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
-										"</form>"+
-							               
-
-										"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
-										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-										"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
-										
-							          "</td>"+
-							          "</div>"+
-							        "</tr>"
-							   
-						   
-						}
-						
-					document.getElementById("mydiv").innerHTML = resultText;
-				}else{
-					alert(this.status);
-				}
-			}
-		}
-		//3.開啟通道
-		xhr.open("post","replyEmptyDetail",true)
-		//4.發送請求
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		var articleId = Id;
-		xhr.send("articleId="+articleId)
-		
-	}
-
-
-}
-
-
 </script>
 <table >
                <%
@@ -375,13 +340,13 @@ function queryReply(Id){
 							<i class="tf-ion-ios-calendar"></i><%=TimeTest.transToDate(detail.getDate())%>
 							</li>
 							<li style="font-size: 18px">
-							<i class="tf-ion-ios-calendar"></i>收藏數<%=detail.getArticleLike()%>
+							<i class="tf-ion-ios-heart"></i>收藏數<%=detail.getArticleLike()%>
 							</li>
 							<li style="font-size: 18px">
 							<i class="tf-ion-ios-calendar"></i>留言數<%=detail.getArticleReplys()%>
 							</li>
 							<li style="font-size: 18px">
-							<i class="tf-ion-ios-calendar"></i>觀看數<%=detail.getArticleViews()%>
+							<i class="tf-ion-android-person"></i>觀看數<%=detail.getArticleViews()%>
 							</li>
 						</ul>
 					</div>
@@ -396,9 +361,6 @@ function queryReply(Id){
  <tbody id ="collect"/>
 </table>
 </div>
-
-   
-<h1>留言版</h1>
         <table>
        	   <tr>
 				<input type="hidden" name="articleId" id ="ArticleId" value="<%=request.getParameter("articleId")%>" readonly>
@@ -413,10 +375,6 @@ function queryReply(Id){
             </tr>
         </table>
 
-
- <tbody id ="mydiv"/>
- 
-
 <div class="post-social-share">
 				        <h3 class="post-sub-heading">Share this post</h3>
 				        <div class="social-media-icons">
@@ -430,25 +388,11 @@ function queryReply(Id){
 				        </div>
 </div>
 
+<div id ="mydiv"></div>
 
+	
 				    
 
-
-
-
-
-
-
-
-
-
-
-
-
-<div style="margin-top:22%;">
-<div id ="mydiv2"></div>
-<div id ="mydiv"></div>
-</div>
 <script language='javascript' src='js/jquery-3.6.0.js'></script>
 <script language='javascript' src='js/WangReply.js'></script>
 <script>
