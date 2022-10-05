@@ -1,6 +1,7 @@
-	const E = window.wangEditor
-		const editor = new E('#div1')
-	    const $text1 = $('#text1')
+	var E = window.wangEditor
+		var editor = new E('#div1')
+	    var $text1 = $('#text1')
+	    
     editor.config.onchange = function (html) {
         // 第二步，监控变化，同步更新到 textarea
         $text1.val(html)

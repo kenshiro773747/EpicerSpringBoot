@@ -36,7 +36,7 @@
 			<div class="col-md-8" style="padding-right: 10%">
         		<!-- ///////  文章發布 (多篇風格頁面)  ////// -->
 			<!-- @@include('blocks/blog-posts.htm') -->
-			<%@include file="formFrontBlogPosts.jsp" %>
+			<%@include file="formFrontBlogPostsDetail.jsp" %>
       		</div>
       		<div class="col-md-4">
 					<!-- ///////////  文章頁的側邊 -推播專區 ///////////// -->

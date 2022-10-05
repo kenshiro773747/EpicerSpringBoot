@@ -3,32 +3,6 @@
     
     <!-- ////// 這是多頁文章的串聯頁面  /////// -->
 <style type="text/css">
-/* .modal-body p{ */
-/* white-space:pre-wrap; */
-/* width:450px; */
-/* } */
-/* .modal-dialog{ */
-
-/* overflow-y: initial !important */
-
-/* } */
-
-/* .modal-body{ */
-/* overflow-x: hidden; */
-/* height: 450px; */
-/* overflow-y: auto; */
-
-/* } */
-
-/* span{ */
-/* position: relative; */
-/*  overflow: hidden; */
-/*   white-space: nowrap; */
-/*   text-overflow: ellipsis; */
-/*   max-width: 140px; */
-/*   display: inline-block; */
-/*   height:20px; */
-/* } */
 
 .multiline-ellipsis { 
   display: -webkit-box;
@@ -89,12 +63,11 @@ height:46px
 </style>
 
 <script>
+
 $(document).ready(function(){
-	queryAll();
+	queryAll()
 });
 
-
-	
 
 
 function del(id){
@@ -174,15 +147,25 @@ function queryAll(){
 				var resultText = '';
 				for(var i=0;i<data.length;i++){
 					var time = new Date(data[i].date);
-			
 					resultText +=
 					"<div class='post'>"+
 					"<h1 class='post-title' style='font-size:30px;margin:0 0 0 8%'>"+data[i].title+
 					"<button type='button' class='btn btn-warning btn-xs' style='margin-left:10px' name='"+data[i].plateformCategoryId+"' onclick='category(this)'>"+
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
-					"<div class='post-content multiline-ellipsis pic' style='height:350px;margin:auto'>"+
+					
+					
+					
+					
+		            "<form action='articleFrontDetail' method='post'>"+
+					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+					"<div onclick='this.parentNode.submit()'>"+
 					data[i].articleContent+
 					"</div>"+
+					"</form>"+
+					
+					
+					
+					
 					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
@@ -237,9 +220,12 @@ function querytitle(){
 					"<h1 class='post-title' style='font-size:30px;margin:0 0 0 8%'>"+data[i].title+
 					"<button type='button' class='btn btn-warning btn-xs' style='margin-left:10px'  name='"+data[i].plateformCategoryId+"' onclick='category(this)'>"+
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
-					"<div class='post-content multiline-ellipsis pic' style='height:350px;margin:auto'>"+
+		            "<form action='articleFrontDetail' method='post'>"+
+					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+					"<div onclick='this.parentNode.submit()'>"+
 					data[i].articleContent+
 					"</div>"+
+					"</form>"+
 					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
@@ -299,9 +285,12 @@ function category(category){
 					"<h1 class='post-title' style='font-size:30px;margin:0 0 0 8%'>"+data[i].title+
 					"<button type='button' class='btn btn-warning btn-xs' style='margin-left:10px'  name='"+data[i].plateformCategoryId+"' onclick='category(this)'>"+
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
-					"<div class='post-content multiline-ellipsis pic' style='height:350px;margin:auto'>"+
+		            "<form action='articleFrontDetail' method='post'>"+
+					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+					"<div onclick='this.parentNode.submit()'>"+
 					data[i].articleContent+
 					"</div>"+
+					"</form>"+
 					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
@@ -343,28 +332,9 @@ function category(category){
 
 
 
-</script>    
 
+</script>    
 <div style="margin-top:22%;">
 <div id ="mydiv"></div>
 </div>
 
-<!-- ////// 分頁跳轉  /////// -->
-<div class="text-center">
-	<ul class="pagination post-pagination">
-		<li><a href="#!">Prev</a>
-		</li>
-		<li class="active"><a href="#!">1</a>
-		</li>
-		<li><a href="#!">2</a>
-		</li>
-		<li><a href="#!">3</a>
-		</li>
-		<li><a href="#!">4</a>
-		</li>
-		<li><a href="#!">5</a>
-		</li>
-		<li><a href="#!">Next</a>
-		</li>
-	</ul>
-</div>

@@ -474,8 +474,17 @@ public class ArticleController {
 		return "forum/formFrontIndex";
 	}
 	
-	
-	
+	@PostMapping("/articleFrontDetail")
+	public String articleFrontDetail(Integer articleId) {
+		ArticleBean selectDetail = aService.findByArticleId(articleId);
+		session.setAttribute("selectDetail", selectDetail);
+		
+		int views =selectDetail.getArticleViews();
+		views++;
+		aService.updateViews(views, articleId);
+		
+		return "forum/formFrontIndexDetail";
+	}
 	
 	
 	
