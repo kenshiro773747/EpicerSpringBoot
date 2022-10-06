@@ -31,12 +31,11 @@
 .searchTitle{
   z-index: 10;     
   position: fixed;      
-  top:5%;
+  top:10%;
   width:65%;
   left: 13%;
   opacity: 0.94;
   transition: opacity .5s ease-out;  
-
 }
 
 .searchInput{
@@ -48,7 +47,6 @@ margin-top:20px;
 border-bottom-left-radius:15px;
 border-top-left-radius:15px;
 outline:none;
-
 }
 
 .searchButton{
@@ -120,9 +118,7 @@ function report(id){
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
-		      
 		    ).then((result) => {
-
 		    	queryAll();
 		    })
 		  }
@@ -162,8 +158,6 @@ function queryAll(){
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
-					
-					
 					
 					
 					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+

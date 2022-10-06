@@ -485,7 +485,12 @@ public class ArticleController {
 		
 		return "forum/formFrontIndexDetail";
 	}
-	
+	@PostMapping("/articleAjaxtDetail")
+	@ResponseBody
+	public ArticleBean articleAjaxtDetail(Integer articleId) {
+		ArticleBean selectDetail = aService.findByArticleId(articleId);
+		return selectDetail;
+	}
 	
 	
 	
