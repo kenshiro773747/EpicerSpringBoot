@@ -1,6 +1,7 @@
 package com.epicer.service.forum;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,7 +14,7 @@ public interface ArticleRepository extends JpaRepository<ArticleBean, Integer> {
 	
 	public List<ArticleBean> findAllByTitleLike(String title);
 
-	public List<ArticleBean> findAllByPlateformCategoryIdLike(int id);
+	public List<ArticleBean> findAllByPlateformCategoryId(int id);
 	
 	public List<ArticleBean> findAllByStatus(int status);
 	
@@ -45,5 +46,16 @@ public interface ArticleRepository extends JpaRepository<ArticleBean, Integer> {
 	@Modifying
 	@Query( value = "UPDATE forum_article SET articlestatus=?1  where articleid=?2",nativeQuery = true)
 	public void insertReport(int status,int articleId);
+
+	//////front
+	@Query( value = "select * from forum_article where articlestatus=?1",nativeQuery = true)
+	public List<ArticleBean> frontFindAllByStatus(int status);
+	
+	@Query( value = "select * from forum_article where articlecategory=?1 and articlestatus=?2",nativeQuery = true)
+	public List<ArticleBean> frontFindAllByPlateformCategoryId(int id,int status);
+	
+	@Query( value = "select * from forum_article where articletitle like ?1 and articlestatus=?2",nativeQuery = true)
+	public List<ArticleBean> frontFindAllByTitleLike(String title,int status);
+	
 	
 }

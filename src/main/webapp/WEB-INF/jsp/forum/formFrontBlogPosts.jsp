@@ -186,7 +186,7 @@ function queryAll(){
 		}
 	}
 	//3.開啟通道
-	xhr.open("get","QueryAllAjax",true)
+	xhr.open("get","frontQueryAllAjax",true)
 	//4.發送請求
 	xhr.send()
 	
@@ -247,7 +247,7 @@ function querytitle(){
 		}
 	}
 	//3.開啟通道
-	xhr.open("post","QueryNameAjax",true)
+	xhr.open("post","frontQueryNameAjax",true)
 	//4.發送請求
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
 	var searchTitle = document.getElementById("searchTitle").value;
@@ -312,7 +312,7 @@ function category(category){
 		}
 	}
 	//3.開啟通道
-	xhr.open("post","QueryCategoryAjax",true)
+	xhr.open("post","frontQueryCategoryAjax",true)
 	//4.發送請求
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
 	var searchCategoryId = category.name;

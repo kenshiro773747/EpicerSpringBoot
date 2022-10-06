@@ -61,5 +61,10 @@ public class ArticleReplyService{
 	public void insertReport(int status,int replyId) {
 		arRepo.insertReport(status, replyId);
 	}
+	
+	public List<ArticleReplyBean> frontFindAllByArticleId(ArticleBean id){
+		return arRepo.frontFindAllByArticleId(id);
+	}
+	
 
 }

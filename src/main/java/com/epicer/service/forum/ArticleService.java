@@ -39,8 +39,8 @@ public class ArticleService {
 		return aRepo.findAllByTitleLike(title);
 	}
 
-	public List<ArticleBean> findByCategoryLike(int id) {
-		return aRepo.findAllByPlateformCategoryIdLike(id);
+	public List<ArticleBean> findByCategory(int id) {
+		return aRepo.findAllByPlateformCategoryId(id);
 	}
 
 	public List<ArticleBean> findAll() {
@@ -81,4 +81,20 @@ public class ArticleService {
 	public void updateCountReply(int articlereplys,int articleId) {
 		aRepo.updateCountReply(articlereplys, articleId);
 	}
+	
+	
+	////////////////////////////Front
+	
+	public List<ArticleBean> frontFindByStatus() {
+		return aRepo.frontFindAllByStatus(0);
+	}
+	
+	public List<ArticleBean> frontFindAllByPlateformCategoryId(int id) {
+		return aRepo.frontFindAllByPlateformCategoryId(id,0);
+	}
+	
+	public List<ArticleBean> frontFindAllByTitleLike(String title) {
+		return aRepo.frontFindAllByTitleLike(title,0);
+	}
+	
 }

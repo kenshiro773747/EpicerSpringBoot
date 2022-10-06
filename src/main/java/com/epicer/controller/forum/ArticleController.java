@@ -78,7 +78,7 @@ public class ArticleController {
 	@PostMapping("/QueryCategoryAjax")
 	@ResponseBody
 	public List<ArticleBean> QueryCategoryAjax(int categoryId) {
-		return aService.findByCategoryLike(categoryId);
+		return aService.findByCategory(categoryId);
 	}
 	
 	
@@ -495,10 +495,56 @@ public class ArticleController {
 	
 	
 	
+	@PostMapping("/replyFrontDetail")
+	@ResponseBody
+	public List<ArticleReplyBean> replyFrontDetail(int articleId,String replyContent) {
+		
+		int userId = (int) session.getAttribute("userId");
+		ArticleUserBean userID = uService.findByUserId(userId);
+		ArticleBean articleID = aService.findByArticleId(articleId);
+		ArticleReplyBean articleReply = new ArticleReplyBean();
+		articleReply.setArticleId(articleID);
+		articleReply.setUser(userID);
+		articleReply.setArticleReplyContent(replyContent);
+		articleReply.setArticleReplyDate(TimeTest.getTime());
+		articleReply.setStatus(0);
+		
+		arService.insert(articleReply);
+		
+		int replys= aService.CountReply(articleId);
+		aService.updateCountReply(replys, articleId);
+		
+		ArticleBean replyid = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.frontFindAllByArticleId(replyid);
+		return selectReplyAll ;
+	}
+	
+	@PostMapping("/replyFrontEmptyDetail")
+	@ResponseBody
+	public List<ArticleReplyBean> replyFrontEmptyDetail(int articleId) {
+		ArticleBean replyid = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.frontFindAllByArticleId(replyid);
+		return selectReplyAll ;
+	}
 	
 	
-	
-	
+	@GetMapping("/frontQueryAllAjax")
+	@ResponseBody
+	public List<ArticleBean> FrontQueryAllAjax() {
+		return aService.frontFindByStatus();
+	}
+
+	@PostMapping("/frontQueryNameAjax")
+	@ResponseBody
+	public List<ArticleBean> frontQueryNameAjax(String title) {
+		return aService.frontFindAllByTitleLike("%"+title+"%");
+	}
+
+	@PostMapping("/frontQueryCategoryAjax")
+	@ResponseBody
+	public List<ArticleBean> frontQueryCategoryAjax(int categoryId) {
+		return aService.frontFindAllByPlateformCategoryId(categoryId);
+	}
 	
 	
 	

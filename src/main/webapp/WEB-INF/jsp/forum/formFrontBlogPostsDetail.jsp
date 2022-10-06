@@ -140,7 +140,7 @@ function queryAll(){
 		}
 	}
 	//3.開啟通道
-	xhr.open("get","QueryAllAjax",true)
+	xhr.open("get","frontQueryAllAjax",true)
 	//4.發送請求
 	xhr.send()
 	
@@ -204,7 +204,7 @@ function querytitle(){
 		}
 	}
 	//3.開啟通道
-	xhr.open("post","QueryNameAjax",true)
+	xhr.open("post","frontQueryNameAjax",true)
 	//4.發送請求
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
 	var searchTitle = document.getElementById("searchTitle").value;
@@ -272,7 +272,7 @@ function category(category){
 		}
 	}
 	//3.開啟通道
-	xhr.open("post","QueryCategoryAjax",true)
+	xhr.open("post","frontQueryCategoryAjax",true)
 	//4.發送請求
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
 	var searchCategoryId = category.name;
@@ -416,7 +416,7 @@ function queryReply(){
 						"<tr style='background-color:#FFD494'>"+
 					            "<div class='d-flex px-2 py-1'>"+
 					            
-					            "<div id ='judge'>"+
+					            "<div id ='judge"+i+"'>"+
 					            "<form action='replyUpdatePage' method='post'>"+
 								"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
@@ -431,7 +431,7 @@ function queryReply(){
 					          "</td>"+
 					          "</div>"+
 					        "</tr>";
-				judgeMember(data[i].user.userId);
+				judgeMember(data[i].user.userId,i);
 				}
 				document.getElementById("comments").innerHTML ="<h3 class='post-sub-heading'>"+o+" Comments</h3>";
 				document.getElementById("mydiv").innerHTML = resultText;
@@ -442,7 +442,7 @@ function queryReply(){
 		}
 	}
 	//3.開啟通道
-	xhr.open("post","replyDetail",true)
+	xhr.open("post","replyFrontDetail",true)
 	//4.發送請求
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
 	var articleId = document.getElementById('ArticleId').value;
@@ -485,7 +485,7 @@ function queryReply(){
 							        "<tr  style='background-color:#FFD494'>"+
 							          "<td>"+
 							            "<div class='d-flex px-2 py-1'>"+
-							            "<div id = 'judge'>"+
+							            "<div id = 'judge"+i+"'>"+
 							            "<form action='replyUpdatePage' method='post'>"+
 										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
 										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
@@ -499,7 +499,7 @@ function queryReply(){
 							          "</td>"+
 							          "</div>"+
 							        "</tr>";
-						judgeMember(data[i].user.userId);
+						judgeMember(data[i].user.userId,i);
 						}
 					detailAjax();
 					document.getElementById("comments").innerHTML ="<h3 class='post-sub-heading'>"+o+" Comments</h3>";
@@ -509,7 +509,7 @@ function queryReply(){
 				}
 			}
 		}
-		xhr.open("post","replyEmptyDetail",true)
+		xhr.open("post","replyFrontEmptyDetail",true)
 		//4.發送請求
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
 		var articleId = document.getElementById('ArticleId').value;
@@ -552,12 +552,6 @@ function del(id){
 }
 
 
-function judgeMember(id){
-	var userID = document.getElementById('userId').value;
-	  if (id !=userID) {
-		  document.getElementById('judge').style.display = 'none';
-	  }
-}
 
 
 
@@ -742,32 +736,15 @@ function deleteCollect(){
 <script language='javascript' src='js/WangReply.js'></script>
 
 <script>
-function addCollect(){
-	
-	var xhr = new XMLHttpRequest();
-	xhr.open("post","insertCollect",true);
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-	var articleId = document.getElementById("ArticleId").value;
-	xhr.send("articleId="+articleId);
-	
-	$("#favorite").empty();
-	detailAjax();
-	$("#favorite").append("<button type='button' class='btn btn-danger' onclick ='deleteCollect()'>取消收藏</button>");
-	
-}
-
-
-function deleteCollect(){
-	
-	var xhr = new XMLHttpRequest();
-	xhr.open("post","delCollect",true);
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-	var articleId = document.getElementById("ArticleId").value;
-	xhr.send("articleId="+articleId);
-	$("#favorite").empty();
-	detailAjax();
-	$("#favorite").append("<button type='button' class='btn bg-gradient-primary' onclick ='addCollect()' >收藏</button>");
-	
-
+function judgeMember(id,i){
+	var userID = document.getElementById('userId').value;
+	console.log(userID)
+	console.log(id)
+	console.log(i)
+	console.log(document.getElementById('judge'+i))
+	  if (id !=userID) {
+		  
+// 		  document.getElementById('judge'+i).style.background = 'gray';
+	  }
 }
 </script>
