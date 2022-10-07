@@ -287,8 +287,11 @@ public class ArticleController {
 	@ResponseBody
 	public List<ArticleBean> QueryUserArticle() {
 		int userId = (int) session.getAttribute("userId");
+		
 		List<ArticleBean> artilces = new ArrayList<>();
+		
 		ArticleUserBean userID = uService.findByUserId(userId);
+		
 		Iterable<ArticleBean> selectUserId = aService.findByUser(userID);
 		System.out.println(selectUserId);
 		for (ArticleBean article : selectUserId) {
@@ -547,7 +550,11 @@ public class ArticleController {
 	}
 	
 	
-	
+	@GetMapping("/Scrolltest")
+	@ResponseBody
+	public String Scrolltest() {
+		return "forum/scrollTest";
+	}
 	
 	
 	

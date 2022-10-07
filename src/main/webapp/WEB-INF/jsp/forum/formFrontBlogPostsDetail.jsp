@@ -424,18 +424,18 @@ function queryReply(){
 								"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
 								"<button type='button' class='btn btn-outline-warning' onclick='delReply("+i+")'>刪除</button>"+
 								"</div>"+
-									
-									
-									"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
 								
+									"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
 					          "</td>"+
 					          "</div>"+
 					        "</tr>";
-				judgeMember(data[i].user.userId,i);
 				}
+				detailAjax();
 				document.getElementById("comments").innerHTML ="<h3 class='post-sub-heading'>"+o+" Comments</h3>";
 				document.getElementById("mydiv").innerHTML = resultText;
-				detailAjax();
+				for(let i=0;i<data.length;i++){
+					judgeMember(data[i].user.userId,i);
+				}
 			}else{
 				alert(this.status);
 			}
@@ -458,7 +458,7 @@ function queryReply(){
 					var data = JSON.parse(this.responseText);
 					var o = 0;
 					var resultText = '';
-					for(var i=0;i<data.length;i++){
+					for(let i=0;i<data.length;i++){
 						
 						var time = new Date(data[i].articleReplyDate);
 						o++
@@ -485,7 +485,7 @@ function queryReply(){
 							        "<tr  style='background-color:#FFD494'>"+
 							          "<td>"+
 							            "<div class='d-flex px-2 py-1'>"+
-							            "<div id = 'judge"+i+"'>"+
+							            "<div id = 'judge"+i+"' value='ade'  class='doc-form-area'>"+
 							            "<form action='replyUpdatePage' method='post'>"+
 										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
 										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
@@ -499,11 +499,14 @@ function queryReply(){
 							          "</td>"+
 							          "</div>"+
 							        "</tr>";
-						judgeMember(data[i].user.userId,i);
 						}
 					detailAjax();
 					document.getElementById("comments").innerHTML ="<h3 class='post-sub-heading'>"+o+" Comments</h3>";
 					document.getElementById("mydiv").innerHTML = resultText;
+					for(let i=0;i<data.length;i++){
+						judgeMember(data[i].user.userId,i);
+						
+					}
 				}else{
 					alert(this.status);
 				}
@@ -578,7 +581,6 @@ function report(id){
 		      'success'
 		      
 		    ).then((result) => {
-
 		    	queryAll();
 		    })
 		  }
@@ -673,9 +675,11 @@ function deleteCollect(){
 	xhr.send("articleId="+articleId);
 	$("#favorite").empty();
 	$("#favorite").append("<button type='button' class='btn bg-gradient-primary' onclick ='addCollect()' >收藏</button>");
+	
 	detailAjax();
 
 }
+
 </script>
 <div id ="detail">
 <table >
@@ -734,17 +738,15 @@ function deleteCollect(){
 
 <script language='javascript' src='js/jquery-3.6.0.js'></script>
 <script language='javascript' src='js/WangReply.js'></script>
-
 <script>
+
 function judgeMember(id,i){
 	var userID = document.getElementById('userId').value;
-	console.log(userID)
-	console.log(id)
-	console.log(i)
-	console.log(document.getElementById('judge'+i))
 	  if (id !=userID) {
-		  
-// 		  document.getElementById('judge'+i).style.background = 'gray';
+// 	document.getElementById('mydiv').children[1].firstChild.style.display="none";
+	document.getElementById('judge'+i).style.display="none";
 	  }
 }
+
+// });
 </script>
