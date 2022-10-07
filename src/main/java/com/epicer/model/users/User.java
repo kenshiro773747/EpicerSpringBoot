@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.epicer.model.cart.CartOfProduct;
+import com.epicer.model.cart.OrderProduct;
 
 
 
@@ -72,20 +73,12 @@ public class User {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cartUser", cascade = CascadeType.ALL)
 	private Set<CartOfProduct> cartByUser = new LinkedHashSet<CartOfProduct>();
 
-	
-	
-	
-	public User(int id, String password) {
-		super();
-		this.id = id;
-		this.password = password;
-	}
+
+	// 跟訂單表格串聯
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderUser", cascade = CascadeType.ALL)
+//	private Set<OrderProduct> orderByUser = new LinkedHashSet<OrderProduct>();
 
 
-	public User(String account) {
-		this.account = account;
-	}
-	
 	
 	// register
 	public User(String account, String password, String name, int gender, String avatar, long birth, String phone,

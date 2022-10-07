@@ -60,7 +60,7 @@ function queryReply(){
 					            "<div class='d-flex px-2 py-1'>"+
 					            "<form action='replyUpdatePage' method='post'>"+
 								"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
-								"<button type='submit' class='btn bg-gradient-primary'>Update</button>"+
+								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 								"</form>"+
 					               
 					            
@@ -207,8 +207,9 @@ function queryReply(){
 		<br>	
 		<br>
 		
-<div style="padding-left:5%">
-
+<div style="padding-left:5%;display:inline">
+<table>
+<tr>
 	<form action="insertCollect" method="post"  style="width:800px">
 	<input type="hidden" name="articleId" value="<%=request.getParameter("articleId")%>">
     <input type = "submit" name="submit" class="btn bg-gradient-primary" value="收藏">
@@ -218,8 +219,8 @@ function queryReply(){
 	<input type="hidden" name="articleId" value="<%=request.getParameter("articleId")%>">
     <input type = "submit" name="submit" class="btn bg-gradient-primary" value="del收藏">
 	</form>
-
-
+</tr>
+</table>
 </div>
 <h1>留言版</h1>
 <!-- <form action="replyAdd" method="post"  style="width:800px"> -->

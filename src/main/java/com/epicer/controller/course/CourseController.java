@@ -140,6 +140,7 @@ public class CourseController {
 	
 	
 	
+
 	///1006testckeditorINSERT///
 	@PostMapping(path = "/beforeCourseInsert")
 	public String beforeCourseInsert(Model m) {

@@ -49,7 +49,7 @@ public class TimeTest {
 	 * @param time
 	 * @returns
 	 */
-	public  String transToDate(long time) {
+	public static String transToDate(long time) {
 		Date date = new Date(time);
 		Format format = new SimpleDateFormat("yyyy/MM/dd ");
 		return format.format(date);
