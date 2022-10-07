@@ -1,6 +1,7 @@
 package com.epicer.controller.course;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.epicer.model.course.Course;
@@ -30,31 +32,115 @@ public class CourseController {
 	
 	
 	private TimeTest TT = new TimeTest();
+	
+	
+	////篩選尚未開始的課程///
+	@GetMapping(path = "/querycourseaftercurrenttime/{currenttime}")
+	@ResponseBody
+	public Object[] processcourseaftercurrenttime(Model m ,@PathVariable("currenttime") Long currenttime ) {
+		
+		List<Course> listWithStyle = CS.findBycourseDateGreaterThan(currenttime);
+		List<Teacher> listTeacher = new ArrayList<Teacher>();
+		for (Course course : listWithStyle) {
+			System.out.println(course.getTeacher().getTeacherImage()); 
+			listTeacher.add(course.getTeacher());
+			String coursetime = TT.transToDate(course.getCourseDate());				
+			System.out.println("step1 coursetime: " + coursetime); 			
+			course.setFakeCourseDate(coursetime);
+			System.out.println("step2 FakeCourseDate: " + course.getFakeCourseDate() ); 			
+		}
+		System.out.println(listTeacher.size());
+		Object [] mix = {listWithStyle,listTeacher};
+		return mix;
+		
+	};
+	
+	////篩選已經結束的課程///
+	@GetMapping(path = "/querycoursebeforecurrenttime/{currenttime}")
+	@ResponseBody
+	public Object[] processcoursebeforecurrenttime(Model m ,@PathVariable("currenttime") Long currenttime ) {
+		
+		List<Course> listWithStyle = CS.findBycourseDateLessThan(currenttime);
+		List<Teacher> listTeacher = new ArrayList<Teacher>();
+		for (Course course : listWithStyle) {
+			System.out.println(course.getTeacher().getTeacherImage()); 
+			listTeacher.add(course.getTeacher());
+			String coursetime = TT.transToDate(course.getCourseDate());				
+			System.out.println("step1 coursetime: " + coursetime); 			
+			course.setFakeCourseDate(coursetime);
+			System.out.println("step2 FakeCourseDate: " + course.getFakeCourseDate() ); 			
+		}
+		System.out.println(listTeacher.size());
+		Object [] mix = {listWithStyle,listTeacher};
+		return mix;
+		
+	};
+	
+	
+	
+	///導向首頁///
+	@GetMapping(path = "/666")
+	public String processCoursePage() {
+		return "course/Test0928coursePageWithFrame";
+	};
 
 	///LISTAll///
-	@GetMapping(path = "/666")
-	public String processMainAction(Model m) {
+	@GetMapping(path = "/5566")
+	@ResponseBody
+	public Object[] processMainAction(Model m) {
 		List<Course> list = CS.findAllCourse();
-		m.addAttribute("listAll", list);
-		return "course/coursePageWithFrame";
+		List<Teacher> listTeacher = new ArrayList<Teacher>();
+		for (Course course : list) {
+			System.out.println(course.getTeacher().getTeacherImage()); 
+			listTeacher.add(course.getTeacher());
+			String coursetime = TT.transToDate(course.getCourseDate());				
+			System.out.println("step1 coursetime: " + coursetime); 			
+			course.setFakeCourseDate(coursetime);
+			System.out.println("step2 FakeCourseDate: " + course.getFakeCourseDate() ); 			
+		}
+		System.out.println(listTeacher.size());
+		Object [] mix = {list,listTeacher};
+		
+		return mix;
 	};
 
 	///LIST技術///
+//		@GetMapping(path = "/queryByCourseStyle/{style}")
+//		public String process555MainAction(Model m ,@PathVariable("style") String name ) {
+//			List<Course> listWithStyle = CS.findAllCourseByStyle(name);
+//			m.addAttribute("listAll", listWithStyle);
+//			for (Course course : listWithStyle) {
+//				System.out.println(course.getCourseName());
+//			}
+//			
+//			return "course/Test0928coursePageWithFrame";
+//		};
+		
+	///0929LIST技術test///
 		@GetMapping(path = "/queryByCourseStyle/{style}")
-		public String process555MainAction(Model m ,@PathVariable("style") String name ) {
+		@ResponseBody
+		public Object[] process555MainAction(Model m ,@PathVariable("style") String name ) {
+			System.out.println("controller: "+name);
 			List<Course> listWithStyle = CS.findAllCourseByStyle(name);
-			m.addAttribute("listAll", listWithStyle);
+			List<Teacher> listTeacher = new ArrayList<Teacher>();
 			for (Course course : listWithStyle) {
-				System.out.println(course.getCourseName());
+				System.out.println(course.getTeacher().getTeacherImage()); 
+				listTeacher.add(course.getTeacher());
+				String coursetime = TT.transToDate(course.getCourseDate());				
+				System.out.println("step1 coursetime: " + coursetime); 			
+				course.setFakeCourseDate(coursetime);
+				System.out.println("step2 FakeCourseDate: " + course.getFakeCourseDate() ); 			
 			}
+			System.out.println(listTeacher.size());
+			Object [] mix = {listWithStyle,listTeacher};
+			return mix;
 			
-			return "course/coursePageWithFrame";
 		};
 	
 	
 	
 	
-	///INSERT///
+	///1006testckeditorINSERT///
 	@PostMapping(path = "/beforeCourseInsert")
 	public String beforeCourseInsert(Model m) {
 
@@ -64,7 +150,7 @@ public class CourseController {
 		List<Teacher> list = TS.findAllTeacher();
 		m.addAttribute("listAll", list);
 ////////
-		return "course/courseInsertWithFrame";
+		return "course/Test1006courseInsertWithCKeditor";
 	};
 
 	@PostMapping(path = "/addCourse")
@@ -100,7 +186,7 @@ public class CourseController {
 			m.addAttribute("listAll", list);
 	////////
 
-		return "course/courseEditorWithFrame";
+		return "course/Test1006courseEditorWithCKeditor";
 	};
 
 	@PostMapping(path = "/updateCourse")
@@ -140,11 +226,17 @@ public class CourseController {
 //	};
 	
 
-	///DELETE///
-	@PostMapping(path = "/deleteCourse")
-	public String deleteCourse(@RequestParam("courseId") int courseId) {
+	///1006originDELETE///
+//	@PostMapping(path = "/deleteCourse")
+//	public String deleteCourse(@RequestParam("courseId") int courseId) {
+//		CS.deleteCourseById(courseId);
+//		return "redirect:/666";
+//	};
+	
+	///1006sweetalertDELETE///
+	@GetMapping(path = "/deleteCourse/{courseId}")
+	public void deleteCourse(@PathVariable("courseId") int courseId) {
 		CS.deleteCourseById(courseId);
-		return "redirect:/666";
 	};
 	
 	///SELECT///

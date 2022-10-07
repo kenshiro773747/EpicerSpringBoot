@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "teacher")
 @Component
@@ -48,6 +50,7 @@ public class Teacher {
 	private String teacherBirthday;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Set<Course> course = new LinkedHashSet<Course>();
 
 	public int getTeacherId() {
@@ -141,5 +144,13 @@ public class Teacher {
 
 	public Teacher() {
 	}
+
+//	@Override
+//	public String toString() {
+//		return "Teacher [teacherId=" + teacherId + ", teacherName=" + teacherName + ", teacherDescription="
+//				+ teacherDescription + ", teacherStatus=" + teacherStatus + ", teacherImage=" + teacherImage
+//				+ ", teacherAddress=" + teacherAddress + ", teacherPhone=" + teacherPhone + ", teacherBirthday="
+//				+ teacherBirthday + ", course=" + course + "]";
+//	}
 
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.*, com.epicer.model.course.*,com.epicer.controller.*,org.hibernate.Session,
-org.hibernate.SessionFactory,com.epicer.util.*"%>
+	import="java.util.*, com.epicer.model.course.*,com.epicer.controller.*,
+com.epicer.util.*"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="zh">

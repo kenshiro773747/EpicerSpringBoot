@@ -14,6 +14,69 @@
 <!-- eLindHead (開始) -->
 <%@include file="../includes/eLinkHead.jsp"%>
 <!-- eLindHead (結束) -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	
+	
+<!-- 搜全部 -->
+<script>
+$(document).ready(
+		function(){queryall()}
+		
+   );
+	
+function queryall() {
+    $.ajax({
+        type: 'get', 
+        contentType: 'application/json',
+        url: '/7788',
+        success: function (response) {
+            console.log(JSON.stringify(response));
+           	console.log("responselength: "+response.length);
+            var resultText = "";
+            for (let i = 0; i < response.length  ; i++) {
+            	console.log(response[i].teacherId);
+            	resultText += 
+            		
+            		
+            		'<tr>'+
+				'<td>'+response[i].teacherId+'</td>'+
+				'<td>'+response[i].teacherName+'</td>'+
+				'<td>'+response[i].teacherDescription+'</td>'+
+				'<td>'+response[i].teacherStatus+'</td>'+
+				'<td>'+ '<img width=100 height=80 src="images/'+response[i].teacherImage+'"></td>'+
+				'<td>'+response[i].teacherAddress+'</td>'+
+				'<td>'+response[i].teacherPhone+'</td>'+
+				'<td>'+response[i].teacherBirthday+'</td>'+
+				
+
+				'<td>'+
+					'<form action="beforeTeacherUpdate" method="post">'+
+						'<input type="hidden" name="teacherId"value='+response[i].teacherId+'>'+
+						'<button type="submit" class="btn btn-success">編輯</button>'+
+					'</form>'+
+				'</td>'+
+				  '<td>'+
+				'<form action="deleteTeacher" method = "post">'+
+				'<input type = "hidden" name = "teacherId" value ='+response[i].teacherId+'>'+			
+				'<button type = "submit" class="btn btn-danger">刪除</button>'+					
+				'</form>'+
+				'</td>'+
+
+			'</tr>';
+            			
+            }
+                     
+            $("#result").html(resultText);
+        }
+    });
+}	
+
+	
+</script>
+
+
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -65,51 +128,10 @@
 								<!--<th>負責的課程</th>-->
 								<th class="text-secondary opacity-7"></th>
 								<th class="text-secondary opacity-7"></th>
-
 							</tr>
 						</thead>
 
-						<tbody>
-
-
-					<%
-					TimeTest timeTest = new TimeTest();
-					List<Teacher> list = (List<Teacher>) request.getAttribute("listAll");
-					for (Teacher t : list) {
-					%>
-					  <tr>
-						<td><%=t.getTeacherId()%></td>
-						<td><%=t.getTeacherName()%></td>
-						<td><%=t.getTeacherDescription()%></td>
-						<td><%=t.getTeacherStatus()%></td>
-						<td><img width=100 height=80 src="images/<%=t.getTeacherImage()%>"></td>
-						<td><%=t.getTeacherAddress()%></td>
-						<td><%=t.getTeacherPhone()%></td>
-						<td><%=t.getTeacherBirthday()%></td>
-						<!--<td><%=t.getCourse()%></td>-->
-
-						<td>
-							<form action="beforeTeacherUpdate" method="post">
-								<input type="hidden" name="teacherId"
-									value=<%=t.getTeacherId()%>>
-								<button type="submit" class="btn btn-success">編輯</button>
-							</form>
-						</td>
-						  <td>
-						<form action="deleteTeacher" method = "post">
-						<input type = "hidden" name = "teacherId" value = <%=t.getTeacherId()%>>			
-						<button type = "submit" class="btn btn-danger">刪除</button>					
-						</form>
-						</td>
-						
-						
-
-					</tr>
-
-					<%
-					}
-					%>
-				</tbody>
+						<tbody id ="result"></tbody>
 			</table>
 
 				</div>

@@ -200,6 +200,9 @@
 			</form:form>
 		</div>
 
+
+
+
 		<!-- ////////////////// 個人主文結束 //////////////////-->
 		<!--////////////////// Footer(開始) //////////////////-->
 		<%@include file="../includes/eFooter.jsp"%>
@@ -218,7 +221,6 @@
 	<!-- ////////////////// 框架Script url (開始)(不能少) ////////////////// -->
 	<%@include file="../includes/eScriptForBody.jsp"%>
 	<!-- ////////////////// 框架Script (結束) //////////////////-->
-
 	<script type="text/javascript" src="js/jquery-3.6.0.js"></script>
 	<script type="text/javascript">
 		$(function() {
@@ -244,6 +246,7 @@
 			});
 		});
 	</script>
+
 </body>
 
 </html>

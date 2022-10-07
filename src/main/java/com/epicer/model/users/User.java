@@ -72,6 +72,21 @@ public class User {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cartUser", cascade = CascadeType.ALL)
 	private Set<CartOfProduct> cartByUser = new LinkedHashSet<CartOfProduct>();
 
+	
+	
+	
+	public User(int id, String password) {
+		super();
+		this.id = id;
+		this.password = password;
+	}
+
+
+	public User(String account) {
+		this.account = account;
+	}
+	
+	
 	// register
 	public User(String account, String password, String name, int gender, String avatar, long birth, String phone,
 			int city, String township, String address) {

@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "course")
 @Component
@@ -37,6 +39,7 @@ public class Course {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "teacherid")
+	@JsonBackReference
 	private Teacher teacher;
 
 	@Transient
@@ -53,6 +56,21 @@ public class Course {
 	
 	@Transient
 	private String fakeCourseDate;
+	
+	
+	////ckeditor/////
+	@Column(name="courseckeditor")
+	private String courseckeditor;
+	
+	
+
+	public String getCourseckeditor() {
+		return courseckeditor;
+	}
+
+	public void setCourseckeditor(String courseckeditor) {
+		this.courseckeditor = courseckeditor;
+	}
 
 	public String getFakeCourseDate() {
 		return fakeCourseDate;
@@ -191,8 +209,28 @@ public class Course {
 		this.courseImage = courseImage;
 		this.fakeCourseDate = fakeCourseDate;
 	}
+	
+	
+
+	public Course(int courseId, String courseName, int coursePrice, String courseDescription, Long courseDate,
+			Teacher teacher, int fakeTeacherID, int classroomId, String courseStyle, String courseImage,
+			String fakeCourseDate, String courseckeditor) {
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.coursePrice = coursePrice;
+		this.courseDescription = courseDescription;
+		this.courseDate = courseDate;
+		this.teacher = teacher;
+		this.fakeTeacherID = fakeTeacherID;
+		this.classroomId = classroomId;
+		this.courseStyle = courseStyle;
+		this.courseImage = courseImage;
+		this.fakeCourseDate = fakeCourseDate;
+		this.courseckeditor = courseckeditor;
+	}
 
 	public Course() {
 	}
+
 
 }

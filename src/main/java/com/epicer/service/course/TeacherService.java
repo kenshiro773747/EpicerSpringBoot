@@ -48,6 +48,12 @@ public class TeacherService {
 	public List<Teacher> findAllTeacher() {
 		return tRepo.findAll();
 	}
+	
+	//QueryByStatus
+	public List<Teacher> findTeacherByStatus(String status){
+		return tRepo.findByTeacherStatus(status);
+			
+	}
 
 	// IMG 上船自資料夾並回傳檔名
 	public String processImg(String courseName, MultipartFile photoData) throws IllegalStateException, IOException {

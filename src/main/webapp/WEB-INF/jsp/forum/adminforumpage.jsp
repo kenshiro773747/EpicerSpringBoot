@@ -64,8 +64,8 @@ position: relative;
 						          "<td class='align-middle text-center'>"+
 						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
 						          "</td>"+
-						          "<td class='align-middl'>"+
-						            "<form action='forumUpdatePage' method='post'>"+
+	key = value					          "<td class='align-middl'>"+
+			'"+xxxxx+"'			            "<form action='forumUpdatePage' method='post'>"+
 										"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 									"</form>"+

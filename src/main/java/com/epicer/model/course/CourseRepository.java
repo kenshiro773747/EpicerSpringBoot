@@ -11,6 +11,12 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 	
 	//大寫測試
 	public List<Course>  findByCourseStyleLike(String Style);
+	
+	
+	//時間測試
+	public List<Course> findBycourseDateGreaterThan(Long currentTime);
+	
+	public List<Course> findBycourseDateLessThanEqual(Long currentTime);
 
 	
 }
