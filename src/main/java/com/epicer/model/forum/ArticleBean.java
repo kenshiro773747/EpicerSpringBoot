@@ -39,7 +39,7 @@ public class ArticleBean implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userid")
-	@JsonIgnoreProperties(value="userId")
+//	@JsonIgnoreProperties(value="userId")
 	private ArticleUserBean user;
 	
 	

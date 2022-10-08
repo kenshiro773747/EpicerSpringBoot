@@ -141,8 +141,11 @@ function queryAll(){
 				var data = JSON.parse(this.responseText);
 				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 				var resultText = '';
+				var reports=0;
 				for(var i=0;i<data.length;i++){
 					var time = new Date(data[i].date);
+					reports++;
+
 					resultText +=
 					"<div class='post'>"+
 					"<h1 class='post-title' style='font-size:30px;margin:0 0 0 8%'>"+data[i].title+
@@ -174,12 +177,36 @@ function queryAll(){
 							"<li style='font-size: 18px'>"+
 								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
 							"</li>"+
+							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+							"<form action='forumFrontUpdatePage' method='post'>"+
+							"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+							"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+							"</form>"+
+						"</li>"+
+						
+							
+						"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+						"</li>"+
+						"<li style='font-size: 18px;'  id = 'reports"+reports+"'>"+
+							 "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+						"</li>"+
+
 						"</ul>"+
 					"</div>"+
 				"</div>"
 				  
 				}
 				document.getElementById("mydiv").innerHTML = resultText;
+				document.getElementById("searchTitle").value = "";
+				var report=1;
+				for(let i=0;i<data.length;i++){
+									judgeIndexPage(data[i].user.userId,i,report);
+									report++;
+								}
+
 			}else{
 				alert(this.status);
 			}
@@ -206,9 +233,10 @@ function querytitle(){
 				var data = JSON.parse(this.responseText);
 				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 				var resultText = '';
+				var reports=0;
 				for(var i=0;i<data.length;i++){
 					var time = new Date(data[i].date);
-					
+					reports++;
 					resultText +=
 					"<div class='post'>"+
 					"<h1 class='post-title' style='font-size:30px;margin:0 0 0 8%'>"+data[i].title+
@@ -234,13 +262,36 @@ function querytitle(){
 							"<li style='font-size: 18px'>"+
 								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
 							"</li>"+
+							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+							"<form action='forumFrontUpdatePage' method='post'>"+
+							"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+							"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+							"</form>"+
+						"</li>"+
+						
+							
+						"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+						"</li>"+
+						"<li style='font-size: 18px;'  id = 'reports"+reports+"'>"+
+							 "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+						"</li>"+
+
 						"</ul>"+
 					"</div>"+
 				"</div>"
 				  
 				}
 				document.getElementById("mydiv").innerHTML = resultText;
-				document.getElementById("searchTitle").value = ""
+				document.getElementById("searchTitle").value = "";
+				var report=1;
+					for(let i=0;i<data.length;i++){
+						judgeIndexPage(data[i].user.userId,i,report);
+						report++;
+					}
+
 			}else{
 				alert(this.status);
 			}
@@ -271,8 +322,11 @@ function category(category){
 				var data = JSON.parse(this.responseText);
 				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 				var resultText = '';
+				var reports=0;
 				for(var i=0;i<data.length;i++){
 					var time = new Date(data[i].date);
+					reports++;
+
 					
 					resultText +=
 					"<div class='post'>"+
@@ -299,13 +353,36 @@ function category(category){
 							"<li style='font-size: 18px'>"+
 								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
 							"</li>"+
+							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+							"<form action='forumFrontUpdatePage' method='post'>"+
+							"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+							"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+							"</form>"+
+						"</li>"+
+						
+							
+						"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+						"</li>"+
+						"<li style='font-size: 18px;'  id = 'reports"+reports+"'>"+
+							 "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+						"</li>"+
+
 						"</ul>"+
 					"</div>"+
 				"</div>"
 				  
 				}
 				document.getElementById("mydiv").innerHTML = resultText;
-				document.getElementById("searchTitle").value = ""
+				document.getElementById("searchTitle").value = "";
+				var report=1;
+					for(let i=0;i<data.length;i++){
+						judgeIndexPage(data[i].user.userId,i,report);
+						report++;
+					}
+
 			}else{
 				alert(this.status);
 			}
@@ -329,6 +406,25 @@ function category(category){
 
 </script>    
 <div style="margin-top:22%;">
+<input type="hidden" name="userId" id ="userId" value="<%=Integer.parseInt(session.getAttribute("userId").toString())%>" readonly>
 <div id ="mydiv"></div>
 </div>
+
+<script>
+
+function judgeIndexPage(id,i,report){
+	var userID = document.getElementById('userId').value;
+	var x = document.getElementsByClassName('judge'+i);
+	  if (id !=userID) {
+		  for (var i = 0; i < x.length; i++) {
+			  x[i].style.display="none";
+		} 
+	
+	  }else{
+		  console.log('reports'+report)
+		  document.getElementById('reports'+report).style.display="none";
+	  }
+}
+
+</script>
 

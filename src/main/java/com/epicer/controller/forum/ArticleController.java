@@ -550,17 +550,83 @@ public class ArticleController {
 	}
 	
 	
-	@GetMapping("/Scrolltest")
-	@ResponseBody
-	public String Scrolltest() {
-		return "forum/scrollTest";
+	
+	
+	
+	@GetMapping("/forntForumAdd")
+	public String forntForumAdd() {
+		return "forum/forumFrontAdd";
+	}
+
+	@PostMapping("/forntArticleAdd")
+	public String forntForumAdd(int category, String articleTitle, String articleContent) {
+		ArticleBean article = new ArticleBean();
+		article.setPlateformCategoryId(category);
+		article.setTitle(articleTitle);
+		article.setDate(TimeTest.getTime());
+		article.setArticleContent(articleContent);
+		article.setStatus(0);
+		article.setArticleLike(0);
+		article.setArticleViews(0);
+		article.setArticleReplys(0);
+		int userId = (int) session.getAttribute("userId");
+		ArticleUserBean userID = uService.findByUserId(userId);
+		article.setUser(userID);
+		aService.insert(article);
+		return "redirect:/formFirstFrontIndex";
 	}
 	
 	
+	@PostMapping("/forumFrontUpdatePage")
+	public String forumFrontUpdatePage(int articleId) {
+		ArticleBean updateDetail = aService.findByArticleId(articleId);
+		session.setAttribute("updateDetail", updateDetail);
+		return "forum/forumFrontUpdate";
+	}
+
+	@PostMapping("/frontArticleUpdate")
+	public String frontArticleUpdate(int articleId, String aTitle, String aContent,int status,int replys,int views,int likes) {
+		ArticleBean article = new ArticleBean();
+		int userId = (int) session.getAttribute("userId");
+		article.setArticleId(articleId);
+		article.setTitle(aTitle);
+		ArticleUserBean userID = uService.findByUserId(userId);
+		article.setUser(userID);
+		article.setArticleContent(aContent);
+		article.setDate(TimeTest.getTime());
+		article.setStatus(status);
+		article.setArticleLike(likes);
+		article.setArticleReplys(replys);
+		article.setArticleViews(views);
+		aService.insert(article);
+		return "redirect:/formFirstFrontIndex";
+		
+	}
+	
+	@PostMapping("/frontReplyUpdatePage")
+	public String frontReplyUpdatePage(int replyId) {
+		ArticleReplyBean replyUpdateDetail = arService.findById(replyId);
+		session.setAttribute("replyUpdateDetail", replyUpdateDetail);
+		return "forum/forumFrontReplyUpdate";
+	}
+
+	@PostMapping("/frontReplyUpdate")
+	public String frontReplyUpdate(int articleId, int replyId, String replyContent) {
+
+		arService.updateobject(replyContent, TimeTest.getTime(), replyId);
+		
+		ArticleBean selectDetail = aService.findByArticleId(articleId);
+		List<ArticleReplyBean> selectReplyAll = arService.findAllByArticleId(selectDetail);
+		session.setAttribute("selectDetail", selectDetail);
+		session.setAttribute("selectReplyAll", selectReplyAll);
+		return "forum/formFrontIndexDetail";
+	}
 	
 	
-	
-	
-	
+
+	@GetMapping("/Scrolltest")
+	public String Scrolltest() {
+		return "forum/formFrontRec";
+	}
 	
 }

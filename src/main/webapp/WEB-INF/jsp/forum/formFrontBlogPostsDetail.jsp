@@ -78,8 +78,6 @@ $(document).ready(function(){
 
 
 function queryAll(){
-	
-	
 		if(document.getElementById("div1")!==null){
 		document.getElementById("detail").remove();
 	}
@@ -94,25 +92,21 @@ function queryAll(){
 				var data = JSON.parse(this.responseText);
 				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 				var resultText = '';
+				var reports=0;
 				for(var i=0;i<data.length;i++){
 					var time = new Date(data[i].date);
+					reports++;
 					resultText +=
 					"<div class='post'>"+
 					"<h1 class='post-title' style='font-size:30px;margin:0 0 0 8%'>"+data[i].title+
 					"<button type='button' class='btn btn-warning btn-xs' style='margin-left:10px' name='"+data[i].plateformCategoryId+"' onclick='category(this)'>"+
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
-					
-					
-					
-					
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 					"<div onclick='this.parentNode.submit()'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
-					
-					
 					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
@@ -127,6 +121,24 @@ function queryAll(){
 							"<li style='font-size: 18px'>"+
 								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
 							"</li>"+
+							
+							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+								"<form action='forumFrontUpdatePage' method='post'>"+
+								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+								"</form>"+
+							"</li>"+
+							
+								
+							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+								"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+								"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+							"</li>"+
+							"<li style='font-size: 18px;'  id = 'reports"+reports+"'>"+
+								 "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+							"</li>"+
+								
 						"</ul>"+
 					"</div>"+
 				"</div>"
@@ -134,6 +146,11 @@ function queryAll(){
 				}
 				document.getElementById("searchTitle").value = ""
 				document.getElementById("mydiv2").innerHTML = resultText;
+				var report=1;
+				for(let i=0;i<data.length;i++){
+					judgeIndexPage(data[i].user.userId,i,report);
+					report++;
+				}
 			}else{
 				alert(this.status);
 			}
@@ -163,9 +180,10 @@ function querytitle(){
 				var data = JSON.parse(this.responseText);
 				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 				var resultText = '';
+				var reports=0;
 				for(var i=0;i<data.length;i++){
 					var time = new Date(data[i].date);
-					
+					reports++;
 					resultText +=
 					"<div class='post'>"+
 					"<h1 class='post-title' style='font-size:30px;margin:0 0 0 8%'>"+data[i].title+
@@ -191,6 +209,21 @@ function querytitle(){
 							"<li style='font-size: 18px'>"+
 								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
 							"</li>"+
+							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+							"<form action='forumFrontUpdatePage' method='post'>"+
+							"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+							"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+							"</form>"+
+						"</li>"+
+						"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+						"</li>"+
+						"<li style='font-size: 18px;'  id = 'reports"+reports+"'>"+
+							 "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+						"</li>"+
+
 						"</ul>"+
 					"</div>"+
 				"</div>"
@@ -198,6 +231,12 @@ function querytitle(){
 				}
 				document.getElementById("mydiv2").innerHTML = resultText;
 				document.getElementById("searchTitle").value = ""
+					var report=1;
+				for(let i=0;i<data.length;i++){
+					judgeIndexPage(data[i].user.userId,i,report);
+					report++;
+				}
+
 			}else{
 				alert(this.status);
 			}
@@ -231,9 +270,10 @@ function category(category){
 				var data = JSON.parse(this.responseText);
 				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
 				var resultText = '';
+				var reports=0;
 				for(var i=0;i<data.length;i++){
 					var time = new Date(data[i].date);
-					
+					reports++;
 					resultText +=
 					"<div class='post'>"+
 					"<h1 class='post-title' style='font-size:30px;margin:0 0 0 8%'>"+data[i].title+
@@ -259,6 +299,23 @@ function category(category){
 							"<li style='font-size: 18px'>"+
 								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
 							"</li>"+
+							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+							"<form action='forumFrontUpdatePage' method='post'>"+
+							"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+							"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+							"</form>"+
+						"</li>"+
+						
+							
+						"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+						"</li>"+
+						"<li style='font-size: 18px;'  id = 'reports"+reports+"'>"+
+							 "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+						"</li>"+
+
 						"</ul>"+
 					"</div>"+
 				"</div>"
@@ -266,6 +323,12 @@ function category(category){
 				}
 				document.getElementById("mydiv2").innerHTML = resultText;
 				document.getElementById("searchTitle").value = ""
+					var report=1;
+				for(let i=0;i<data.length;i++){
+					judgeIndexPage(data[i].user.userId,i,report);
+					report++;
+				}
+
 			}else{
 				alert(this.status);
 			}
@@ -386,12 +449,13 @@ function queryReply(){
 			if(this.status==200){
 				var data = JSON.parse(this.responseText);
 				var o = 0;
+				var reports=0;
 				var resultText = '';
 				for(var i=0;i<data.length;i++){
-					
 					var time = new Date(data[i].articleReplyDate);
 					console.log(data);
-				o++
+					o++
+					reports++
 					resultText +=
 						"<div class='post-comments'>"+
 						"<ul class='media-list comments-list m-bot-50 clearlist'>"+
@@ -409,32 +473,33 @@ function queryReply(){
 						"<p>"+data[i].articleReplyContent+" </p>"+
 						" </div>"+
 						" </li>"+
-						"</ul>"+
-						"</div>"+
-
-						
-						"<tr style='background-color:#FFD494'>"+
-					            "<div class='d-flex px-2 py-1'>"+
-					            
-					            "<div id ='judge"+i+"'>"+
-					            "<form action='replyUpdatePage' method='post'>"+
+						"<div>"+
+						"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+								"<form action='frontReplyUpdatePage' method='post'>"+
 								"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 								"</form>"+
+						"</li>"+
+						"<li style='font-size: 18px' class = 'judge"+i+"'>"+
 								"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
 								"<button type='button' class='btn btn-outline-warning' onclick='delReply("+i+")'>刪除</button>"+
-								"</div>"+
-								
-									"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
-					          "</td>"+
-					          "</div>"+
-					        "</tr>";
+								"</form>"+
+						"</li>"+
+						"<li style='font-size: 18px;'  id = 'reports"+reports+"'>"+
+								"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+						"</li>"+
+						"</div>"+
+						"</ul>"+
+						"</div>";
 				}
 				detailAjax();
 				document.getElementById("comments").innerHTML ="<h3 class='post-sub-heading'>"+o+" Comments</h3>";
 				document.getElementById("mydiv").innerHTML = resultText;
+				
+				var report=1;
 				for(let i=0;i<data.length;i++){
-					judgeMember(data[i].user.userId,i);
+					judgeIndexPage(data[i].user.userId,i,report);
+					report++;
 				}
 			}else{
 				alert(this.status);
@@ -457,55 +522,59 @@ function queryReply(){
 				if(this.status==200){
 					var data = JSON.parse(this.responseText);
 					var o = 0;
+					var reports=0;
 					var resultText = '';
 					for(let i=0;i<data.length;i++){
 						
 						var time = new Date(data[i].articleReplyDate);
 						o++
+						reports++
 							resultText +=
 									"<div class='post-comments'>"+
 									"<ul class='media-list comments-list m-bot-50 clearlist'>"+
 									"<li class='media'>"+
-									"<a class='pull-left' href='#!'>"+
-									" <img class='media-object comment-avatar' src='./source/images/blog/avater-1.jpg' alt='' width='50' height='50'>"+
-									"</a>"+
+										"<a class='pull-left' href='#!'>"+
+										" <img class='media-object comment-avatar' src='./source/images/blog/avater-1.jpg' alt='' width='50' height='50'>"+
+										"</a>"+
 									"<div class='media-body'>"+
 									"<div class='comment-info'>"+
 									" <div class='comment-author'>"+
-									"<a href='#!'>"+data[i].user.userId+"</a>"+
+											"<a href='#!'>"+data[i].user.userId+"</a>"+
 									"</div>"+
-									"<time>"+time.toLocaleString()+"</time>"+
+											"<time>"+time.toLocaleString()+"</time>"+
 									"</div>"+
-									"<p>"+data[i].articleReplyContent+" </p>"+
+											"<p>"+data[i].articleReplyContent+" </p>"+
 									" </div>"+
 									" </li>"+
-									"</ul>"+
+									"<div>"+
+									"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+											"<form action='frontReplyUpdatePage' method='post'>"+
+											"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+											"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+											"</form>"+
+									"</li>"+
+									"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+											"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
+											"<button type='button' class='btn btn-outline-warning' onclick='delReply("+i+")'>刪除</button>"+
+											"</form>"+
+									"</li>"+
+									"<li style='font-size: 18px;'  id = 'reports"+reports+"'>"+
+											"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
+									"</li>"+
 									"</div>"+
-								
-							        "<tr  style='background-color:#FFD494'>"+
-							          "<td>"+
-							            "<div class='d-flex px-2 py-1'>"+
-							            "<div id = 'judge"+i+"' value='ade'  class='doc-form-area'>"+
-							            "<form action='replyUpdatePage' method='post'>"+
-										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
-										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
-										"</form>"+
-										"<input type='hidden' name='replyId' id ='replyId"+i+"' value="+data[i].articleReplyId+">"+
-										"<button type='button' class='btn btn-outline-warning' onclick='delReply("+i+")'>刪除</button>"+
-										"</div>"+
+									"</ul>"+
+									"</div>";
 										
-										"<button type='button' class='btn btn-outline-warning' onclick='replyReport("+i+")'>檢舉</button>"+
-										
-							          "</td>"+
-							          "</div>"+
-							        "</tr>";
 						}
 					detailAjax();
 					document.getElementById("comments").innerHTML ="<h3 class='post-sub-heading'>"+o+" Comments</h3>";
 					document.getElementById("mydiv").innerHTML = resultText;
+					var report=1;
 					for(let i=0;i<data.length;i++){
-						judgeMember(data[i].user.userId,i);
-						
+						console.log(data[i].user)
+
+						judgeIndexPage(data[i].user.userId,i,report);
+						report++;
 					}
 				}else{
 					alert(this.status);
@@ -681,11 +750,10 @@ function deleteCollect(){
 }
 
 </script>
+ <%ArticleBean detail = (ArticleBean)request.getSession().getAttribute("selectDetail"); %>
+ <input type="hidden" name="userId" id ="userId" value="<%=Integer.parseInt(session.getAttribute("userId").toString())%>" readonly>
 <div id ="detail">
 <table >
-               <%
-      	   ArticleBean detail = (ArticleBean)request.getSession().getAttribute("selectDetail");  
-               %>
                <% String[] category = {"全榖雜糧","豆魚蛋肉","蔬菜","水果","乳品","油脂與堅果種子"};%>
             <div class='post'>
 					<h1 class="post-title" style="font-size:30px;margin:0 0 0 8%"><%=detail.getTitle()%>
@@ -740,13 +808,20 @@ function deleteCollect(){
 <script language='javascript' src='js/WangReply.js'></script>
 <script>
 
-function judgeMember(id,i){
+
+function judgeIndexPage(id,i,report){
 	var userID = document.getElementById('userId').value;
-	  if (id !=userID) {
 // 	document.getElementById('mydiv').children[1].firstChild.style.display="none";
-	document.getElementById('judge'+i).style.display="none";
+	var x = document.getElementsByClassName('judge'+i);
+	  if (id !=userID) {
+		  for (var i = 0; i < x.length; i++) {
+			  x[i].style.display="none";
+		} 
+	
+	  }else{
+		  console.log('reports'+report)
+		  document.getElementById('reports'+report).style.display="none";
 	  }
 }
 
-// });
 </script>
