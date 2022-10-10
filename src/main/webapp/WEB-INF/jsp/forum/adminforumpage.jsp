@@ -22,10 +22,7 @@ margin-left: 10px !important;
 }
 
 
-.modal-body p{
-white-space:pre-wrap;
-width:450px;
-}
+
 .modal-dialog{
 
 overflow-y: initial !important
@@ -38,7 +35,10 @@ height: 450px;
 overflow-y: auto;
 
 }
-
+.modal-body p{
+white-space:pre-wrap;
+width:450px;
+}
 span{
 position: relative;
  overflow: hidden;
@@ -858,9 +858,7 @@ function announcement(id){
 
 <% session.setAttribute("userId", 1002);%>
 
- 		<form action="forumUser" method="get">
-		  <input type="submit" value="userPage">
-        </form>
+ 		
 	        
 
 
@@ -872,20 +870,20 @@ function announcement(id){
 
 
 
-<div style="text-align: center;margin:0 0 10px 0"   >
-<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" onclick="queryAll()">查詢全部</button>
-<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="1" onclick="category(this)">全榖雜糧</button>
-<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="2" onclick="category(this)">豆魚蛋肉</button>
-<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="3" onclick="category(this)">蔬菜</button>
-<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="4" onclick="category(this)">水果</button>
-<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="5" onclick="category(this)">乳品</button>
-<button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="6" onclick="category(this)">油脂與堅果種子</button>
-<button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="7" onclick="announcementPage()">公告</button>
-<button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="8" onclick="reportPage()">檢舉文章</button>
-<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="9" onclick="replyReportPage()">檢舉留言</button>
+<div class="btn-group"  style="text-align:center;margin:0 10px 10px 10px"  role="group" aria-label="Basic example"   >
+<button type="button" class="btn btn-secondary" style="width:80px;" onclick="queryAll()">全部</button>
+<button type="button" class="btn btn-secondary" style="width:80px;" name="1" onclick="category(this)">全榖雜糧</button>
+<button type="button" class="btn btn-secondary" style="width:80px;" name="2" onclick="category(this)">豆魚蛋肉</button>
+<button type="button" class="btn btn-secondary" style="width:80px;" name="3" onclick="category(this)">蔬菜</button>
+<button type="button" class="btn btn-secondary" style="width:80px;" name="4" onclick="category(this)">水果</button>
+<button type="button" class="btn btn-secondary" style="width:80px;" name="5" onclick="category(this)">乳品</button>
+<button type="button" class="btn btn-secondary" style="width:110px;" name="6" onclick="category(this)">油脂與堅果種子</button>
+<button type="button" class="btn btn-secondary" style="width:80px;" name="7" onclick="announcementPage()">公告</button>
+<button type="button" class="btn btn-secondary" style="width:80px;" name="8" onclick="reportPage()">檢舉文章</button>
+<button type="button" class="btn btn-secondary" style="width:80px;" name="9" onclick="replyReportPage()">檢舉留言</button>
 
 </div>   
-<div style="padding:0 5%">
+<div style="padding:0 3%">
 <div class="card" >
   <div class="table-responsive">
     <table class="table align-items-center mb-0">

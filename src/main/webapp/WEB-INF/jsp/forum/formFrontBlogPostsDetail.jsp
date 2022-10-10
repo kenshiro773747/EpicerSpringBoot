@@ -29,9 +29,6 @@ margin-left: 1%;
   overflow: hidden;
 }
 
-.post{
-margin-top:10%
-}
 
 .pic {
   width: 500px;
@@ -113,11 +110,11 @@ function queryAll(){
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
+					"<div class='multiline-ellipsis' onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
-					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
+					"<div class='post-meta' style='margin-top:3%;padding-left:11%'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
@@ -201,11 +198,11 @@ function querytitle(){
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
+					"<div class='multiline-ellipsis' onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
-					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
+					"<div class='post-meta' style='margin-top:3%;padding-left:11%'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
@@ -291,11 +288,11 @@ function category(category){
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
+					"<div class='multiline-ellipsis' onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
-					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
+					"<div class='post-meta' style='margin-top:3%;padding-left:11%'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
@@ -625,22 +622,21 @@ function announcementPage(){
 					var time = new Date(data[i].date);
 					resultText +=
 						
-						"<div class='media'>"+
+						"<div class='media' id ='side' style= 'position:relative'>"+
 					"<a class='pull-left' href='#!'>"+
-						"<img class='media-object' src='./source/images/blog/post-thumb.jpg' alt='Image'>"+
+					"<img class='media-object' src='./images/公告.jpg' alt='Image' style='height:180px;width:160%'>"+
 					"</a>"+
-					"<div class='media-body'>"+
-						"<h4 class='media-heading'><a href='#!'>"+data[i].title+"</a></h4>"+
+					"<div class='media-body'  style= 'position:absolute; left:0;top:0;'>"+
 					 "<form action='articleFrontDetail' method='post'>"+
 						"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-						"<div onclick='this.parentNode.submit()'>"+
-						"<p>"+data[i].articleContent+"</p>"+
+						"<div onclick='this.parentNode.submit()' >"+
+						"<h4  style='margin-top:1.5%;'>"+data[i].title+"</h4>"+
 						"</div>"+
 						"</form>"+
-					
-						
 					"</div>"+
 					"</div>";
+					
+					
 			   }
 				document.getElementById("sidebar").innerHTML = resultText;
 			}else{
@@ -829,7 +825,7 @@ function deleteCollect(){
 <table >
                <% String[] category = {"全榖雜糧","豆魚蛋肉","蔬菜","水果","乳品","油脂與堅果種子"};%>
             <div class='post'>
-					<h1 class="post-title" style="font-size:30px"><%=detail.getTitle()%>
+					<h1 class="post-title" style="font-size:30px;margin:0 0 0 -4%"><%=detail.getTitle()%>
 					<button type='button' class='btn btn-warning btn-xs' style='margin-left:10px' name=<%=detail.getPlateformCategoryId()%> onclick='category(this)'>
 					<%=category[detail.getPlateformCategoryId()-1]%></button></h1>
 		           <div style="margin:0 0 0 4 %"><%=detail.getArticleContent()%>

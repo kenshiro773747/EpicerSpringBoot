@@ -163,13 +163,13 @@ function queryAll(){
 					
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
+					"<div class='multiline-ellipsis' onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
 					
 					
-					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
+					"<div class='post-meta' style='margin-top:3%;padding-left:11%'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
@@ -250,11 +250,11 @@ function querytitle(){
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
+					"<div class='multiline-ellipsis' onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
-					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
+					"<div class='post-meta' style='margin-top:3%;padding-left:11%'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
@@ -341,11 +341,11 @@ function category(category){
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
+					"<div class='multiline-ellipsis' onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
-					"<div class='post-meta' style='margin-top:50px;text-align:center'>"+
+					"<div class='post-meta' style='margin-top:3%;padding-left:11%'>"+
 						"<ul>"+
 							"<li style='font-size: 18px'>"+
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
@@ -426,13 +426,13 @@ function announcementPage(){
 						
 						"<div class='media' id ='side' style= 'position:relative'>"+
 					"<a class='pull-left' href='#!'>"+
-						"<img class='media-object' src='./images/公告.jpg' alt='Image' style='height:150px;width:110%'>"+
+						"<img class='media-object' src='./images/公告.jpg' alt='Image' style='height:180px;width:160%'>"+
 					"</a>"+
 					"<div class='media-body'  style= 'position:absolute; left:0;top:0;'>"+
 					 "<form action='articleFrontDetail' method='post'>"+
 						"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 						"<div onclick='this.parentNode.submit()'>"+
-						"<h3>"+data[i].title+"</h3>"+
+						"<h4  style='margin-top:1.5%'>"+data[i].title+"</h4>"+
 						"</div>"+
 						"</form>"+
 					"</div>"+
@@ -456,6 +456,24 @@ function announcementPage(){
 
 
 </script>    
+
+
+<form action="forumUser" method="get">
+		  <input type="submit" value="userPage">
+        </form>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 <div style="margin-top:22%;">
 <input type="hidden" name="userId" id ="userId" value="<%=Integer.parseInt(session.getAttribute("userId").toString())%>" readonly>
 <div id ="mydiv"></div>

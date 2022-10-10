@@ -28,12 +28,12 @@ height:200px;
  <!-- /////////// 申請寄發新文章通知信(輸入頁面) ///////////// -->
 <aside class="sidebar sidebarFixed">
 	<!-- Widget Latest Posts -->
-		<h4 class="widget-title">Latest Posts</h4>
-	<div class="widget widget-latest-post" id = "sidebar">
+		<h4 class="widget-title" style="margin-top:2em;">公告</h4>
+	<div class="widget widget-latest-post" id = "sidebar" >
 	</div>
  <!-- /////////// 文章分類-風格2 (關鍵字方式/可用於食譜) ///////////// -->
 	<!-- Widget tag -->
-	<div class="widget widget-tag">
+	<div class="widget widget-tag"  style="margin-top:-4em;">
 		<h4 class="widget-title">Tag Cloud</h4>
 		<ul class="widget-tag-list">
 	         <li>
