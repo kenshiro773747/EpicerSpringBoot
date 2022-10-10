@@ -11,9 +11,12 @@
   overflow: hidden;
 }
 
+button{
+margin-left: 1%;
+}
+
 .post{
-/*  border: 2px gray solid; */
-/*  border-radius: 30px; */
+margin-top:10%
 }
 
 .pic {
@@ -63,20 +66,22 @@ height:46px
 <script>
 
 $(document).ready(function(){
-	queryAll()
+	queryAll();
+	announcementPage()
 });
 
 
 
 function del(id){
 	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
+		  title: '刪除文章',
+		  text: "確認後無法復原",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Yes, delete it!'
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
 		}).then((result) => {
 		  if (result.isConfirmed) {
 			  var xhr = new XMLHttpRequest();
@@ -100,13 +105,14 @@ function del(id){
 
 function report(id){
 	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
+		 title: '檢舉文章',
+		  text: "確認後無法復原",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: '確定檢舉!'
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
 		}).then((result) => {
 	    	var xhr = new XMLHttpRequest();
 	    	xhr.open("post","forumReport",true);
@@ -157,7 +163,7 @@ function queryAll(){
 					
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()'>"+
+					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
@@ -169,13 +175,13 @@ function queryAll(){
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-ios-heart'></i>收藏數"+data[i].articleLike+
+								"<i class='tf-ion-ios-heart'></i>"+data[i].articleLike+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-chatbubbles'></i>留言數"+data[i].articleReplys+
+								"<i class='tf-ion-chatbubbles'></i>"+data[i].articleReplys+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
+								"<i class='tf-ion-android-person'></i>"+data[i].articleViews+
 							"</li>"+
 							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
 							"<form action='forumFrontUpdatePage' method='post'>"+
@@ -244,7 +250,7 @@ function querytitle(){
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()'>"+
+					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
@@ -254,13 +260,13 @@ function querytitle(){
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-ios-heart'></i>收藏數"+data[i].articleLike+
+								"<i class='tf-ion-ios-heart'></i>"+data[i].articleLike+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-chatbubbles'></i>留言數"+data[i].articleReplys+
+								"<i class='tf-ion-chatbubbles'></i>"+data[i].articleReplys+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
+								"<i class='tf-ion-android-person'></i>"+data[i].articleViews+
 							"</li>"+
 							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
 							"<form action='forumFrontUpdatePage' method='post'>"+
@@ -335,7 +341,7 @@ function category(category){
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()'>"+
+					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
@@ -345,13 +351,13 @@ function category(category){
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-ios-heart'></i>收藏數"+data[i].articleLike+
+								"<i class='tf-ion-ios-heart'></i>"+data[i].articleLike+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-chatbubbles'></i>留言數"+data[i].articleReplys+
+								"<i class='tf-ion-chatbubbles'></i>"+data[i].articleReplys+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
+								"<i class='tf-ion-android-person'></i>"+data[i].articleViews+
 							"</li>"+
 							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
 							"<form action='forumFrontUpdatePage' method='post'>"+
@@ -400,8 +406,53 @@ function category(category){
 
 
 
-
-
+function announcementPage(){
+	document.getElementById("searchTitle").value = ""
+	
+	//1.創建ajax對象
+	var xhr = new XMLHttpRequest();
+	//2.註冊回調函數
+	xhr.onreadystatechange = function(){
+		if(this.readyState ==4 ){
+			if(this.status==200){
+				var data = JSON.parse(this.responseText);
+				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
+				var resultText = '';
+				var o = 0;
+				for(var i=0;i<data.length;i++){
+					o++
+					var time = new Date(data[i].date);
+					resultText +=
+						
+						"<div class='media' id ='side' style= 'position:relative'>"+
+					"<a class='pull-left' href='#!'>"+
+						"<img class='media-object' src='./images/公告.jpg' alt='Image' style='height:150px;width:110%'>"+
+					"</a>"+
+					"<div class='media-body'  style= 'position:absolute; left:0;top:0;'>"+
+					 "<form action='articleFrontDetail' method='post'>"+
+						"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+						"<div onclick='this.parentNode.submit()'>"+
+						"<h3>"+data[i].title+"</h3>"+
+						"</div>"+
+						"</form>"+
+					"</div>"+
+					"</div>";
+					
+					
+			   }
+				document.getElementById("sidebar").innerHTML = resultText;
+			}else{
+				alert(this.status);
+			}
+		}
+	}
+	//3.開啟通道
+	xhr.open("post","QueryArticleReport",true)
+	//4.發送請求
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
+	xhr.send("status="+2)
+	
+}
 
 
 </script>    

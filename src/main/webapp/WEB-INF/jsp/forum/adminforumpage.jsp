@@ -14,6 +14,14 @@
 <link rel="stylesheet" href="css/sweetalert2.min.css">
 
 <style type="text/css">
+form{
+float:left
+}
+button{
+margin-left: 10px !important;
+}
+
+
 .modal-body p{
 white-space:pre-wrap;
 width:450px;
@@ -118,6 +126,7 @@ $(document).ready(function(){
 										"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
 										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 									    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+									    "<button type='button' class='btn btn-outline-warning' onclick='announcement("+i+")'>設為公告</button>"+
 						          "</td>"+
 						        "</tr>"
 						   
@@ -172,6 +181,7 @@ $(document).ready(function(){
 								"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
 								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 							    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+							    "<button type='button' class='btn btn-outline-warning' onclick='announcement("+i+")'>設為公告</button>"+
 								
 					          "</td>"+
 					        "</tr>"
@@ -257,6 +267,7 @@ $(document).ready(function(){
 								"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
 								"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 							    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+							    "<button type='button' class='btn btn-outline-warning' onclick='announcement("+i+")'>設為公告</button>"+
 					          "</td>"+
 					        "</tr>"
 					   
@@ -312,6 +323,7 @@ $(document).ready(function(){
 									"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
 									"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 								    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+								    "<button type='button' class='btn btn-outline-warning' onclick='announcement("+i+")'>設為公告</button>"+
 						          "</td>"+
 						        "</tr>"
 						}
@@ -401,6 +413,7 @@ function category(category){
 							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
 							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 						    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+						    "<button type='button' class='btn btn-outline-warning' onclick='announcement("+i+")'>設為公告</button>"+
 				          "</td>"+
 				        "</tr>"
 				   
@@ -455,6 +468,7 @@ function category(category){
 							"<input type='hidden' name='articleId' id ='articleID"+i+"' value="+data[i].articleId+">"+
 							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 						    "<button type='button' class='btn btn-outline-warning' onclick='report("+i+")'>檢舉</button>"+
+						    "<button type='button' class='btn btn-outline-warning' onclick='announcement("+i+")'>設為公告</button>"+
 				          "</td>"+
 				        "</tr>"
 				}
@@ -558,6 +572,90 @@ function reportPage(){
 }
 
 
+function announcementPage(){
+	document.getElementById("searchTitle").value = ""
+	
+	//1.創建ajax對象
+	var xhr = new XMLHttpRequest();
+	//2.註冊回調函數
+	xhr.onreadystatechange = function(){
+		if(this.readyState ==4 ){
+			if(this.status==200){
+				var data = JSON.parse(this.responseText);
+				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
+				var resultText = '';
+				var o = 0;
+				for(var i=0;i<data.length;i++){
+					o++
+					var time = new Date(data[i].date);
+					resultText +=
+						  "<tr>"+
+				          "<td>"+
+				            "<div>"+
+					        "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop"+o+"'>"+(i+1)+
+						     " </button>"+
+						      <!-- Modal -->
+						      "<div class='modal fade' id='staticBackdrop"+o+"' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>"+
+					            "<div  class='modal-dialog'>"+
+					             " <div class='modal-content'>"+
+					              " <div class='modal-header'>"+
+					               "<h5 class='modal-title' id='staticBackdropLabel'>"+data[i].title+"</h5>"+
+					                 "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"+
+					                "</div>"+
+					                "<div class='modal-body'>"+
+					                data[i].articleContent+
+					              "</div>"+
+					               " <div class='modal-footer'>"+
+					                "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>關閉</button>"+
+					                "<form action='articleDetail' method='post'>"+
+									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+									"<button type='submit' class='btn btn-primary'>進入文章</button>"+
+									"</form>"+
+					               " </div>"+
+					            "  </div>"+
+					            "</div>"+
+					          "</div>"+
+				            "</div>"+
+				          "</td>"+
+				          "<td>"+
+				            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].plateformCategoryId-1]+"</p>"+
+				          "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].title+"</span>"+
+				         "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+				          "</td>"+
+				          "<td class='align-middle text-center'>"+
+				            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
+				          "</td>"+
+				          "<td class='align-middl'>"+
+				            "<form action='forumAdminUpdatePage' method='post'>"+
+								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+							"</form>"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleId"+i+"' value="+data[i].articleId+">"+
+							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+				          "</td>"+
+				        "</tr>"
+				   
+			   }
+				document.getElementById("mydiv").innerHTML = resultText;
+			}else{
+				alert(this.status);
+			}
+		}
+	}
+	//3.開啟通道
+	xhr.open("post","QueryArticleReport",true)
+	//4.發送請求
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
+	xhr.send("status="+2)
+	
+}
+
+
 function replyReportPage(){
 	document.getElementById("searchTitle").value = ""
 	
@@ -620,8 +718,8 @@ function replyReportPage(){
 								"<input type='hidden' name='articleReplyId' value='"+data[i].articleReplyId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 							"</form>"+
-							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId+">"+
-							"<input type='hidden' name='articleId' id ='articleId"+i+"' value="+data[i].articleId+">"+
+							"<input type='hidden' name='number' id ='number"+i+"' value="+data[i].articleId.articleId+">"+
+							"<input type='hidden' name='articleId' id ='articleId"+i+"' value="+data[i].articleId.articleId+">"+
 							"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
 				          "</td>"+
 				        "</tr>"
@@ -643,19 +741,19 @@ function replyReportPage(){
 
 function del(id){
 	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
+		 title: '刪除文章',
+		  text: "確認後無法復原",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Yes, delete it!'
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
 		}).then((result) => {
 		  if (result.isConfirmed) {
 			  var xhr = new XMLHttpRequest();
 		    	xhr.open("post","articleDelete",true);
 		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-		    	var articleId = document.getElementById("articleID"+id).value;
 		    	var number = document.getElementById("number"+id).value;
 		    	xhr.send("number="+number);
 		    Swal.fire(
@@ -673,20 +771,21 @@ function del(id){
 
 function report(id){
 	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
+		 title: '檢舉文章',
+		  text: "確認後無法復原",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: '確定檢舉!'
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
 		}).then((result) => {
+		  if (result.isConfirmed) {
 	    	var xhr = new XMLHttpRequest();
 	    	xhr.open("post","forumReport",true);
 	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
 	    	var number = document.getElementById("number"+id).value;
 	    	xhr.send("number="+number);
-		  if (result.isConfirmed) {
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',
@@ -701,6 +800,39 @@ function report(id){
 	
 }
 
+
+
+
+function announcement(id){
+	Swal.fire({
+		 title: '設為公告',
+		  text: "確認後無法復原",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
+		}).then((result) => {
+		  if (result.isConfirmed) {
+	    	var xhr = new XMLHttpRequest();
+	    	xhr.open("post","announcement",true);
+	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+	    	var number = document.getElementById("number"+id).value;
+	    	xhr.send("number="+number);
+		    Swal.fire(
+		      'Deleted!',
+		      'Your file has been deleted.',
+		      'success'
+		      
+		    ).then((result) => {
+
+		    	queryAll();
+		    })
+		  }
+		})
+	
+}
 
 
 </script>
@@ -748,8 +880,9 @@ function report(id){
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="4" onclick="category(this)">水果</button>
 <button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="5" onclick="category(this)">乳品</button>
 <button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="6" onclick="category(this)">油脂與堅果種子</button>
-<button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="7" onclick="reportPage()">檢舉文章</button>
-<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="8" onclick="replyReportPage()">檢舉留言</button>
+<button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="7" onclick="announcementPage()">公告</button>
+<button type="button" class="btn btn-secondary" style="width:140px; margin:0 1%;" name="8" onclick="reportPage()">檢舉文章</button>
+<button type="button" class="btn btn-secondary" style="width:95px; margin:0 1%;" name="9" onclick="replyReportPage()">檢舉留言</button>
 
 </div>   
 <div style="padding:0 5%">

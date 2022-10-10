@@ -402,21 +402,22 @@ function deleteCollect(){
 <script>
 function del(id){
 	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
+		  title: '刪除留言',
+		  text: "確認後無法復原",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Yes, delete it!'
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
 		}).then((result) => {
-			var xhr = new XMLHttpRequest();
-	    	xhr.open("post","replyDelete",true);
-	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-	    	var articleId = document.getElementById("ArticleId").value;
-	    	var replyId = document.getElementById("replyId"+id).value;
-	    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
 		  if (result.isConfirmed) {
+			  var xhr = new XMLHttpRequest();
+		    	xhr.open("post","replyDelete",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var articleId = document.getElementById("ArticleId").value;
+		    	var replyId = document.getElementById("replyId"+id).value;
+		    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',
@@ -433,21 +434,22 @@ function del(id){
 
 function replyReport(id){
 	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
+		 title: '檢舉留言',
+		  text: "確認後無法復原",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: '檢舉!'
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
 		}).then((result) => {
-			var xhr = new XMLHttpRequest();
-	    	xhr.open("post","replyReport",true);
-	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-	    	var articleId = document.getElementById("ArticleId").value;
-	    	var replyId = document.getElementById("replyId"+id).value;
-	    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
 		  if (result.isConfirmed) {
+			  var xhr = new XMLHttpRequest();
+		    	xhr.open("post","replyReport",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var articleId = document.getElementById("ArticleId").value;
+		    	var replyId = document.getElementById("replyId"+id).value;
+		    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',

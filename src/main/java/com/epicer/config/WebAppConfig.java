@@ -41,7 +41,6 @@ public class WebAppConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-
 		registry.addRedirectViewController("/",	"redirect:/recipe" );
 		registry.addViewController("to/add").setViewName("recipe/AddPage");
 		

@@ -8,7 +8,16 @@
     <!-- ////// 這是多頁文章的串聯頁面  /////// -->
     
 <style type="text/css">
+#detail { 
+ padding-top: 25%
+ } 
+#mydiv2 { 
+ margin-top:30% 
+ } 
 
+button{
+margin-left: 1%;
+}
 .w-e-text-container{
     height: 200px !important;/*!important是重点，因为原div是行内样式设置的高度300px*/
 }
@@ -21,7 +30,7 @@
 }
 
 .post{
-margin-top: 20%
+margin-top:10%
 }
 
 .pic {
@@ -74,6 +83,7 @@ height:46px
 $(document).ready(function(){
 	queryReply();
 	queryCollect();
+	announcementPage()
 });
 
 
@@ -103,7 +113,7 @@ function queryAll(){
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()'>"+
+					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
@@ -113,13 +123,13 @@ function queryAll(){
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-ios-heart'></i>收藏數"+data[i].articleLike+
+								"<i class='tf-ion-ios-heart'></i>"+data[i].articleLike+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-chatbubbles'></i>留言數"+data[i].articleReplys+
+								"<i class='tf-ion-chatbubbles'></i>"+data[i].articleReplys+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
+								"<i class='tf-ion-android-person'></i>"+data[i].articleViews+
 							"</li>"+
 							
 							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
@@ -191,7 +201,7 @@ function querytitle(){
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()'>"+
+					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
@@ -201,13 +211,13 @@ function querytitle(){
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-ios-heart'></i>收藏數"+data[i].articleLike+
+								"<i class='tf-ion-ios-heart'></i>"+data[i].articleLike+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-chatbubbles'></i>留言數"+data[i].articleReplys+
+								"<i class='tf-ion-chatbubbles'></i>"+data[i].articleReplys+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
+								"<i class='tf-ion-android-person'></i>"+data[i].articleViews+
 							"</li>"+
 							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
 							"<form action='forumFrontUpdatePage' method='post'>"+
@@ -281,7 +291,7 @@ function category(category){
 					category[data[i].plateformCategoryId-1]+"</button>"+"</h1>"+
 		            "<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()'>"+
+					"<div onclick='this.parentNode.submit()' style='margin:0 0 0 11%'>"+
 					data[i].articleContent+
 					"</div>"+
 					"</form>"+
@@ -291,13 +301,13 @@ function category(category){
 							"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-ios-heart'></i>收藏數"+data[i].articleLike+
+								"<i class='tf-ion-ios-heart'></i>"+data[i].articleLike+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-chatbubbles'></i>留言數"+data[i].articleReplys+
+								"<i class='tf-ion-chatbubbles'></i>"+data[i].articleReplys+
 							"</li>"+
 							"<li style='font-size: 18px'>"+
-								"<i class='tf-ion-android-person'></i>觀看數"+data[i].articleViews+
+								"<i class='tf-ion-android-person'></i>"+data[i].articleViews+
 							"</li>"+
 							"<li style='font-size: 18px' class = 'judge"+i+"'>"+
 							"<form action='forumFrontUpdatePage' method='post'>"+
@@ -402,6 +412,7 @@ function detailAjax(){
 			if(this.status==200){
 				var data = JSON.parse(this.responseText);
 				var time = new Date(data.date);
+				console.log(data.articleLike);
 				var resultText = '';
 					
 					resultText +=
@@ -410,15 +421,15 @@ function detailAjax(){
 					"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
 					"</li>"+
 					"<li style='font-size: 18px'>"+
-					"<i class='tf-ion-ios-heart'></i>收藏數"+data.articleLike+
+					"<i class='tf-ion-ios-heart'></i>"+data.articleLike+
 					"</li>"+
 					"<li style='font-size: 18px'>"+
-					"<i class='tf-ion-ios-calendar'></i>留言數"+data.articleReplys+
+					"<i class='tf-ion-chatbubbles'></i>"+data.articleReplys+
 					"</li>"+
 					"<li style='font-size: 18px'>"+
-					"<i class='tf-ion-android-person'></i>觀看數"+data.articleViews+
+					"<i class='tf-ion-android-person'></i>"+data.articleViews+
 					"</li>"+
-					"</ul>"
+					"</ul>";
 				 
 				document.getElementById("detailAjax").innerHTML = resultText;
 			}else{
@@ -431,7 +442,8 @@ function detailAjax(){
 	//4.
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
 	var articleId = document.getElementById("ArticleId").value;
-	xhr.send("articleId="+articleId)
+	xhr.send("articleId="+articleId);
+	
 	
 }
 
@@ -466,15 +478,15 @@ function queryReply(){
 						"<div class='media-body'>"+
 						"<div class='comment-info'>"+
 						" <div class='comment-author'>"+
-						"<a href='#!'>"+data[i].user.userId+"</a>"+
+								"<a href='#!'>"+data[i].user.userId+"</a>"+
+								"<time style='margin-left:1%'>"+time.toLocaleString()+"</time>"+
 						"</div>"+
-						"<time>"+time.toLocaleString()+"</time>"+
+								data[i].articleReplyContent+
 						"</div>"+
-						"<p>"+data[i].articleReplyContent+" </p>"+
 						" </div>"+
 						" </li>"+
 						"<div>"+
-						"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+						"<li style='font-size: 18px ;float:left' class = 'judge"+i+"'>"+
 								"<form action='frontReplyUpdatePage' method='post'>"+
 								"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
 								"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
@@ -540,14 +552,14 @@ function queryReply(){
 									"<div class='comment-info'>"+
 									" <div class='comment-author'>"+
 											"<a href='#!'>"+data[i].user.userId+"</a>"+
+											"<time style='margin-left:1%'>"+time.toLocaleString()+"</time>"+
 									"</div>"+
-											"<time>"+time.toLocaleString()+"</time>"+
+											data[i].articleReplyContent+
 									"</div>"+
-											"<p>"+data[i].articleReplyContent+" </p>"+
 									" </div>"+
 									" </li>"+
 									"<div>"+
-									"<li style='font-size: 18px' class = 'judge"+i+"'>"+
+									"<li style='font-size: 18px;float:left' class = 'judge"+i+"'>"+
 											"<form action='frontReplyUpdatePage' method='post'>"+
 											"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
 											"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
@@ -594,15 +606,74 @@ function queryReply(){
 }
 
 
+
+function announcementPage(){
+	document.getElementById("searchTitle").value = ""
+	
+	//1.創建ajax對象
+	var xhr = new XMLHttpRequest();
+	//2.註冊回調函數
+	xhr.onreadystatechange = function(){
+		if(this.readyState ==4 ){
+			if(this.status==200){
+				var data = JSON.parse(this.responseText);
+				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
+				var resultText = '';
+				var o = 0;
+				for(var i=0;i<data.length;i++){
+					o++
+					var time = new Date(data[i].date);
+					resultText +=
+						
+						"<div class='media'>"+
+					"<a class='pull-left' href='#!'>"+
+						"<img class='media-object' src='./source/images/blog/post-thumb.jpg' alt='Image'>"+
+					"</a>"+
+					"<div class='media-body'>"+
+						"<h4 class='media-heading'><a href='#!'>"+data[i].title+"</a></h4>"+
+					 "<form action='articleFrontDetail' method='post'>"+
+						"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+						"<div onclick='this.parentNode.submit()'>"+
+						"<p>"+data[i].articleContent+"</p>"+
+						"</div>"+
+						"</form>"+
+					
+						
+					"</div>"+
+					"</div>";
+			   }
+				document.getElementById("sidebar").innerHTML = resultText;
+			}else{
+				alert(this.status);
+			}
+		}
+	}
+	//3.開啟通道
+	xhr.open("post","QueryArticleReport",true)
+	//4.發送請求
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") 
+	xhr.send("status="+2)
+	
+}
+
+
+
+
+
+
+
+
+
 function del(id){
 	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
+		 title: '刪除文章',
+		  text: "確認後無法復原",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Yes, delete it!'
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
 		}).then((result) => {
 		  if (result.isConfirmed) {
 			  var xhr = new XMLHttpRequest();
@@ -630,25 +701,25 @@ function del(id){
 
 function report(id){
 	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
+		 title: '檢舉文章',
+		  text: "確認後無法復原",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: '確定檢舉!'
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
 		}).then((result) => {
-	    	var xhr = new XMLHttpRequest();
-	    	xhr.open("post","forumReport",true);
-	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-	    	var number = document.getElementById("number"+id).value;
-	    	xhr.send("number="+number);
 		  if (result.isConfirmed) {
+			  var xhr = new XMLHttpRequest();
+		    	xhr.open("post","forumReport",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var number = document.getElementById("number"+id).value;
+		    	xhr.send("number="+number);
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
-		      
 		    ).then((result) => {
 		    	queryAll();
 		    })
@@ -659,21 +730,22 @@ function report(id){
 
 function delReply(id){
 	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
+		 title: '刪除留言',
+		  text: "確認後無法復原",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Yes, delete it!'
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
 		}).then((result) => {
-			var xhr = new XMLHttpRequest();
-	    	xhr.open("post","replyDelete",true);
-	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-	    	var articleId = document.getElementById("ArticleId").value;
-	    	var replyId = document.getElementById("replyId"+id).value;
-	    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
 		  if (result.isConfirmed) {
+			  var xhr = new XMLHttpRequest();
+		    	xhr.open("post","replyDelete",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var articleId = document.getElementById("ArticleId").value;
+		    	var replyId = document.getElementById("replyId"+id).value;
+		    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',
@@ -690,21 +762,23 @@ function delReply(id){
 
 function replyReport(id){
 	Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
+		 title: '檢舉留言',
+		  text: "確認後無法復原",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: '檢舉!'
+		  cancelButtonText: '取消',
+		  confirmButtonText: '確認!',
 		}).then((result) => {
-			var xhr = new XMLHttpRequest();
-	    	xhr.open("post","replyReport",true);
-	    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
-	    	var articleId = document.getElementById("ArticleId").value;
-	    	var replyId = document.getElementById("replyId"+id).value;
-	    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
+			
 		  if (result.isConfirmed) {
+			  var xhr = new XMLHttpRequest();
+		    	xhr.open("post","replyReport",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var articleId = document.getElementById("ArticleId").value;
+		    	var replyId = document.getElementById("replyId"+id).value;
+		    	xhr.send("articleId="+articleId+"&"+"replyId="+replyId);
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',
@@ -729,7 +803,6 @@ function addCollect(){
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
 	var articleId = document.getElementById("ArticleId").value;
 	xhr.send("articleId="+articleId);
-	
 	$("#favorite").empty();
 	$("#favorite").append("<button type='button' class='btn btn-danger' onclick ='deleteCollect()'>取消收藏</button>");
 	detailAjax();
@@ -744,25 +817,25 @@ function deleteCollect(){
 	xhr.send("articleId="+articleId);
 	$("#favorite").empty();
 	$("#favorite").append("<button type='button' class='btn bg-gradient-primary' onclick ='addCollect()' >收藏</button>");
-	
 	detailAjax();
 
 }
 
+
 </script>
  <%ArticleBean detail = (ArticleBean)request.getSession().getAttribute("selectDetail"); %>
  <input type="hidden" name="userId" id ="userId" value="<%=Integer.parseInt(session.getAttribute("userId").toString())%>" readonly>
-<div id ="detail">
+<div id ="detail"  style="margin:0 0 0 15%">
 <table >
                <% String[] category = {"全榖雜糧","豆魚蛋肉","蔬菜","水果","乳品","油脂與堅果種子"};%>
             <div class='post'>
-					<h1 class="post-title" style="font-size:30px;margin:0 0 0 8%"><%=detail.getTitle()%>
-					<button type='button' class='btn btn-warning btn-xs' style='margin-left:10px' name='"+data[i].plateformCategoryId+"' onclick='category(this)'>
+					<h1 class="post-title" style="font-size:30px"><%=detail.getTitle()%>
+					<button type='button' class='btn btn-warning btn-xs' style='margin-left:10px' name=<%=detail.getPlateformCategoryId()%> onclick='category(this)'>
 					<%=category[detail.getPlateformCategoryId()-1]%></button></h1>
-		           <%=detail.getArticleContent()%>
-					<div class='post-meta' style='margin-top:50px;text-align:center'>
+		           <div style="margin:0 0 0 4 %"><%=detail.getArticleContent()%>
+					<div class='post-meta' style='margin-top:50px; text-align: left;'>
 					<div id="detailAjax"></div>
-
+					</div>
 					</div>
             </tbody>
 </table>     

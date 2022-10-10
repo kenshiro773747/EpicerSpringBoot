@@ -14,12 +14,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.epicer.model.forum.ArticleBean;
@@ -101,16 +103,20 @@ public class ArticleController {
 
 	@PostMapping("/articleAdd")
 	public String articleAdd(int category, String articleTitle, String articleContent) {
+		int userId = (int) session.getAttribute("userId");
 		ArticleBean article = new ArticleBean();
 		article.setPlateformCategoryId(category);
 		article.setTitle(articleTitle);
 		article.setDate(TimeTest.getTime());
 		article.setArticleContent(articleContent);
-		article.setStatus(0);
+		if(userId==1002){
+			article.setStatus(2);}
+		else {
+			article.setStatus(0);
+		}
 		article.setArticleLike(0);
 		article.setArticleViews(0);
 		article.setArticleReplys(0);
-		int userId = (int) session.getAttribute("userId");
 		ArticleUserBean userID = uService.findByUserId(userId);
 		article.setUser(userID);
 		aService.insert(article);
@@ -134,6 +140,12 @@ public class ArticleController {
 	public String forumReport(int number) {
 		aService.insertReport(1,number);
 		mail.sendToGmail();
+//		mail.forumSendToGmail(mail);
+		return "redirect:/QueryAllPage";
+	}
+	@PostMapping("/announcement")
+	public String announcement(int number) {
+		aService.insertReport(2,number);
 //		mail.forumSendToGmail(mail);
 		return "redirect:/QueryAllPage";
 	}
@@ -213,6 +225,7 @@ public class ArticleController {
 	
 
 	@PostMapping("/articleDelete")
+	@ResponseStatus(HttpStatus.OK)
 	public void articleDelete(int number) {
 		aService.deleteById(number);
 	}
@@ -223,6 +236,7 @@ public class ArticleController {
 
 	
 	@PostMapping("/replyDelete")
+	@ResponseStatus(HttpStatus.OK)
 	public void replyDelete(int replyId, int articleId) {
 		arService.deleteById(replyId);
 		int replys= aService.CountReply(articleId);
@@ -278,10 +292,7 @@ public class ArticleController {
 
 //////////////////////////////////////////////////////////////////////////////////////////	
 	
-	@GetMapping("/forumUser")
-	public String forumUser() {
-		return "forum/forumUserPage";
-	}
+	
 	
 	@GetMapping("/QueryUserArticle")
 	@ResponseBody
@@ -319,6 +330,7 @@ public class ArticleController {
 	 * @return
 	 */
 	@PostMapping("/insertCollect")
+	@ResponseStatus(HttpStatus.OK)
 	public void addRec(int articleId) {
 		ArticleCollectRecBean rec = new ArticleCollectRecBean();
 		
@@ -334,6 +346,7 @@ public class ArticleController {
 	}
 	
 	@PostMapping("/delCollect")
+	@ResponseStatus(HttpStatus.OK)
 	public void delRec(int articleId) {
 		int userId = (int) session.getAttribute("userId");
 		aurService.delete(articleId,userId);
@@ -624,9 +637,15 @@ public class ArticleController {
 	
 	
 
-	@GetMapping("/Scrolltest")
-	public String Scrolltest() {
+	@GetMapping("/forumUser")
+	public String forumUser() {
 		return "forum/formFrontRec";
 	}
+	
+	@GetMapping("/address")
+	public String address() {
+		return "forum/address";
+	}
+	
 	
 }
