@@ -6,6 +6,7 @@
 <%@include file="../frontpartials/frontheaderlink.jsp" %>
 <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=63296382a700c90019f6dc52&product=image-share-buttons" async="async"></script>
 <script language='javascript' src='js/wangEditor.min.js'></script>
+<script language='javascript' src='js/fontawesome.js'></script>
 <link rel="stylesheet" href="css/sweetalert2.min.css">
 </head>
 <body id="body">

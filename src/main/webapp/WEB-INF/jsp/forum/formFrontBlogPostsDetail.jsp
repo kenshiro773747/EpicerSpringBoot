@@ -615,30 +615,26 @@ function announcementPage(){
 			if(this.status==200){
 				var data = JSON.parse(this.responseText);
 				var category = ['全榖雜糧', '豆魚蛋肉', '蔬菜', '水果', '乳品', '油脂與堅果種子'];
-				var resultText = '';
+				var photo = '';
+				var list = '';
 				var o = 0;
+				var w=80;
 				for(var i=0;i<data.length;i++){
 					o++
 					var time = new Date(data[i].date);
-					resultText +=
-						
-						"<div class='media' id ='side' style= 'position:relative'>"+
-					"<a class='pull-left' href='#!'>"+
-					"<img class='media-object' src='./images/公告.jpg' alt='Image' style='height:180px;width:160%'>"+
-					"</a>"+
-					"<div class='media-body'  style= 'position:absolute; left:0;top:0;'>"+
-					 "<form action='articleFrontDetail' method='post'>"+
-						"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-						"<div onclick='this.parentNode.submit()' >"+
-						"<h4  style='margin-top:1.5%;'>"+data[i].title+"</h4>"+
-						"</div>"+
-						"</form>"+
+					photo +="<li><img src='./images/公告.jpg' alt='Image' style='position: relative'>"+
+					"<form action='articleFrontDetail' method='post'>"+
+					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+					"<div onclick='this.parentNode.submit()'>"+
+					"<h3 style='position: absolute; top: 5px; left:"+w+"px;'>"+data[i].title+"</h3>"+
 					"</div>"+
-					"</div>";
-					
+					"</form></li>";
+					list +="<li ></li>";
+					w+=250;
 					
 			   }
-				document.getElementById("sidebar").innerHTML = resultText;
+				document.getElementById("photo").innerHTML = photo;
+				document.getElementById("list").innerHTML = list;
 			}else{
 				alert(this.status);
 			}

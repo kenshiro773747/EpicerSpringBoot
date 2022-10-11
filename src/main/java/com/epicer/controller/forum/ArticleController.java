@@ -644,7 +644,7 @@ public class ArticleController {
 	
 	@GetMapping("/address")
 	public String address() {
-		return "forum/address";
+		return "frontframeblankpgs/index";
 	}
 	
 	

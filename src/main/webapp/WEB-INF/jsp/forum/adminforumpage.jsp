@@ -856,7 +856,7 @@ function announcement(id){
 <!-- ////////////////// 個人主文開始 //////////////////-->
 
 
-<% session.setAttribute("userId", 1002);%>
+<% session.setAttribute("userId", 1006);%>
 
  		
 	        
