@@ -26,6 +26,9 @@ public interface UserRespostity extends JpaRepository<User, Integer> {
 	@Query(value="from User where status =?1")
 	public List<User> checkStatus(int status);
 	
+	@Query(value="from User where userid =?1")
+	public User findUser(int userid);
+	
 	
 	public User findByAccountAndPassword(String account,String password);	
 

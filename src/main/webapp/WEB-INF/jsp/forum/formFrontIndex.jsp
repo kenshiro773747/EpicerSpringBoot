@@ -39,10 +39,13 @@
 			<!-- @@include('blocks/blog-posts.htm') -->
 			<%@include file="formFrontBlogPosts.jsp" %>
       		</div>
-      		<div class="col-md-4">
+      		<div class="col-md-4" style="padding-right: 5%">
+      			<div>
 					<!-- ///////////  文章頁的側邊 -推播專區 ///////////// -->
 				<!-- @@include('blocks/post-sidebar.htm') -->
 				<%@include file="formFrontBlogSidebar.jsp" %>
+      			
+      			</div>
       		</div>
 		</div>
 	</div>

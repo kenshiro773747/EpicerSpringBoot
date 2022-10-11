@@ -14,7 +14,7 @@ import com.epicer.model.forum.ArticleUserBean;
 public class UserService {
 
 	@Autowired
-	private UserRepository uRepo;
+	private forumUserRepository uRepo;
 
 	public ArticleUserBean findByUserId(int userId) {
 		Optional<ArticleUserBean> op = uRepo.findById(userId);

@@ -29,6 +29,8 @@ import com.epicer.model.forum.ArticleCollectRecBean;
 import com.epicer.model.forum.ArticleReplyBean;
 import com.epicer.model.forum.ArticleUserBean;
 import com.epicer.model.forum.WangEditorResponse;
+import com.epicer.model.users.User;
+import com.epicer.model.users.UserRespostity;
 import com.epicer.service.forum.ArticleReplyService;
 import com.epicer.service.forum.ArticleService;
 import com.epicer.service.forum.ArticleUserRecService;
@@ -56,6 +58,9 @@ public class ArticleController {
 	@Autowired
 	private UserService uService;
 
+	@Autowired
+	private UserRespostity uRepo;
+	
 	@Autowired
 	private HttpSession session;
 
@@ -139,8 +144,12 @@ public class ArticleController {
 	@PostMapping("/forumReport")
 	public String forumReport(int number) {
 		aService.insertReport(1,number);
-		mail.sendToGmail();
-//		mail.forumSendToGmail(mail);
+		ArticleBean auser = aService.findByArticleId(number);
+		ArticleUserBean user= auser.getUser();
+		int userId =user.getUserId();
+		
+		User u = uRepo.findUser(userId);
+		mail.forumSendToGmail(u.getAccount());
 		return "redirect:/QueryAllPage";
 	}
 	@PostMapping("/announcement")

@@ -4,7 +4,7 @@
  <style>
  .wrap {	
             width: 250px;
-            height: 200px;
+            height: 180px;
             margin: 0 auto;
             background-color:#F5F5DC;
             position: relative;
@@ -85,8 +85,7 @@
 
 /* 以上是jquery 輪播 */
  
- 
- 
+
  .sidebarFixed{
   z-index: 10;     
   position: fixed;      
@@ -165,12 +164,12 @@ $(function () {
  <!-- ///////////  文章頁的側邊 ///////////// -->
  <!-- ///////////  推播專區 ///////////// -->
  
- 
  <!-- /////////// 申請寄發新文章通知信(輸入頁面) ///////////// -->
-<aside class="sidebar sidebarFixed">
+<aside class=" sidebar sidebarFixed">
 	<!-- Widget Latest Posts -->
 		<h4 class="widget-title" style="margin-top:2em;">公告</h4>
 	<div class="container">
+
 			        <div class="wrap"  style="margin-right:230%">
 			            <a class="slide-arrow right" id="slideNext">
 			                <i class="fa-solid fa-circle-arrow-right"></i>
@@ -183,12 +182,11 @@ $(function () {
 			            <ul class="pages" id = list>
 			            </ul>
 			        </div>
-			    </div>
-	
+	</div>
 	
  <!-- /////////// 文章分類-風格2 (關鍵字方式/可用於食譜) ///////////// -->
 	<!-- Widget tag -->
-	<div class="widget widget-tag"   style="margin-top:2em;">
+	<div class="widget widget-tag" style="margin-top:2em;">
 		<h4 class="widget-title">Tag Cloud</h4>
 		<ul class="widget-tag-list">
 	         <li>
@@ -203,6 +201,7 @@ $(function () {
 	        <li>
 	        <a href="javascript: void(0)" name="3" onclick="category(this)">蔬菜</a>
 	        </li>
+	        </br>
 	        <li>
 	        <a href="javascript: void(0)" name="4" onclick="category(this)">水果</a>
 	        </li>

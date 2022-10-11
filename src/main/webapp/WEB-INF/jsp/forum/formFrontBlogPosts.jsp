@@ -66,7 +66,7 @@ height:46px
 
 
 </style>
-
+<script language='javascript' src='js/infinite-scroll.pkgd.min.js'></script>
 <script>
 
 $(document).ready(function(){
