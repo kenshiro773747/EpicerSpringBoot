@@ -651,10 +651,6 @@ public class ArticleController {
 		return "forum/formFrontRec";
 	}
 	
-	@GetMapping("/address")
-	public String address() {
-		return "frontframeblankpgs/index";
-	}
 	
 	
 }

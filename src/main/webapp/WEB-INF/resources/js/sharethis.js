@@ -960,7 +960,7 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function(d, e) {
     }
     if (st.mobile) {
       return window.open(url, '_blank');
-    } else if (url.indexOf('mailto:') > -1) {
+    } else if (url.indexOf('mailto:') > -1 || url.indexOf('viber') > -1) {
       return document.location = url;
     } else {
       wh = st.getWindowSize().height;
@@ -1261,6 +1261,20 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function(d, e) {
         title: title,
         description: description
       }),
+      iorbix: "https://iorbix.com/m-share?" + st.qs({
+        url: share_url,
+        title: title
+      }),
+      kakao: "https://story.kakao.com/share?" + st.qs({
+        url: share_url
+      }),
+      kindleit: "https://pushtokindle.fivefilters.org/send.php?" + st.qs({
+        url: share_url
+      }),
+      kooapp: "https://www.kooapp.com/create?" + st.qs({
+        title: title,
+        link: share_url
+      }),
       line: "https://lineit.line.me/share/ui?" + st.qs({
         url: share_url,
         text: title || description
@@ -1296,6 +1310,11 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function(d, e) {
       odnoklassniki: "https://connect.ok.ru/dk?" + st.qs({
         'st.cmd': 'WidgetSharePreview',
         'st.shareUrl': share_url
+      }),
+      outlook: "https://outlook.live.com/mail/deeplink/compose?" + st.qs({
+        path: 'mail inbox',
+        subject: subject || "I'd like to share a link with you",
+        body: message || ("" + url)
       }),
       pinterest: "https://pinterest.com/pin/create/button/?" + st.qs({
         description: title,
@@ -1337,9 +1356,21 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function(d, e) {
         text: title,
         to: ''
       }),
+      tencentqq: "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?" + st.qs({
+        url: share_url,
+        title: title,
+        summary: share_url,
+        desc: description,
+        pics: image
+      }),
       threema: "threema://compose?" + st.qs({
         text: share_url,
         id: ''
+      }),
+      trello: "https://trello.com/add-card?" + st.qs({
+        mode: 'popup',
+        url: share_url,
+        desc: description || title
       }),
       tumblr: "https://www.tumblr.com/share?" + st.qs({
         t: title,
@@ -1353,6 +1384,10 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function(d, e) {
       }),
       vk: "https://vk.com/share.php?" + st.qs({
         url: share_url
+      }),
+      viber: "viber://forward?" + st.qs({
+        text: share_url,
+        url: 'viber'
       }),
       weibo: "http://service.weibo.com/share/share.php?" + st.qs({
         title: title,
@@ -1372,6 +1407,14 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function(d, e) {
         to: '',
         subject: title,
         body: share_url
+      }),
+      yummly: "https://www.yummly.com/urb/verify?" + st.qs({
+        url: share_url,
+        title: title,
+        urbtype: 'bookmarklet',
+        type: 'agg',
+        vendor: 'sharethis',
+        image: image
       }),
       xing: "https://www.xing.com/app/user?" + st.qs({
         op: 'share',
@@ -2157,6 +2200,10 @@ st.embeds = st.getEmbeds();
     houzz: '#4DBC15',
     instagram: '#bc2a8d',
     instapaper: '#000000',
+    iorbix: '#364447',
+    kakao: '#F9DD4A',
+    kindleit: '#363C3D',
+    kooapp: '#FACD00',
     line: '#00c300',
     linkedin: '#0077b5',
     livejournal: '#00b0ea',
@@ -2165,6 +2212,7 @@ st.embeds = st.getEmbeds();
     meneame: '#ff6400',
     messenger: '#448AFF',
     odnoklassniki: '#d7772d',
+    outlook: '#3070CB',
     patreon: '#F96854',
     pinterest: '#CB2027',
     print: '#222222',
@@ -2181,13 +2229,16 @@ st.embeds = st.getEmbeds();
     spotify: '#1ED760',
     surfingbird: '#6dd3ff',
     telegram: '#0088cc',
+    tencentqq: '#5790F7',
     threema: '#000000',
+    trello: '#0D63DE',
     tiktok: '#4c4c4c',
     tripadvisor: '#1ABC9C',
     tumblr: '#32506d',
     twitch: '#6441A4',
     twitter: '#55acee',
     vk: '#4c6c91',
+    viber: '#645EA4',
     vimeo: '#29B6F6',
     wechat: '#4EC034',
     weibo: '#ff9933',
@@ -2197,6 +2248,7 @@ st.embeds = st.getEmbeds();
     yelp: '#d32323',
     youtube: '#FF0000',
     yahoomail: '#720e9e',
+    yummly: '#E16120',
     zillow: '#006aff'
   };
 
@@ -2550,6 +2602,10 @@ st.embeds = st.getEmbeds();
     houzz: img('houzz.svg'),
     instagram: img('instagram.svg'),
     instapaper: img('instapaper.svg'),
+    iorbix: img('iorbix.svg'),
+    kakao: img('kakao.svg'),
+    kindleit: img('kindleit.svg'),
+    kooapp: img('kooapp.svg'),
     line: img('line.svg'),
     linkedin: img('linkedin.svg'),
     livejournal: img('livejournal.svg'),
@@ -2558,6 +2614,7 @@ st.embeds = st.getEmbeds();
     meneame: img('meneame.svg'),
     messenger: img('messenger.svg'),
     odnoklassniki: img('odnoklassniki.svg'),
+    outlook: img('outlook.svg'),
     patreon: img('patreon.svg'),
     pinterest: img('pinterest.svg'),
     print: img('print.svg'),
@@ -2576,12 +2633,14 @@ st.embeds = st.getEmbeds();
     telegram: img('telegram.svg'),
     tencentqq: img('tencentqq.svg'),
     threema: img('threema.svg'),
+    trello: img('trello.svg'),
     tiktok: img('tiktok.svg'),
     tripadvisor: img('tripadvisor.svg'),
     tumblr: img('tumblr.svg'),
     twitch: img('twitch.svg'),
     twitter: img('twitter.svg'),
     vk: img('vk.svg'),
+    viber: img('viber.svg'),
     vimeo: img('vimeo.svg'),
     wechat: img('wechat.svg'),
     weibo: img('weibo.svg'),
@@ -2591,6 +2650,7 @@ st.embeds = st.getEmbeds();
     yahoomail: img('yahoomail.svg'),
     yelp: img('yelp.svg'),
     youtube: img('youtube.svg'),
+    yummly: img('yummly.svg'),
     zillow: img('zillow.svg')
   };
 
@@ -2618,6 +2678,10 @@ st.embeds = st.getEmbeds();
     houzz: img('houzz-white.svg'),
     instagram: img('instagram-white.svg'),
     instapaper: img('instapaper-white.svg'),
+    iorbix: img('iorbix-white.svg'),
+    kakao: img('kakao-white.svg'),
+    kindleit: img('kindleit-white.svg'),
+    kooapp: img('kooapp-white.svg'),
     line: img('line-white.svg'),
     linkedin: img('linkedin-white.svg'),
     livejournal: img('livejournal-white.svg'),
@@ -2626,6 +2690,7 @@ st.embeds = st.getEmbeds();
     meneame: img('meneame-white.svg'),
     messenger: img('messenger-white.svg'),
     odnoklassniki: img('odnoklassniki-white.svg'),
+    outlook: img('outlook-white.svg'),
     patreon: img('patreon-white.svg'),
     pinterest: img('pinterest-white.svg'),
     print: img('print-white.svg'),
@@ -2643,13 +2708,16 @@ st.embeds = st.getEmbeds();
     surfingbird: img('surfingbird-white.svg'),
     telegram: img('telegram-white.svg'),
     telegram: img('telegram-white.svg'),
+    tencentqq: img('tencentqq-white.svg'),
     threema: img('threema-white.svg'),
+    trello: img('trello-white.svg'),
     tiktok: img('tiktok-white.svg'),
     tripadvisor: img('tripadvisor-white.svg'),
     tumblr: img('tumblr-white.svg'),
     twitch: img('twitch-white.svg'),
     twitter: img('twitter-white.svg'),
     vk: img('vk-white.svg'),
+    viber: img('viber-white.svg'),
     vimeo: img('vimeo-white.svg'),
     wechat: img('wechat-white.svg'),
     weibo: img('weibo-white.svg'),
@@ -2660,6 +2728,7 @@ st.embeds = st.getEmbeds();
     ycombinator: img('ycombinator-white.svg'),
     yelp: img('yelp-white.svg'),
     youtube: img('youtube-white.svg'),
+    yummly: img('yummly-white.svg'),
     zillow: img('zillow-white.svg')
   };
 
@@ -2700,9 +2769,9 @@ st.embeds = st.getEmbeds();
 
   st = window.__sharethis__;
 
-  st.networks = ['airbnb', 'amazon', 'blogger', 'blm', 'buffer', 'diaspora', 'digg', 'discord', 'douban', 'email', 'evernote', 'etsy', 'facebook', 'flipboard', 'getpocket', 'github', 'gmail', 'googlebookmarks', 'hackernews', 'houzz', 'instapaper', 'line', 'linkedin', 'livejournal', 'mailru', 'meneame', 'messenger', 'odnoklassniki', 'pinterest', 'print', 'qzone', 'reddit', 'refind', 'renren', 'sharethis', 'skype', 'sms', 'snapchat', 'surfingbird', 'telegram', 'threema', 'tiktok', 'tripadvisor', 'tumblr', 'twitter', 'vk', 'vimeo', 'wechat', 'weibo', 'whatsapp', 'wordpress', 'xing', 'yahoomail', 'zillow'];
+  st.networks = ['airbnb', 'amazon', 'blogger', 'blm', 'buffer', 'diaspora', 'digg', 'discord', 'douban', 'email', 'evernote', 'etsy', 'facebook', 'flipboard', 'getpocket', 'github', 'gmail', 'googlebookmarks', 'hackernews', 'houzz', 'instapaper', 'iorbix', 'kakao', 'kindleit', 'kooapp', 'line', 'linkedin', 'livejournal', 'mailru', 'meneame', 'messenger', 'odnoklassniki', 'outlook', 'pinterest', 'print', 'qzone', 'reddit', 'refind', 'renren', 'sharethis', 'skype', 'sms', 'snapchat', 'surfingbird', 'telegram', 'tencentqq', 'threema', 'tiktok', 'trello', 'tripadvisor', 'tumblr', 'twitter', 'vk', 'viber', 'vimeo', 'wechat', 'weibo', 'whatsapp', 'wordpress', 'xing', 'yahoomail', 'yummly', 'zillow'];
 
-  st.shareNetworks = ['blm', 'blogger', 'buffer', 'diaspora', 'digg', 'douban', 'email', 'evernote', 'facebook', 'flipboard', 'getpocket', 'gmail', 'googlebookmarks', 'hackernews', 'instapaper', 'line', 'linkedin', 'livejournal', 'mailru', 'meneame', 'messenger', 'odnoklassniki', 'pinterest', 'print', 'qzone', 'reddit', 'refind', 'renren', 'sharethis', 'skype', 'sms', 'surfingbird', 'telegram', 'threema', 'tumblr', 'twitter', 'vk', 'wechat', 'weibo', 'whatsapp', 'wordpress', 'xing', 'yahoomail'];
+  st.shareNetworks = ['blm', 'blogger', 'buffer', 'diaspora', 'digg', 'douban', 'email', 'evernote', 'facebook', 'flipboard', 'getpocket', 'gmail', 'googlebookmarks', 'hackernews', 'instapaper', 'iorbix', 'kakao', 'kindleit', 'kooapp', 'line', 'linkedin', 'livejournal', 'mailru', 'meneame', 'messenger', 'odnoklassniki', 'outlook', 'pinterest', 'print', 'qzone', 'reddit', 'refind', 'renren', 'sharethis', 'skype', 'sms', 'surfingbird', 'telegram', 'tencentqq', 'threema', 'trello', 'tumblr', 'twitter', 'vk', 'viber', 'wechat', 'weibo', 'whatsapp', 'wordpress', 'xing', 'yahoomail', 'yummly'];
 
   st.followNetworks = ['airbnb', 'amazon', 'blogger', 'digg', 'discord', 'etsy', 'facebook', 'flipboard', 'github', 'houzz', 'instagram', 'linkedin', 'medium', 'messenger', 'odnoklassniki', 'patreon', 'pinterest', 'quora', 'reddit', 'snapchat', 'soundcloud', 'spotify', 'telegram', 'tiktok', 'tripadvisor', 'tumblr', 'twitch', 'twitter', 'vimeo', 'vk', 'wechat', 'weibo', 'yelp', 'youtube', 'zillow'];
 
@@ -3377,6 +3446,11 @@ __stdos__.logger = {
                           if(res.dmd === "true") {
                             window.__sharethis__.js("https://platform-api.sharethis.com/dmd.js")
                           }
+
+                          if(res.atlas) {
+                            window.__sharethis__.js("https://platform-api.sharethis.com/atlas-exp.js")
+                          }
+
                         }
                         j ? j() : null
                       } catch(e) {
@@ -5275,4 +5349,4 @@ __stdos__.logger = {
 
 }).call(this);
 
-(function(){window.__sharethis__.md5="ddf6c95d3b8db57be44cc28c0ba87350";})();
+(function(){window.__sharethis__.md5="b762e69cb0c8c1bafe388d131bae3675";})();
