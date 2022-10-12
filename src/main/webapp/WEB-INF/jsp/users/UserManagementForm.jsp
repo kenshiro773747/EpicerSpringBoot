@@ -101,9 +101,10 @@
               <tr>
                 <th width="30%">Password</th>
                 <td width="2%">:</td>
-                <td><input type="text" id="password" name="password" value="${user.getPassword()}" required >
+                <td><input type="password" id="password" name="password"  placeholder="●●●●●●●●"  required >
 <span class="msg">${show.password.getMessage()}</span>
 <span class="msg" id="sp1"></span></td>
+<input type="hidden" id="oldpassword" name="oldpassword" value="${user.getPassword()}" >
               </tr>
               <tr>
                 <th width="30%">Phone</th>
@@ -117,6 +118,8 @@
                 <td width="2%">:</td>
                 <td>
                 <div class="twzipcode"></div>
+  <span  class="msg" id="sp3"></span><br>
+  <span  class="msg" id="sp4"></span>
   </td>
               </tr>
                <tr>
@@ -124,11 +127,11 @@
                 <td width="2%">:</td>
                 <td><input type="text" id="road" name="road" value="${user.getAddress()}" required>
 <span class="msg">${show.address.getMessage()}</span>
-<span class="msg" id="sp5"></span></td>
+<span class="msg" id="sp9"></span></td>
               </tr>
               <tr>
               <td colspan="3" style="
-  text-align: center;"><input type="file" id="myfile" name="myfile"></td>
+  text-align: center;"><input type="file" id="myfile" name="myfile" required></td>
               </tr>
             </table>
           </div>
@@ -137,10 +140,12 @@
           <div style="height: 50px;display: flex;
   justify-content: center;
   align-content: center;">
-<input type="submit"  name="submit" value="確認">
-<input type="submit" name="submit"  value="返回">
-</div>
+<input type="submit" id="commit" name="submit" value="確認">
             </form>
+</div>
+<form action="/userback" method="post">
+<input type="submit" name="submit"  value="返回">
+</form>
         </div>
       </div>
     </div>
@@ -180,11 +185,14 @@
     </script>
     <script>
     $(function(){
+    	//當password = null 時，password value=oldpassword
+    	$('#password')
+    	
     //居住路段必填 判斷 非空 觸發 onblur onsubmit
     $(".twzipcode").on('change',function(){
      let county = twzipcode.get('county');
 		  let district = twzipcode.get('district');
-		  $('#road').attr("value",county+district);
+		  $('#road').prop("value",county+district);
    });
     });
     </script>

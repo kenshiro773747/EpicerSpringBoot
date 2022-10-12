@@ -1,16 +1,38 @@
 package com.epicer.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 
 public class Tools {
+	
+	private BCryptPasswordEncoder bc =new BCryptPasswordEncoder();
+	
 	public Tools() {
 		// TODO Auto-generated constructor stub
+	}
+
+	
+	public String getEncodePassword(String rawPassword) {
+		String encodePassword = bc.encode(rawPassword);		
+//	    boolean result = bc.matches(rawPassword,encodePassword);
+	    System.out.println(encodePassword);
+//	    System.out.println(result);
+	    return encodePassword;
+	}
+	
+	public boolean getComparaion(String rawPassword,String encodePassword) {
+	    boolean result = bc.matches(rawPassword,encodePassword);
+	    System.out.println(rawPassword);
+	    System.out.println(encodePassword);
+	    System.out.println(result);
+	    return result;
 	}
 	
 	//產生亂數
@@ -135,6 +157,12 @@ public class Tools {
 	}
 		
 		
+	public Date dateFromLong(Long mili) throws ParseException {
+		        return new Date(mili);  
+		    }
+		
+		
+		
 		public String StringDateFromDate(Date date) {
 			SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
 		    String strdate = sdf.format(date);
@@ -170,16 +198,40 @@ public class Tools {
 		
 		
 		
+		//狀態說明
+		public String getStatusDes(int status) { //0 1 2 3 4
+			String[] StatusDes = {"管理員","正式會員","臨時會員","none","已停權"};
+			String des=StatusDes[status];
+			System.out.println(des);
+			return des;
+			
+		}
+		
+		
+		//狀態編碼
+		public int getStatusDes(String  statusDes) {
+		int status=11;
+		String[] StatusDes = {"管理員","正式會員","臨時會員","已停權"};
+		for(int i=0;i<StatusDes.length;i++) {
+			if(statusDes.equals(StatusDes[i])) {
+				status=i;
+			}
+		}
+		return status;
+		}
+		
+		
 			
 			public String getGenderName(int gender) {
-			    String gendername =" ";
+			    String gendername ="";
 				if(gender == 1) {
-					gendername="女性";
-					return gendername;
+					gendername+="女性";
+				}else if(gender==0){
+					gendername+="男性";
 				}else {
-					gendername="男性";
-					return gendername;
+					gendername +=" "; 
 				}
+				return gendername;
 			}
 		
 		
@@ -216,7 +268,7 @@ public class Tools {
 				for(int i =0 ;i<allcities.length;i++) {
 					if(cityName.equals(allcities[i])) {
 						result = i;
-						return result;
+						return result+1;
 					}
 				}
 				return 0;

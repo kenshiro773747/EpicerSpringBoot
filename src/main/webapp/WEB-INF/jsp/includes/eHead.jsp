@@ -134,6 +134,9 @@
 			</div>
 		</nav>
 		<!-- End 上方 Header-Navbar -->
+<<<<<<< HEAD
+			
+=======
 <!-- 
 						<li class="nav-item d-flex align-items-center"><a
 							href="javascript:;"
@@ -251,3 +254,4 @@
 			</div>
 		</nav>
 		<!-- End 上方 Header-Navbar -->
+>>>>>>> branch 'master' of https://github.com/sakanaki/EpicerSpringBoot.git

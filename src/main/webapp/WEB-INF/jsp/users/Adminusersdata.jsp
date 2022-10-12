@@ -1,12 +1,12 @@
 <%@ page import="java.util.*,com.epicer.model.users.*,com.epicer.util.*"  language="java" contentType="text/html; charset=UTF-8"
- pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh">
 
 <head>
 <meta charset="utf-8" />
 <meta name="viewport"
- content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Epicer Admin System</title>
 
 <!-- eLindHead (開始) -->
@@ -73,164 +73,239 @@
   border-radius: 5px;
   }
   
-  
+  button{
+  background-color:#fff;
+  opacity: 1;
+  margin: 15px;
+  width: 100px;
+  height: 3em;
+  padding: 8px;
+  border: 1px  solid transparents;
+  border-radius: 5px;
+  }
+ 
+   
    .down{
      margin-left: auto;
   margin-right: auto;
     }
     
     </style>
+    
 </head>
-
 <body class="g-sidenav-show   bg-gray-100">
-
- <!-- ////////////////// 介面最外層框架 //////////////////-->
- <div class="min-height-300 bg-primary position-absolute w-100"></div>
- <!-- ////////////////// Side Navber (開始) //////////////////-->
- <%@include file="../includes/eSidenavAdmin.jsp"%>
- <!-- ////////////////// Side Navber (結束) //////////////////-->
- <!-- //////////////////主畫面框架(開始) ////////////////// -->
- <main class="main-content position-relative border-radius-lg ">
-  <!-- ////////////////// (Header)Start 上方 Navbar 上方  (要加裝在個人頁面)(從includes/eHead.jsp要拉一個檔案到自己資料夾改)////////////////// -->
-  <%@include file="../includes/eHead.jsp"%>
-  <!-- ////////////////// End 上方 Navbar //////////////////-->
+	<!-- ////////////////// 介面最外層框架 //////////////////-->
+	<div class="min-height-300 bg-primary position-absolute w-100"></div>
+	<!-- ////////////////// Side Navber (開始) //////////////////-->
+	<%@include file="../includes/eSidenavAdmin.jsp"%>
+	<!-- ////////////////// Side Navber (結束) //////////////////-->
+	<!-- //////////////////主畫面框架(開始) ////////////////// -->
+	<main class="main-content position-relative border-radius-lg ">
+		<!-- ////////////////// (Header)Start 上方 Navbar 上方  (要加裝在個人頁面)(從includes/eHead.jsp要拉一個檔案到自己資料夾改)////////////////// -->
+		<%@include file="../includes/eHead.jsp"%>
+		<!-- ////////////////// End 上方 Navbar //////////////////-->
 <!-- ////////////////// 個人主文開始 //////////////////-->
-<%
-List<User> list = (List<User>)session.getAttribute("list");
-if(list == null){ %>
+<br>
+<br>
+<br>
 <form action="user" method="post">
-        <h4 style="margin-left:200px;">層級</h4>
-        <div style="margin-left:200px">
-        <select name="status" required>
+        <div style="margin-left:190px;margin-top:150px">
+        <select name="status" id= status required>
+         <option  value="7">所有使用者</option>
                     <option  value="0">管理者</option>
-                    <option  value="1">會員</option>
-                     <option  value="4">黑名單</option>
+                    <option  value="1">正式會員</option>
+                      <option  value="2">臨時會員</option>
+                     <option  value="4">已停權</option>
                     </select>
-                    </div>
-       <input type="submit" name="submit" value="搜尋" style="margin-left:250px;margin-top:15px">
+<input type="submit" name="submit" value="搜尋" style="margin-left:10px;margin-top:15px">
 </form>
-<form action="back" method="post">
-        <input type="submit" name="submit" value="返回" style="margin-left:900px;margin-top:15px"  >
-        </form>
-<!--第二層--->
-
-<% }else{ 
-ListIterator it = list.listIterator();
-Tools tools= new Tools();
-Message msg = (Message)request.getAttribute("msg"); //delete
-String info ="";
-if(msg == null){
- info="";
-}else{
- info=msg.getMessage();
-} %>
-<form action="user" method="post">
- <h4 id="p" value="<%= info %>" style="margin-left:250px;color:red"><%= info %></h4>
-        <h4 style="margin-left:200px;">層級</h4>
-        <div style="margin-left:200px">
-        <select name="status" required >
-                    <option  value="0">管理者</option>
-                    <option  value="1">會員</option>
-                      <option  value="4">黑名單</option>
-                    </select>&emsp;&emsp;<input type="submit" name="submit" value="搜尋" >
-                    </div>
-</form>  
- <hr>
- <form action="delete" method="post" id="deleteform">
-  <table class="center" id="table_id">
+</div>
+<br>
+  <table class="center" id="table_id" style="width:1800px;margin-left:190px">
             <thead>
-              <tr>
-                <th>編號</th>
-                <th>層級</th>
-                <th>姓名</th>
-                <th>暱稱</th>
+              <tr style="text-align:center;font-size:20px">
+               <th>頭像</th>
+                <th>使用者</th>
+                <th>權限</th>
                 <th>性別</th>
-              <th>生日</th>
-                <th>帳號</th>
-                <th>密碼</th>
-               <th>電話</th>
-               <th>城市</th>
-                <th>區域</th>
-                <th>路段</th>
+                <th>出生年/月/日</th>
+               <th>連絡電話</th>
+               <th>縣市</th>
+                <th>市鄉鎮區</th>
+                <th>完整地址</th>
                 <th>上次登錄</th>
-                <th>再見</th>
+                <th>選擇</th>
               </tr>
             </thead>
-            <%   while(it.hasNext()){
-User user = (User)it.next();%> 
  <tbody>
+          <%
+List<EpicerUser> list = (List<EpicerUser>)session.getAttribute("list");
+ListIterator it = list.listIterator();
+Tools tools= new Tools();
+while(it.hasNext()){
+    EpicerUser user = (EpicerUser)it.next();
+%>
+ <!-- 頭像 -->
               <tr style="height: 75px;">
+              <td>
+               <span><img src="<%= user.getAvatar() %>" style="width:50px"></span>
+              </td>
+              
+             <!-- 使用者 -->
+                <td style="text-align:center">
+                <span><%= user.getName() %></span><br>
+                  <span><%= user.getAccount() %></span>
+                </td>
                 
-                <td><a href="select/${user.getId()}"><%= user.getId() %></a></td>
-               <td><%= user.getStatus() %></td>
-               <td><%= user.getName() %></td>
-                <td><%= user.getNickname() %></td>
-               <td><%= user.getGenderName(user.getGender())%></td>
-               <td><%= tools.getStringDate(user.getBirth()) %></td>
-                <td><%= user.getAccount() %></td>
-               <td><%= user.getPassword() %></td>
+                <!-- 權限 --> 
+               <td>
+               <span><%= tools.getStatusDes(user.getStatus()) %></span><br>
+               <span>ID : <%= user.getId() %></span>
+               </td>
+               
+                 <!-- 性別 --> 
+               <td><%= tools.getGenderName(user.getGender())%></td>
+               
+                <!-- 出生年/月/日--> 
+               <td>
+               <span><%= tools.getStringDate(user.getBirth() )%></span><br>
+               <span>年齡：<%=tools.getAge(user.getBirth()) %> 歲</span>
+               </td>
+               
+               <!-- 連絡電話--> 
                 <td><%= user.getPhone() %></td>
+                
+                <!-- 縣市 --> 
                <td><%= user.getCityName(user.getCity())%></td>
+               
+               <!--市鄉鎮區--> 
                 <td><%= user.getTownship() %></td>
+                
+                 <!--完整地址--> 
                <td><%= user.getAddress() %></td>
-<%                      String logindate =null;
-                     logindate = tools.getStringDate(user.getLogindate());%>
-                <td><%= logindate %></td>
-  <td><input type="radio" name="userid" value="<%= user.getId() %>"  required></td>
+               
+                <!--上次登錄--> 
+                <td><%= tools.getStringDate(user.getLogindate()) %></td>
+                
+                <!--停權--> 
+  <td><input type="radio" id="selectedid" name="userid" value="<%= user.getId() %>"   style="width:16px"></td>
               </tr>
-            </tbody>
             <% }%>
- </table>
-      <input type="text" name="password" id="password" placeholder="員工密碼"  style="margin-left:900px;margin-top:15px" required>
-      <input type="submit" name="submit" id="delete" value="刪除"  style="margin-left:900px;margin-top:15px">
-       </form>
+            </tbody>
+            <tr>
+            <td colspan="11"> <input type="text" name="password" id="password" placeholder="員工密碼"  style="width:150px;text-align: center;" required></td>
+            </tr>
+            <tr>
+            <td colspan="11">
+             <button name="submit" id="delete" value="刪除"  style="float:left;margin-left:42%">刪除</button>      
 <form action="back" method="post">
-         <input type="submit" name="submit" value="返回" style="margin-left:900px;margin-top:15px"  >
-         </form>
-</div>
+        <input type="submit" name="submit" value="返回" style="margin-right:40%" >
+        </form>
+            </td>
+            </tr>
+ </table>
+     
 <!-- ////////////////// 個人主文結束 //////////////////-->
-  <!--////////////////// Footer(開始) //////////////////-->
-  <%@include file="../includes/eFooter.jsp"%>
-  <!-- ////////////////// Footer(結束) //////////////////-->
+		<!--////////////////// Footer(開始) //////////////////-->
+		<%@include file="../includes/eFooter.jsp"%>
+		<!-- ////////////////// Footer(結束) //////////////////-->
 
-  </div>
-  <!-- ////////////////// 中間主畫面(結束) ////////////////// -->
- </main>
- <!-- ////////////////// 主畫面框架(結束) //////////////////-->
+		</div>
+		<!-- ////////////////// 中間主畫面(結束) ////////////////// -->
+	</main>
+	<!-- ////////////////// 主畫面框架(結束) //////////////////-->
 
- <!-- ////////////////// (右上設定鈕)Sidenav Type 調整樣式 ////////////////// -->
- <!-- ////////////////// Sidebar Backgrounds 開始 //////////////////-->
- <%@include file="../includes/eSidenavTypeSetting.jsp"%>
- <!-- ////////////////// Sidebar Backgrounds 結束 ////////////////// -->
+	<!-- ////////////////// (右上設定鈕)Sidenav Type 調整樣式 ////////////////// -->
+	<!-- ////////////////// Sidebar Backgrounds 開始 //////////////////-->
+	<%@include file="../includes/eSidenavTypeSetting.jsp"%>
+	<!-- ////////////////// Sidebar Backgrounds 結束 ////////////////// -->
 
- <!-- ////////////////// 框架Script url (開始)(不能少) ////////////////// -->
- <%@include file="../includes/eScriptForBody.jsp"%>
- <!-- ////////////////// 框架Script (結束) //////////////////-->
-      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<!-- ////////////////// 框架Script url (開始)(不能少) ////////////////// -->
+	<%@include file="../includes/eScriptForBody.jsp"%>
+	<!-- ////////////////// 框架Script (結束) //////////////////-->
+  <script
+  src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-      <script src="js/sweetalert2.all.min.js"></script>
-    <script>
+<script>
     $(document).ready( function () {
         $('#table_id').DataTable(); 
+        
+        
         $("#delete").click(function(){
-         var password = $("#password").val();
-         if($.trim(password) == ""){
-          Swal.fire({
-             icon: 'error',
-             title: 'Oops...',
-             text: '請先輸入密碼',
-           })
-          return;
-         }
-         if(confirm("是否確定刪除")){
-          $('#deleteform').submit();
-          return true;
-         }else{
-          return false;
-         }
-        })    //click   
-    } ); //底
+        	
+        	var password = $("#password").val();
+        	var vid =  $("input[type='radio']:checked").val();
+        	console.log(vid);
+        	
+        	if($.trim(password) == "" || vid == null){
+        		
+        		Swal.fire({
+        			  icon: 'error',
+        			  title: 'Oops...',
+        			  text: '請輸入密碼及選擇用戶',
+        			})
+        		return;
+        		
+        	}else{
+        		
+        		Swal.fire({
+        			  title: '是否確定將該用戶停權？',
+        			  showDenyButton: true,
+        			  showCancelButton: true,
+        			  confirmButtonText: '是',
+        			  denyButtonText: '否',
+        			})
+        			
+        			.then((result) => {
+        			  /* Read more about isConfirmed, isDenied below */
+        				  
+        		 			var vpassword = $("#password").val();
+        		        	var id =  $("input[type='radio']:checked").val();
+        		        	console.log(id);
+        		        	
+        		        	
+        		        	var user ={
+        		        			 "id":''+id,
+        		   				  "password":''+vpassword
+        		        	} 
+        		        		
+        		        		$.ajax({
+        					  type:"POST",
+        					  url:"/admin/delete2",
+        					  contentType:'application/json',
+        					  data:JSON.stringify(user),
+        					  success:function(data){
+        						  console.log(data);
+        						  
+        						 if(data.code =='1'){
+        							 
+        							Swal.fire({
+        								  icon: 'error',
+        								  title: 'Oops...',
+        								  text: '密碼錯誤，請重新嘗試!',
+        								})
+        								return;
+        							
+        						  }else{
+        							  
+        							  Swal.fire({
+        								  icon: 'success',
+        								  title: '修改成功！',
+        								  text: '修改成功，請重整確認狀態!',
+        								})
+        								return;
+        						  }
+        					  },//success
+        					  error:function(err){console.log(err)},
+        				  }); //ajax
+        			}) //then
+		     return;
+        	}
+        })//click   
+    }); //底
     </script>
 </body>
 </html>
-<% } %>

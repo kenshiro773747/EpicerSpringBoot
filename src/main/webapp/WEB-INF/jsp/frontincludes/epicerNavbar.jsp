@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,7 +64,8 @@ li {
 					<li class="nav-item"><a class="nav-link" href="http://localhost:8091/queryusercart">購物車</a></li>
 					
 					 <li class="nav-item">
-                     <form name='form1' action='checkuserstatus' method='post'>
+                     <form name='form1' action='${pageContext.request.contextPath}
+                     /checkuserstatus' method='post'>
                         <a class="nav-link" href="javascript:document.form1.submit();">會員登入</a>
                           </form>
                     </li>

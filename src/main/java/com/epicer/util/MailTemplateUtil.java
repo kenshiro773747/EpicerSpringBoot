@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import com.epicer.model.users.User;
+import com.epicer.model.users.EpicerUser;
 
 import freemarker.template.Template;
 
@@ -25,20 +25,18 @@ public class MailTemplateUtil {
     @Autowired
     private FreeMarkerConfigurer freeMarkerConfigurer;
 
-    public void sendMessageWithFreemarkerTemplate(String tempName,User user) {
+    public void sendMessageWithFreemarkerTemplate(String tempName,EpicerUser user) {
         MimeMessage message = javaMailSender.createMimeMessage();
 
         try {
             MimeMessageHelper mailsender = new MimeMessageHelper(message, true,"UTF-8");
-
             mailsender.setTo(user.getAccount());
-            mailsender.setSubject("Hello!"+" "+user.getName()+" "+"Welcome to join Epicer!!!!");
+            mailsender.setSubject("【Epicer 歡迎您】"+" "+"您好"+" "+user.getName());
 
             HashMap<String, Object> models = new HashMap<>();
             models.put("name","freemarker");
-            models.put("user",user);
-//            Context context = new Context();
-//            context.setVariable("user",user);
+            models.put("vertify",user);
+            System.out.println(user.getId());
             Template template = freeMarkerConfigurer.getConfiguration().getTemplate(tempName);
             String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, models);
             
@@ -49,4 +47,6 @@ public class MailTemplateUtil {
         	System.out.println("出示了阿北");
         }
     }
+    
+    
 }

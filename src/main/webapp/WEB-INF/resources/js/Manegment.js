@@ -1,11 +1,22 @@
 $(function(){
+	
+	
+	$('#commit').on('click',function(){
+		var resultP = checkPassword();
+		var resultp = checkPhone();
+			selectcity();
+	checkTownship();
+	checkRoad();
+	
+	})
+	
 
     $('#myfile').on('change', function(e){      
   const file = this.files[0];//將上傳檔案轉換為base64字串
       
   const fr = new FileReader();//建立FileReader物件
   fr.onload = function (e) {
-    $('img').attr('src', e.target.result);//读取的结果放入圖片
+    $('#avatar').attr('src', e.target.result);//读取的结果放入圖片
   };
       
  // 使用 readAsDataURL 將圖片轉成 Base64
@@ -25,6 +36,9 @@ $('#password').on('blur',
                     if (password ==null || password ==""){
                 var msg = "密碼必須填寫";  
                 $('#sp1').text(msg);  
+                var oldpassword = $('#oldpassword').val();
+                console.log(oldpassword);
+                $('#password').prop("value",oldpassword);
                 return false
             }else{
                  var eng =new RegExp("[a-zA-z]"); //要改成有中文不行
@@ -98,38 +112,51 @@ $('#phone').on('blur', function(){
         }
 
 
-
-
-
 //居住城市必填 判斷 必選 觸發 onblur onsubmit
-let city = document.querySelector("#city");  //select
-    city.addEventListener("blur", selectcity);
+ $("#phone").on('focus',function(){
+	selectcity();
+	checkTownship();
+	checkRoad();
+	
+})
+
+//let district = twzipcode.get('district');
+/*    $('county').on('blur',function(){
+        checkTownship()
+    })*/
+    
     
      function selectcity() {
-      const result = city.options[city.selectedIndex].value;
-      if(result == 0){
+     var county = twzipcode.get('county');
+      if(typeof  county ==="string"){
+	 if( county == null  ||  county == "" ){
      var msg= "居住城市必填";
-          $('#sp3').text(msg);
-          return false;
-    }else{
-      var msg= "OK";
-          $('#sp3').text(msg);
-          return true;
+          $('#sp3').html(msg);
+          return false;		
+	}else{
+		  var msg= "ok";
+          $('#sp3').html(msg);
+          return true;		
+	}
+}else {//非字串
+	var msg= "居住城市必填";
+          $('#sp3').html(msg);
+          return false;	
+}
     }
     
-    }
-    
-    
+    /*
     //居住區域必填 非空  觸發 onblur onsubmit
     $('#township').on('blur',function(){
         checkTownship()
+        selectcity()
     })
-    
+    */
     
     function checkTownship(){
-        let township = $('#township').val()
-        if(typeof township ==="string"){
-            if(township == null  || township == "" ){
+	let district = twzipcode.get('district')
+        if(typeof district ==="string"){
+            if(district == null  || district == "" ){
                 var msg ="區域必填";
                 $('#sp4').text(msg)
                 return false
@@ -145,23 +172,17 @@ let city = document.querySelector("#city");  //select
         }
        
       }
-    
+     
     
      //居住路段必填 判斷 非空 觸發 onblur onsubmit
-         $(".twzipcode").on('change',function(){
-          let county = twzipcode.get('county');
-   		  let district = twzipcode.get('district');
-   		  $('#road').attr("value",county+district);
-        });
-        
-        
+        /*
         $('#road').on('blur',function(){
-        checkRoad()
+        checkRoad();
         });
-        
+        */
         
         function checkRoad(){
-            let road = $('#road').val()
+            let road = $('#road').val();
             if(typeof road ==="string"){
                 if(road == null  || road == "" ){
                     var msg ="路段必填";
@@ -177,6 +198,7 @@ let city = document.querySelector("#city");  //select
                 $('#sp9').text(msg)
                 return false
             }
-          
           }
-          })
+         
+          
+          })//底

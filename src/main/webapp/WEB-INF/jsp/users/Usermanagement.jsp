@@ -57,7 +57,7 @@
       <div class="col-lg-4">
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
-            <img class="profile_img" src="${user.getAvatar()}" alt="UserAvatar">
+            <img  class="profile_img" src="${user.getAvatar()}" alt="UserAvatar">
             <h3>${user.getName()}</h3>
           </div>
           <div class="card-body">
@@ -92,7 +92,7 @@
               <tr>
                 <th width="30%">Password</th>
                 <td width="2%">:</td>
-                <td>${user.getPassword()}</td>
+                <td>●●●●●●●●</td>
               </tr>
               <tr>
                 <th width="30%">Phone</th>
@@ -132,8 +132,12 @@
   align-content: center;">
 <input type="submit"  name="submit" value="修改">
 <input type="submit" name="submit"  value="返回">
-</div>
             </form>
+<form action="userdownload" method="post">
+<input type="hidden" name="userid" value="${user.getId()}">
+<input type="submit" name="submit"  value="PDF">
+</form>
+</div>
         </div>
       </div>
     </div>

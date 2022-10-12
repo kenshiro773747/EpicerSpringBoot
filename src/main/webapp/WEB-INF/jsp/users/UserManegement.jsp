@@ -35,7 +35,7 @@
               
 <!-- Student Profile -->
 <form action="modify" method="post">
-<div class="student-profile py-4" style="padding:0 5%">
+<div class="student-profile py-4">
   <div class="container">
     <div class="row">
       <div class="col-lg-4">

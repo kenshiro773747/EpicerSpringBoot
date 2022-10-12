@@ -38,7 +38,7 @@
     <div class="rt-container">
     	<div class="col-rt-12">
         	<div class="rt-heading">
-            	<h1>Hello ${user.getName()} !</h1>
+            	<h1>Hello ${admin.getName()} !</h1>
             </div>
         </div>
     </div>
@@ -57,13 +57,13 @@
       <div class="col-lg-4">
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
-            <img class="profile_img" src="${user.getAvatar()}" alt="UserAvatar">
-            <h3>${user.getName()}</h3>
+            <img class="profile_img" src="${admin.getAvatar()}" alt="UserAvatar">
+            <h3>${admin.getName()}</h3>
           </div>
           <div class="card-body">
-            <p class="mb-0"><strong class="pr-1">User ID:</strong>${user.getId()}</p>
-            <p class="mb-0"><strong class="pr-1">Name:</strong>${user.getName()}</p>
-            <p class="mb-0"><strong class="pr-1">Nickname:</strong>${user.getNickname()}</p>
+            <p class="mb-0"><strong class="pr-1">User ID:</strong>${admin.getId()}</p>
+            <p class="mb-0"><strong class="pr-1">Name:</strong>${admin.getName()}</p>
+            <p class="mb-0"><strong class="pr-1">Nickname:</strong>${admin.getNickname()}</p>
           </div>
         </div>
       </div>
@@ -87,17 +87,17 @@
               <tr>
                 <th width="30%">Account</th>
                 <td width="2%">:</td>
-                <td>${user.getAccount()}</td>
+                <td>${admin.getAccount()}</td>
               </tr>
               <tr>
                 <th width="30%">Password</th>
                 <td width="2%">:</td>
-                <td>${user.getPassword()}</td>
+                <td>●●●●●●●●</td>
               </tr>
               <tr>
                 <th width="30%">Phone</th>
                 <td width="2%">:</td>
-                <td>${user.getPhone()}</td>
+                <td>${admin.getPhone()}</td>
               </tr>
                <tr>
                 <th width="30%">City</th>
@@ -107,12 +107,12 @@
                <tr>
                 <th width="30%">Township</th>
                 <td width="2%">:</td>
-                <td>${user.getTownship()}</td>
+                <td>${admin.getTownship()}</td>
               </tr>
                <tr>
                 <th width="30%">Address</th>
                 <td width="2%">:</td>
-                <td>${user.getAddress()}</td>
+                <td>${admin.getAddress()}</td>
               </tr>
             </table>
           </div>

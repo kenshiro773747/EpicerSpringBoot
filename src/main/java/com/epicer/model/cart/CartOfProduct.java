@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 import com.epicer.model.product.Product;
-import com.epicer.model.users.User;
+import com.epicer.model.users.EpicerUser;
 
 @Entity
 @Table(name = "cartProductDetails")
@@ -31,7 +31,7 @@ public class CartOfProduct implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "userid")
-	private User cartUser;
+	private EpicerUser cartUser;
 	 
 	@ManyToOne
 	@JoinColumn(name = "productid")
@@ -41,7 +41,7 @@ public class CartOfProduct implements Serializable {
 	}
 
 	//查全部
-	public CartOfProduct(Integer cartProductId, Integer quantity, User cartUser, Product cartProduct) {
+	public CartOfProduct(Integer cartProductId, Integer quantity, EpicerUser cartUser, Product cartProduct) {
 		super();
 		this.cartProductId = cartProductId;
 		this.quantity = quantity;
@@ -49,7 +49,7 @@ public class CartOfProduct implements Serializable {
 		this.cartProduct = cartProduct;
 	}
 
-	public CartOfProduct(User cartUser, Product cartProduct , Integer quantity) {
+	public CartOfProduct(EpicerUser cartUser, Product cartProduct , Integer quantity) {
 		super();
 		this.quantity = quantity;
 		this.cartUser = cartUser;
@@ -57,7 +57,7 @@ public class CartOfProduct implements Serializable {
 	}
 
 	//驗證id
-	public CartOfProduct(User cartUser, Product cartProduct) {
+	public CartOfProduct(EpicerUser cartUser, Product cartProduct) {
 		super();
 		this.cartUser = cartUser;
 		this.cartProduct = cartProduct;
@@ -80,11 +80,11 @@ public class CartOfProduct implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public User getCartUser() {
+	public EpicerUser getCartUser() {
 		return cartUser;
 	}
 
-	public void setCartUser(User cartUser) {
+	public void setCartUser(EpicerUser cartUser) {
 		this.cartUser = cartUser;
 	}
 

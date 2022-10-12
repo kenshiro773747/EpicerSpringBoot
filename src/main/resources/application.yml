@@ -4,10 +4,18 @@ profiles:
  phone: 0900000000
  
  spring:
+  ## Freemarker 配置
   freemarker:
-    template-loader-path: classpath:/templates/
-    enabled: true
     cache: false
     charset: UTF-8
-    content-type: text/html
     check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+  mvc:
+    static-path-pattern: /**
+
+

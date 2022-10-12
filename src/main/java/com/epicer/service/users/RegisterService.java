@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.epicer.model.users.Message;
-import com.epicer.model.users.User;
+import com.epicer.model.users.EpicerUser;
 import com.epicer.model.users.UserRespostity;
 import com.epicer.util.Tools;
 
@@ -22,7 +22,7 @@ public class RegisterService {
 	private Tools tools =new Tools();
 		
 
-		public HashMap<String,Message> checkAll(User user) {
+		public HashMap<String,Message> checkAll(EpicerUser user) {
 			HashMap<String,Message> show =new HashMap<String,Message>();
 			Message name = this.checkName(user);
 			Message gender = this.checkGender(user);
@@ -71,8 +71,8 @@ public class RegisterService {
 		}
 		
 		
-		public boolean InsertClient(User user) {
-			User result = ur.save(user);
+		public boolean InsertClient(EpicerUser user) {
+			EpicerUser result = ur.save(user);
 			if(result == null) {
 				return false;
 			}else {
@@ -80,10 +80,10 @@ public class RegisterService {
 			}
 		}
 		
-		public Message checkAccount(User user) {
+		public Message checkAccount(EpicerUser user) {
 			Message msg = new Message();
 			String account = user.getAccount();
-			User admin = ur.checkAccount(account);
+			EpicerUser admin = ur.checkAccount(account);
 		    if(admin == null) {
 		    	msg.setCode(0);
 				msg.setMessage("OK");
@@ -96,7 +96,7 @@ public class RegisterService {
 		
 		
 		// 不為空，6~18字以內，是否含中文，是否英文數字
-			public Message checkPassword(User user) {
+			public Message checkPassword(EpicerUser user) {
 				String password = user.getPassword();
 				Message msg = new Message();
 				boolean isempty = tools.isEmpty(password);
@@ -130,7 +130,7 @@ public class RegisterService {
 			}
 
 			// 姓名不能為空 不能含英文或數字 姓+名長度>2
-			public Message checkName(User user) {
+			public Message checkName(EpicerUser user) {
 				String name = user.getName();
 				Message msg = new Message();
 				boolean isempty = tools.isEmpty(name);
@@ -157,7 +157,7 @@ public class RegisterService {
 			}
 
 			// 性別不能為空
-			public Message checkGender(User user) {
+			public Message checkGender(EpicerUser user) {
 				int gender = user.getGender();
 				Message msg = new Message();
 				if (gender == 0 || gender == 1) {
@@ -172,7 +172,7 @@ public class RegisterService {
 			}
 
 			// 生日不能為空 年齡大於18
-			public Message checkAge(User user) {
+			public Message checkAge(EpicerUser user) {
 				long birth = user.getBirth();
 				Message msg = new Message();
 				if (birth<=0) { // 生日為空
@@ -192,7 +192,7 @@ public class RegisterService {
 			}
 
 			// 電話不能為空 不能含中文英文
-			public Message checkPhone(User user) {
+			public Message checkPhone(EpicerUser user) {
 				String phone = user.getPhone();
 				Message msg = new Message();
 				boolean isempty = tools.isEmpty(phone);
@@ -220,7 +220,7 @@ public class RegisterService {
 			}
 
 			// 縣市不能為0 且 必須範圍內
-			public Message checkCity(User user) {
+			public Message checkCity(EpicerUser user) {
 				Message msg = new Message();
 				int city = user.getCity();
 				if (city == 0 || city > 22) { // 縣市為空 或 超出範圍
@@ -234,7 +234,7 @@ public class RegisterService {
 			}
 
 		//區域不能為空
-			public Message checkTownship(User user) {
+			public Message checkTownship(EpicerUser user) {
 				Message msg = new Message();
 				String township = user.getTownship();
 				boolean isempty = tools.isEmpty(township);
@@ -249,7 +249,7 @@ public class RegisterService {
 			}
 
 		//路段不能為空
-			public Message checkAddress(User user) {
+			public Message checkAddress(EpicerUser user) {
 				Message msg = new Message();
 				String road = user.getAddress();
 				boolean isempty = tools.isEmpty(road);
@@ -263,7 +263,7 @@ public class RegisterService {
 				return msg;
 			}
 
-			public Message checknick(User user) {
+			public Message checknick(EpicerUser user) {
 				int length = user.getNickname().length();
 				Message msg2 = new Message();
 				if(length > 16) {

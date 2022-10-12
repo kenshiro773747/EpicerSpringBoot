@@ -25,7 +25,7 @@
 	<!-- //////////////////主畫面框架(開始) ////////////////// -->
 	<main class="main-content position-relative border-radius-lg ">
 		<!-- ////////////////// (Header)Start 上方 Navbar 上方  (要加裝在個人頁面)(從includes/eHead.jsp要拉一個檔案到自己資料夾改)////////////////// -->
-		<%@include file="eHead.jsp"%>
+		<%@include file="../includes/eHead.jsp"%>
 		<!-- ////////////////// End 上方 Navbar //////////////////-->
 <!-- ////////////////// 個人主文開始 //////////////////-->
 

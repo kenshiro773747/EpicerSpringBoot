@@ -13,23 +13,37 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface UserRespostity extends JpaRepository<User, Integer> {
+public interface UserRespostity extends JpaRepository<EpicerUser, Integer> {
     //save(user); 
 	//For Register :public User InsertCilent(User user); >
 	
 	//For Login :public User checkAccount(String account) >
-	@Query(value="from User where account =?1")
-	public User checkAccount(String account);
+	@Query(value="from EpicerUser where account =?1")
+	public EpicerUser checkAccount(String account);
+	
+	@Query(value="from EpicerUser where account =?1")
+	public Optional<EpicerUser> checkAccount2(String account);
+	
+	
+//	@Query(value="from User where account =?1")
+//	public Optional<User> checkAccountGetUser(String account);
 	
 	//For LoginDate j: public User updateDate(User user)  > save(User);
 
-	@Query(value="from User where status =?1")
-	public List<User> checkStatus(int status);
+	@Query(value="from EpicerUser where status =?1")
+	public List<EpicerUser> checkStatus(int status);
 	
 	@Query(value="from User where userid =?1")
 	public User findUser(int userid);
 	
 	
-	public User findByAccountAndPassword(String account,String password);	
-
+	public EpicerUser findByAccountAndPassword(String account,String password);	
+	
+	
+	@Query(value="from EpicerUser where gender =?1")
+	public List<EpicerUser> findByGender(Integer gender);
+	
+	
+	@Query(value="from Comment where senderid=?1")
+	public List<Comment> findBySenderId(Integer senderid);	
 }
