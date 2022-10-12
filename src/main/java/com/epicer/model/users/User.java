@@ -1,5 +1,6 @@
 package com.epicer.model.users;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -14,14 +15,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.epicer.model.cart.CartOfProduct;
 import com.epicer.model.cart.OrderProduct;
 
 
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "userss")
+public class User  {
 	@Id
 	@Column(name = "userid")
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
@@ -73,11 +77,20 @@ public class User {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cartUser", cascade = CascadeType.ALL)
 	private Set<CartOfProduct> cartByUser = new LinkedHashSet<CartOfProduct>();
 
+	public User(int id, String password) {
+		super();
+		this.id = id;
+		this.password = password;
+	}
 
+
+	public User(String account) {
+		this.account = account;
+	}
+	
 	// 跟訂單表格串聯
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderUser", cascade = CascadeType.ALL)
 //	private Set<OrderProduct> orderByUser = new LinkedHashSet<OrderProduct>();
-
 
 	
 	// register

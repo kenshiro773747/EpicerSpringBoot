@@ -10,7 +10,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 %>
 <html>
 <head>
-<title>新增文章</title>
+<title>更新文章</title>
 <script language='javascript' src='js/wangEditor.min.js'></script>
 <script>
 
@@ -46,6 +46,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
      </div>
 	<form action="articleReportUpdate" method="post">	
 		<input type="hidden" name="action" value="Update">
+		
 		<table class="tb1">
 
 			<tr>
@@ -59,7 +60,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<select class="form-control" id="exampleFormControlSelect1" name="status" >
 				<option value="0" <%if(detail.getStatus()==0){%> selected <% }%>>正常顯示</option> 
 				<option value="1" <%if(detail.getStatus()==1){%> selected <% }%>>檢舉</option> 
-				<option value="2" <%if(detail.getStatus()==2){%> selected <% }%>>黑名單</option> 
+				<option value="2" <%if(detail.getStatus()==2){%> selected <% }%>>設為公告</option> 
+				<option value="3" <%if(detail.getStatus()==3){%> selected <% }%>>黑名單</option> 
 				</select>
 				</td>
 

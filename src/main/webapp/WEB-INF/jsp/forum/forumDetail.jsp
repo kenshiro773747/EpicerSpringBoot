@@ -125,9 +125,8 @@
 
 
     
-<!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> -->
 <script language='javascript' src='js/jquery-3.6.0.js'></script>
-<script language='javascript' src='js/Wang.js'></script>
+<script language='javascript' src='js/WangReply.js'></script>
 <script>
 function del(id){
 	Swal.fire({

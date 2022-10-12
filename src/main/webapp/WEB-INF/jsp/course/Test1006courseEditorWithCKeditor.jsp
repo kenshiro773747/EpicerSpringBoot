@@ -319,7 +319,7 @@
 					<tr>
 						<td><label>課程圖片：</label></td>
 						<td><input type="file" name="photo"
-							class="form-control form-control-alternative need" id="Ann"
+							class="form-control form-control-alternative " id="Ann"
 							placeholder="name@example.com" /></td>
 						<!--  <td><img width=150
 							src="images/<%=oldCourse.getCourseImage()%>"></td>-->

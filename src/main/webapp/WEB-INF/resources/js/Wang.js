@@ -21,38 +21,12 @@
     
 
     
-//      //開啟debug模式
-//         editor.config.debug = true;
-//         // 關閉粘貼內容中的樣式
-//         editor.config.pasteFilterStyle = false
-//         // 忽略粘貼內容中的圖片
-//         editor.config.pasteIgnoreImg = true
-//         // 使用 base64 保存圖片
-//         //editor.customConfig.uploadImgShowBase64 = true
-
-//         // 上傳圖片到服務器
-//         editor.config.uploadFileName = 'img'; //設置文件上傳的參數名稱
-//         editor.config.uploadImgServer = 'images'; //設置上傳文件的服務器路徑
-//         editor.config.uploadImgMaxSize = 3 * 1024 * 1024; // 將圖片大小限制為 3M
-//         editor.config.uploadImgTimeout = 50000;
-//         //自定義上傳圖片事件
-//         editor.config.uploadImgHooks = {
-//             before: function(xhr, editor, files) {
-
-//             },
-//             success: function(xhr, editor, result) {
-//                 console.log("上傳成功");
-//             },
-//             fail: function(xhr, editor, result) {
-//                 console.log("上傳失敗,原因是" + result);
-//             },
-//             error: function(xhr, editor) {
-//                 console.log("上傳出錯");
-//             },
-//             timeout: function(xhr, editor) {
-//                 console.log("上傳超時");
-//             }
-//         }
+  $("#input").on("click",function(){
+	document.getElementById("example-text-input").value ="貓咪手作早午餐店";
+	document.getElementById("exampleFormControlSelect1").value ="1";
+	 editor.txt.append('<p>位在西門町商圈周邊的早初，是間充滿創意及巧思的小店三層樓的用餐空間採光極佳，裝潢設計給人一種溫馨之感店裡有著各式各樣的明信片，甚至能挑選自己喜歡的樣式在上頭留下給未來自己的話，寄放在店內留給未來的自己<br/></p><p>▷淡忘起司雞法式歐蕾吐司＊２２０<br/></p><p><img src="images/aa5fc92b3145440d992737b4b4a6cb4d圖.jpeg" style="max-width:100%;" contenteditable="false" width="274.76" height="274.76"/><br/><br/></p><p>浸過蛋液後煎出的歐蕾吐司，口感比一般烤吐司來得柔和中間夾的是雞腿排與起司片，再放上太陽蛋整體味道蠻好另一道紙包雞料理更有特色，將雞蛋.水果.堅果果乾.芋泥薯塊和伯爵司康放入雞蛋盒，最喜歡司康和綿密的芋泥球每一種元素份量都小小巧巧，嚐到多種風味卻不會有負擔<br/></p><p><img src="images/bc6fa870d8d24925a6d919bfb1cef123圖.jpeg" style="max-width:100%;" contenteditable="false" width="271.76" height="271.76"/></p>')
+		
+})
 
  //    设置上传本地图片到服务器
     editor.config.uploadImgServer =  'images';//与后端访问接口保持一致

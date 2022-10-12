@@ -162,7 +162,7 @@
 					<tr>
 						<td><label>頭貼</label></td>
 						<td><input type="file" name="photo"
-							class="form-control form-control-alternative need" id="Ann"
+							class="form-control form-control-alternative " id="Ann"
 							placeholder="name@example.com" /></td>
 
 						<input type="hidden" name="oldimg"
@@ -198,7 +198,7 @@
 
 					<tr>
 						<td><span class="detail">縣市</span></td>
-						<td><div class="twzipcode need"></div></td>
+						<td><div class="twzipcode "></div></td>
 					</tr>
 
 					<tr>

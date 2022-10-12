@@ -39,8 +39,8 @@ public class ArticleService {
 		return aRepo.findAllByTitleLike(title);
 	}
 
-	public List<ArticleBean> findByCategoryLike(int id) {
-		return aRepo.findAllByPlateformCategoryIdLike(id);
+	public List<ArticleBean> findByCategory(int id) {
+		return aRepo.findAllByPlateformCategoryId(id);
 	}
 
 	public List<ArticleBean> findAll() {
@@ -62,4 +62,39 @@ public class ArticleService {
 	public void insertReport(int status,int articleid) {
 		aRepo.insertReport(status, articleid);
 	}
+	
+	public int CountLike(int articleId) {
+		return aRepo.countLike(articleId);
+	}
+	
+	public void updateLike(int articlelike,int articleId) {
+		aRepo.updateLike(articlelike, articleId);
+	}
+	
+	public void updateViews(int articleViews,int articleId) {
+		aRepo.updateViews(articleViews, articleId);
+	}
+	
+	public int CountReply(int articleId) {
+		return aRepo.countReply(articleId);
+	}
+	public void updateCountReply(int articlereplys,int articleId) {
+		aRepo.updateCountReply(articlereplys, articleId);
+	}
+	
+	
+	////////////////////////////Front
+	
+	public List<ArticleBean> frontFindByStatus() {
+		return aRepo.frontFindAllByStatus(0);
+	}
+	
+	public List<ArticleBean> frontFindAllByPlateformCategoryId(int id) {
+		return aRepo.frontFindAllByPlateformCategoryId(id,0);
+	}
+	
+	public List<ArticleBean> frontFindAllByTitleLike(String title) {
+		return aRepo.frontFindAllByTitleLike(title,0);
+	}
+	
 }

@@ -16,7 +16,7 @@
 <div class="forms">
 <div class="form loign">
 <span class="title">Login</span>
-<form action="login" method="post">
+<form action="userlogin" method="post">
     <div class="inputfeild">
         <input type="text" name="account" id="account" placeholder="Enter your EmailAccount" required>
         <i class="uil uil-envelope-alt icon"></i>
@@ -41,12 +41,49 @@
 </form>
 <div class="loginsignup">
     <span class="text">Not A Member</span>
-    <a href="form" class="text signuptext">Sign Up Now</a>
+    <a href="form" class="text signuptext" style="color:blue;font-weight:bold">Sign Up Now</a>
+</div>
+<div class="loginsignup">
+    <span class="text" ><form action="forgetpassword" name="forgetpassword" method="post"><a href="javascript:document.forgetpassword.submit();" class="text signuptext" style="color:blue;font-weight:bold">忘記密碼</a></span>
 </div>
 </div>
 </div>
 </div>
 <script src="js/jquery-3.6.0.js"></script>
 <script src="js/login.js"></script>
+<script>
+$(function(){
+	
+	var account = $('#account').val();
+	var password =$('#password').val();
+	if($.trim(account) =="" ||$.trim(password)== "" ){
+		Swal.fire({
+			  icon: 'error',
+			  title: '帳號或密碼為必填',
+			})	
+	}else{
+		var user ={
+				"account":''+account,
+				"password":''+password
+		}
+	 
+		
+		$.ajax({
+			type:"post",
+			url:"",
+			contentType:"application/json",
+			data:JSON.stringify(user),
+			success:function(data){
+			if(data ==''){
+				
+			}	
+			},
+			
+		})
+		
+		
+	}
+}) //底
+</script>
 </body>
 </html>

@@ -32,6 +32,9 @@ public class ArticleUserRecService{
 		return  aurRepo.findAllByUser(userid);
 	}
 
+	public String statusRec(int aid,int id) {
+		return  aurRepo.collectStatus(aid, id);
+	}
 	
 
 

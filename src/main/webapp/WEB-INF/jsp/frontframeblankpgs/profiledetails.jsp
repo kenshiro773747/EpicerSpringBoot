@@ -4,8 +4,45 @@
     
 <!-- //////**極重要!!!!不可少//////<html> + <head> + <link>//////// -->
 <%@include file="../frontpartials/frontheaderlink.jsp" %>
+ <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <!--Only for demo purpose - no need to add.-->
+   <!-- <link rel="stylesheet" href="css/demo.css" />-->
+	   <link rel="stylesheet" href="css/style.css">
+<style>
+.inputt {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  color: black;
+  background-color:#fff;
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+  width:50%;
+  float: left
+
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
+
+#avatar{
+width:150px;
+height:150px;
+border-radius:50%
+}
+
+
+
+</style>
 </head>
-<body id="body">
+<body id="body" style="background-color: white">
 
 <!-- 主文內容 開始 -->
 <!-- /////// 超級重要!!!!Navbar 1+2 要連放一起!! (1)聯絡電話 + 購物車 + 商品搜尋 (2)首頁連動，
@@ -28,28 +65,103 @@
           <li><a href="dashboard.html">Dashboard歡迎+訂購畫面</a></li>
           <li><a href="order.html">Order(訂單/課程)</a></li>
           <li><a href="address.html">Address(文章管理/收藏/食譜)</a></li>
-          <li><a class="active"  href="profile-details.html">個人資料維護</a></li>
+        <li><form name="usermanagement" method="post" action="usermanagement"><a href="javascript:document.usermanagement.submit();">個人資料維護</a></form></li>
         </ul>
-        <div class="dashboard-wrapper dashboard-user-profile">
-          <div class="media">
-            <div class="pull-left text-center" href="#!">
-              <img class="media-object user-img" src="./source/images/avater.jpg" alt="Image">
-              <a href="#x" class="btn btn-transparent mt-20">Change Image</a>
-            </div>
-            <div class="media-body">
-              <ul class="user-profile-list">
-                <li><span>Full Name:</span>Johanna Doe</li>
-                <li><span>Country:</span>USA</li>
-                <li><span>Email:</span>mail@gmail.com</li>
-                <li><span>Phone:</span>+880123123</li>
-                <li><span>Date of Birth:</span>Dec , 22 ,1991</li>
-              </ul>
-            </div>
+  <br>
+   <br>
+    <br>
+<section>
+    <div class="rt-container">
+          <div class="col-rt-12">
+              <div class="Scriptcontent">
+<!-- Student Profile -->
+<form action="usermodify" method="post">
+<div class="student-profile py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-transparent text-center">
+          <br>
+            <img  id="avatar" class="profile_img" src="${user.getAvatar()}" alt="UserAvatar">
+          </div><br>
+          <div class="card-body">
+            <p class="mb-0"><strong class="pr-1">使用者ID:</strong>${user.getId()}</p>
+            <p class="mb-0"><strong class="pr-1">姓名:</strong>${user.getName()}</p>
+            <p class="mb-0"><strong class="pr-1">暱稱:</strong>${user.getNickname()}</p>
           </div>
+            <br>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-transparent border-0">
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>詳細資訊</h3>
+          </div>
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr>
+                <th width="30%">性別</th>
+                <td width="2%">:</td>
+                <td>${sgender}</td>
+              </tr>
+              <tr>
+                <th width="30%">出生年月日</th>
+                <td width="2%">:</td>
+                <td>${sbirth}</td>
+              </tr>
+              <tr>
+                <th width="30%">信箱</th>
+                <td width="2%">:</td>
+                <td>${user.getAccount()}</td>
+              </tr>
+              <tr>
+                <th width="30%">密碼</th>
+                <td width="2%">:</td>
+                <td>●●●●●●●●</td>
+              </tr>
+              <tr>
+                <th width="30%">連絡電話</th>
+                <td width="2%">:</td>
+                <td>${user.getPhone()}</td>
+              </tr>
+               <tr>
+                <th width="30%">居住縣市</th>
+                <td width="2%">:</td>
+                <td>${scity}</td>
+              </tr>
+               <tr>
+                <th width="30%">區域</th>
+                <td width="2%">:</td>
+                <td>${user.getTownship()}</td>
+              </tr>
+               <tr>
+                <th width="30%">完整地址</th>
+                <td width="2%">:</td>
+                <td>${user.getAddress()}</td>
+              </tr>
+              <tr>
+              <td colspan="3">
+              <input type="submit" class="inputt" name="submit" value="修改">
+<input type="submit" class="inputt" name="submit"  value="返回">
+            </form>
+              
+              </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+         <br>
         </div>
       </div>
     </div>
   </div>
+</div>
+<!-- partial -->
+           
+    		</div>
+		</div>
+    </div>
 </section>
 
 

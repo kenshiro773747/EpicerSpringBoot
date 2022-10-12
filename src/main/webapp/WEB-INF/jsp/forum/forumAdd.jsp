@@ -12,9 +12,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <head>
 <title>新增文章</title>
 <script language='javascript' src='js/wangEditor.min.js'></script>
-<script>
 
-</script>
 <style>
         .tb1 {
             width: 700px;
@@ -23,7 +21,11 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
             margin: auto;
         }
 </style>
+<script>
 
+
+
+</script>
 
 
 </head>
@@ -48,6 +50,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
      <form action="QueryAllPage" method="Get" >
       <input type="submit"value="返回" class="btn bg-gradient-secondary">
      </form>
+       <button type="button" class="btn btn-outline-warning"  id="input">一鍵輸入</button>
      </div>
 
     <form action="articleAdd" method="post" >

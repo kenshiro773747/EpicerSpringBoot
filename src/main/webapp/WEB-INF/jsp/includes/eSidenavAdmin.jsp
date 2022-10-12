@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 	
 <!-- Side Navber (開始)-->
 <aside
@@ -31,7 +32,7 @@
 			</p>
 			<div class="collapse" id="collapseMember">
 			
-	       <form name="usersdata" action="usersdata" method="post"> 
+	       <form name="usersdata" action='${pageContext.request.contextPath}/admin/usersdata' method="post"> 
 			<a class="nav-link active" href="javascript:document.usersdata.submit();">
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -39,19 +40,29 @@
 			</a>
 			</form>
 			
-			<form name="adminmanagement" action="adminmanagement" method="post">
+			<form name="adminmanagement" action='${pageContext.request.contextPath}/admin/adminmanagement2' method="post">
+			<input type="hidden" name="account" value="${admin.getId()}"/>
 			<a class="nav-link active" href="javascript:document.adminmanagement.submit();" >
 					<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center" ></div>
 					<span class="nav-link-text ms-1">個人資料管理</span>
 			</a>
 			</form>
 			
-			<form name="empregister" action="empregister" method="post">
+			<form name="empregister" action='${pageContext.request.contextPath}/admin/empregister' method="post">
 			<a class="nav-link active" href="javascript:document.empregister.submit();" >
 					<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center" ></div>
 					<span class="nav-link-text ms-1">新進人員註冊</span>
 			</a>
 			</form>
+			
+			
+				<form name="char" action='${pageContext.request.contextPath}/admin/char' method="post">
+			<a class="nav-link active" href="javascript:document.char.submit();" >
+					<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center" ></div>
+					<span class="nav-link-text ms-1">統計數據</span>
+			</a>
+			</form>
+				
 			</div> 
 			<!-- 會員管理底 -->
 
@@ -193,12 +204,14 @@
 			
 			<!-- 登出 -->
 				<a class="nav-link active"
-				href="adminlogout" >
+				href='${pageContext.request.contextPath}/adminlogout' >
 					<div
 						class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 					</div> <span class="nav-link-text ms-1">登出</span>
 			</a>
 			</div>
+			
+			
 
 			<!-- 個人資料維護 -->
 			<!--

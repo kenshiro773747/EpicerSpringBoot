@@ -26,6 +26,12 @@
 			<div id="navbar" class="navbar-collapse collapse text-center">
 				<ul class="nav navbar-nav">
 
+					<!-- Home 首頁 -->
+					<li class="dropdown ">
+						<a href="index.html">HOME</a>
+					</li><!-- / Home -->
+
+
 					<!-- TEST -->
 					<li class="dropdown ">
 						<a href="http://localhost:8091/testbar">測試</a>
@@ -177,6 +183,7 @@
 					</li><!-- / Member center -->
 					
 					<!-- //////////////////以下為範本區 /////////////// -->
+
 					<!-- Shop 商品&購物分頁 -->
 					<li class="dropdown dropdown-slide">
 						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"

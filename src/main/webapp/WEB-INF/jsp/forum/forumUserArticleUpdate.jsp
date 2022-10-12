@@ -10,7 +10,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 %>
 <html>
 <head>
-<title>新增文章</title>
+<title>更新文章</title>
 <script language='javascript' src='js/wangEditor.min.js'></script>
 <script>
 
@@ -46,6 +46,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
      </div>
 	<form action="UserUpdateArticle" method="post">
 		<input type="hidden" name="action" value="Update">
+		<input type="hidden" name="replys" value="<%=detail.getArticleReplys()%>">
 		<table class="tb1">
 
 			<tr>

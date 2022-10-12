@@ -1,13 +1,19 @@
 package com.epicer.service.users;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epicer.model.users.Comment;
 import com.epicer.model.users.DemoUser;
 import com.epicer.model.users.DeomUserRespostity;
+import com.epicer.model.users.EpicerUser;
 import com.epicer.model.users.Message;
+import com.epicer.model.users.User;
+import com.epicer.util.Tools;
 
 @Service
 @Transactional
@@ -30,5 +36,18 @@ public class DemoUserService {
 			msg.setObject(result);
 		}
 		return msg;			
+	}
+	
+	public EpicerUser findByCommentId() {
+		try {
+			Optional<Comment> optional = dur.findByContentId(1000);
+			Comment comment = optional.get();
+			EpicerUser user = comment.getUser();
+			System.out.println(user.getAccount());
+			return user;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

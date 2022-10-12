@@ -93,11 +93,11 @@
     	 
     	 //一鍵輸入
     	  $('#action').on('click',function(){
-    		  $('#name').attr("value","暗影騎士"); 
-    		  $("#birth").attr("value","2022-01-02"); 
+    		  $('#name').attr("value","郭湘鈴"); 
+    		  $("#birth").attr("value","1992-05-25"); 
     		  $('#account').attr("value","860102yeah@gmail.com");
-    		  $('#password').attr("value","eeit49024902");
-    		  $('#phone').attr("value","我沒有手機");
+    		  $('#password').attr("value","asd123456");
+    		  $('#phone').attr("value","0903060859");
     		  twzipcode.set({
     			    'county': '臺中市',
     			    'district': '太平區'

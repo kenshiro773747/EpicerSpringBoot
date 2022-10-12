@@ -1,6 +1,5 @@
 package com.epicer.config;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 import org.springframework.context.annotation.Bean;

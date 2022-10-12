@@ -19,7 +19,7 @@
 <jsp:param name="pagination" value="個人管理" />
 </jsp:include>
 
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <section class="user-dashboard page-wrapper">
 	<div class="container">
@@ -30,8 +30,9 @@
 					<li><a class="active" href="dashboard.jsp">Dashboard歡迎+訂購畫面</a></li>
 					<li><a href="order.jsp">Order(訂單/課程)</a></li>
 					<li><a href="address.jsp">Address(文章管理/收藏/食譜)</a></li>
-					<li><a href="profiledetails.jsp">個人資料維護</a></li>
+					<li><form name="usermanagement" method="post" action="usermanagement"><a href="javascript:document.usermanagement.submit();">個人資料維護</a></form></li>
 				</ul>
+				
 				<div class="dashboard-wrapper user-dashboard">
 					<div class="media">
 						<div class="pull-left">

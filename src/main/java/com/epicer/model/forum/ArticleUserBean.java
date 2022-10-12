@@ -40,7 +40,6 @@ public class ArticleUserBean implements Serializable {
 	@JsonIgnore
 	private List<ArticleBean> articleBean = new ArrayList<ArticleBean>();
 
-
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL)
 	@JsonIgnore

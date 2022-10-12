@@ -184,7 +184,7 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 					<tr>
 						<div class="inputbox">
 							<td><label class="detail">縣市</label></td>
-							<td><div class="twzipcode need"></div></td>
+							<td><div class="twzipcode "></div></td>
 							<td><span id="sp7" class="msg"></span></td>
 							<td><span id="sp8" class="msg"></span></td>
 						</div>

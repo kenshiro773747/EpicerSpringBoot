@@ -70,6 +70,7 @@ color: white;
   <div class="centered">
   <form action="checkuserstatus" method="post" name="form3">
   <a href="javascript:document.form3.submit();"> <img src="images/default.jpg" alt="Avatar woman"></a>
+ <!--   <a href="checkuserstatus"> <img src="images/default.jpg" alt="Avatar woman">-->
     <h2>會員登入</h2>
     </form>
     <a href="form">我還不是會員</a>
@@ -78,10 +79,11 @@ color: white;
 
 <div class="split right">
   <div class="centered">
-  <form action="checkadminstatus" method="post" name="form2">
+  <form action="admin/checkadminstatus2" method="post" name="form2">
     <a href="javascript:document.form2.submit();"> <img src="images/default.jpg" alt="Avatar woman"></a>
+ <!-- <a href="admin/checkadminstatus2"> <img src="images/default.jpg" alt="Avatar woman">-->
     <h2>管理者登入</h2>
-     </form>
+ <!--    </form> -->
   </div>
 </div>
 </body>

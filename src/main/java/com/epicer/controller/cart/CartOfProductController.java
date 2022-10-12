@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.epicer.model.cart.CartOfProduct;
 import com.epicer.model.product.Product;
-import com.epicer.model.users.User;
+import com.epicer.model.users.EpicerUser;
 import com.epicer.service.cart.CartOfProductService;
 import com.epicer.controller.product.*;
 
@@ -60,7 +60,7 @@ public class CartOfProductController {
 	public String processItemCheckAction(@RequestParam("productid") Integer productId,
 			@RequestParam("quantity") Integer quantity,Model m){
 		System.out.println("addtocart--userid"+userid);
-		User cartUser = new User();
+		EpicerUser cartUser = new EpicerUser();
 		cartUser.setId(userid);
 		Product cartProduct = new Product();
 		cartProduct.setProductId(productId);

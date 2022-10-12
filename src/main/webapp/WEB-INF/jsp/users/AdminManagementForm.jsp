@@ -21,9 +21,15 @@
 	    <link rel="stylesheet" href="css/style.css">
 	    <style>
 	    
-	    span{
+	    .msg{
 	    color:red;
 	    }
+	    
+	       
+	    .msg2{
+	    color:red;
+	    }
+	    
 	    
 	    </style>
 </head>
@@ -45,7 +51,7 @@
     <div class="rt-container">
     	<div class="col-rt-12">
         	<div class="rt-heading">
-            	<h1>Hello ${user.getName()} !</h1>
+            	<h1>Hello ${admin.getName()} !</h1>
             </div>
         </div>
     </div>
@@ -63,15 +69,15 @@
       <div class="col-lg-4">
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
-            <img class="profile_img" src="${user.getAvatar()}" alt="UserAvatar">
-            <h3>${user.getName()}</h3>
+            <img class="profile_img" src="${admin.getAvatar()}" alt="UserAvatar">
+            <h3>${admin.getName()}</h3>
           </div>
           <div class="card-body">
-            <p class="mb-0"><strong class="pr-1">User ID:</strong>${user.getId()}</p>
-            <input type="hidden" name="id" value="${user.getId()}">
-            <p class="mb-0"><strong class="pr-1">Name:</strong>${user.getName()}</p>
-            <p class="mb-0"><strong class="pr-1">Nickname:</strong><input type="text" name="nickname" value='${user.getNickname()}' required></p>
-            <span>${show.nickname.getMessage()}</span>
+            <p class="mb-0"><strong class="pr-1">User ID:</strong>${admin.getId()}</p>
+            <input type="hidden" name="id" value="${admin.getId()}">
+            <p class="mb-0"><strong class="pr-1">Name:</strong>${admin.getName()}</p>
+            <p class="mb-0"><strong class="pr-1">Nickname:</strong><input type="text" name="nickname" value='${admin.getNickname()}' required></p>
+            <span class="msg2">${show.nickname.getMessage()}</span>
           </div>
         </div>
       </div>
@@ -95,35 +101,37 @@
               <tr>
                 <th width="30%">Account</th>
                 <td width="2%">:</td>
-                <td>${user.getAccount()}</td>
+                <td>${admin.getAccount()}</td>
               </tr>
               <tr>
                 <th width="30%">Password</th>
                 <td width="2%">:</td>
-                <td><input type="text" id="password" name="password" value="${user.getPassword()}" required >
-<span>${show.password.getMessage()}</span>
-<span id="sp1"></span></td>
+                <td><input type="text" id="password" name="password" value="●●●●●●●●" required >
+<span class="msg2">${show.password.getMessage()}</span>
+<span id="sp1" class="msg"></span></td>
               </tr>
               <tr>
                 <th width="30%">Phone</th>
                 <td width="2%">:</td>
-                <td><input type="text" id="phone" name="phone" value="${user.getPhone()}" required>
-<span>${show.phone.getMessage()}</span>
-<span id="sp2"></span>
+                <td><input type="text" id="phone" name="phone" value="${admin.getPhone()}" required>
+<span  class="msg2">${show.phone.getMessage()}</span>
+<span id="sp2"  class="msg"></span>
               </tr>
                <tr>
                 <th width="30%">City & Township</th>
                 <td width="2%">:</td>
                 <td>
                 <div class="twzipcode"></div>
+                  <span  class="msg" id="sp3"></span><br>
+  <span  class="msg" id="sp4"></span>
   </td>
               </tr>
                <tr>
                 <th width="30%">Address</th>
                 <td width="2%">:</td>
-                <td><input type="text" id="road" name="road" value="${user.getAddress()}" required>
-<span>${show.address.getMessage()}</span>
-<span id="sp5"></span></td>
+                <td><input type="text" id="road" name="road" value="${admin.getAddress()}" required>
+<span  class="msg2">${show.address.getMessage()}</span>
+<span id="sp5"  class="msg"></span></td>
               </tr>
               <tr>
               <td colspan="3" style="
@@ -179,6 +187,19 @@
 <script src="js/test.js"></script>
  <script>
     const twzipcode = new TWzipcode(".twzipcode");
+    </script>
+    <script>
+    $(function(){
+    	//當password = null 時，password value=oldpassword
+    	$('#password')
+    	
+    //居住路段必填 判斷 非空 觸發 onblur onsubmit
+    $(".twzipcode").on('change',function(){
+     let county = twzipcode.get('county');
+		  let district = twzipcode.get('district');
+		  $('#road').prop("value",county+district);
+   });
+    });
     </script>
 </body>
 

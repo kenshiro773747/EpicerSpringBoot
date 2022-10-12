@@ -39,6 +39,7 @@ public class cartController {
 	@GetMapping("/firstfrontindex")
 	public String processFristFrontIndexAction() {
 		return "frontframeblankpgs/shop";
+//		return "cart/carttest";
 	}
 
 }

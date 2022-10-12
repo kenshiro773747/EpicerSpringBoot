@@ -19,11 +19,17 @@ position: relative;
   text-overflow: ellipsis;
   max-width: 140px;
   display: inline-block;
+  height:20px;
 }
 </style>
 <script>
-window.onload=function(){
-	document.getElementById("btnArticle").onclick=function(){
+$(document).ready(function(){
+	btnArticle()
+});
+
+
+	
+	function btnArticle(){
 			
 		//1.創建ajax對象
 		var xhr = new XMLHttpRequest();
@@ -36,8 +42,46 @@ window.onload=function(){
 					var resultText = '';
 					for(var i=0;i<data.length;i++){
 						var time = new Date(data[i].date);
+						if(data[i].status==1){
 						resultText +=
-						        "<tr>"+
+						        "<tr style='background-color:#FFD494'>"+
+						          "<td>"+
+						            "<div class='d-flex px-2 py-1'>"+
+						            "<form action='articleDetail' method='post'>"+
+									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+									"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+									"</form>"+
+						            "</div>"+
+						          "</td>"+
+						          
+						          "<td>"+
+						            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].plateformCategoryId-1]+"</p>"+
+						          "</td>"+
+						          
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].title+"</span>"+
+						         "</td>"+
+						         
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+						          "</td>"+
+						          
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
+						          "</td>"+
+						          
+						          "<td class='align-middl'>"+
+						            "<form action='UserUpdateArticlePage' method='post'>"+
+										"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
+										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+									"</form>"+
+										"<input type='hidden' name='number"+i+"' id='number"+i+"'  value="+data[i].articleId+">"+
+										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
+						          "</td>"+
+						        "</tr>"
+					   }else if(data[i].status==0){
+							resultText +=
+								"<tr>"+
 						          "<td>"+
 						          
 						            "<div class='d-flex px-2 py-1'>"+
@@ -65,14 +109,12 @@ window.onload=function(){
 										"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 									"</form>"+
-									 "<form id = 'myform"+i+"' action='UserDeleteArticle' method='post'>"+
-										"<input type='hidden' name='number' value="+data[i].articleId+">"+
+										"<input type='hidden' name='number"+i+"' id='number"+i+"'  value="+data[i].articleId+">"+
 										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-									"</form>"+
 						          "</td>"+
 						        "</tr>"
-						   
-					   }
+						}
+						}
 					document.getElementById("mydiv").innerHTML = resultText;
 				}else{
 					alert(this.status);
@@ -91,7 +133,7 @@ window.onload=function(){
 	
 	
 	
-	document.getElementById("btnReply").onclick=function(){
+	function btnReply(){
 		
 		//1.創建ajax對象
 		var xhr = new XMLHttpRequest();
@@ -104,8 +146,9 @@ window.onload=function(){
 					var resultText = '';
 					for(var i=0;i<data.length;i++){
 						var time = new Date(data[i].articleReplyDate);
+						if(data[i].status==1){
 						resultText +=
-						        "<tr>"+
+						        "<tr style='background-color:#FFD494'>"+
 						          "<td>"+
 						          
 						            "<div class='d-flex px-2 py-1'>"+
@@ -133,14 +176,48 @@ window.onload=function(){
 										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
 										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
 									"</form>"+
-									 "<form id = 'myform"+i+"' action='UserDeleteReply' method='post'>"+
-										"<input type='hidden' name='replyId' value="+data[i].articleReplyId+">"+
-										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-									"</form>"+
+										"<input type='hidden' name='replyId' id='replyId"+i+"' value="+data[i].articleReplyId+">"+
+										"<button type='button' class='btn btn-outline-warning' onclick='replydel("+i+")'>刪除</button>"+
 						          "</td>"+
 						        "</tr>"
 						   
+					   }else if(data[i].status==0){
+						   resultText +=
+							   "<tr>"+
+						          "<td>"+
+						          
+						            "<div class='d-flex px-2 py-1'>"+
+						            "<form action='articleDetail' method='post'>"+
+									"<input type='hidden' name='articleId' value='"+data[i].articleId.articleId+"'>"+
+									"<button type='submit' class='btn bg-gradient-primary'>"+(i+1)+"</button>"+
+									"</form>"+
+						               
+						            "</div>"+
+						          "</td>"+
+						          "<td>"+
+						            "<p class='text-xs font-weight-bold mb-0'>"+category[data[i].articleId.plateformCategoryId-1]+"</p>"+
+						          "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleId.title+"</span>"+
+						         "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
+						          "</td>"+
+						          "<td class='align-middle text-center'>"+
+						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleReplyContent+"</span>"+
+						          "</td>"+
+						          "<td class='align-middl'>"+
+						            "<form action='UserUpdateReplyPage' method='post'>"+
+										"<input type='hidden' name='replyId' value='"+data[i].articleReplyId+"'>"+
+										"<button type='submit' class='btn btn-outline-warning'>更新</button>"+
+									"</form>"+
+										"<input type='hidden' name='replyId' id='replyId"+i+"' value="+data[i].articleReplyId+">"+
+										"<button type='button' class='btn btn-outline-warning' onclick='replydel("+i+")'>刪除</button>"+
+						          "</td>"+
+						        "</tr>"
 					   }
+						
+					}
 					document.getElementById("mydiv").innerHTML = resultText;
 				}else{
 					alert(this.status);
@@ -155,7 +232,7 @@ window.onload=function(){
 	}
 	
 	
-	document.getElementById("btnCollect").onclick=function(){
+	function btnCollect(){
 		
 		//1.創建ajax對象
 		var xhr = new XMLHttpRequest();
@@ -193,10 +270,8 @@ window.onload=function(){
 						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleId.articleContent+"</span>"+
 						          "</td>"+
 						          "<td class='align-middl'>"+
-									 "<form id = 'myform"+i+"' action='UserdelRec' method='post'>"+
-										"<input type='hidden' name='articleId' value="+data[i].articleId.articleId+">"+
-										"<button type='button' class='btn btn-outline-warning' onclick='del("+i+")'>刪除</button>"+
-									"</form>"+
+										"<input type='hidden' name='articleId' id='articleId"+i+"' value="+data[i].articleId.articleId+">"+
+										"<button type='button' class='btn btn-outline-warning' onclick='collectdel("+i+")'>刪除</button>"+
 						          "</td>"+
 						        "</tr>"
 						   
@@ -224,12 +299,40 @@ window.onload=function(){
 	
 	
 
-}
+
 
 	
 
 
 function del(id){
+		Swal.fire({
+			  title: 'Are you sure?',
+			  text: "You won't be able to revert this!",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  var xhr = new XMLHttpRequest();
+			    	xhr.open("post","UserDeleteArticle",true);
+			    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+			    	var number = document.getElementById("number"+id).value;
+			    	xhr.send("number="+number);
+			    Swal.fire(
+			      'Deleted!',
+			      'Your file has been deleted.',
+			      'success'
+			    ).then((result) => {
+			    	btnArticle();
+			    })
+			  }
+			})
+		
+	}
+	
+function replydel(id){
 	Swal.fire({
 		  title: 'Are you sure?',
 		  text: "You won't be able to revert this!",
@@ -240,19 +343,50 @@ function del(id){
 		  confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
 		  if (result.isConfirmed) {
+			  var xhr = new XMLHttpRequest();
+		    	xhr.open("post","UserDeleteReply",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var replyId = document.getElementById("replyId"+id).value;
+		    	xhr.send("replyId="+replyId);
 		    Swal.fire(
 		      'Deleted!',
 		      'Your file has been deleted.',
 		      'success'
-		      
-		    )
-		    $("#myform"+id).submit();
+		    ).then((result) => {
+		    	btnReply();
+		    })
 		  }
 		})
 	
 }
 
-
+function collectdel(id){
+	Swal.fire({
+		  title: 'Are you sure?',
+		  text: "You won't be able to revert this!",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  var xhr = new XMLHttpRequest();
+		    	xhr.open("post","UserdelRec",true);
+		    	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded") ;
+		    	var articleId = document.getElementById("articleId"+id).value;
+		    	xhr.send("articleId="+articleId);
+		    Swal.fire(
+		      'Deleted!',
+		      'Your file has been deleted.',
+		      'success'
+		    ).then((result) => {
+		    	btnCollect();
+		    })
+		  }
+		})
+	
+}
 
 
 
@@ -292,9 +426,9 @@ function del(id){
 <h1>${userId}號會員歡迎登入</h1>
 </div>
 <div style="text-align: center;">
-<button id = "btnArticle" class="btn btn-secondary">文章記錄</button>
-<button id = "btnReply" class="btn btn-secondary">留言紀錄</button>
-<button id = "btnCollect" class="btn btn-secondary">收藏紀錄</button>
+<button class="btn btn-secondary" onclick="btnArticle()">文章記錄</button>
+<button class="btn btn-secondary" onclick="btnReply()">留言紀錄</button>
+<button class="btn btn-secondary" onclick="btnCollect()">收藏紀錄</button>
 </div>
 
 
