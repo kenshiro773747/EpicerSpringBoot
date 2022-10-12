@@ -842,13 +842,8 @@ function deleteCollect(){
 			<div class="post-social-share">
 				        <h3 class="post-sub-heading">Share this post</h3>
 				        <div class="social-media-icons">
-				        	<ul>
-								<li><a class="facebook" href="https://themefisher.com/"><i class="tf-ion-social-facebook"></i></a></li>
-								<li><a class="twitter" href="https://themefisher.com/"><i class="tf-ion-social-twitter"></i></a></li>
-								<li><a class="dribbble" href="https://themefisher.com/"><i class="tf-ion-social-dribbble-outline"></i></a></li>
-								<li><a class="instagram" href="https://themefisher.com/"><i class="tf-ion-social-instagram"></i></a></li>
-								<li><a class="googleplus" href="https://themefisher.com/"><i class="tf-ion-social-googleplus"></i></a></li>
-							</ul>
+								
+								<div class="line-it-button" data-lang="zh_Hant" data-type="share-b" data-env="REAL" data-url="http://localhost:8091/articleFrontDetail" data-color="default" data-size="large" data-count="false" data-ver="3" style="display: none;"></div>
 				        </div>
 			</div>
 <div id = "comments" ></div>
@@ -859,6 +854,7 @@ function deleteCollect(){
 
 <script language='javascript' src='js/jquery-3.6.0.js'></script>
 <script language='javascript' src='js/WangReply.js'></script>
+<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 <script>
 
 
