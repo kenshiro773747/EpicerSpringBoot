@@ -370,18 +370,14 @@ function queryCollect(){
 				var resultText = '';
 					if(data==true){
 					resultText +=
-						"<tr>"+
-						"<td id='favorite'>"+
-					"<button type='button' class='btn btn-danger' onclick ='deleteCollect()'>取消收藏</button>"+
-					"</td>"+
-					"</tr>"
+						"<li style='font-size: 18px;list-style-type:none' id='favorite'>"+
+						"<button type='button' class='btn btn-danger' onclick ='deleteCollect()'>取消收藏</button>"+
+						"</li>";
 				   }else if(data==false){
 					   resultText +=
-						   "<tr>"+
-						   "<td id='favorite'>"+
+						   "<li style='font-size: 18px;list-style-type:none' id='favorite'>"+
 							"<button type='button' class='btn bg-gradient-primary' onclick ='addCollect()' >收藏</button>"+
-							"<td>"+
-							"</tr>"
+							"</li>";
 				}
 				document.getElementById("collect").innerHTML = resultText;
 			}else{
@@ -416,9 +412,6 @@ function detailAjax(){
 						"<ul>"+
 					"<li style='font-size: 18px'>"+
 					"<i class='tf-ion-ios-calendar'></i>"+time.toLocaleString()+
-					"</li>"+
-					"<li style='font-size: 18px'>"+
-					"<i class='tf-ion-ios-heart'></i>"+data.articleLike+
 					"</li>"+
 					"<li style='font-size: 18px'>"+
 					"<i class='tf-ion-chatbubbles'></i>"+data.articleReplys+
@@ -618,7 +611,7 @@ function announcementPage(){
 				var photo = '';
 				var list = '';
 				var o = 0;
-				var w=80;
+				var w=0;
 				for(var i=0;i<data.length;i++){
 					o++
 					var time = new Date(data[i].date);
@@ -626,7 +619,7 @@ function announcementPage(){
 					"<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
 					"<div onclick='this.parentNode.submit()'>"+
-					"<h3 style='position: absolute; top: 5px; left:"+w+"px;'>"+data[i].title+"</h3>"+
+					"<h3 style='position: absolute; top: 110px; left:"+w+"px;height:100px;width:250px;word-break: normal;background-color:#fcfcd5;text-align: center;padding-top:12px'>"+data[i].title+"</h3>"+
 					"</div>"+
 					"</form></li>";
 					list +="<li ></li>";
@@ -797,7 +790,6 @@ function addCollect(){
 	xhr.send("articleId="+articleId);
 	$("#favorite").empty();
 	$("#favorite").append("<button type='button' class='btn btn-danger' onclick ='deleteCollect()'>取消收藏</button>");
-	detailAjax();
 }
 
 
@@ -809,7 +801,6 @@ function deleteCollect(){
 	xhr.send("articleId="+articleId);
 	$("#favorite").empty();
 	$("#favorite").append("<button type='button' class='btn bg-gradient-primary' onclick ='addCollect()' >收藏</button>");
-	detailAjax();
 
 }
 
@@ -825,17 +816,14 @@ function deleteCollect(){
 					<button type='button' class='btn btn-warning btn-xs' style='margin-left:10px' name=<%=detail.getPlateformCategoryId()%> onclick='category(this)'>
 					<%=category[detail.getPlateformCategoryId()-1]%></button></h1>
 		           <div style="margin:0 0 0 4 %"><%=detail.getArticleContent()%>
-					<div class='post-meta' style='margin-top:50px; text-align: left;'>
-					<div id="detailAjax"></div>
+					<div class="post-meta" style="margin-top:50px; text-align: left;">
+					<div id="detailAjax" style="float:left"></div>
+					 <div id ="collect"></div>
 					</div>
 					</div>
             </tbody>
 </table>     
-<div style="padding-left:5%;display:inline">
-<table>
- <tbody id ="collect"/>
-</table>
-</div>
+
 
         <table>
        	   <tr>
@@ -863,7 +851,7 @@ function deleteCollect(){
 							</ul>
 				        </div>
 			</div>
-<div id = "comments"></div>
+<div id = "comments" ></div>
 <div id ="mydiv"></div>
 </div>
 

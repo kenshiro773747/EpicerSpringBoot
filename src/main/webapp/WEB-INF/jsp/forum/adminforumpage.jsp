@@ -113,9 +113,6 @@ $(document).ready(function(){
 						          "<td class='align-middle text-center'>"+
 						            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
 						          "</td>"+
-						          "<td class='align-middle text-center'>"+
-						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
-						          "</td>"+
 						          "<td class='align-middl'>"+
 						            "<form action='forumUpdatePage' method='post'>"+
 										"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
@@ -168,9 +165,6 @@ $(document).ready(function(){
 					         "</td>"+
 					          "<td class='align-middle text-center'>"+
 					            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
-					          "</td>"+
-					          "<td class='align-middle text-center'>"+
-					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
 					          "</td>"+
 					          "<td class='align-middl'>"+
 					            "<form action='forumUpdatePage' method='post'>"+
@@ -255,9 +249,6 @@ $(document).ready(function(){
 					          "<td class='align-middle text-center'>"+
 					            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
 					          "</td>"+
-					          "<td class='align-middle text-center'>"+
-					            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
-					          "</td>"+
 					          "<td class='align-middl'>"+
 					            "<form action='forumUpdatePage' method='post'>"+
 									"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
@@ -310,9 +301,6 @@ $(document).ready(function(){
 						         "</td>"+
 						          "<td class='align-middle text-center'>"+
 						            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
-						          "</td>"+
-						          "<td class='align-middle text-center'>"+
-						            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
 						          "</td>"+
 						          "<td class='align-middl'>"+
 						            "<form action='forumUpdatePage' method='post'>"+
@@ -401,9 +389,6 @@ function category(category){
 				          "<td class='align-middle text-center'>"+
 				            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
 				          "</td>"+
-				          "<td class='align-middle text-center'>"+
-				            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
-				          "</td>"+
 				          "<td class='align-middl'>"+
 				            "<form action='forumUpdatePage' method='post'>"+
 								"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
@@ -455,9 +440,6 @@ function category(category){
 				         "</td>"+
 				          "<td class='align-middle text-center'>"+
 				            "<span class='text-secondary text-xs font-weight-bold'>"+time.toLocaleString()+"</span>"+
-				          "</td>"+
-				          "<td class='align-middle text-center'>"+
-				            "<span class='text-secondary text-xs font-weight-bold'>"+data[i].articleContent+"</span>"+
 				          "</td>"+
 				          "<td class='align-middl'>"+
 				            "<form action='forumUpdatePage' method='post'>"+
@@ -893,7 +875,6 @@ function announcement(id){
           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">類型</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">標題</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">時間</th>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">內文</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">操作</th>
         </tr>
       </thead>

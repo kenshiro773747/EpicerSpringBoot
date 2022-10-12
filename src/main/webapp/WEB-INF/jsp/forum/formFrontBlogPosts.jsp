@@ -424,15 +424,15 @@ function announcementPage(){
 				var photo = '';
 				var list = '';
 				var o = 0;
-				var w=80;
+				var w=0;
 				for(var i=0;i<data.length;i++){
 					o++
 					var time = new Date(data[i].date);
 					photo +="<li><img src='./images/公告.jpg' alt='Image' style='position: relative'>"+
 					"<form action='articleFrontDetail' method='post'>"+
 					"<input type='hidden' name='articleId' value='"+data[i].articleId+"'>"+
-					"<div onclick='this.parentNode.submit()'>"+
-					"<h3 style='position: absolute; top: 5px; left:"+w+"px;'>"+data[i].title+"</h3>"+
+					"<div onclick='this.parentNode.submit()'> style=''"+
+					"<h3 style='position: absolute; top: 110px; left:"+w+"px;height:100px;width:250px;word-break: normal;background-color:#fcfcd5;text-align: center;padding-top:12px'>"+data[i].title+"</h3>"+
 					"</div>"+
 					"</form></li>";
 					list +="<li ></li>";

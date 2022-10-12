@@ -167,8 +167,8 @@ $(function () {
  <!-- /////////// 申請寄發新文章通知信(輸入頁面) ///////////// -->
 <aside class=" sidebar sidebarFixed">
 	<!-- Widget Latest Posts -->
-		<h4 class="widget-title" style="margin-top:2em;">公告</h4>
-	<div class="container">
+<!-- 		<h4 class="widget-title" style="margin-top:2em;margin-left:10%">公告</h4> -->
+	<div class="container" style="margin-top:2em">
 
 			        <div class="wrap"  style="margin-right:230%">
 			            <a class="slide-arrow right" id="slideNext">

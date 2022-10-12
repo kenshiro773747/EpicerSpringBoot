@@ -10,7 +10,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 %>
 <html>
 <head>
-<title>新增文章</title>
+<title>更新留言</title>
 <script language='javascript' src='js/wangEditor.min.js'></script>
 <script>
 
