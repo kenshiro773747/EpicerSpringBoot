@@ -11,11 +11,157 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Epicer Admin System</title>
 
+
+
 <!-- eLindHead (開始) -->
 <%@include file="../includes/eLinkHead.jsp"%>
 <!-- eLindHead (結束) -->
+
+<style>
+
+.table> :not(caption)>*>* {
+    padding: 0.1rem 0.1rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 0.1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+
+fieldset {
+             width: 900px;
+                border-radius: 15px;
+                margin: 10px auto;
+                background-color: white;
+}
+
+
+span {
+position:relative;
+overflow:hidden;
+white-space: nowrap;  
+overflow: hidden;  
+text-overflow: ellipsis; 
+max-width:60px;
+display:inline-block;
+
+}
+.d-flex  {
+position:relative;
+overflow:hidden;
+white-space: nowrap;  
+overflow: hidden;  
+text-overflow: ellipsis; 
+max-width:120px;
+display:inline-block;
+}
+
+
+
+.row>* {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: var(--bs-gutter-y);
+}
+
+body {
+    font-weight: 50;
+    line-height: 0.5;
+}
+
+.tb1 {
+	border: 3px solid green;
+	border-collapse: collapse;
+}
+
+.tb1 th {
+	border: 1px solid black;
+	text-align: center;
+}
+</style>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+<!-- SweetAlert開始 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+<!-- sweetalert刪除 -->
+<script>
+    $(function () {
+        $('#result').on('click', '.sweetalertdelete',
+            function () {
+
+        	var sendcourseid = $(this).val();
+        	console.log('CourseId:' + sendcourseid);
+        	
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+                swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: "刪除後將無法復原!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '是的',
+                    cancelButtonText: '再想一下',
+                    reverseButtons: true
+                }).then((result) => {
+                	
+                        
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            type: 'get',
+                            //contentType: 'application/json',
+                            url: '/deleteTeacher/'+sendcourseid,
+                            
+                            success: function (response) {
+                            	     	          	
+                            }
+                        });
+                    	
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            '此筆資料已刪除',
+                            'success'
+                        ).then((result)=> {
+                        	queryall();
+                        })
+                        
+
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                            'Cancelled',
+                            '此筆資料沒有刪除:',
+                            'error'
+                        )
+                    }
+                    
+                    
+                })
+
+
+            });
+
+    });
+</script>
+
+
+
 
 	
 	
@@ -41,10 +187,10 @@ function queryall() {
             		
             		
             		'<tr>'+
-				'<td>'+response[i].teacherId+'</td>'+
-				'<td>'+response[i].teacherName+'</td>'+
+				'<td>'+'<p align="center">'+response[i].teacherId+'</p>'+'</td>'+
+				'<td>'+'<p align="center">'+response[i].teacherName+'</p>'+'</td>'+
 				'<td>'+response[i].teacherDescription+'</td>'+
-				'<td>'+response[i].teacherStatus+'</td>'+
+				'<td>'+'<p align="center">'+response[i].teacherStatus+'</p>'+'</td>'+
 				'<td>'+ '<img width=100 height=80 src="images/'+response[i].teacherImage+'"></td>'+
 				'<td>'+response[i].teacherAddress+'</td>'+
 				'<td>'+response[i].teacherPhone+'</td>'+
@@ -56,13 +202,23 @@ function queryall() {
 						'<input type="hidden" name="teacherId"value='+response[i].teacherId+'>'+
 						'<button type="submit" class="btn btn-success">編輯</button>'+
 					'</form>'+
-				'</td>'+
-				  '<td>'+
-				'<form action="deleteTeacher" method = "post">'+
-				'<input type = "hidden" name = "teacherId" value ='+response[i].teacherId+'>'+			
-				'<button type = "submit" class="btn btn-danger">刪除</button>'+					
-				'</form>'+
-				'</td>'+
+				'</td>'
+				
+				////1011testSWETAlertDelete////
+				+
+				
+				'<td>'
+				+ 
+				'<button type="button" class="btn btn-danger sweetalertdelete" value=' + response[i].teacherId +'>刪除</button>'
+				+
+				'</td>' 
+				+
+				//+'<td>'+
+				//'<form action="deleteTeacher" method = "post">'+
+				//'<input type = "hidden" name = "teacherId" value ='+response[i].teacherId+'>'+			
+				//'<button type = "submit" class="btn btn-danger">刪除</button>'+					
+				//'</form>'+
+				//'</td>'+
 
 			'</tr>';
             			

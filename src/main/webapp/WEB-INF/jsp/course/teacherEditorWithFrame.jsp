@@ -15,6 +15,72 @@
 <!-- eLindHead (開始) -->
 <%@include file="../includes/eLinkHead.jsp"%>
 <!-- eLindHead (結束) -->
+<!-- SweetAlert開始 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+<script type="text/javascript">
+
+    $(function () {
+
+        $('#123').on('click', '#save', function () {
+        	
+        	
+			/////////////////////////
+        	var res = false;
+        	var errorMsg = '未填資料行:<br>';
+        	
+       	
+        	$('.need').each(function(){
+        		       		
+        		if($(this).val()==""){
+        			errorMsg+= '<font style="color:red">'+$(this).parent().prev().children().text()+'<br>'+'</font>';
+        			res=true;
+        		}       		
+        		});
+        	
+        	if(res){
+        			Swal.fire({  
+        						title:'你的資料不完整喔',
+        					  	html:errorMsg,
+        					  	icon:'question'
+        						})
+        		console.log(errorMsg);
+        		return;
+        	};
+        	
+        	///////////////////////////////
+
+            Swal.fire({
+                title: '編輯',
+                text: "更新前確定資料都完整嗎",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '更新'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                		Swal.fire(
+                    	    '更新成功!',
+                    	    '成功更新此筆',
+                    	    'success'
+                    	).then((result) => {
+                    		 $('#123').submit();	
+	                		console.log("123="+$(this).val())
+                    	})
+                	}
+            })
+
+        });
+    });
+
+</script>
+
+
+
+
+
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -43,7 +109,7 @@
 
 <div class="card" style="float: left;">
 		<div class="p-4 bg-secondary">
-			<form:form action="updateTeacher" method="post"
+			<form:form id="123" action="updateTeacher" method="post"
 				modelAttribute="Teacher" enctype="multipart/form-data">
 				<table>
 					<div class="row">
@@ -55,9 +121,9 @@
 						<tr>
 							<div class="col-md-6">
 								<div class="form-group">
-									<td><label>姓名:</label></td>
+									<td><label>姓名</label></td>
 									<td><form:input type="text" path="teacherName"
-											class="form-control form-control-alternative"
+											class="form-control form-control-alternative need"
 											id="exampleFormControlInput1" placeholder="請輸入中文姓名" /></td>
 								</div>
 							</div>
@@ -67,9 +133,9 @@
 						<tr>
 							<div class="col-md-6">
 								<div class="form-group">
-									<td><label>描述：：</label></td>
+									<td><label>描述</label></td>
 									<td><form:textarea type="textarea"
-											path="teacherDescription" class="form-control"
+											path="teacherDescription" class="form-control need"
 											id="exampleFormControlTextarea1" cols="40" rows="5"
 											style="resize:none" placeholder="請輸入相關資訊"></form:textarea></td>
 								</div>
@@ -80,9 +146,9 @@
 					<!-- teacherStatus -->
 					<tr>
 						<div class="form-group">
-							<td><label>狀態：</label></td>
+							<td><label>狀態</label></td>
 							<td><form:select path="teacherStatus"
-									class="form-control form-control-alternative"
+									class="form-control form-control-alternative need"
 									id="exampleFormControlInput1" placeholder="name@example.com">
 									<option><%=oldTeacher.getTeacherStatus()%></option>
 									<option>1</option>
@@ -94,9 +160,9 @@
 
 					<!-- image -->
 					<tr>
-						<td><label>頭貼：</label></td>
+						<td><label>頭貼</label></td>
 						<td><input type="file" name="photo"
-							class="form-control form-control-alternative" id="Ann"
+							class="form-control form-control-alternative need" id="Ann"
 							placeholder="name@example.com" /></td>
 
 						<input type="hidden" name="oldimg"
@@ -108,9 +174,9 @@
 					<tr>
 						<div class="col-md-6">
 							<div class="form-group">
-								<td><label>電話:</label></td>
+								<td><label>電話</label></td>
 								<td><form:input type="text" path="teacherPhone"
-										class="form-control form-control-alternative"
+										class="form-control form-control-alternative need"
 										id="exampleFormControlInput1" placeholder="請輸入能找的到人的電話" /></td>
 							</div>
 						</div>
@@ -123,7 +189,7 @@
 							<div class="form-group">
 								<td><label>生日：</label></td>
 								<td><form:input type="date" path="teacherBirthday"
-										class="form-control form-control-alternative"
+										class="form-control form-control-alternative need"
 										id="exampleFormControlInput1" /></td>
 							</div>
 						</div>
@@ -131,17 +197,17 @@
 					</tr>
 
 					<tr>
-						<td><span class="detail">縣市:</span></td>
-						<td><div class="twzipcode"></div></td>
+						<td><span class="detail">縣市</span></td>
+						<td><div class="twzipcode need"></div></td>
 					</tr>
 
 					<tr>
-						<td><span class="detail">地址:</span></td>
-						<td><input type="text" id="road" name="road"></td>
+						<td><span class="detail">地址</span></td>
+						<td><input type="text" id="road" name="road" class="need"></td>
 					</tr>
 
 					<tr>
-						<td colspan="8"><form:button type="submit" value="Send"
+						<td colspan="8"><form:button id="save" type="button" value="Send"
 								class="btn bg-gradient-primary">提交更新</form:button></td>
 					</tr>
 

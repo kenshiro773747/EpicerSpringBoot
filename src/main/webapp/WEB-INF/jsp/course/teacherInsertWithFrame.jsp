@@ -15,6 +15,72 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 <!-- eLindHead (開始) -->
 <%@include file="../includes/eLinkHead.jsp"%>
 <!-- eLindHead (結束) -->
+
+<!-- SweetAlert開始 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $('#123').on('click', '#save', function () {
+        	
+		/////////////////////////
+        	var res = false;
+        	var errorMsg = '未填資料行:<br>';
+        	
+       	
+        	$('.need').each(function(){
+        		       		
+        		if($(this).val()==""){
+        			errorMsg+='<font style="color:red">'+$(this).parent().prev().children().text()+'<br>'+'</font>';
+        			res=true;
+        		}       		
+        		});
+        	
+        	if(res){
+        			Swal.fire({  
+        						title:'你的資料不完整喔',
+        					  	html:errorMsg,
+        					  	icon:'question'
+        						})
+        		console.log(errorMsg);
+        		return;
+        	};
+        	
+        	///////////////////////////////
+        	
+        	
+
+            Swal.fire({
+                title: '新增',
+                text: "新增前確定資料都完整嗎",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '新增'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                		Swal.fire(
+                    	    '新增成功!',
+                    	    '成功新增此筆',
+                    	    'success'
+                    	).then((result) => {
+                    		 $('#123').submit();	
+	                		console.log("123="+$(this).val())
+                    	})
+                	}
+            })
+
+        });
+    });
+
+</script>
+
+
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -39,16 +105,16 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 
 		<h1>新增老師</h1>
 		<div class="p-4 bg-secondary">
-			<form:form action="insertTeacher" method="post"
+			<form:form id= "123" action="insertTeacher" method="post"
 				modelAttribute="Teacher" enctype="multipart/form-data">
 				<table>
 					<!-- teacherName -->
 					<tr>
 						<div class="col-md-6">
 							<div class="form-group">
-								<td><label>姓名:</label></td>
+								<td><label>姓名</label></td>
 								<td><form:input type="text" path="teacherName"
-										class="form-control form-control-alternative"
+										class="form-control form-control-alternative need"
 										id="exampleFormControlInput1" placeholder="請輸入中文姓名" /></td>
 							</div>
 						</div>
@@ -58,9 +124,9 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 					<tr>
 						<div class="col-md-6">
 							<div class="form-group">
-								<td><label>描述：</label></td>
+								<td><label>描述</label></td>
 								<td><form:textarea type="textarea"
-										path="teacherDescription" class="form-control"
+										path="teacherDescription" class="form-control need"
 										id="exampleFormControlTextarea1" cols="40" rows="5"
 										style="resize:none" placeholder="請輸入相關經歷"></form:textarea></td>
 							</div>
@@ -70,8 +136,8 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 
 					<!-- teacherStatus -->
 					<tr>
-						<td><label>狀態：</label></td>
-						<td><form:select path="teacherStatus" class="form-control form-control-alternative"
+						<td><label>狀態</label></td>
+						<td><form:select path="teacherStatus" class="form-control form-control-alternative need"
 									id="exampleFormControlInput1">
 								<option>1</option>
 								<option>2</option>
@@ -82,9 +148,9 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 
 					<!-- image -->
 					<tr>
-						<td><label>照片：</label></td>
+						<td><label>照片</label></td>
 						<td><input type="file" name="photo"
-							class="form-control form-control-alternative" id="Ann"
+							class="form-control form-control-alternative need" id="Ann"
 							/></td>
 						<td><img width=200  id="gmi" src=""></td>
 					</tr>
@@ -93,9 +159,9 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 					<tr>
 						<div class="col-md-6">
 							<div class="form-group">
-								<td><label>電話：</label></td>
+								<td><label>電話</label></td>
 								<td><form:input type="text" path="teacherPhone"
-										class="form-control form-control-alternative"
+										class="form-control form-control-alternative need"
 										id="exampleFormControlInput1" placeholder="請輸入找的到人的電話" /></td>
 							</div>
 						</div>
@@ -107,9 +173,9 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 					<tr>
 						<div class="col-md-6">
 							<div class="form-group">
-								<td><label>生日：</label></td>
+								<td><label>生日</label></td>
 								<td><form:input type="date" path="teacherBirthday"
-										class="form-control form-control-alternative"
+										class="form-control form-control-alternative need"
 										id="exampleFormControlInput1" placeholder="name@example.com" /></td>
 							</div>
 						</div>
@@ -117,8 +183,8 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 					</tr>
 					<tr>
 						<div class="inputbox">
-							<td><label class="detail">縣市:</label></td>
-							<td><div class="twzipcode"></div></td>
+							<td><label class="detail">縣市</label></td>
+							<td><div class="twzipcode need"></div></td>
 							<td><span id="sp7" class="msg"></span></td>
 							<td><span id="sp8" class="msg"></span></td>
 						</div>
@@ -126,14 +192,14 @@ org.hibernate.SessionFactory,com.epicer.util.*"%>
 
 					<tr>
 						<div class="inputbox">
-							<td><label class="detail">地址:</label></td>
+							<td><label class="detail">地址</label></td>
 							<td><input type="text" id="road" name="road"
-								placeholder="address" required> <span id="sp8"
+								placeholder="address" class="need"> <span id="sp8"
 								class="msg"></span></td>
 						</div>
 					</tr>
 					<tr>
-						<td colspan="7"><button type="submit" value="Send"
+						<td colspan="7"><button id ="save" type="button" value="Send"
 								class="btn bg-gradient-primary">提交新增</button></td>
 					</tr>
 				</table>

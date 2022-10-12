@@ -8,4 +8,6 @@ public interface courseFeedBackRepository extends JpaRepository<coursefeedback, 
 
 	public List<coursefeedback> findBycourseid(Course course);
 	
+	
+	
 }

@@ -34,6 +34,69 @@ public class CourseController {
 	private TimeTest TT = new TimeTest();
 	
 	
+	//test1011 測試各種前端版  shopsidebar
+	@GetMapping(path="123")
+	public String processshopsidebar() {
+		
+		return "course/shopsidebar";
+	}
+	
+	
+	//test1010商品頁面依類別分類
+	@PostMapping("/queryshopbystyle")
+	public String queryshopbystyle(@RequestParam("style") String style, Model m) {
+		
+		List<Teacher> tlist = TS.findAllTeacher();
+		m.addAttribute("tlist",tlist);
+		
+		List<Course> list = CS.findAllCourseByStyle(style);
+		m.addAttribute("listAll",list);
+		return "course/courseshop";
+		
+	}
+	
+	
+	//test1010全部商品頁面
+	@GetMapping("/555")
+	public String processcourseshop(Model m ) {
+		List<Course> list = CS.findAllCourse();
+		m.addAttribute("listAll",list);
+		
+		List<Teacher> tlist = TS.findAllTeacher();
+		for(Teacher t :tlist) {
+			System.out.println("123TeacherName: "+t.getTeacherName());
+		}
+		m.addAttribute("tlist",tlist);
+		return "course/courseshop";		
+		
+	}
+	
+	//test1010單一商品頁面
+	@GetMapping("")
+	public String processcourseproduct(@PathVariable("courseid") int courseid , Model m) {
+		Course c = CS.getCourseById(courseid);
+		m.addAttribute("courseWithId",c);	
+		return "course/courseproductsingle";	
+	}
+	
+	//1010post方法
+	@PostMapping("/999")
+	public String processproduct(@RequestParam("courseid") int courseid , Model m) {
+		
+		Course c = CS.getCourseById(courseid);
+		System.out.println("進來沒: " + courseid);
+		m.addAttribute("courseWithId",c);
+		
+		
+		
+		List<Course> list = CS.findAllCourseByStyle(c.getCourseStyle());
+		m.addAttribute("listAll",list);
+		
+		return "course/productsingle";	
+	}
+	
+	
+	
 	////篩選尚未開始的課程///
 	@GetMapping(path = "/querycourseaftercurrenttime/{currenttime}")
 	@ResponseBody
@@ -152,6 +215,7 @@ public class CourseController {
 		m.addAttribute("listAll", list);
 ////////
 		return "course/Test1006courseInsertWithCKeditor";
+		
 	};
 
 	@PostMapping(path = "/addCourse")

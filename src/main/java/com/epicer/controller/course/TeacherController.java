@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.epicer.model.course.Course;
 import com.epicer.model.course.Teacher;
 import com.epicer.model.course.ordercourse;
+import com.epicer.service.course.CourseFeedBackService;
 import com.epicer.service.course.CourseService;
 import com.epicer.service.course.OrderCourseService;
 import com.epicer.service.course.TeacherService;
@@ -31,6 +32,9 @@ import com.epicer.util.TimeTest;
 
 @Controller
 public class TeacherController {
+	
+	@Autowired
+	private CourseFeedBackService CFBS;
 
 	@Autowired
 	private CourseService CS;
@@ -45,6 +49,9 @@ public class TeacherController {
 	private CSVExportUtil CSVExportUtil;
 
 	private TimeTest TT = new TimeTest();
+	
+	///CourseFeedBack1010///
+	
 
 	//// exportCSV////
 	@GetMapping(value = "/exportcsv/{courseid}", produces = "application/json; charset=utf-8")
@@ -75,7 +82,7 @@ public class TeacherController {
 			dataList.add(map);
 		}
 
-//        OutputStreamWriter osw = new OutputStreamWriter(response.getOutputStream(),"UTF-8");
+
 
 		try (final OutputStream os = response.getOutputStream()) {
 			CSVExportUtil.responseSetProperties(fName, response);
@@ -195,7 +202,7 @@ public class TeacherController {
 			String district, String road) throws IllegalStateException, IOException {
 
 		if (!photo.isEmpty()) {
-			String imgName = TS.processImg(teacher.getTeacherImage(), photo);
+			String imgName = TS.processImg(teacher.getTeacherName(), photo);
 			teacher.setTeacherImage(imgName);
 		} else {
 			return null;
@@ -238,10 +245,18 @@ public class TeacherController {
 	}
 
 	/// DELETE///
-	@PostMapping(path = "/deleteTeacher")
-	public String deleteTeacher(@RequestParam("teacherId") Integer teacherId) {
+//	@PostMapping(path = "/deleteTeacher")
+//	public String deleteTeacher(@RequestParam("teacherId") Integer teacherId) {
+//		TS.deleteTeacherById(teacherId);
+//		return "redirect:/777";
+//	}
+	
+	///test1011 DELETE///
+	@GetMapping(path="/deleteTeacher/{teacherId}")
+	public void deleteTeacher(@PathVariable("teacherId") int teacherId) {
 		TS.deleteTeacherById(teacherId);
-		return "redirect:/777";
-	}
+	};
+	
+	
 
 }

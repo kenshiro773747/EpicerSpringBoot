@@ -62,6 +62,19 @@
 										url : '/QueryStudentsByCourseId/'
 												+ sendcourseid,
 										success : function(response) {
+											
+							////////////////1007test////////////////////
+											 if (response=='') {
+												 console.log("測試=");
+												 
+												 
+                               				Swal.fire({
+                                   			icon: 'error',
+                                   			title: 'Oops...',
+                                   			text: '該課程還沒有人報名喔!',
+                               				})
+
+                          					 }else{
 
 											console.log(JSON
 													.stringify(response));
@@ -100,7 +113,7 @@
 												color : '#716add'
 
 											})
-
+                          					 }
 										}
 									});
 						});
@@ -242,7 +255,7 @@
 
 								Set<Course> teachersCourse = hiTeacher.getCourse();
 								for (Course cd : teachersCourse) {
-									if (cd.getCourseDate() > ltime) {
+									if (cd.getCourseDate() >= ltime) {
 								%>
 
 								<!-- 進行中課程 -->
@@ -273,9 +286,20 @@
 
 
 									<!--看詳情-->
-									<td>
-										<button>看詳情</button>
-									</td>
+
+
+									<td><form action="/999" method="post">
+										<input type=hidden value="<%=cd.getCourseId()%>"
+											name="courseid">
+
+											<button type="submit">看詳情</button>
+
+									</form></td>
+
+
+
+
+
 									<!--看名單-->
 									<td>
 										<button class="sendcourseid " value=<%=cd.getCourseId()%>>看名單</button>
@@ -286,8 +310,7 @@
 									</td>
 
 									<!--輸出csv-->
-									<td>	
-									<a
+									<td><a
 										href="http://localhost:8091/exportcsv/<%=cd.getCourseId()%>"><button>下載名單</button></a>
 									</td>
 
@@ -335,9 +358,13 @@
 
 
 									<!--看詳情-->
-									<td>
-										<button>看詳情</button>
-									</td>
+									<td><form action="999" method="post">
+										<input type=hidden value="<%=cd.getCourseId()%>"
+											name="courseid">
+
+											<button type="submit">看詳情</button>
+
+									</form></td>
 									<!--看名單-->
 									<td>
 										<button class="sendcourseid " value=<%=cd.getCourseId()%>>看名單</button>
@@ -346,10 +373,9 @@
 									<td>
 										<button>看回饋</button>
 									</td>
-									
+
 									<!--輸出csv-->
-									<td>	
-									<a
+									<td><a
 										href="http://localhost:8091/exportcsv/<%=cd.getCourseId()%>"><button>下載名單</button></a>
 									</td>
 								</tr>

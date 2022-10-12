@@ -21,6 +21,57 @@
 </style>
 
 <style>
+.table> :not(caption)>*>* {
+    padding: 0.1rem 0.1rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 0.1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+
+fieldset {
+             width: 900px;
+                border-radius: 15px;
+                margin: 10px auto;
+                background-color: white;
+}
+
+
+span {
+position:relative;
+overflow:hidden;
+white-space: nowrap;  
+overflow: hidden;  
+text-overflow: ellipsis; 
+max-width:60px;
+display:inline-block;
+
+}
+.d-flex  {
+position:relative;
+overflow:hidden;
+white-space: nowrap;  
+overflow: hidden;  
+text-overflow: ellipsis; 
+max-width:120px;
+display:inline-block;
+}
+
+
+
+.row>* {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: var(--bs-gutter-y);
+}
+
+body {
+    font-weight: 50;
+    line-height: 0.5;
+}
+
 .tb1 {
 	border: 3px solid green;
 	border-collapse: collapse;
@@ -32,15 +83,17 @@
 }
 </style>
 
-<script
+ <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <!-- DataTable開始 -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
-<script type="text/javascript" charset="utf8"
-	src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+	
+<!--  	<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>-->
+
 <!-- DataTable結束 -->
 
 
@@ -72,11 +125,11 @@
 
                 swalWithBootstrapButtons.fire({
                     title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    text: "刪除後將無法復原!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
+                    confirmButtonText: '是的',
+                    cancelButtonText: '再想一下',
                     reverseButtons: true
                 }).then((result) => {
                 	
@@ -95,7 +148,7 @@
                     	
                         swalWithBootstrapButtons.fire(
                             'Deleted!',
-                            'Your file has been deleted.',
+                            '此筆資料已刪除',
                             'success'
                         ).then((result)=> {
                         	queryall();
@@ -108,7 +161,7 @@
                     ) {
                         swalWithBootstrapButtons.fire(
                             'Cancelled',
-                            'Your imaginary file is safe :)',
+                            '此筆資料沒有刪除:)',
                             'error'
                         )
                     }
@@ -154,7 +207,7 @@
                                 				Swal.fire({
                                     			icon: 'error',
                                     			title: 'Oops...',
-                                    			text: 'Something went wrong!',
+                                    			text: '該課程還沒有人報名喔!',
                                 				})
 
                            					 }else{
@@ -241,7 +294,7 @@
 							'<tr>'
 										
 									+
-									'<td>'
+									'<td width="150">'
 									+ '<img width=150 height=100 src="' + 'images/' + response[0][i].courseImage + '">'
 									+'</td>'
 
@@ -252,13 +305,13 @@
 									+ '<div class="d-flex px-2 py-1">'
 									
 									+ '<div class="d-flex flex-column justify-content-center">'
-									+ '<h5 style="font-size: 15px;">'
+									+ '<h5 style="font-size: 10px;">'
 									+ response[0][i].courseId
 									+ '</h5>'
-									+ '<p style="font-size: 18px;">'
+									+ '<p style="font-size: 10px;">'
 									+ response[0][i].courseName
 									+ '</p>'
-									+ '<p style="font-size: 16px;">'
+									+ '<p style="font-size: 10px;">'
 									+ response[0][i].courseDescription
 									+ '</p>'
 									+ '</div>'
@@ -354,7 +407,7 @@
 
 						}
 						$("#result").html(resultText);
-						$('#myTable').DataTable();
+						//$('#myTable').DataTable();
 					}
 				});
 	}
@@ -375,7 +428,7 @@
 						'.sendstyle',
 						function() {
 
-							$('#myTable').DataTable().destroy();
+							//$('#myTable').DataTable().destroy();
 
 							var coursestyle = $(this).val();
 							console.log('courseStyle:' + coursestyle);
@@ -406,13 +459,13 @@
 														'<td>'
 														+ '<div class="d-flex px-2 py-1">'
 														+ '<div class="d-flex flex-column justify-content-center">'
-														+ '<h5 style="font-size: 15px;">'
+														+ '<h5 style="font-size: 10px;">'
 														+ response[0][i].courseId
 														+ '</h5>'
-														+ '<p style="font-size: 18px;">'
+														+ '<p style="font-size: 10px;">'
 														+ response[0][i].courseName
 														+ '</p>'
-														+ '<p style="font-size: 16px;">'
+														+ '<p style="font-size: 10px;">'
 														+ response[0][i].courseDescription
 														+ '</p>'
 														+ '</div>'
@@ -420,7 +473,7 @@
 														+ '</td>'
 														+
 
-														'<td>'
+														'<td width="150">'
 														+ '<img width=150 height=100 src="'+'images/'+ response[0][i].courseImage+'">'
 
 														
@@ -507,7 +560,7 @@
 
 											}
 											$("#result").html(resultText);
-											$('#myTable').DataTable();
+											//$('#myTable').DataTable();
 										}
 									});
 						});
@@ -523,7 +576,7 @@
 					'#queryAfterCurrentTime',
 					function() {
 
-						$('#myTable').DataTable().destroy();
+						//$('#myTable').DataTable().destroy();
 
 						var currenttime = $(this).val();
 						console.log('currenttime:' + currenttime);
@@ -552,13 +605,13 @@
 													'<td>'
 													+ '<div class="d-flex px-2 py-1">'
 													+ '<div class="d-flex flex-column justify-content-center">'
-													+ '<h5 style="font-size: 15px;">'
+													+ '<h5 style="font-size: 10px;">'
 													+ response[0][i].courseId
 													+ '</h5>'
-													+ '<p style="font-size: 18px;">'
+													+ '<p style="font-size: 10px;">'
 													+ response[0][i].courseName
 													+ '</p>'
-													+ '<p style="font-size: 16px;">'
+													+ '<p style="font-size: 10px;">'
 													+ response[0][i].courseDescription
 													+ '</p>'
 													+ '</div>'
@@ -566,7 +619,7 @@
 													+ '</td>'
 													+
 
-													'<td>'
+													'<td width="150">'
 													+ '<img width=150 height=100 src="'+'images/'+ response[0][i].courseImage+'">'
 
 													
@@ -633,10 +686,13 @@
 
 													'<td>'
 													+ '<form action="deleteCourse" method="post">'
-													+ '<input type="hidden" name="courseId" value=' + response[0][i].courseId+'>'
-													+ '<button type="submit" class="btn btn-danger">刪除</button>'
-													+ '</form>'
-													+ '</td>'
+													+ '<input type="hidden" name="courseId" value=' + response[0][i].courseId + '>'
+													+ '<button type="button" class="btn btn-danger sweetalertdelete" value=' + response[0][i].courseId +'>刪除</button>'
+													+ '</form>' + 
+													'</td>'
+													
+													
+													
 													+ '</tr>'
 
 											////////////////////////////////////////////////
@@ -644,7 +700,7 @@
 
 										}
 										$("#result").html(resultText);
-										$('#myTable').DataTable();
+										//$('#myTable').DataTable();
 									}
 								});
 
@@ -660,7 +716,7 @@
 					'#queryBeforeCurrentTime',
 					function() {
 
-						$('#myTable').DataTable().destroy();
+						//$('#myTable').DataTable().destroy();
 
 						var currenttime = $(this).val();
 						console.log('currenttime:' + currenttime);
@@ -689,13 +745,13 @@
 													'<td>'
 													+ '<div class="d-flex px-2 py-1">'
 													+ '<div class="d-flex flex-column justify-content-center">'
-													+ '<h5 style="font-size: 15px;">'
+													+ '<h5 style="font-size: 10px;">'
 													+ response[0][i].courseId
 													+ '</h5>'
-													+ '<p style="font-size: 18px;">'
+													+ '<p style="font-size: 10px;">'
 													+ response[0][i].courseName
 													+ '</p>'
-													+ '<p style="font-size: 16px;">'
+													+ '<p style="font-size: 10px;">'
 													+ response[0][i].courseDescription
 													+ '</p>'
 													+ '</div>'
@@ -703,7 +759,7 @@
 													+ '</td>'
 													+
 
-													'<td>'
+													'<td width="150">'
 													+ '<img width=150 height=100 src="'+'images/'+ response[0][i].courseImage+'">'
 
 													+ 
@@ -769,10 +825,13 @@
 
 													'<td>'
 													+ '<form action="deleteCourse" method="post">'
-													+ '<input type="hidden" name="courseId" value=' + response[0][i].courseId+'>'
-													+ '<button type="submit" class="btn btn-danger">刪除</button>'
-													+ '</form>'
-													+ '</td>'
+													+ '<input type="hidden" name="courseId" value=' + response[0][i].courseId + '>'
+													+ '<button type="button" class="btn btn-danger sweetalertdelete" value=' + response[0][i].courseId +'>刪除</button>'
+													+ '</form>' + 
+													'</td>'
+													
+													
+													
 													+ '</tr>'
 
 											////////////////////////////////////////////////
@@ -780,7 +839,7 @@
 
 										}
 										$("#result").html(resultText);
-										$('#myTable').DataTable();
+										//$('#myTable').DataTable();
 									}
 								});
 

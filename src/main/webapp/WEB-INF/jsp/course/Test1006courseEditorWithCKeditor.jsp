@@ -15,6 +15,80 @@
 <!-- eLindHead (開始) -->
 <%@include file="../includes/eLinkHead.jsp"%>
 <!-- eLindHead (結束) -->
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- SweetAlert開始 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+ <script type="text/javascript">
+
+    $(function () {
+
+        $('#123').on('click', '#save', function () {
+        	
+/////////////////////////
+        	var res = false;
+        	var errorMsg = '未填資料行:<br>';
+        	
+       	
+        	$('.need').each(function(){
+        		       		
+        		if($(this).val()==""){
+        			errorMsg+= '<font style="color:red">'+$(this).parent().prev().children().text()+'<br>'+'</font>';
+        			res=true;
+        		}       		
+        		});
+        	
+        	if(res){
+        			Swal.fire({  
+        						title:'你的資料不完整喔',
+        					  	html:errorMsg,
+        					  	icon:'question'
+        						})
+        		console.log(errorMsg);
+        		return;
+        	};
+        	
+        	///////////////////////////////
+			
+			
+            Swal.fire({
+                title: '編輯',
+                text: "更新前確定資料都完整嗎",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '更新'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                		Swal.fire(
+                    	    '更新成功!',
+                    	    '成功更新此筆課程',
+                    	    'success'
+                    	).then((result) => {
+                    		 $('#123').submit();	
+	                		console.log("123="+$(this).val())
+                    	})
+                	}
+            })
+
+        });
+    });
+
+</script>
+
+
+
+
+
+
+
+
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -103,7 +177,7 @@
 
 
 		<div class="p-4 bg-secondary">
-			<form:form action="updateCourse" method="post"
+			<form:form id="123" action="updateCourse" method="post"
 				modelAttribute="Course" enctype="multipart/form-data">
 				<table>
 					<div class="row">
@@ -117,7 +191,7 @@
 								<div class="form-group">
 									<td><label>課程名稱:</label></td>
 									<td><form:input type="text" path="courseName"
-											class="form-control form-control-alternative"
+											class="form-control form-control-alternative need"
 											id="exampleFormControlInput1" placeholder="name@example.com" /></td>
 								</div>
 							</div>
@@ -129,7 +203,7 @@
 								<div class="form-group">
 									<td><label>課程價錢：</label></td>
 									<td><form:input type="text" path="coursePrice"
-											class="form-control form-control-alternative"
+											class="form-control form-control-alternative need"
 											id="exampleFormControlInput1" placeholder="name@example.com" /></td>
 								</div>
 							</div>
@@ -142,7 +216,7 @@
 							<div class="form-group">
 								<td><label>課程介紹：</label></td>
 								<td><form:textarea type="textarea" path="courseDescription"
-										class="form-control" id="exampleFormControlTextarea1"
+										class="form-control need" id="exampleFormControlTextarea1"
 										cols="40" rows="5" style="resize:none"></form:textarea></td>
 							</div>
 						</div>
@@ -156,7 +230,7 @@
 								<td><label>課程日期：</label></td>
 								<td><form:input type="date" path="fakeCourseDate"
 										min="<%=stringDate%>"
-										value="<%=TT.TransLongToString(oldCourse.getCourseDate())%>" /></td>
+										value="<%=TT.TransLongToString(oldCourse.getCourseDate())%>" class="need"/></td>
 							</div>
 						</div>
 						</div>
@@ -245,7 +319,7 @@
 					<tr>
 						<td><label>課程圖片：</label></td>
 						<td><input type="file" name="photo"
-							class="form-control form-control-alternative" id="Ann"
+							class="form-control form-control-alternative need" id="Ann"
 							placeholder="name@example.com" /></td>
 						<!--  <td><img width=150
 							src="images/<%=oldCourse.getCourseImage()%>"></td>-->
@@ -260,7 +334,7 @@
 
 
 					<tr>
-						<td colspan="9"><form:button type="submit" value="Send"
+						<td colspan="9"><form:button id="save" type="button" value="Send"
 								class="btn bg-gradient-primary">提交更新</form:button></td>
 					</tr>
 

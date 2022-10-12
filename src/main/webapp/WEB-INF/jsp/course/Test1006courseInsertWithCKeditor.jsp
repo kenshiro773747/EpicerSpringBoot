@@ -3,6 +3,7 @@
 	import="java.util.*, com.epicer.model.course.*,com.epicer.controller.*,
 com.epicer.util.*"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html>
 <html lang="zh">
 
@@ -15,6 +16,82 @@ com.epicer.util.*"%>
 <!-- eLindHead (開始) -->
 <%@include file="../includes/eLinkHead.jsp"%>
 <!-- eLindHead (結束) -->
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+
+
+<!-- SweetAlert開始 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+	
+  
+  
+  
+  
+    
+    <script type="text/javascript">
+
+    $(function () {
+
+        $('#123').on('click', '#save', function () {
+        	
+        	/////////////////////////
+        	var res = false;
+        	var errorMsg = '未填資料行:<br>';
+        	
+       	
+        	$('.need').each(function(){
+        		       		
+        		if($(this).val()==""){
+        			errorMsg+= '<font style="color:red">'+$(this).parent().prev().children().text()+'<br>'+'</font>';
+        			res=true;
+        		}       		
+        		});
+        	
+        	if(res){
+        			Swal.fire({  
+        						title:'你的資料不完整喔',
+        					  	html:errorMsg,
+        					  	icon:'question'
+        						})
+        		console.log(errorMsg);
+        		return;
+        	};
+        	
+        	///////////////////////////////
+        	
+        	
+        	
+
+            Swal.fire({
+                title: '新增',
+                text: "新增前確定資料都完整嗎",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '新增'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                		Swal.fire(
+                    	    '新增成功!',
+                    	    '成功新增此筆課程',
+                    	    'success'
+                    	).then((result) => {
+                    		 $('#123').submit();	
+	                		console.log("123="+$(this).val())
+                    	})
+                	}
+            })
+
+        });
+    });
+
+</script>
 
 
 
@@ -43,18 +120,18 @@ com.epicer.util.*"%>
 		%>
 
 		<h1>新增課程</h1>
-		<div class="p-4 bg-secondary">
+		<div  class="p-4 bg-secondary">
 
-			<form:form action="addCourse" method="post" modelAttribute="Course"
-				enctype="multipart/form-data">
+			<form:form id="123" action="addCourse" method="post" modelAttribute="Course"
+				enctype="multipart/form-data" >
 				<table>
 					<!-- courseName -->
 					<tr>
 						<div class="col-md-6">
 							<div class="form-group">
-								<td><label>課程名稱:</label></td>
+								<td><label>課程名稱</label></td>
 								<td><form:input type="text" path="courseName"
-										class="form-control form-control-alternative"
+										class="form-control form-control-alternative need"
 										id="exampleFormControlInput1" placeholder="請輸入課程名稱" /></td>
 							</div>
 						</div>
@@ -64,9 +141,9 @@ com.epicer.util.*"%>
 					<tr>
 						<div class="col-md-6">
 							<div class="form-group">
-								<td><label>課程價錢：</label></td>
-								<td><form:input type="text" path="coursePrice"
-										class="form-control form-control-alternative"
+								<td><label>課程價錢</label></td>
+								<td><form:input type="number" path="coursePrice"
+										class="form-control form-control-alternative need"
 										id="exampleFormControlInput1" placeholder="請輸入課程價錢" /></td>
 							</div>
 						</div>
@@ -77,10 +154,10 @@ com.epicer.util.*"%>
 					<tr>
 						<div class="col-md-6">
 							<div class="form-group">
-								<td><label>課程介紹：</label></td>
+								<td><label>課程介紹</label></td>
 								<td><form:textarea type="textarea" path="courseDescription"
-										class="form-control" id="exampleFormControlTextarea1"
-										cols="40" rows="5" style="resize:none" placeholder="請輸入課程描述"></form:textarea></td>
+										class="form-control need" id="exampleFormControlTextarea1"
+										cols="40" rows="5" style="resize:none" placeholder="請輸入15格字內的課程描述" ></form:textarea></td>
 							</div>
 						</div>
 						</div>
@@ -91,9 +168,9 @@ com.epicer.util.*"%>
 					<tr>
 						<div class="col-md-6">
 							<div class="form-group">
-								<td><label>課程日期：</label></td>
+								<td><label>課程日期</label></td>
 								<td><form:input type="date" path="fakeCourseDate"
-										min="<%=stringDate%>" /></td>
+										min="<%=stringDate%>" class="need"/></td>
 							</div>
 						</div>
 						</div>
@@ -115,7 +192,7 @@ com.epicer.util.*"%>
 					<!-- 測試下拉式選單 -->
 					<tr>
 						<div class="form-group">
-							<td><label>老師：</label></td>
+							<td><label>老師</label></td>
 							<td><form:select path="fakeTeacherID"
 									class="form-control form-control-alternative"
 									id="exampleFormControlInput1">
@@ -136,7 +213,7 @@ com.epicer.util.*"%>
 					<!-- classroomId -->
 					<tr>
 						<div class="form-group">
-							<td><label>教室：</label></td>
+							<td><label>教室</label></td>
 							<td><form:select path="classroomId"
 									class="form-control form-control-alternative"
 									id="exampleFormControlInput1" placeholder="name@example.com">
@@ -157,7 +234,7 @@ com.epicer.util.*"%>
 					<!-- courseStyle -->
 					<tr>
 						<div class="form-group">
-							<td><label>課程類別：</label></td>
+							<td><label>課程類別</label></td>
 							<td><form:select path="courseStyle"
 									class="form-control form-control-alternative"
 									id="exampleFormControlInput1" placeholder="name@example.com">
@@ -173,9 +250,9 @@ com.epicer.util.*"%>
 
 					<!-- image -->
 					<tr>
-						<td><label>課程圖片：</label></td>
+						<td><label>課程圖片</label></td>
 						<td><input type="file" name="photo"
-							class="form-control form-control-alternative" id="Ann"
+							class="form-control form-control-alternative need" id="Ann"
 							placeholder="name@example.com" /></td>
 						<td><img width=200 id="gmi" src=""></td>
 					</tr>
@@ -184,14 +261,15 @@ com.epicer.util.*"%>
 
 
 					<tr>
-						<td colspan="8"><button type="submit" value="Send"
-								class="btn bg-gradient-primary">提交新增</button></td>
+						<td colspan="8">
+							<button id ="save" type="button" value="Send" class="btn bg-gradient-primary" >提交新增</button>
+						</td>
 					</tr>
 
 
 					<tr>
 						<div id="container">
-							<td><label>ckeditor：</label></td>
+							<td><label>ckeditor</label></td>
 							<td><form:textarea id="editor" type="textarea"
 									path="courseckeditor" ></form:textarea><td>
 						</div>
@@ -269,7 +347,7 @@ com.epicer.util.*"%>
 
 
 
-	<!-- ckeditor -->
+	<!-- ckeditor開始 -->
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/35.2.0/super-build/ckeditor.js"></script>
 	<!--
@@ -421,7 +499,15 @@ com.epicer.util.*"%>
             });
         </script>
         
-        <!-- ckeditor結束 -->
+   	<!-- ckeditor結束 -->
+        
+    <!-- sweetalert開始 --> 
+       
+       
+       
+       
+       
+    <!-- sweetalert結束 -->    
 
 </body>
 

@@ -22,7 +22,7 @@ public class coursefeedback {
 	private int feedbackid;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "courseorderid")
+	@JoinColumn(name = "courseid")
 	private Course courseid;
 	
 	@Column(name="studentname")

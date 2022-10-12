@@ -49,7 +49,7 @@ com.epicer.util.*"%>
 								<td><label>課程名稱:</label></td>
 								<td><form:input type="text" path="courseName"
 										class="form-control form-control-alternative"
-										id="exampleFormControlInput1" placeholder="請輸入課程名稱" /></td>
+										id="exampleFormControlInput1" placeholder="請輸入課程名稱" required/></td>
 							</div>
 						</div>
 					</tr>
@@ -59,9 +59,9 @@ com.epicer.util.*"%>
 						<div class="col-md-6">
 							<div class="form-group">
 								<td><label>課程價錢：</label></td>
-								<td><form:input type="text" path="coursePrice"
+								<td><form:input type="number" min=0 path="coursePrice"
 										class="form-control form-control-alternative"
-										id="exampleFormControlInput1" placeholder="請輸入課程價錢" /></td>
+										id="exampleFormControlInput1" placeholder="請輸入課程價錢" required/></td>
 							</div>
 						</div>
 						</div>
@@ -74,7 +74,7 @@ com.epicer.util.*"%>
 								<td><label>課程介紹：</label></td>
 								<td><form:textarea type="textarea" path="courseDescription"
 										class="form-control" id="exampleFormControlTextarea1"
-										cols="40" rows="5" style="resize:none" placeholder="請輸入課程描述"></form:textarea></td>
+										cols="40" rows="5" style="resize:none" placeholder="請輸入課程描述" required></form:textarea></td>
 							</div>
 						</div>
 						</div>
@@ -87,7 +87,7 @@ com.epicer.util.*"%>
 							<div class="form-group">
 								<td><label>課程日期：</label></td>
 								<td><form:input type="date" path="fakeCourseDate"
-										min="<%=stringDate%>" /></td>
+										min="<%=stringDate%>" required /></td>
 							</div>
 						</div>
 						</div>

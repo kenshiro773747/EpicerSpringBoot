@@ -56,10 +56,28 @@ public class TeacherService {
 	}
 
 	// IMG 上船自資料夾並回傳檔名
+//	public String processImg(String courseName, MultipartFile photoData) throws IllegalStateException, IOException {
+//
+//		String filename = courseName + System.currentTimeMillis() + ".jpg";
+//		String saveFileDir = "C:\\\\Users\\\\User\\\\Desktop\\\\EpicerSpringBoot\\\\src\\\\main\\\\webapp\\\\WEB-INF\\\\resources\\\\images";
+//		File saveFilePath = new File(saveFileDir, filename);
+//		photoData.transferTo(saveFilePath);
+//		return filename;
+//
+//	}
+	
+	
+	// 測試活的路徑
 	public String processImg(String courseName, MultipartFile photoData) throws IllegalStateException, IOException {
 
 		String filename = courseName + System.currentTimeMillis() + ".jpg";
-		String saveFileDir = "C:\\\\Users\\\\User\\\\Desktop\\\\EpicerSpringBoot\\\\src\\\\main\\\\webapp\\\\WEB-INF\\\\resources\\\\images";
+		// String saveFileDir =
+		// "C:\\Action\\worksapce\\第二組Epicer\\EpicerSpringBoot\\src\\main\\webapp\\WEB-INF\\resources\\images";
+		// 存入該專案的位置寫法
+		String classLocalPath = this.getClass().getClassLoader().getResource("").getPath();
+		String classLocalPathModify = classLocalPath.substring(1).replaceAll("target", "src").replaceAll("classes",
+				"main");
+		String saveFileDir = classLocalPathModify + "webapp/WEB-INF/resources/images";
 		File saveFilePath = new File(saveFileDir, filename);
 		photoData.transferTo(saveFilePath);
 		return filename;
